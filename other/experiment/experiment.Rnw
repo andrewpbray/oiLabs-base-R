@@ -1,0 +1,163 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+
+\input{style}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
+options(replace.assign=TRUE,width=90)
+@
+
+\section{Design}
+
+Each of the two weeks student received an email with links to the labs. Students within one team had the same version of the lab. They turn in team reports so only one person was working on producing the report (randomly selected ``author" for the week) but both the TAs and myself observed that all team members tried most of the R steps on their computers.
+
+Links to labs:
+\begin{itemize}
+\item \href{http://stat.duke.edu/courses/Fall12/sta101.001/labs/lab0a.pdf}{Week 1 (multi)}
+\item \href{http://stat.duke.edu/courses/Fall12/sta101.001/labs/lab0b.pdf}{Week 1 (single)}
+\item \href{http://stat.duke.edu/courses/Fall12/sta101.001/labs/lab1a.pdf}{Week 2 (multi)}
+\item \href{http://stat.duke.edu/courses/Fall12/sta101.001/labs/lab1b.pdf}{Week 2 (single)}
+\end{itemize}
+
+
+\section{Week 1}
+
+Survey can be found at: \\
+\href{https://docs.google.com/spreadsheet/viewform?formkey=dEZ0eGNHeDhRd1B0RlltMHJvcXhiZVE6MQ#gid=0}{https://docs.google.com/spreadsheet/viewform?formkey=dEZ0eGNHeDhRd1B0RlltMHJvcXhiZVE6MQ\#gid=0}
+
+<<load-d1, tidy = FALSE>>=
+d1 = read.csv("Lab survey - Week 1 - Sheet1.csv")
+names(d1) = c("timestamp","difficulty","identify_args","no_args",
+              "color","identifier")
+levels(d1$color) = c("multiple","single")
+dim(d1)
+@
+
+\subsection{Compare between versions: difficulty}
+
+<<compare-diff-d1, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+boxplot(d1$difficulty ~ d1$color, ylab = "difficulty, 1-very easy, 5-very hard")
+t.test(d1$difficulty ~ d1$color)
+@
+
+\subsection{Compare between versions: \% correct on indetifying argument and function}
+1 means correct, 0 means false.
+
+<<compare-identify_args-d1, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+d1$identify_args_score = NA
+d1$identify_args_score[d1$identify_args == "function: names, argument: present"] = 1
+d1$identify_args_score[d1$identify_args == "function: present, argument: names"] = 0
+mosaicplot(table(d1$color,d1$identify_args_score))
+chisq.test(table(d1$color,d1$identify_args_score), simulate.p.value = TRUE)
+@
+
+\subsection{Compare between versions: \%correct on number of argument}
+
+<<compare-no_args-d1, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+d1$no_args_score = NA
+d1$no_args_score[d1$no_args == 3] = 1
+d1$no_args_score[d1$no_args != 3] = 0
+mosaicplot(table(d1$color,d1$no_args_score))
+chisq.test(table(d1$color,d1$no_args_score))
+@
+
+\section{Week 2}
+
+Survey can be found at: \\
+\href{https://docs.google.com/spreadsheet/viewform?formkey=dHlCMFl2ZmtHT2lDdXR4U0VKWmlicnc6MQ#gid=0}{https://docs.google.com/spreadsheet/viewform?formkey=dHlCMFl2ZmtHT2lDdXR4U0VKWmlicnc6MQ\#gid=0}
+
+<<load-d2, tidy=FALSE>>=
+d2 = read.csv("Lab survey - Week 2 - Sheet1.csv")
+names(d2) = c("timestamp","difficulty","whats_wrong1","whats_wrong2","compare_diff",
+              "rewrite", "rewrite_score","typos","color","identifier")
+levels(d2$color) = c("multiple","single")
+dim(d2)
+@
+
+I assigned scores to the open-ended rewrite the code question manually. There was no partial credit, so those that had only a minor mistake (spell \hlsymbol{mosaicplot} as \hlsymbol{Mosaicplot}) received the same score as a major mistake or no answer.
+
+\subsection{Compare between versions: difficulty}
+
+<<compare-diff-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+boxplot(d2$difficulty ~ d2$color, ylab = "difficulty, 1-very easy, 5-very hard")
+t.test(d2$difficulty ~ d2$color)
+@
+
+\subsection{Compare between versions: what's wrong with the code (1)}
+
+<<compare-whats_wrong1-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+d2$whats_wrong1_score = NA
+d2$whats_wrong1_score[d2$whats_wrong1 == "30 should not be in quotation marks."] = 1
+d2$whats_wrong1_score[d2$whats_wrong1 != "30 should not be in quotation marks."] = 0
+mosaicplot(table(d2$color,d2$whats_wrong1_score))
+chisq.test(table(d2$color,d2$whats_wrong1_score))
+@
+
+\subsection{Compare between versions: what's wrong with the code (2)}
+
+<<compare-whats_wrong2-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+d2$whats_wrong2_score = NA
+d2$whats_wrong2_score[d2$whats_wrong2 == " = should instead be ==."] = 1
+d2$whats_wrong2_score[d2$whats_wrong2 != " = should instead be ==."] = 0
+mosaicplot(table(d2$color,d2$whats_wrong2_score))
+chisq.test(table(d2$color,d2$whats_wrong2_score), simulate.p.value = TRUE)
+@
+
+\subsection{Compare between versions: \%correct on rewrite}
+
+<<compare-rewrite-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+mosaicplot(table(d2$color,d2$rewrite_score))
+chisq.test(table(d2$color,d2$rewrite_score))
+@
+
+\subsection{Compare between versions: typos}
+
+<<compare-typos-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+mosaicplot(table(d2$color,d2$typos), las = 1)
+chisq.test(table(d2$color,d2$typos), simulate.p.value = TRUE)
+@
+
+\subsection{Compare difficulty between this and previous}
+
+<<compare-diff-prev-d2, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+levels(d2$compare_diff) = c("this easier", "this more diff", "this same")
+mosaicplot(table(d2$color,d2$compare_diff), las = 1)
+chisq.test(table(d2$color,d2$compare_diff), simulate.p.value = TRUE)
+d2$this_easier = NA
+d2$this_easier[d2$compare_diff == "this easier"] = 1
+d2$this_easier[d2$compare_diff != "this easier"] = 0
+chisq.test(table(d2$color,d2$this_easier), simulate.p.value = TRUE)
+@
+
+\section{Compare across weeks}
+
+Only 51 students were matched.
+
+<<together>>=
+d = merge(d1,d2,by = c("identifier","identifier"))
+d = d[d$identifier != "123",]  # 4 people chose 123!
+dim(d)
+@
+
+\subsection{Sanity check}
+
+There should have been nobody who had multiple or single colors both weeks, but there are. I'm confident that they got the correct links, so I think they don't quite understand what the question is asking. I don't know what this means about the reliability of the rest of the results.
+
+<<crosstab-col>>==
+table(d$color.x, d$color.y)
+@
+
+\subsection{Change in perceived in difficulty}
+
+<<diff-diff, fig.height=4,fig.width=5, out.width=0.5\textwidth>>=
+d$diff_diff = d$difficulty.x - d$difficulty.y
+boxplot(d$diff_diff~d$color.x, xlab = "color in week 1", ylab = "week 1 difficulty - week 2 difficulty")
+boxplot(d$diff_diff~d$color.y, xlab = "color in week 2", ylab = "week 1 difficulty - week 2 difficulty")
+@
+
+\end{document}

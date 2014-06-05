@@ -1,0 +1,16 @@
+- goog:
+
+The data consist of the number of requests Google received for user account information as part of criminal investigations in the first half of 2011 and the rate of compliance as well as some other indicators on the countries.
+
+Sources: Çetinkaya-Rundel, Stangl, Lock Morgan, 2012. Exploring Google’s Transparency Report. CHANCE 25(2), and original data from Google's Transparency Report, http://www.google.com/transparencyreport/.
+
+Format
+A data frame with 26 observations on the following 8 variables.
+	country: Name of country
+	complied: Percentage of requests Google complied with
+	requests: Number of requests Google received for user account information as part of criminal investigations
+	pop: Population in country, in thousands
+	hdi: Human development index, a composite measure of life expectancy, literacy, education, and standard of living on a scale of 0 (least developed) to 1 (most developed). 
+	dem: Democracy index, categorized into full democracies, flawed democracies, and hybrid regimes
+	internet: Percentage of internet users in country
+	freepress: Free press index, scored on a scale from 1 (most free) to 100 (least free)

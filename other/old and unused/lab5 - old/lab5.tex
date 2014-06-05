@@ -1,0 +1,287 @@
+\documentclass[11pt]{article}
+
+% load packages and functions
+\input{../labStyle}
+
+% document
+\begin{document}
+
+\section*{Lab 5: Hypothesis Tests}
+
+\license{This is a product of OpenIntro that is released under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported (\web{creativecommons.org/licenses/by-nc-nd/3.0/}). This lab was written for OpenIntro by Andrew Bray and Mine \c{C}etinkaya-Rundel from a lab written by the faculty and TAs of UCLA Statistics.}
+
+\subsection*{North Carolina Births}
+In 2004, the state of North Carolina released to the public a large data set containing information on births recorded in this state.  This data set has been of interest to medical researchers who are studying the relation between habits and practices of expectant mothers and the birth of their children. We will work with a sample of observations from this data set.  These cases were chosen at random.
+
+\subsection*{Exploratory Analysis}
+Let's load up the \code{nc} data set.
+
+\begin{lstlisting}
+download.file("http://stat.duke.edu/courses/Fall11/sta101.02/labs/nc.csv", destfile = "nc.csv")
+\end{lstlisting}
+
+Load this data into your workspace using the following command.\footnote{If you don't remember how to do this ask people around you or your TA, or check out the instructions from the previous lab.}
+
+We have observations on 13 different variables, some categorical and some numerical.  The meaning of each variable is as follows.
+
+\begin{table}[h] \small
+\begin{tabular}{r | l}
+\texttt{fage} & father's age in years. \\
+\texttt{mage} & mother's age in years. \\
+\texttt{mature} & maturity status of mother. \\
+\texttt{weeks} & length of pregnancy in weeks. \\
+\texttt{premie} & whether the birth was classified as premature (premie) or full-term. \\
+\texttt{visits} & number of hospital visits during pregnancy. \\
+\texttt{gained} & weight gained by mother during pregnancy in pounds. \\
+\texttt{weight} & weight of the baby at birth in pounds. \\
+\texttt{lowbirthweight} & whether baby was classified as low birthweight (\code{low}) or not (\code{not low}). \\
+\texttt{gender} & gender of the baby, \code{female} or \code{male}. \\
+\texttt{habit} & status of the mother as a \code{nonsmoker} or a \code{smoker}. \\
+\texttt{marital} & whether mother is \code{married} or \code{not married} at birth. \\
+\texttt{whitemom} & whether mom is \code{white} or \code{not white}. \\
+\end{tabular}
+\end{table}
+
+\begin{exercise}
+What are the cases in this data set?  How many cases are there in our sample?
+\end{exercise}
+
+Before we begin our analysis let's take a look at features of all the variables in the data set by getting a summary of each.
+
+\begin{lstlisting}
+summary(nc)
+\end{lstlisting}
+
+We will first tackle the relationship between a mother's smoking habit and the health of her baby.  By now you have had practice using R commands to summarize and visualize data.  For the following exercises, the training wheels come off.\footnote{If you do need a little help from the training wheels, they can be found back in lab 1. We have also put together a list of useful R commands on the course FAQ page, it's also linked \href{http://stat.duke.edu/courses/Fall11/sta101.02/labs/Rcommands.pdf}{here}.}
+
+\begin{exercise}
+\label{table}
+What proportion of total births were to mothers that were smokers?  What proportion of total births were of babies that were classified as low birthweight?
+\end{exercise}
+
+\begin{exercise}
+Make a mosaic plot of \code{habit} and \code{lowbirthweight}. What does the plot tell us about the relationship between the two variables?
+\end{exercise}
+
+%The mosaic plot and the one of the tables you made for Exercise~\ref{table} shows us that there is one observation for which we don't have data on the mother's smoking habit. Before we proceed with the rest of the analysis let's see what's going on with this case.
+%
+%\begin{lstlisting}
+%which(is.na(nc$habit))
+%\end{lstlisting}
+%
+%Since missing data is a common (and annoying) problem in statistics, R has a built in function for looking for \code{NA}s, namely \code{is.na}. We use that function within the function \code{which} in order to figure out \textit{which} element in \code{nc$habit} \textit{is not available}. Neat, huh?
+%
+%Looks like this is row 988. Let's look at what's going on in this row of the data. You can either scroll down to row 988 in the data viewer window, or use the following command.
+%
+%\begin{lstlisting}
+%nc[988,]
+%\end{lstlisting}
+%
+%Looks like there are a whole lot of \code{NA}s in this row, so let's drop this observation from the data so that it doesn't complicate things later. Remember, whenever you're excluding observations from your analysis you should have a good reason for doing so. In this case our reason is that we barely have any data on this observation, so it's not going to contribute to our analysis all that much.\footnote{When working on your project if you decide to exclude any cases from your analysis, you should make sure to explain your reasoning in your write up.}
+%
+%We exclude the observation from the data using the following code.
+%
+%\begin{lstlisting}
+%nc <- nc[-988,]
+%\end{lstlisting}
+%
+%This piece of code writes over the existing data set called \code{nc}. The new data set has all the rows except for row 988.
+
+\subsection*{Inference on proportions using simulation}
+Exploratory analysis is a useful first step when dealing with data because it helps us notice trends and develop research questions.  The mosaic plot we just made shows us that in our sample, the babies born to smokers were more often classified as low birthweight than those born to non-smokers. 
+
+We can quantify this observed difference as the difference between the proportions of low birthweight babies born to mothers who smoke and do not smoke. 
+
+\begin{exercise}
+Make a contingency table of \code{lowbirthweight} vs. \code{habit}.
+\end{exercise}
+
+When you do this in R  you should get a table similar to the one shown below, except for the totals.
+
+\begin{center}
+\begin{tabular}{rrrr}
+  \hline
+		 & nonsmoker 	& smoker	& Total \\ 
+  \hline
+low 		&  92 		& 18		& 110 \\ 
+not low 	& 781 		& 108 	& 889\\
+   \hline
+Total 	& 873		& 126 	& 999\\
+   \hline
+\end{tabular}
+\end{center}
+
+\begin{exercise}
+Calculate the proportions of low birthweight babies born to non-smoker and smoker mothers, and find the difference between the two proportions. Take note of this value as it will be useful in the next stage of the analysis.
+\end{exercise}
+
+At this stage, though, that's just a descriptive statistic.  In order to determine if this difference is significant and not due to chance, we need to do inference.
+
+Let's conduct a hypothesis test to answer the following question: do smokers and non-smokers give birth to low birthweight children at the same rate?
+
+\begin{exercise}
+State the hypotheses for this research question.
+\end{exercise}
+
+To test these hypotheses, we can use a simulation method. For this we use the custom function \code{reallocate()}. Before you proceed you should download this function and then load it to your workspace by clicking on the downloaded file called \code{custom101.R}.\footnote{The following file actually containts two functions, \code{reallocate()} and \code{z.test}. We'll use \texttt{reallocate} in the next step of the analysis, and \code{z.test} later on in the lab.}
+
+\begin{lstlisting}
+source("http://stat.duke.edu/courses/Fall11/sta101.02/labs/custom101.R")
+\end{lstlisting}
+
+Below is a physical representation of the setup for conducting this hypothesis test using simulation:
+\begin{enumerate}
+\item Write \textit{low} on 110 cards to represent babies that are low birthweight, and \textit{not low} on the 889 cards to represent babies that are not low birthweight.
+\item Shuffle the cards and deal into two groups of size 873 (representing non-smokers) and 126 (representing smokers).
+\item Calculate the proportion of low birthweight babies in each simulated sample.
+\item Take the difference of the simulated sample proportions and record this value.
+\item Repeat this many times (the function \code{reallocate()} by default repeats this procedure 10,000 times).
+\item Plot the resulting simulated differences and determine whether or not the observed difference is plausible based on this randomization distribution, i.e. under the assumption that the null hypothesis is true.
+\end{enumerate}
+
+Using the code below run the hypothesis test:
+
+\begin{lstlisting}
+reallocate(nc$lowbirthweight, group = nc$habit, alternative = "two.sided")
+\end{lstlisting}
+
+This may take a few seconds, be patient.
+
+\begin{exercise}
+Pair up with a neighbor and discuss how this function works. If you're unsure how it works, make sure to ask others or your TA. Did you get the same p-value as your neighbor? If not, are they similar? Is this surprising? Once you're clear on how the simulation test works, determine the conclusion of the hypothesis test.
+\end{exercise}
+
+We can also calculate a bootstrapping interval for the difference between the two proportions:
+
+\begin{lstlisting}
+resample(nc$lowbirthweight, group = nc$habit)
+\end{lstlisting}
+
+By default this gives us the confidence interval for $p_{non smoker} - p_{smoker}$. To change the order we add an additional argument to the previous function:
+
+\begin{lstlisting}
+resample(nc$lowbirthweight, group = nc$habit, order = c("smoker","nonsmoker"))
+\end{lstlisting}
+
+If we want the interval for the difference between the proportions of babies that are not low birth weight we can add one more argument as shown below:
+
+\begin{lstlisting}
+resample(nc$lowbirthweight, group = nc$habit, order = c("smoker","nonsmoker"), outcome = "not low")
+\end{lstlisting}
+
+These additional arguments, \code{order} and \code{outcome}, can also be used in the \code{reallocate()} function when conducting a hypothesis test.
+
+\subsection*{Inference on proportions using the CLT}
+
+We can also answer the same question using inference methods based on the CLT. For conducting the hypothesis test we use the function \code{prop.test()} in R.
+
+\begin{lstlisting}
+prop.test(c(92,18), c(873,126), alternative="two.sided")
+\end{lstlisting}
+
+The \code{c(92,18)} is the vector of low birthweight counts for each of the two groups (the numerators from the sample proportions), and \code{c(873,126)} is the vector of sample sizes for the two groups (the denominators from the sample proportions).  The argument \code{alternative = "two.sided"} is included to specify that the alternative hypothesis is two sided.  For other tests you would use either \code{alternative = "less"} or \code{alternative = "greater"}. 
+
+You get a lot of output from this function.  Notice first the p-value at the end of the second line.  This may not match the p-value you computed earlier exactly, but it should be pretty close.
+
+\begin{exercise}
+What is the conclusion of the hypothesis test based on this p-value?
+\end{exercise}
+
+Along with the p-value \code{prop.test()} also prints out a confidence interval.  The default the confidence level is 95\%.  To generate a 99\% confidence interval to compare to your earlier calculations, use \code{conf.level = 0.99}, as seen below:
+
+\begin{lstlisting}
+prop.test(c(92,18), c(873,126), conf.level=0.99)
+\end{lstlisting}
+
+Now let's try a one sided hypothesis test to see if non-smoker mothers have a higher rate of low birthweight babies than smoker mothers.
+
+\begin{lstlisting}
+prop.test(c(92,18),c(873,126), alternative="less")
+\end{lstlisting}
+
+Notice that this p-value is just half of the p-value from the earlier test. Also notice that the confidence interval looks a bit odd, the lower bound is -1. Confidence intervals only really make sense associated with two-sided tests (because you are leaving out the extremes in both tails). In order for the confidence interval to be printed out properly you should use a two sided test, or just leave out \code{alternative} so the function defaults to a two sided test automatically.
+
+\subsection*{Inference on means using simulation}
+
+Let's now change our research question a bit and investigate the difference between the average weights of male and female babies. More specifically, we'll conduct a hypothesis test to answer the following question: is there a difference between the average weights of male and female babies?
+
+\begin{exercise}
+State the hypotheses for this research question.
+\end{exercise}
+
+Let's first try an exploratory approach to see if we can spot any differences between the distributions of weights for male and female babies.
+
+\begin{exercise}
+Make a box plot of weights by gender of the baby. Does it appear that there is a difference between the weights of male and female babies?
+\end{exercise}
+
+Next we conduct a hypothesis test using a simulation method to see if the average weights of male and female babies are different. The setup is very similar to the earlier setup for comparing proportions, except this time we're taking the differences between simulated sample means.
+
+\begin{lstlisting}
+reallocate(nc$weight, group = nc$gender, alternative = "two.sided")
+\end{lstlisting}
+
+\begin{exercise}
+If there was no difference between the average weights of male and female babies, what would you expect the difference between the averages to be? How does this value compare to the center of the randomization distribution? What is the conclusion of your hypothesis test?
+\end{exercise}
+
+The \code{resample} function can also be used to calculate the difference between the average weights of males and females.
+
+\begin{lstlisting}
+resample(nc$weight, group = nc$gender)
+\end{lstlisting}
+
+As shown earlier, we can change the order in which we calculate the difference using the argument \code{order}.
+
+\subsection*{Inference on means using the CLT}
+
+We can also answer the same question using inference methods based on the CLT. For this we will use the custom function \code{z.test()} in R.
+
+We'll start by creating two vectors, one for weights of male babies, and the other for weights of female babies. Note that the character \code{#} is used to comment out whatever comes after it, i.e. R will ignore anything after a \code{#}.\footnote{Commenting your code is an extremely useful practice, it helps others follow your code, or reminds you what you were doing when you look back at your code weeks later.}
+
+\begin{lstlisting}
+mweight = nc$weight[nc$gender == "male"]	# weights of male babies
+fweight = nc$weight[nc$gender == "female"]	# weights of female babies
+\end{lstlisting}
+
+Then we use the custom function \code{z.test} to evaluate the hypotheses we set up earlier testing for a difference between the average weights of male and female babies.
+
+\begin{lstlisting}
+z.test(mweight, fweight, alternative = "two.sided", mu = 0)
+\end{lstlisting}
+
+\begin{exercise}
+Is your p-value same as your neighbor's? Is this surprising? What is the conclusion of your hypothesis test? Does this match your earlier conclusion from the simulation test?
+\end{exercise}
+
+\subsection*{New functions from this lab}
+
+We used four new functions in this lab:
+
+\begin{lstlisting}
+prop.test	# for proportions, CI \& HT using CLT
+z.test		# for means, CI \& HT using CLT
+reallocate	# for means and proportions, HT using simulation
+resample		# for means and proportions, CI using simulation
+\end{lstlisting}
+
+
+\subsection*{On Your Own}
+Do not forget to submit your workspace on \href{https://sakai.duke.edu}{\textit{Sakai}} at the end of the lab session. The ``on your own" section is due on Tuesday, October 25, 2011, along with your homework. You should not include your code in your write up, we just want to see the results of your analysis, but you should include the output and plots from R to supplement your analysis.
+
+We've considered the association between smoking and low birthweight and also the link between gender and birthweight.  Now it's your turn to analyze two variables that are of interest to you.
+
+\begin{enumerate}
+\item Select two variables from this data set: a categorical variable with two groups and a second variable, either categorical or quantitative, that is of interest to you.  You will be performing a hypothesis test that compares either the proportion or mean between these two groups.  What is the research question you will be answering?  What are the null and alternative hypotheses?
+
+\item Conduct the appropriate randomization test to evaluate your hypotheses.  Provide the plot of your randomization distribution and the associated p-value.  What is your conclusion?
+
+\item Conduct the appropriate z-test to evaluate your hypotheses.  Are the conditions for inference being met?  Regardless of if they are, what is the p-value?  What is your conclusion?
+
+\item How do your two p-values compare?  Why do you think this is? 
+
+\item What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
+
+\end{enumerate}
+
+\end{document}

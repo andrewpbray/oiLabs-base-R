@@ -1,0 +1,148 @@
+%% LyX 2.0.3 created this file. For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+
+\input{../../labStyle}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+require(parser)
+opts_knit$set(use.highlight = TRUE)
+@
+
+
+\license{This is a product of OpenIntro that is released under a Creative Commons Attribution-ShareAlike 3.0 Unported (\web{http://creativecommons.org/licenses/by-sa/3.0/}). This lab was adapted for OpenIntro by Mine \c{C}etinkaya-Rundel from a lab written by the faculty and TAs of UCLA Statistics.}
+
+\section*{Lab 5: Inference for numerical data}
+
+\subsection*{North Carolina births}
+
+In 2004, the state of North Carolina released a large data set containing information on births recorded in this state. This data set is useful to researchers studying the relation between habits and practices of expectant mothers and the birth of their children. We will work with a random sample of observations from this data set.
+
+\subsection*{Exploratory analysis}
+Load the \hlsymbol{nc} data set into our workspace.
+
+<<load-data, eval=FALSE>>=
+download.file("http://www.openintro.org/stat/data/nc.RData", destfile = "nc.RData")
+
+load("nc.RData")
+@
+
+We have observations on 13 different variables, some categorical and some numerical. The meaning of each variable is as follows.
+
+\begin{table}[h] \small
+\begin{tabular}{r | l}
+\hlsymbol{fage} & father's age in years. \\
+\hlsymbol{mage} & mother's age in years. \\
+\hlsymbol{mature} & maturity status of mother. \\
+\hlsymbol{weeks} & length of pregnancy in weeks. \\
+\hlsymbol{premie} & whether the birth was classified as premature (premie) or full-term. \\
+\hlsymbol{visits} & number of hospital visits during pregnancy. \\
+\hlsymbol{marital} & whether mother is \hlstring{married} or \hlstring{not married} at birth. \\
+\hlsymbol{gained} & weight gained by mother during pregnancy in pounds. \\
+\hlsymbol{weight} & weight of the baby at birth in pounds. \\
+\hlsymbol{lowbirthweight} & whether baby was classified as low birthweight (\hlstring{low}) or not (\hlstring{not low}). \\
+\hlsymbol{gender} & gender of the baby, \hlstring{female} or \hlstring{male}. \\
+\hlsymbol{habit} & status of the mother as a \hlstring{nonsmoker} or a \hlstring{smoker}. \\
+\hlsymbol{whitemom} & whether mom is \hlstring{white} or \hlstring{not white}. \\
+\end{tabular}
+\end{table}
+
+\begin{exercise}
+What are the cases in this data set? How many cases are there in our sample?
+\end{exercise}
+
+As a first step in the analysis, we should consider summaries of the data. This can be done using the \hlfunctioncall{summary} command:
+
+<<summary, eval=FALSE>>=
+summary(nc)
+@
+
+As you review the variable summaries, consider which variables are categorical and which are numerical. For numerical variables, are there outliers? If you aren't sure or want to take a closer look at the data, make a graph.
+
+Consider the possible relationship between a mother's smoking habit and the weight of her baby. Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions.
+
+\begin{exercise}
+Make a side-by-side boxplot of \hlsymbol{habit} and \hlsymbol{weight}. What does the plot highlight about the relationship between these two variables?
+\end{exercise}
+
+The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following function to split the \hlfunctioncall{weight} variable into the \hlfunctioncall{habit} groups, then take the mean of each using the \hlfunctioncall{mean} function.
+
+<<by-means, eval=FALSE>>=
+by(nc$weight, nc$habit, mean)
+@
+% mean color of function
+
+There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.
+
+\subsection*{Inference}
+
+\begin{exercise}
+Check if the conditions necessary for inference are satisfied. Note that you will need to obtain sample sizes to check the conditions. You can compute the group size using the same \hlfunctioncall{by} command above but replacing \hlsymbol{mean} with \hlsymbol{length}.
+\end{exercise}
+
+\begin{exercise}
+Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.
+\end{exercise}
+
+Next, we introduce a new function, \hlfunctioncall{inference}, that we will use for conducting hypothesis tests and constructing confidence intervals. 
+
+<<inf-weight-habit-ht, eval=FALSE, tidy=FALSE>>=
+inference(data = nc$weight, group = nc$habit, est = "mean", type = "ht", null = 0, 
+          alternative = "twosided", method = "theoretical")
+@
+
+Let's pause for a moment to go through the arguments of this custom function.
+\begin{itemize}
+
+\item The first argument is \hlargument{data}, which is the response variable that we are interested in: \hlsymbol{nc}\hlkeyword{\$}\hlsymbol{weight}.
+
+\item The second argument is the grouping variable, \hlargument{group}, which is the variable that splits the data into two groups, smokers and non-smokers: \hlsymbol{nc}\hlkeyword{\$}\hlsymbol{habit}.
+
+\item The third argument, \hlargument{est}, is the parameter we're interested in: \hlstring{"mean"} (other options are \hlstring{"median"}, or \hlstring{"proportion"}.)
+
+\item Next we decide on the \hlargument{type} of inference we want: a hypothesis test (\hlstring{ht}) or a confidence interval (\hlstring{"ci"}).
+
+\item When performing a hypothesis test, we also need to supply the \hlargument{null} value, which in this case is \hlnumber{0}, since the null hypothesis sets the two population means equal to each other.
+
+\item The \hlargument{alternative} hypothesis can be \hlstring{"less"}, \hlstring{"greater"}, or \hlstring{"twosided"}.
+
+\item Lastly, the \hlargument{method} of inference can be \hlstring{"theoretical"} or \hlstring{"simulation"} based.
+\end{itemize}
+
+\begin{exercise}
+Change the \hlargument{type} argument to \hlstring{"ci"} to construct and record a confidence interval for the difference between the weights of babies born to smoking and non-smoking mothers.
+\end{exercise}
+
+By default the function reports an interval for ($\mu_{nonsmoker} - \mu_{smoker}$). We can easily change this order by using the \hlargument{order} argument:
+
+<<inf-weight-habit-ci, eval=FALSE, tidy=FALSE>>=
+inference(data = nc$weight, group = nc$habit, est = "mean", type = "ci", null = 0, 
+          alternative = "twosided", method = "theoretical", 
+          order = c("smoker","nonsmoker"))
+@
+
+\vspace{2cm}
+
+\subsection*{On your own}
+
+\begin{enumerate}
+
+\item Calculate a 95\% confidence interval for the average length of pregnancies (\hlsymbol{weeks}) and interpret it in context. Note that since you're doing inference on a single population parameter, there is no grouping variable, so you can omit the \hlargument{group} variable from the function.
+
+\item Calculate a new confidence interval for the same parameter at the 90\% confidence level. You can change the confidence level by adding a new argument to the function: \hlargument{conflevel}\hlkeyword{ = }\hlnumber{0.90}.
+
+\item Conduct a hypothesis test evaluating whether the average weight gained by younger mothers is different than the average weight gained by mature mothers.
+
+\item Now, a non-inference task: Determine the age cutoff for younger and mature mothers. Use a method of your choice, and explain how your method works.
+
+\item Pick a pair of numerical and categorical variables and come up with a research question evaluating the relationship between these variables. Formulate the question in a way that it can be answered using a hypothesis test and/or a confidence interval. Answer your question using the \hlfunctioncall{inference} function, report the statistical results, and also provide an explanation in plain language.
+
+\item What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
+
+\end{enumerate}
+
+ 
+\end{document}

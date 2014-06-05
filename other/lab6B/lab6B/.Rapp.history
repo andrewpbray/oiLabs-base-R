@@ -1,0 +1,979 @@
+7.88 + c(-1,1) * 2.31 * 1.95
+qt(0.01, 8)
+qt(0.005, 8)
+library(openintro)
+data(babysmoke)
+data(baby_smoke)
+data(babySmoke)
+data(nc)
+129 + 20 + 70
+(95.61 - 93.29) / 1.58
+library(openintro)
+data(countyComplete)
+names(countyComplete)
+28 * 34
+480 * 1280 / 720
+(2593 + 5386) / (227571
+)
+p <- (2593 + 5386) / (227571)
+sqrt(p * (1-p) * (1 / 67593 + 1 / 159978))
+p1 <- 2593 / 67593
+p2 <- 5386 / 159978
+sqrt(p1*(1-p1) / 67593 + p2*(1-p2) / 159978)
+2.4 / 1.96
+1.2 * 1.96
+4.6 / 1.96
+2.3 * 1.96
+359 /  736
+sqrt(.488 * .512 / 736)
+p1
+p2
+p1 - p2
+129 / 12
+75 / 12
+4000 / 12
+6 + 62 + 4 + 11 + 267 + 88 + 16
+75000 / 12
+21/24
+x <- 0:10#
+y <- dbinom(x, 10, 0.1)#
+plot(x, y)
+x <- 0:10#
+y <- dbinom(x, 10, 0.2)#
+plot(x, y)
+segments(rep(0, 11), 0, y1 = y)
+segments(0:11, 0, y1 = y)
+x <- 0:10#
+y <- dbinom(x, 10, 0.2)#
+plot(x, y)#
+segments(0:11, 0, y1 = y)
+x <- 0:10#
+y <- dbinom(x, 15, 0.2)#
+plot(x, y)#
+segments(0:11, 0, y1 = y)
+x <- 0:10#
+y <- dbinom(x, 15, 0.25)#
+plot(x, y)#
+segments(0:11, 0, y1 = y)
+x <- 0:10#
+y <- dbinom(x, 14, 0.25)#
+plot(x, y)#
+segments(0:11, 0, y1 = y)
+x <- 0:10#
+y <- dbinom(x, 12, 0.25)#
+plot(x, y)#
+segments(0:11, 0, y1 = y)
+6000 / 15
+pt(1.6, 50)
+qt(0.05, 50)
+1.1 + c(-1,1)*1.68 * 4.9 / sqrt(51)
+pt(-2.72, 35)
+2593 / 67593 - 5386 /159978
+library(openintro)#
+data(COL)
+oiB = COL[1]
+par(mar=c(5,0,0,0), las=1, mgp=c(3,1,0), mfrow = c(1,1))#
+#
+m = 0#
+s = 0.00084#
+l = -0.00467#
+u = 0.00467#
+#
+normTail(m = m, s = s, U = u, L = l, axes = FALSE, col = oiB, xlab = "(d)", cex.lab = 2)
+m = 0#
+s = 0.00084#
+u = 0.00467#
+#
+x <- seq(-0.0028, 0.005, 0.000025)#
+y <- dnorm(x, 0, s)#
+plot(x, y, type = "l", xlab = "", ylab = "")#
+abline(h = 0)
+x <- seq(-0.0028, 0.005, 0.000025)#
+y <- dnorm(x, 0, s)#
+plot(x, y, type = "l", xlab = "", ylab = "")#
+abline(h = 0)#
+lines(c(u, 1), c(0, 0), lwd = 3, col = COL[4])
+lines(c(u, 1), c(0, 0), lwd = 3, type = "b", col = COL[4])
+lines(c(u, 1), c(0, 0), lwd = 3, type = "b", pch = 19, col = COL[4])
+x <- seq(-0.0028, 0.005, 0.000025)#
+y <- dnorm(x, 0, s)#
+plot(x, y, type = "l", xlab = "", ylab = "")#
+abline(h = 0)#
+lines(c(u, 1), c(0, 0), lwd = 3, type = "b", pch = 19, col = COL[4])
+lines(c(u, 1), c(0, 0), lwd = 3, col = COL[4])#
+points(c(u, 1), c(0, 0), pch = 19, col = COL[4])
+x <- seq(-0.0028, 0.005, 0.000025)#
+y <- dnorm(x, 0, s)#
+plot(x, y, type = "l", xlab = "", ylab = "")#
+abline(h = 0)#
+lines(c(u, 1), c(0, 0), lwd = 3, col = COL[4])#
+points(c(u, 1), c(0, 0), pch = 19, col = COL[4])
+pdf("avandia.pdf", height = 3, width = 5)#
+par(mar=c(5,0,0,0), las=1, mgp=c(3,1,0), mfrow = c(1,1))#
+#
+m = 0#
+s = 0.00084#
+u = 0.00467#
+#
+x <- seq(-0.0028, 0.005, 0.000025)#
+y <- dnorm(x, 0, s)#
+plot(x, y, type = "l", xlab = "", ylab = "")#
+abline(h = 0)#
+lines(c(u, 1), c(0, 0), lwd = 3, col = COL[4])#
+points(c(u, 1), c(0, 0), pch = 19, col = COL[4])#
+#
+dev.off()
+.00469 / 0.00084
+1.1 * c(-1,1)*1.96 * 4.9 / sqrt(51)
+1.1 + c(-1,1)*1.96 * 4.9 / sqrt(51)
+27 * .7
+27 * .65
+27 * .64
+27 * .28
+30 * 30 * 6
+30 * 30 * 6 * .22
+264 / 16
+24 / 72
+72 / 24
+72 / 24 /20
+72 / 24 / 20
+72 / 24 / 60
+1 / (72 / 24 / 60)
+1 / (72 / 24 / 60) * 2.5
+1 / (72 / 24 / 60) * 2.5 * .25
+1000 / .22
+1000 / .22 * .010
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i] * .78  #
+}#
+money.end <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .78#
+money.during <- money#
+#
+times <- rep(1:31, 2)
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during))
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)))
+money.end
+money.during
+money
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i] * .78  #
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .78#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")
+money.end
+money.during
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.18, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i] * .78  #
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .78#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.18, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i] * .83#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .83#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+prod(1 + returns)
+log(prod(1 + returns), 30)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.18, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i] * .83#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .83#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+log(prod(1 + returns), 30)
+returns
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.18, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.18)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.25)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+money.during
+library(ggplot2)#
+#
+returns <- rnorm(30, 0.15, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+returns <- rnorm(40, 0.15, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, 30)#
+gains <- rep(NA, 30)#
+for (i in 1:30) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(1:31, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(31, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+years   <- 40#
+returns <- rnorm(years, 0.15, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(0:years + 1, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(years + 1, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+years   <- 40#
+returns <- rnorm(years, 0.08, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(0:years + 1, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(years + 1, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+years   <- 40#
+returns <- rnorm(years, 0.11, 0.15)#
+#
+# Taxed at end#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(0:years + 1, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(years + 1, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(ggplot2)#
+#
+years   <- 40#
+returns <- rnorm(years, 0.14, 0.2)#
+#
+# Taxed at end#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  gains[i]   <- ifelse(gains[i] < 0, .72, .8) * gains[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money.during <- money#
+#
+# Taxed each year#
+money <- rep(1e3, years)#
+gains <- rep(NA, years)#
+for (i in 1:years) {#
+  gains[i]   <- money[i] * returns[i]#
+  money[i+1] <- money[i] + gains[i]#
+}#
+money[i+1] <- money[i+1] * .8#
+money.end <- money#
+#
+times <- rep(0:years + 1, 2)#
+qplot(times, c(money.end, money.during), log="y",#
+      colour = rep(c("end", "during"), rep(years + 1, 2)),#
+      geom = "line")#
+#
+tail(money.during, 1)#
+tail(money.end, 1)
+library(OIdata)
+data(sp500)
+sp500[1:5,]
+library(openintro)
+data(email)
+email[1:2, ]
+?email
+library(openintro)
+data(emails)
+data(email)
+email$number
+table(email$number)
+sum(table(email$number)
+)
+2827 / 3921
+exp(seq(-12, 0))
+exp(seq(-12, 1))
+exp(seq(-8, 0.5))
+exp(seq(-8, 0.5, 0.7))
+exp(seq(-8, -0.5, 0.7))
+exp(seq(-8, -0.5, 0.75))
+exp(seq(-6, -0.5, 0.5))
+over  <- exp(seq(-6, -0.5, 0.5))#
+under <- c(0, head(over, -1))
+under
+cbind(under, over)
+set.seed(1)#
+over  <- exp(sample(seq(-6, -0.5, 0.1), 12))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(exp(sample(seq(-6, -0.5, 0.1), 12)))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(exp(sample(seq(-5, -0.5, 0.1), 12)))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(exp(sample(seq(-5, 0, 0.1), 12)))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(exp(sample(seq(-5, 0, 0.1), 20)))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(exp(sample(seq(-5, 0, 0.1)^0.8, 20)))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+exp(sample(seq(-5, 0, 0.1)
+set.seed(1)#
+over  <- sort(sample(exp(seq(-5, 0, 0.1)^0.8), 20))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+exp(seq(-5, 0, 0.1)^0.8)
+exp(seq(-5, 0, 0.1))^0.8
+set.seed(1)#
+over  <- sort(sample(exp(seq(-5, 0, 0.1))^0.8, 12))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(sample(exp(seq(-5, 0, 0.1))^0.75, 12))#
+under <- c(0, head(over, -1))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(sample(exp(seq(-5, 0, 0.1))^0.6, 12))#
+cbind(under, over)
+set.seed(1)#
+over  <- sort(sample(exp(seq(-5, 0, 0.1))^0.6, 12))#
+cbind(over)
+library(openintro)
+data(county)
+?county
+(2.05∗18/4)^2
+(2.05 * 18/4)^2
+?write.table
+sample(1e6)
+sample(1e6, 1)
+library(stockPortfolio)
+install.packages("stockPortfolio")
+library(stockPortfolio)
+gr <- getReturns(c("BAC", "GOOG"))
+gr
+d <- getReturns(c("VWINX", "GOOG"))
+d
+Author: David Diez (david@openintro.org)#
+#
+# Description#
+#   This set of code is to perform a simle comparison#
+#   of the methods within this package and more explicit#
+#   computations using familiar functions.#
+#
+# Usage#
+#   To perform a sufficient comparison of the bootstrap#
+#   methods, it is recommended that 1 million bootstrap#
+#   samples be used (via the "N" variable).#
+#
+# source("cicond/simulations/03-T1E_analysis.R")#
+# _____ Simulation Parameters _____ ##
+start <- Sys.time()#
+library(cicond)#
+library(ggplot2)#
+set.seed(1)#
+N  <- 1e4 # Number of bootstrap samples
+library(openintro)
+data(run10Samp)
+head(run10Samp)
+median(run10Samp$time)
+library(RCurl)
+url <- "http://flossdata.syr.edu/data/fc/2013/2013-Dec/"; htmlPage <- rawToChar(getURLContent(url, followlocation = TRUE, binary = TRUE))#
+doc <- htmlParse(htmlPage, asText=TRUE)
+install.packages("RCurl")
+library(RCurl)
+url <- "http://flossdata.syr.edu/data/fc/2013/2013-Dec/"; htmlPage <- rawToChar(getURLContent(url, followlocation = TRUE, binary = TRUE))#
+doc <- htmlParse(htmlPage, asText=TRUE)
+htmlPage
+gsub("<*>", "", htmlPage)
+gsub("<*>", "", htmlPage, perl = TRUE)
+gsub("<[^>]>", "", htmlPage, perl = TRUE)
+gsub("<[^>]+>", "", htmlPage, perl = TRUE)
+174 / 14767
+155 / (13202 + 2135)
+sample(30, 2)
+5000 / 27.85
+library(openintro)
+data(countyComplete)
+head(countyComplete)
+library(SB)
+sample(1e6, 1)
+522 / 3
+387 / 3
+45 * 4
+193 / 16
+rgb(193,210,200)
+c(698, 461) / 3
+236 / 3
+604 / 3
+127 / 3
+c(947, 127) / 3
+c(946, 225) / 3
+sample(1e6, 1)
+sqrt(.75 * .25 / 6)
+sqrt(.75 * .25 / 6) * 6
+(4.5 - 2) / 1.06
+source("http://www.openintro.org/stat/data/cdc.R")
+ls()
+object.size(cdc)
+object.size(cdc) / 1e6
+pbinom(10, 20, .5)
+dbinom(10, 20, .5)
+install.packages(c("stockPortfolio", "openintro", "OIsurv"))
+rnbinom(100, 1, .471)
+rnbinom(100, 1, .171)
+sd(rnbinom(10000000, 1, .471))
+1.543234^2
+sd(rnbinom(10000000, 1, .471))
+x <- c(50, 25, 0)
+p <- c(0.0129, 0.1176, 0.8695)
+ex <- sum(x * p)
+(x - ex)^2 * p
+sum((x - ex)^2 * p)
+sqrt(sum((x - ex)^2 * p))
+library(animated)#
+set.seed(5)#
+#
+# _____ Parameters _____ ##
+scenario    <- 2#
+transitions <- 20#
+# _____ Files + Seed _____ ##
+folder <- c("01_Shuffle_Assign",#
+            "02_Shuffle_Assign")[scenario]#
+bankerR.file <- c("icons/Banker_Generic.png",#
+                  "icons/Banker_Yes.png")[scenario]#
+bankerN.file <- c("icons/Banker_Generic.png",#
+                  "icons/Banker_No.png")[scenario]#
+seed   <- c(1, 5)[scenario]#
+# _____ Plotting Parameters _____ ##
+xlim <- c(0, 1280)#
+ylim <- c(0, 720)#
+#
+# _____ Helper Functions _____ ##
+RandomizeDF <- function(banker.loc) {#
+  return(banker.loc[sample(nrow(banker.loc)), ])#
+}#
+MergeIconsForOverlap <- function(i1, i2, starter = list()) {#
+  icons <- starter#
+  ns    <- length(starter)#
+  n1    <- length(i1$x)#
+  n2    <- length(i2$x)#
+  for (i in 1:n1) {#
+    icons[[ns + i]]   <- i1#
+    icons[[ns + i]]$x <- i1$x[i]#
+    icons[[ns + i]]$y <- i1$y[i]#
+  }#
+  for (i in 1:n2) {#
+    icons[[ns + n1 + i]]   <- i2#
+    icons[[ns + n1 + i]]$x <- i2$x[i]#
+    icons[[ns + n1 + i]]$y <- i2$y[i]#
+  }#
+  return(icons)#
+}#
+#
+# _____ Key Locations _____ ##
+resume.loc <- data.frame(#
+  x = rep(seq(80, 560, length.out = 6), rep(8, 6)),#
+  y = rep(seq(200, 670, length.out = 8), 6))#
+resume.loc <- as.data.frame(lapply(resume.loc, round))#
+banker.loc <- resume.loc#
+banker.loc$x <- banker.loc$x + 640#
+#
+# _____ Male Resume _____ ##
+resumeM <- list()#
+resumeM$file <- "icons/Folder_Male.png"#
+resumeM$x    <- resume.loc$x[1:24]#
+resumeM$y    <- resume.loc$y[1:24]#
+resumeM$xw   <- 28#
+resumeM$yw   <- 24#
+resumeM.     <- resumeM#
+tmp1         <- matrix(c(320, 435), 48, 2, byrow = TRUE) +#
+                  round(rnorm(96, sd = 15))#
+resumeM.$x   <- tmp1[1:24, 1]#
+resumeM.$y   <- tmp1[1:24, 2]#
+tmp2         <- RandomizeDF(banker.loc)#
+resumeM..    <- resumeM#
+resumeM..$x  <- tmp2[1:24, 1] + 5#
+resumeM..$y  <- tmp2[1:24, 2] - 15#
+#
+# _____ Female Resume _____ ##
+resumeF      <- resumeM#
+resumeF$file <- "icons/Folder_Female.png"#
+resumeF$x    <- resume.loc$x[24 + 1:24]#
+resumeF$y    <- resume.loc$y[24 + 1:24]#
+resumeF.     <- resumeF#
+resumeF.$x   <- tmp1[24 + 1:24, 1]#
+resumeF.$y   <- tmp1[24 + 1:24, 2]#
+resumeF..    <- resumeM#
+resumeF..$x  <- tmp2[24 + 1:24, 1] + 5#
+resumeF..$y  <- tmp2[24 + 1:24, 2] - 15#
+#
+# _____ Banker Positions _____ ##
+bankerR <- list()#
+banker.loc   <- RandomizeDF(banker.loc)#
+bankerR$file <- bankerR.file#
+bankerR$x    <- banker.loc$x[1:35]#
+bankerR$y    <- banker.loc$y[1:35]#
+bankerR$xw   <- 28#
+bankerR$yw   <- 52#
+bankerN      <- bankerR#
+bankerN$file <- bankerN.file#
+bankerN$x    <- banker.loc$x[35 + 1:13]#
+bankerN$y    <- banker.loc$y[35 + 1:13]#
+pts    <- data.frame(-100, -100)#
+#
+# _____ Create Icon Lists _____ ##
+set.seed(5)#
+tmp     <- MergeIconsForOverlap(bankerR, bankerN)#
+bankers <- tmp[sample(48)]#
+icons1  <- icons1[new.order]#
+icons1  <- MergeIconsForOverlap(resumeM, resumeF, bankers)#
+icons2  <- MergeIconsForOverlap(resumeM., resumeF., bankers)#
+icons3  <- MergeIconsForOverlap(resumeM.., resumeF.., bankers)#
+#
+set.seed(seed)#
+nb        <- length(bankers)#
+new.order <- c(1:nb, sample(nb + 1:48, 48))#
+icons1  <- icons1[new.order]#
+icons2  <- icons2[new.order]#
+icons3  <- icons3[new.order]#
+# _____ Animate _____ ##
+animate2(pts, pts, icons1 = icons1, icons2 = icons2,#
+         transitions = transitions, xlim = xlim, ylim = ylim,#
+         folder = folder, plot.par = list(mar = rep(0, 4)),#
+         xyzaxes = "")#
+animate2(pts, pts, icons1 = icons2, icons2 = icons3,#
+         transitions = transitions, xlim = xlim, ylim = ylim,#
+         folder = folder, plot.par = list(mar = rep(0, 4)),#
+         xyzaxes = "", file.start = t1 + 1)
+get_digit <- function(x, which_digit = "first") {if (is.na(match(which_digit, c("first", "last")))) {stop("which_digit must be first or last") }if (which_digit == "first") { as.integer(head(strsplit(as.character(x), "")[[1]], n = 1))} else {as.integer(tail(strsplit(as.character(x), "")[[1]], n = 1))} }# read in iran datairan <- read.csv("iran.csv", header = TRUE)digits_iran <- sapply(iran$total_votes_cast, FUN = get_digit)obs <- table(digits_iran)barplot(obs)
+digits_iran
+iran[1:5, ]
+iran$total_votes_cast <- iran$Ahmadinejad + iran$Karrubi + iran$Mousavi
+iran[1:5, ]
+digits_iran <- sapply(iran$total_votes_cast, FUN = get_digit)
+digits_iran
+obs <- table(digits_iran)
+obs
+barplot(obs)
+dim(iran)
+iran.. <- iran
+get_digit <- function(x, which_digit = "first") {if (is.na(match(which_digit, c("first", "last")))) {stop("which_digit must be first or last") }if (which_digit == "first") { as.integer(head(strsplit(as.character(x), "")[[1]], n = 1))} else {as.integer(tail(strsplit(as.character(x), "")[[1]], n = 1))} }# read in iran datairan <- read.csv("iran2.csv", header = TRUE)digits_iran <- sapply(iran$total_votes_cast, FUN = get_digit)obs <- table(digits_iran)barplot(obs)
+get_digit <- function(x, which_digit = "first") {if (is.na(match(which_digit, c("first", "last")))) {stop("which_digit must be first or last") }if (which_digit == "first") { as.integer(head(strsplit(as.character(x), "")[[1]], n = 1))} else {as.integer(tail(strsplit(as.character(x), "")[[1]], n = 1))} }# read in iran datairan <- read.csv("iran.csv", header = TRUE)digits_iran <- sapply(iran$total_votes_cast, FUN = get_digit)obs <- table(digits_iran)barplot(obs)
+compare to Benfords distn <- dim(iran)[1]benfords_p <- log10(1 + 1/1:9)expected <- benfords_p * nchistat <- sum(((obs - expected)^2)/expected)pchisq(chistat, df = 8, lower.tail = FALSE)
+benfords_p
+digits_iran / n
+obs / n
+benfords_p
+norway <- read.csv("norway.csv", header = TRUE)digits_norway <- sapply(norway$total_votes_cast, FUN = get_digit)obs <- table(digits_norway)barplot(obs)
+norway <- read.csv("nor.csv", header = TRUE)digits_norway <- sapply(norway$total_votes_cast, FUN = get_digit)obs <- table(digits_norway)barplot(obs)
+norway <- read.csv("norway.csv", header = TRUE)digits_norway <- sapply(norway$total_votes_cast, FUN = get_digit)obs <- table(digits_norway)barplot(obs)
+norway <- read.csv("nor.csv", header = TRUE)digits_norway <- sapply(norway$total_votes_cast, FUN = get_digit)obs <- table(digits_norway)barplot(obs)
+norway
+36 * 25

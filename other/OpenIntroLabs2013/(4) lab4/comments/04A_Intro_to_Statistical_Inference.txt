@@ -1,0 +1,21 @@
+
+Note 0
+The other parts don't really add any additional information, and the connection with the section title is lost. If not including something describing the data briefly here, like in the proposed edit, then drop the subsection title since that isn't covered in this paragraph.
+
+Note 1
+This is nit-picky. The first question isn't quite saying to describe it, but rather it is asking the reader to explain how s/he would describe it.
+
+Note 2
+Wanted to avoid two things here. (1) Phrasing like "sample mean from a sample". (2) It said the best guess was the sample mean from *this* simple random sample, which is only true conditioned on only sample data being considered. These are highly techinical points that students probably won't catch, but critical teachers will.
+
+Note 3
+"better and worse" than what? Also, if it is being compared to one of their first two means, one of those estimates could actually be incredibly close to the population mean. If the student realizes this, then his/her answer should be different than what is being anticipated.
+
+Note 4
+They probably won't remember what the sampling distribution is. Current wording also hints that the sampling distribution only tells us about variability.
+
+Note 5
+Don't want to hint that the sampling distribution is always done using 5000 samples.
+
+Note 6
+Even if not doing the changes above, the second question here should be dropped since technically nothing is broken, if the students coded it properly. Rather, the directions were to do something that didn't really make sense to do, but that doesn't mean the code is functionally (or theoretically) broken.

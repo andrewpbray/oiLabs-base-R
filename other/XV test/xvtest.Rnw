@@ -1,0 +1,48 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}
+
+\input{labStyle}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# this is equivalent to \SweaveOpts{...}
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
+options(replace.assign=TRUE,width=90)
+opts_knit$set(use.highlight = TRUE)
+@
+
+\section*{Copy/Paste Consistency Test}
+To survey how accurately code is replicated when copied from a lab and pasted into an .r script, please copy the chunk of code below and paste it elsewhere.
+
+<<load-data, eval=FALSE>>=
+source("http://www.openintro.org/stat/data/cdc.R")
+
+for(i in 1:10){
+  a <- cdc$gender[i]
+  print((a == "m" & cdc$age[i] < 40) | a == "f")
+}
+
+boxplot(wtdesire ~ gender, cdc)
+@
+
+If the chunk pastes just fine, please go to the google doc at
+
+\web{https://docs.google.com/document/d/1H2EXD6AaRysMsshPplcjGZBdgT9BOMjYrR4TA10BYO0/edit}
+
+and record the particulars of your computing setup.  If it goofed up a couple of the characters, please paste the mangled code in the doc as well.
+
+Consider copying from the pdf in a browser as well as the pdf in reader, and pasting to an .r script in rstudio, as well as the command line, both serverside (if you're setup with that) and desktop edition. 
+
+<<forLoop, eval=FALSE>>=
+for(i in 1:10){
+  a <- cdc$gender[i]
+  print((a == "m" & cdc$age[i] < 40) | a == "f")
+}
+@
+
+Above is a second try to see if the braces copy correctly with spacing.
+
+\end{document}

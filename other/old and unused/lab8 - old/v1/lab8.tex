@@ -1,0 +1,209 @@
+% Note for instructors:
+% The R code that is integrated into OpenIntro labs has been highlighted using the R package "highlight", which converts R code to appropriately highlighted latex code. See the end of this document for the original R code (commented out).
+
+\documentclass[11pt]{article}
+
+% Load packages and functions
+\input{../labStyle}
+
+\begin{document}
+
+\section*{Lab 8: Multiple regression}
+
+\license{This is a product of OpenIntro that is released under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported (\web{creativecommons.org/licenses/by-nc-nd/3.0/}). This lab was written for OpenIntro by Andrew Bray and Mine \c{C}etinkaya-Rundel.}
+
+\subsection*{Google's Transparency Report}
+\begin{quote}
+``Transparency is a core value at Google. As a company we feel it is our responsibility to ensure that we maximize transparency around the flow of information related to our tools and services. We believe that more information means more choice, more freedom and ultimately more power for the individual.''
+\end{quote}
+
+So begins Google's recently released Transparency Report.  As a company, they have access to prodigious amounts of information about their users, information that is often of keen interest to governments.  The report contains information related to the number of government inquiries for user data as well as the number of requests to remove content from Google's services. In this lab we'll consider a handful of countries and various statistics on each to help us get a sense of what defines countries with various levels of internet censorship.  Our tool of choice here will be multiple linear regression, and while it might not be the method best suited to this particular situation, it can still provide us with useful insights.
+
+\subsection*{The data}
+
+The data consist of the number of requests Google received for user account information as part of criminal investigations in the first half of 2011 and the rate of compliance as well as some other indicators on the countries.
+
+Let's load up the Google data:
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlsymbol{goog}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.csv}\hlkeyword{(}\hlstring{"http://www.openintro.org/stat/data/goog.csv"}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+Below is a list of the variables and descriptions.
+
+\begin{table}[h] \small
+\begin{tabular}{r | p{14cm}}
+\texttt{\hlsymbol{country}}		& name of country. \\
+\texttt{\hlsymbol{complied}}	& percentage of requests Google complied with. \\
+\texttt{\hlsymbol{requests}}	& number of requests Google received for user account information as part of criminal investigations. \\
+\texttt{\hlsymbol{pop}}		& population of country, in thousands. \\
+\texttt{\hlsymbol{hdi}}		& human development index, a composite measure of life expectancy, literacy, education, and standard of living on a scale of 0 (least developed) to 1 (most developed). For more information, click \href{http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index}{here}. \\
+\texttt{\hlsymbol{dem}}	& democracy index, categorized into \texttt{\hlstring{full}} democracies, \texttt{\hlstring{flawed}} democracies, and \texttt{\hlstring{hybrid}} regimes. For more information, click \href{http://en.wikipedia.org/wiki/Democracy_Index}{here}. \\
+\texttt{\hlsymbol{internet}}		& percentage of internet users. For more information, click \href{http://en.wikipedia.org/wiki/List_of_Internet_users_by_country}{here}. \\
+\texttt{\hlsymbol{freepress}}	& free press index, scored on a scale from 1 (most free) to 100 (least free). For more information, click \href{http://en.wikipedia.org/wiki/Freedom_of_the_Press_(report)}{here}. \\
+\end{tabular}
+\end{table}
+
+We'll first focus on modeling Google's compliance rate (\texttt{\hlsymbol{complied}}) using the rest of the explanatory variables.
+
+\subsection*{Pairwise plots}
+
+We start our analysis by examining pairwise plots of the data. Since the first column is just the country name, we leave that column out. 
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{plot}\hlkeyword{(}\hlsymbol{goog}\hlkeyword{[}\hlkeyword{,}\hlkeyword{-}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+Note that you could also get the same plot with \texttt{\hlfunctioncall{plot}\hlkeyword{(}\hlsymbol{goog}\hlkeyword{[}\hlkeyword{,}\hlnumber{2}\hlkeyword{:}\hlnumber{8}\hlkeyword{]}\hlkeyword{)}} but it's a bit quicker to use \texttt{\hlkeyword{[}\hlkeyword{,}\hlkeyword{-}\hlnumber{1}\hlkeyword{]}}, saying that you want all columns except for the first one.
+
+\begin{exercise}
+Examine the pairwise scatterplots. What can you say about the trends in relationships between \texttt{\hlsymbol{complied}} and the other variables? Are there any observations that stand out from the rest?
+\end{exercise}
+
+\subsection*{Drop outliers}
+
+One of the observations that stands out as unusual is the country with the highest population. Let's see which country this is:
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{which.max}\hlkeyword{(}\hlsymbol{goog}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{pop}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+The result of the above function indicates that the observation in the 10th row of the data set is the country with the highest population, and this country is India. Next, we subset the data to exclude this observation.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{goog.sub}{\ }\hlassignement{=}{\ }\hlfunctioncall{subset}\hlkeyword{(}\hlsymbol{goog}\hlkeyword{,}{\ }\hlsymbol{country}{\ }\hlkeyword{!=}{\ }\hlstring{"india"}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+Let's take another look at the pairwise plots.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{plot}\hlkeyword{(}\hlsymbol{goog.sub}\hlkeyword{[}\hlkeyword{,}\hlkeyword{-}\hlnumber{1}\hlkeyword{]}\hlkeyword{)}\hspace*{\fill}\
+\normalfont
+
+\begin{exercise}
+Do any other countries appear unusual in this plot? If so, determine which one(s).
+\end{exercise}
+
+Regardless of your answer, we'll proceed with the analysis with the 25 countries remaining in the data frame \texttt{\hlsymbol{goog.sub}}.
+
+\subsection*{Defining the reference level}
+
+Currently there is one categorical variable in the data, \texttt{\hlsymbol{dem}}. Let's make a frequency table for this variable.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{table}\hlkeyword{(}\hlsymbol{goog.sub}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{dem}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+The level that shows up first, \texttt{\hlstring{free}}, is by default the reference level. R usually chooses the reference level as the level that comes up first alphabetically. We can change the reference level to \texttt{\hlstring{hybrid}} using the following command:
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{goog.sub}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{dem}{\ }\hlassignement{=}{\ }\hlfunctioncall{relevel}\hlkeyword{(}\hlsymbol{goog.sub}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{dem}\hlkeyword{,}{\ }\hlargument{ref}{\ }\hlargument{=}{\ }\hlstring{"hybrid"}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+\begin{exercise}
+Confirm that the reference level for \texttt{\hlsymbol{dem}} has been changed to \texttt{\hlstring{hybrid}}.
+\end{exercise}
+
+\subsection*{Multiple linear regression}
+
+Let's fit a multiple linear regression model to predict compliance rate using the rest of the explanatory variables.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{m.full}{\ }\hlassignement{=}{\ }\hlfunctioncall{lm}\hlkeyword{(}\hlsymbol{complied}{\ }\hlkeyword{\urltilda{}}{\ }\hlsymbol{requests}{\ }\hlkeyword{+}{\ }\hlsymbol{pop}{\ }\hlkeyword{+}{\ }\hlsymbol{hdi}{\ }\hlkeyword{+}{\ }\hlsymbol{dem}{\ }\hlkeyword{+}{\ }\hlsymbol{internet}{\ }\hlkeyword{+}{\ }\hlsymbol{freepress}\hlkeyword{,}{\ }\hlargument{data}{\ }\hlargument{=}{\ }\hlsymbol{goog.sub}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{summary}\hlkeyword{(}\hlsymbol{m.full}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+The format here is similar to what we used for simple regression, only now we have many predictors, each separated by \texttt{\hlkeyword{+}}.
+
+\begin{exercise}
+Interpret the coefficient for \texttt{\hlsymbol{pop}} (population) and the coefficients associated with the democracy index.
+\end{exercise}
+
+\subsection*{Model selection}
+
+\begin{exercise}
+Which variables in the full model are significant predictors?
+\end{exercise}
+
+Let's try to find a model that better predicts Google's compliance rate than the full model. For this we can use the \texttt{\hlfunctioncall{step}} function to do a stepwise model selection. By default this function does backwards-elimination.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{step}\hlkeyword{(}\hlsymbol{m.full}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+The second to last argument in the output shows that the formula for the best model is \texttt{\hlfunctioncall{lm}\hlkeyword{(}\hlsymbol{complied}{\ }\hlkeyword{\urltilda{}}{\ }{\ }\hlsymbol{pop}{\ }{\ }\hlkeyword{+}{\ }\hlsymbol{hdi}\hlkeyword{,}{\ }\hlargument{data}{\ }\hlargument{=}{\ }\hlsymbol{goog.sub}\hlkeyword{)}}. So let's try that model and see what the output looks like.
+
+\ttfamily\noindent
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{m}{\ }\hlassignement{=}{\ }\hlfunctioncall{lm}\hlkeyword{(}\hlsymbol{complied}{\ }\hlkeyword{\urltilda{}}{\ }{\ }\hlsymbol{pop}{\ }{\ }\hlkeyword{+}{\ }\hlsymbol{hdi}\hlkeyword{,}{\ }\hlargument{data}{\ }\hlargument{=}{\ }\hlsymbol{goog.sub}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{summary}\hlkeyword{(}\hlsymbol{m}\hlkeyword{)}\hspace*{\fill}\\
+\normalfont
+
+\vfill
+
+\subsection*{On Your Own}
+
+You should work with your teammates on the lab, as well as the homework from the book, but you must turn in your own work. The answers to questions must be in your own words.\\
+
+\begin{enumerate}
+
+\item Do the countries in this data set represent a population or a sample? If you answered ``sample'', then what is the population of interest? Do these countries represent a random sample from this population? Is it reasonable to assume this sample is representative of the population? Why or why not?
+
+\item Copy and paste the R output of the final model and interpret the slope estimates of the variables. Also comment on whether or not the p-values for these coefficients are meaningful in this context. (Hint: What is the null hypothesis for testing for significance of a slope coefficient in the context of multiple linear regression? What does a p-value mean in this context?)
+
+\item Check model diagnostics on the final model. You may want to refer to code from the previous lab to do this as well as the Section 8.3 from the book on graphical model diagnostics for multiple linear regression.
+
+\item Fit another model predicting number of \texttt{\hlsymbol{requests}}from all other explanatory variables except for compliance rate. Using the \texttt{\hlfunctioncall{step}} function find the ``best" model and include only the output for this model.
+
+\end{enumerate}
+
+$\:$ \\
+
+\textit{Note that you might find that your model violates some assumptions. You might  have similar issues with models you use for your projects. Multiple linear regression, while a powerful method, is still considered basic. Many real data sets will require more advanced techniques for proper analysis. If you are interested in what else is out there we encourage you to take a higher level statistics course.}
+
+\vfill
+
+%%
+% R code:
+%%
+
+%% lab code
+
+%goog <- read.csv("http://www.openintro.org/stat/data/goog.csv")
+%
+%plot(goog[,-1])
+%
+%plot(goog[,2:8])
+%
+%which.max(goog$pop)
+%
+%goog.sub = subset(goog, country != "india")
+%
+%plot(goog.sub[,-1])
+%
+%table(goog.sub$dem)
+%
+%goog.sub$dem = relevel(goog.sub$dem, ref = "hybrid")
+%
+%m.full = lm(complied ~ requests + pop + hdi + dem + internet + freepress, data = goog.sub)
+%summary(m.full)
+%
+%step(m.full)
+%
+%m = lm(complied ~  pop  + hdi, data = goog.sub)
+%summary(m)
+
+%% highlighting
+
+% highlight("lab8_code.R", renderer = renderer_latex( document = TRUE ) , size = "normalsize", output = "lab8_code_latex")
+
+\end{document}

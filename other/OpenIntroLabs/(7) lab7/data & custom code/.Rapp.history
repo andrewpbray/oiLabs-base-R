@@ -1,0 +1,623 @@
+install.packages("Rcompression")
+?getURLContent
+?getForm
+getURL("http://www.google.com/search?hl=en&lr=&ie=ISO-8859-1&q=RCurl&btnG=Search")
+html
+html <- getURLContent("...")
+html <- getURLContent("http://www.ebay.com/itm/Big-Bang-Theory-Complete-Fourth-Season-DVD-2011-3-Disc-BRAND-NEW-/190635439816?pt=US_DVD_HD_DVD_Blu_ray&hash=item2c62c1f6c8#ht_500wt_1147")
+str(html)
+length(html)
+class(html)
+URL
+URL <- c("http://www.ebay.com/itm/Big-Bang-Theory-Complete-Fourth-Season-DVD-2011-3-Disc-BRAND-NEW-/190635439816?pt=US_DVD_HD_DVD_Blu_ray&hash=item2c62c1f6c8#ht_500wt_1147", "")
+URL <- c("http://www.ebay.com/itm/Big-Bang-Theory-Complete-Fourth-Season-DVD-2011-3-Disc-BRAND-NEW-/190635439816?pt=US_DVD_HD_DVD_Blu_ray&hash=item2c62c1f6c8#ht_500wt_1147", "http://www.ebay.com/itm/Big-Bang-Theory-Complete-Fourth-Season-DVD-2011-3-Disc-Set-/270904326437?pt=US_DVD_HD_DVD_Blu_ray&hash=item3f1327f925#ht_500wt_1147")
+html <- getURLContent(URL)
+html <- getURLContent(URL[1])
+html <- getURLContent(URL[2])
+URL <- "http://www.ebay.com/sch/i.html?_nkw=big+bang+theory+season+4&LH_Auction=1"
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)
+hold <- strsplit(html, "class=\"ttl\">")[[1]]
+hold[2]
+hold[3]
+hold <- strsplit(html, "class=\"vip\" title=\"")[[1]]
+hold[2]
+hold
+hold[1]
+hold[[1]]
+class(hold)
+hold <- strsplit(html, "vip")[[1]]
+hold[2]
+#
+#install.packages("RCurl")#
+library(RCurl)#
+#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)#
+#
+hold   <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+for(i in 2:length(hold)){#
+  titles[i-1] <- strsplit(hold[i], '"')[[1]]#
+}
+warnings()
+i <- 2
+strsplit(hold[i], '"')[[1]]
+#
+#install.packages("RCurl")#
+library(RCurl)#
+#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)#
+#
+hold   <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+for(i in 2:length(hold)){#
+  titles[i-1] <- strsplit(hold[i], '"')[[1]][3]#
+}
+titles
+?strsplit
+grep("123456789", "3")
+grep("3", "123456789")
+grep1("3", "123456789")
+regexpr("3", "123456789")
+regexpr("3", "123456789")[1]
+regexpr("3", "123456789")
+regexpr("3", "123456789") -> T
+T
+class(T)
+regexpr("345", "123456789") -> T
+T
+T[["match.length"]]
+T["match.length"]
+T$match.length
+class(T)
+attr(T, "match.length")
+i <- 2
+  temp        <- strsplit(hold[i-1], "href=\"")[[1]]#
+  temp        <- tail(temp, 1)
+temp
+regexpr(temp, "[0-9]?")[[1]][1]
+regexpr(temp, "[0-9]?")
+regexpr(temp, "?")
+temp
+regexpr(temp, "[0-9]\?")
+regexpr(temp, "\?")
+regexpr(temp, "?")
+temp
+?regexpr
+regexpr("345", "123456789")
+gregexpr("345", "123456789")
+regexpr(temp, "?")
+gregexpr(temp, "?")
+gregexpr(temp, "9")
+temp
+class(temp)
+gregexpr("9", temp)
+gregexpr("?", temp)
+gregexpr("\?", temp)
+gregexpr("[0-9]", temp)
+gregexpr("[0-9]{10}", temp)
+gregexpr("[0-9]{11}", temp)
+gregexpr("[0-9]{12}", temp)
+gregexpr("[0-9]{14}", temp)
+gregexpr("[0-9]{13}", temp)
+gregexpr("[0-9]{12}", temp)
+gregexpr("?", temp)
+gregexpr("\?", temp)
+temp
+gregexpr("\?", temp)
+gregexpr("[0-9]{12}", temp)
+  t1  <- strsplit(hold[i-1], "href=\"")[[1]]#
+  t2  <- tail(t1, 1)#
+  t3  <- gregexpr("[0-9]{12}", t2)
+t3
+t2
+substr(t2, t3)
+  t1  <- strsplit(hold[i-1], "href=\"")[[1]]#
+  t2  <- tail(t1, 1)#
+  t3  <- gregexpr("[0-9]{12}", t2)#
+  t4  <- t3 + attr(t3, "match.length")#
+  t5  <- substr(t2, t3, t4)
+t3
+  t3  <- regexpr("[0-9]{12}", t2)#
+  t4  <- t3 + attr(t3, "match.length")
+t4
+  t5  <- substr(t2, t3, t4)
+t3
+t5
+  t4  <- t3 + attr(t3, "match.length")-1#
+  t5  <- substr(t2, t3, t4)
+t5
+#
+# install.packages("RCurl")#
+library(RCurl)#
+#
+# Ebay search: big bang theory season 4#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)#
+#
+hold   <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)#
+for(i in 2:length(hold)){#
+  t1  <- strsplit(hold[i-1], "href=\"")[[1]]#
+  t2  <- tail(t1, 1)#
+  t3  <- regexpr("[0-9]{12}", t2)#
+  t4  <- t3 + attr(t3, "match.length")-1#
+  t5  <- substr(t2, t3, t4)#
+  IDs[i-1]    <- #
+  titles[i-1] <- strsplit(hold[i], '"')[[1]][3]#
+}
+hold   <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)#
+for(i in 2:length(hold)){#
+  t1  <- strsplit(hold[i-1], "href=\"")[[1]]#
+  t2  <- tail(t1, 1)#
+  t3  <- regexpr("[0-9]{12}", t2)#
+  t4  <- t3 + attr(t3, "match.length")-1#
+  t5  <- substr(t2, t3, t4)#
+  IDs[i-1]    <- as.numeric(t5)#
+  titles[i-1] <- strsplit(hold[i], '"')[[1]][3]#
+}
+IDs
+titles
+#
+# install.packages("RCurl")#
+library(RCurl)#
+#
+# Ebay search: big bang theory season 4#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)#
+#
+hold   <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)#
+for(i in 2:length(hold)){#
+  t1  <- strsplit(hold[i-1], "href=\"")[[1]]#
+  t2  <- tail(t1, 1)#
+  t3  <- regexpr("[0-9]{12}", t2)#
+  t4  <- t3 + attr(t3, "match.length")-1#
+  t5  <- substr(t2, t3, t4)#
+  IDs[i-1]    <- as.numeric(t5)#
+  titles[i-1] <- strsplit(hold[i], '"')[[1]][3]#
+}
+titles
+length(hold)
+#
+# install.packages("RCurl")#
+library(RCurl)#
+#
+# Ebay search: big bang theory season 4#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURL(URL)#
+#
+hold   <- strsplit(html, "vip")[[1]]
+length(hold)
+hold   <- strsplit(html, "vip")
+length(hold)
+length(hold[[1]])
+html <- getURLContent(URL)
+hold   <- strsplit(html, "vip")
+length(hold[[1]])
+html <- getURLContent(URL)[[1]]
+grep(html)
+object.size(html)
+?getURL
+library(twitteR)
+library(help=twitteR)
+?getTrends
+?searchTwitter
+hold <- searchTwitter("RFunction")
+hold
+hold <- searchTwitter("@RFunction")
+hold
+hold <- searchTwitter("RFunction")
+hold <- searchTwitter("RFunction", n=5)
+hold
+showStatus("RFunction")
+?showStatus("RFunction")
+publicTimeline()
+publicTimeline(n=5)
+userTimeline("RFunction")
+getUser("RFunction")
+getUser("RFunc")
+getUser("R")
+getUser("stat")
+crantastic <- get("crantastic")
+crantastic <- getUser("crantastic")
+crantastic
+class(crantastic)
+status(crantastic)
+class(crantastic)
+showStatus("RFunction")
+publicTimeline()
+?publicTimeline()
+#
+# install.packages("RCurl")#
+library(RCurl)#
+#
+# Ebay search: big bang theory season 4#
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_nkw=big+bang+theory+season+4"#
+html <- getURLContent(URL)[[1]]#
+hold <- strsplit(html, "vip")#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)
+IDs
+length(hold)
+length(html)
+html
+hold <- strsplit(html, "vip")
+hold <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)
+IDs
+?strsplit
+html
+html <- read.delim(URL, FALSE, sep='`')
+html <- paste(html, collapse="\n")
+hold <- strsplit(html, "vip")[[1]]
+length(hold)
+html
+html <- read.delim(URL, FALSE, sep='`')
+html <- paste(as.character(html), collapse="\n")
+hold <- strsplit(html, "vip")[[1]]
+length(hold)
+html
+html <- read.delim(URL, FALSE, sep='`')
+html[,1]
+html <- paste(as.character(html[,1]), collapse="\n")
+hold <- strsplit(html, "vip")[[1]]
+length(hold)
+URL <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_trkparms=65%253A1%257C66%253A2%257C39%253A1&rt=nc&_nkw=big+bang+theory+season+4&_dmpt=US_DVD_HD_DVD_Blu_ray&_trksid=p3286.c0.m2000018.l2552&_pgn=1"
+URL  <- "http://www.ebay.com/sch/i.html?LH_Auction=1&_trkparms=65%253A1%257C66%253A2%257C39%253A1&rt=nc&_nkw=big+bang+theory+season+4&_dmpt=US_DVD_HD_DVD_Blu_ray&_trksid=p3286.c0.m2000018.l2552&_pgn=1"#
+html <- getURLContent(URL)#
+hold <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)
+IDs
+URL  <- "http://www.ebay.com/ctg/Big-Bang-Theory-Complete-Fourth-Season-DVD-2011-3-Disc-Set-/103149230?LH_Auction=1&_dmpt=US_DVD_HD_DVD_Blu_ray&_pcategid=617&_pcatid=1&_refkw=big+bang+theory+season+4&_trkparms=65%253A12%257C66%253A4%257C39%253A1%257C72%253A5841&_trksid=p3286.c0.m14"#
+html <- getURLContent(URL)#
+hold <- strsplit(html, "vip")[[1]]#
+titles <- rep(NA, length(hold)-1)#
+IDs    <- rep(NA, length(hold)-1)
+IDs
+length(IDs)
+?getTrends
+getTrends()
+?browser()
+?browser
+?rownames
+?row.names
+x <- matrix(1:12, 3)
+row.names(x)
+rownames(x)
+#
+# install.packages("xtable")#
+#
+library(xtable)#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+summary(g)#
+xtable(g)
+#
+# install.packages("xtable")#
+#
+library(xtable)#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+xtable(g)
+#
+# install.packages("xtable")#
+#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+#
+library(xtable)#
+xtable(g)
+?xtable
+#
+# install.packages("xtable")#
+#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+#
+library(xtable)#
+xtable(g, "True coefficients: 0 and 1.")
+?xtable
+methods(xtable)
+#
+# install.packages("xtable")#
+#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+#
+library(xtable)#
+xtable(g)#
+#
+methods(xtable)
+xtable(g)
+xtable(summary(g))
+mat
+#
+# install.packages("xtable")#
+#
+mat <- matrix(rnorm(8), 4)#
+library(xtable)#
+xtable(mat)#
+#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+xtable(g)#
+#
+methods(xtable)
+methods(summary)
+#
+# install.packages("xtable")#
+#
+library(xtable)#
+methods(xtable)#
+#
+mat <- matrix(rnorm(8), 4)#
+xtable(mat)#
+#
+set.seed(5)#
+x <- 1:10#
+y <- x + rnorm(10)#
+g <- lm(y ~ x)#
+xtable(g)
+?all.equal
+?split
+require(stats); require(graphics)#
+n <- 10; nn <- 100#
+g <- factor(round(n * runif(n * nn)))#
+x <- rnorm(n * nn) + sqrt(as.numeric(g))#
+xg <- split(x, g)
+x
+xg
+xg$10
+xg[[10]]
+xg[['10']]
+library(twitteR)
+library(help=twitteR)
+searchTwitter("preparethem")
+log(.65)
+log(.42)
+mlb09 <- read.csv("mlb11.csv")
+source("plotSS.r")
+source("plotSS.R")
+plotSS(x = mlb09 at_bats, y = mlb09 runs)
+source("plotSS.R")
+ls()
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+plotSS
+plotSS <- function(x, y, showSquares = FALSE, leastSquares = FALSE){#
+  plot(y~x, asp = 1)#
+  #
+  if(leastSquares){#
+    m1 <- lm(y~x)#
+    y.hat <- m1$fit#
+  } else{#
+    cat("Click two points to make a line.")#
+    pt1 <- locator(1)#
+    points(pt1$x, pt1$y, pch = 4)#
+    pt2 <- locator(1)#
+    points(pt2$x, pt2$y, pch = 4)#
+    pts <- data.frame("x" = c(pt1$x, pt2$x),"y" = c(pt1$y, pt2$y))#
+    m1 <- lm(y ~ x, data = pts)#
+    y.hat <- predict(m1, newdata = data.frame(x))#
+  }#
+  r <- y - y.hat#
+  abline(m1)#
+#
+  oSide <- x - r#
+  LLim <- par()$usr[1]#
+  RLim <- par()$usr[2]#
+  oSide[oSide < LLim | oSide > RLim] <- c(x + r)[oSide < LLim | oSide > RLim] # move boxes to avoid margins#
+#
+  n <- length(y.hat)#
+  for(i in 1:n){#
+    lines(rep(x[i], 2), c(y[i], y.hat[i]), lty = 2, col = "blue")#
+    if(showSquares){#
+    lines(rep(oSide[i], 2), c(y[i], y.hat[i]), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y.hat[i],2), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y[i],2), lty = 3, col = "orange")#
+    }#
+  }#
+#
+  SS <- round(sum(r^2), 3)#
+  cat("\r")#
+  print(m1)#
+  cat("Sum of Squares: ", SS)#
+}
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+plotSS <- function(x, y, showSquares = FALSE, leastSquares = FALSE){#
+  plot(y~x, asp = 1)#
+  #
+  if(leastSquares){#
+    m1 <- lm(y~x)#
+    y.hat <- m1$fit#
+  } else{#
+    cat("Click two points to make a line.")#
+    pt1 <- locator(1)#
+    points(pt1$x, pt1$y, pch = 4)#
+    pt2 <- locator(1)#
+    points(pt2$x, pt2$y, pch = 4)#
+    pts <- data.frame("x" = c(pt1$x, pt2$x),"y" = c(pt1$y, pt2$y))#
+    m1 <- lm(y ~ x, data = pts)#
+    y.hat <- predict(m1, newdata = data.frame(x))#
+  }#
+  r <- y - y.hat#
+  abline(m1)#
+#
+  oSide <- x - r#
+  LLim <- par()$usr[1]#
+  RLim <- par()$usr[2]#
+  oSide[oSide < LLim | oSide > RLim] <- c(x + r)[oSide < LLim | oSide > RLim] # move boxes to avoid margins#
+#
+  n <- length(y.hat)#
+  for(i in 1:n){#
+    lines(rep(x[i], 2), c(y[i], y.hat[i]), lty = 2, col = "blue")#
+    if(showSquares){#
+    lines(rep(oSide[i], 2), c(y[i], y.hat[i]), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y.hat[i],2), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y[i],2), lty = 3, col = "orange")#
+    }#
+  }#
+#
+  SS <- round(sum(r^2), 3)#
+  #cat("\r")#
+  print(m1)#
+  cat("Sum of Squares: ", SS)#
+}
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+plotSS <- function(x, y, showSquares = FALSE, leastSquares = FALSE){#
+  plot(y~x, asp = 1)#
+  #
+  if(leastSquares){#
+    m1 <- lm(y~x)#
+    y.hat <- m1$fit#
+  } else{#
+    cat("Click two points to make a line.")#
+    pt1 <- locator(1)#
+    points(pt1$x, pt1$y, pch = 4)#
+    pt2 <- locator(1)#
+    points(pt2$x, pt2$y, pch = 4)#
+    pts <- data.frame("x" = c(pt1$x, pt2$x),"y" = c(pt1$y, pt2$y))#
+    m1 <- lm(y ~ x, data = pts)#
+    y.hat <- predict(m1, newdata = data.frame(x))#
+  }#
+  r <- y - y.hat#
+  abline(m1)#
+#
+  oSide <- x - r#
+  LLim <- par()$usr[1]#
+  RLim <- par()$usr[2]#
+  oSide[oSide < LLim | oSide > RLim] <- c(x + r)[oSide < LLim | oSide > RLim] # move boxes to avoid margins#
+#
+  n <- length(y.hat)#
+  for(i in 1:n){#
+    lines(rep(x[i], 2), c(y[i], y.hat[i]), lty = 2, col = "blue")#
+    if(showSquares){#
+    lines(rep(oSide[i], 2), c(y[i], y.hat[i]), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y.hat[i],2), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y[i],2), lty = 3, col = "orange")#
+    }#
+  }#
+#
+  SS <- round(sum(r^2), 3)#
+  cat("\r                         ")#
+  print(m1)#
+  cat("Sum of Squares: ", SS)#
+}
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+plotSS <- function(x, y, showSquares = FALSE, leastSquares = FALSE){#
+  plot(y~x, asp = 1)#
+  #
+  if(leastSquares){#
+    m1 <- lm(y~x)#
+    y.hat <- m1$fit#
+  } else{#
+    cat("Click two points to make a line.")#
+    pt1 <- locator(1)#
+    points(pt1$x, pt1$y, pch = 4)#
+    pt2 <- locator(1)#
+    points(pt2$x, pt2$y, pch = 4)#
+    pts <- data.frame("x" = c(pt1$x, pt2$x),"y" = c(pt1$y, pt2$y))#
+    m1 <- lm(y ~ x, data = pts)#
+    y.hat <- predict(m1, newdata = data.frame(x))#
+  }#
+  r <- y - y.hat#
+  abline(m1)#
+#
+  oSide <- x - r#
+  LLim <- par()$usr[1]#
+  RLim <- par()$usr[2]#
+  oSide[oSide < LLim | oSide > RLim] <- c(x + r)[oSide < LLim | oSide > RLim] # move boxes to avoid margins#
+#
+  n <- length(y.hat)#
+  for(i in 1:n){#
+    lines(rep(x[i], 2), c(y[i], y.hat[i]), lty = 2, col = "blue")#
+    if(showSquares){#
+    lines(rep(oSide[i], 2), c(y[i], y.hat[i]), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y.hat[i],2), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y[i],2), lty = 3, col = "orange")#
+    }#
+  }#
+#
+  SS <- round(sum(r^2), 3)#
+  cat("\r                                ")#
+  print(m1)#
+  cat("Sum of Squares: ", SS)#
+}
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+lm(mlb09$runs ~ mlb$at_bats)
+lm(mlb09$runs ~ mlb09$at_bats)
+plotSS <- function(x, y, showSquares = FALSE, leastSquares = FALSE){#
+  plot(y~x, asp = 1)#
+  #
+  if(leastSquares){#
+    m1 <- lm(y~x)#
+    y.hat <- m1$fit#
+  } else{#
+    cat("Click two points to make a line.")#
+    pt1 <- locator(1)#
+    points(pt1$x, pt1$y, pch = 4)#
+    pt2 <- locator(1)#
+    points(pt2$x, pt2$y, pch = 4)#
+    pts <- data.frame("x" = c(pt1$x, pt2$x),"y" = c(pt1$y, pt2$y))#
+    m1 <- lm(y ~ x, data = pts)#
+    y.hat <- predict(m1, newdata = data.frame(x))#
+  }#
+  r <- y - y.hat#
+  abline(m1)#
+#
+  oSide <- x - r#
+  LLim <- par()$usr[1]#
+  RLim <- par()$usr[2]#
+  oSide[oSide < LLim | oSide > RLim] <- c(x + r)[oSide < LLim | oSide > RLim] # move boxes to avoid margins#
+#
+  n <- length(y.hat)#
+  for(i in 1:n){#
+    lines(rep(x[i], 2), c(y[i], y.hat[i]), lty = 2, col = "blue")#
+    if(showSquares){#
+    lines(rep(oSide[i], 2), c(y[i], y.hat[i]), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y.hat[i],2), lty = 3, col = "orange")#
+    lines(c(oSide[i], x[i]), rep(y[i],2), lty = 3, col = "orange")#
+    }#
+  }#
+#
+  SS <- round(sum(r^2), 3)#
+  print(m1)#
+  cat("Sum of Squares: ", SS)#
+}
+plotSS(x = mlb09$at_bats, y = mlb09$runs)
+names(mlb09)
+lm(runs ~ at_bats, mlb09)$r.squared
+summary(lm(runs ~ at_bats, mlb09))$r.squared
+summary(lm(runs ~ hits, mlb09))$r.squared
+summary(lm(runs ~ homeruns, mlb09))$r.squared
+summary(lm(runs ~ bat_avg, mlb09))$r.squared
+summary(lm(runs ~ strikeouts, mlb09))$r.squared
+summary(lm(runs ~ stolen_bases, mlb09))$r.squared
+summary(lm(runs ~ wins, mlb09))$r.squared
+summary(lm(runs ~ new_onbase, mlb09))$r.squared
+summary(lm(runs ~ new_slug, mlb09))$r.squared
+summary(lm(runs ~ new_obs, mlb09))$r.squared
+?plotSS
+plot(lm(runs ~ new_obs, mlb09))
+plot(lm(runs ~ new_obs, mlb09))
+plot(mlb09$runs ~ mlb09$new_obs)

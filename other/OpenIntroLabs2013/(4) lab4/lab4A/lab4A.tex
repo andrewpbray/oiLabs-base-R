@@ -1,0 +1,710 @@
+%% LyX 2.0.3 created this file. For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass{article}\usepackage{graphicx, color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+
+\usepackage{color}%
+ 
+\newsavebox{\hlnormalsizeboxclosebrace}%
+\newsavebox{\hlnormalsizeboxopenbrace}%
+\newsavebox{\hlnormalsizeboxbackslash}%
+\newsavebox{\hlnormalsizeboxlessthan}%
+\newsavebox{\hlnormalsizeboxgreaterthan}%
+\newsavebox{\hlnormalsizeboxdollar}%
+\newsavebox{\hlnormalsizeboxunderscore}%
+\newsavebox{\hlnormalsizeboxand}%
+\newsavebox{\hlnormalsizeboxhash}%
+\newsavebox{\hlnormalsizeboxat}%
+\newsavebox{\hlnormalsizeboxpercent}% 
+\newsavebox{\hlnormalsizeboxhat}%
+\newsavebox{\hlnormalsizeboxsinglequote}%
+\newsavebox{\hlnormalsizeboxbacktick}%
+
+\setbox\hlnormalsizeboxopenbrace=\hbox{\begin{normalsize}\verb.{.\end{normalsize}}%
+\setbox\hlnormalsizeboxclosebrace=\hbox{\begin{normalsize}\verb.}.\end{normalsize}}%
+\setbox\hlnormalsizeboxlessthan=\hbox{\begin{normalsize}\verb.<.\end{normalsize}}%
+\setbox\hlnormalsizeboxdollar=\hbox{\begin{normalsize}\verb.$.\end{normalsize}}%
+\setbox\hlnormalsizeboxunderscore=\hbox{\begin{normalsize}\verb._.\end{normalsize}}%
+\setbox\hlnormalsizeboxand=\hbox{\begin{normalsize}\verb.&.\end{normalsize}}%
+\setbox\hlnormalsizeboxhash=\hbox{\begin{normalsize}\verb.#.\end{normalsize}}%
+\setbox\hlnormalsizeboxat=\hbox{\begin{normalsize}\verb.@.\end{normalsize}}%
+\setbox\hlnormalsizeboxbackslash=\hbox{\begin{normalsize}\verb.\.\end{normalsize}}%
+\setbox\hlnormalsizeboxgreaterthan=\hbox{\begin{normalsize}\verb.>.\end{normalsize}}%
+\setbox\hlnormalsizeboxpercent=\hbox{\begin{normalsize}\verb.%.\end{normalsize}}%
+\setbox\hlnormalsizeboxhat=\hbox{\begin{normalsize}\verb.^.\end{normalsize}}%
+\setbox\hlnormalsizeboxsinglequote=\hbox{\begin{normalsize}\verb.'.\end{normalsize}}%
+\setbox\hlnormalsizeboxbacktick=\hbox{\begin{normalsize}\verb.`.\end{normalsize}}%
+\setbox\hlnormalsizeboxhat=\hbox{\begin{normalsize}\verb.^.\end{normalsize}}%
+
+
+
+\newsavebox{\hltinyboxclosebrace}%
+\newsavebox{\hltinyboxopenbrace}%
+\newsavebox{\hltinyboxbackslash}%
+\newsavebox{\hltinyboxlessthan}%
+\newsavebox{\hltinyboxgreaterthan}%
+\newsavebox{\hltinyboxdollar}%
+\newsavebox{\hltinyboxunderscore}%
+\newsavebox{\hltinyboxand}%
+\newsavebox{\hltinyboxhash}%
+\newsavebox{\hltinyboxat}%
+\newsavebox{\hltinyboxpercent}% 
+\newsavebox{\hltinyboxhat}%
+\newsavebox{\hltinyboxsinglequote}%
+\newsavebox{\hltinyboxbacktick}%
+
+\setbox\hltinyboxopenbrace=\hbox{\begin{tiny}\verb.{.\end{tiny}}%
+\setbox\hltinyboxclosebrace=\hbox{\begin{tiny}\verb.}.\end{tiny}}%
+\setbox\hltinyboxlessthan=\hbox{\begin{tiny}\verb.<.\end{tiny}}%
+\setbox\hltinyboxdollar=\hbox{\begin{tiny}\verb.$.\end{tiny}}%
+\setbox\hltinyboxunderscore=\hbox{\begin{tiny}\verb._.\end{tiny}}%
+\setbox\hltinyboxand=\hbox{\begin{tiny}\verb.&.\end{tiny}}%
+\setbox\hltinyboxhash=\hbox{\begin{tiny}\verb.#.\end{tiny}}%
+\setbox\hltinyboxat=\hbox{\begin{tiny}\verb.@.\end{tiny}}%
+\setbox\hltinyboxbackslash=\hbox{\begin{tiny}\verb.\.\end{tiny}}%
+\setbox\hltinyboxgreaterthan=\hbox{\begin{tiny}\verb.>.\end{tiny}}%
+\setbox\hltinyboxpercent=\hbox{\begin{tiny}\verb.%.\end{tiny}}%
+\setbox\hltinyboxhat=\hbox{\begin{tiny}\verb.^.\end{tiny}}%
+\setbox\hltinyboxsinglequote=\hbox{\begin{tiny}\verb.'.\end{tiny}}%
+\setbox\hltinyboxbacktick=\hbox{\begin{tiny}\verb.`.\end{tiny}}%
+\setbox\hltinyboxhat=\hbox{\begin{tiny}\verb.^.\end{tiny}}%
+
+
+
+\newsavebox{\hlscriptsizeboxclosebrace}%
+\newsavebox{\hlscriptsizeboxopenbrace}%
+\newsavebox{\hlscriptsizeboxbackslash}%
+\newsavebox{\hlscriptsizeboxlessthan}%
+\newsavebox{\hlscriptsizeboxgreaterthan}%
+\newsavebox{\hlscriptsizeboxdollar}%
+\newsavebox{\hlscriptsizeboxunderscore}%
+\newsavebox{\hlscriptsizeboxand}%
+\newsavebox{\hlscriptsizeboxhash}%
+\newsavebox{\hlscriptsizeboxat}%
+\newsavebox{\hlscriptsizeboxpercent}% 
+\newsavebox{\hlscriptsizeboxhat}%
+\newsavebox{\hlscriptsizeboxsinglequote}%
+\newsavebox{\hlscriptsizeboxbacktick}%
+
+\setbox\hlscriptsizeboxopenbrace=\hbox{\begin{scriptsize}\verb.{.\end{scriptsize}}%
+\setbox\hlscriptsizeboxclosebrace=\hbox{\begin{scriptsize}\verb.}.\end{scriptsize}}%
+\setbox\hlscriptsizeboxlessthan=\hbox{\begin{scriptsize}\verb.<.\end{scriptsize}}%
+\setbox\hlscriptsizeboxdollar=\hbox{\begin{scriptsize}\verb.$.\end{scriptsize}}%
+\setbox\hlscriptsizeboxunderscore=\hbox{\begin{scriptsize}\verb._.\end{scriptsize}}%
+\setbox\hlscriptsizeboxand=\hbox{\begin{scriptsize}\verb.&.\end{scriptsize}}%
+\setbox\hlscriptsizeboxhash=\hbox{\begin{scriptsize}\verb.#.\end{scriptsize}}%
+\setbox\hlscriptsizeboxat=\hbox{\begin{scriptsize}\verb.@.\end{scriptsize}}%
+\setbox\hlscriptsizeboxbackslash=\hbox{\begin{scriptsize}\verb.\.\end{scriptsize}}%
+\setbox\hlscriptsizeboxgreaterthan=\hbox{\begin{scriptsize}\verb.>.\end{scriptsize}}%
+\setbox\hlscriptsizeboxpercent=\hbox{\begin{scriptsize}\verb.%.\end{scriptsize}}%
+\setbox\hlscriptsizeboxhat=\hbox{\begin{scriptsize}\verb.^.\end{scriptsize}}%
+\setbox\hlscriptsizeboxsinglequote=\hbox{\begin{scriptsize}\verb.'.\end{scriptsize}}%
+\setbox\hlscriptsizeboxbacktick=\hbox{\begin{scriptsize}\verb.`.\end{scriptsize}}%
+\setbox\hlscriptsizeboxhat=\hbox{\begin{scriptsize}\verb.^.\end{scriptsize}}%
+
+
+
+\newsavebox{\hlfootnotesizeboxclosebrace}%
+\newsavebox{\hlfootnotesizeboxopenbrace}%
+\newsavebox{\hlfootnotesizeboxbackslash}%
+\newsavebox{\hlfootnotesizeboxlessthan}%
+\newsavebox{\hlfootnotesizeboxgreaterthan}%
+\newsavebox{\hlfootnotesizeboxdollar}%
+\newsavebox{\hlfootnotesizeboxunderscore}%
+\newsavebox{\hlfootnotesizeboxand}%
+\newsavebox{\hlfootnotesizeboxhash}%
+\newsavebox{\hlfootnotesizeboxat}%
+\newsavebox{\hlfootnotesizeboxpercent}% 
+\newsavebox{\hlfootnotesizeboxhat}%
+\newsavebox{\hlfootnotesizeboxsinglequote}%
+\newsavebox{\hlfootnotesizeboxbacktick}%
+
+\setbox\hlfootnotesizeboxopenbrace=\hbox{\begin{footnotesize}\verb.{.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxclosebrace=\hbox{\begin{footnotesize}\verb.}.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxlessthan=\hbox{\begin{footnotesize}\verb.<.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxdollar=\hbox{\begin{footnotesize}\verb.$.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxunderscore=\hbox{\begin{footnotesize}\verb._.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxand=\hbox{\begin{footnotesize}\verb.&.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxhash=\hbox{\begin{footnotesize}\verb.#.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxat=\hbox{\begin{footnotesize}\verb.@.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxbackslash=\hbox{\begin{footnotesize}\verb.\.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxgreaterthan=\hbox{\begin{footnotesize}\verb.>.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxpercent=\hbox{\begin{footnotesize}\verb.%.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxhat=\hbox{\begin{footnotesize}\verb.^.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxsinglequote=\hbox{\begin{footnotesize}\verb.'.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxbacktick=\hbox{\begin{footnotesize}\verb.`.\end{footnotesize}}%
+\setbox\hlfootnotesizeboxhat=\hbox{\begin{footnotesize}\verb.^.\end{footnotesize}}%
+
+
+
+\newsavebox{\hlsmallboxclosebrace}%
+\newsavebox{\hlsmallboxopenbrace}%
+\newsavebox{\hlsmallboxbackslash}%
+\newsavebox{\hlsmallboxlessthan}%
+\newsavebox{\hlsmallboxgreaterthan}%
+\newsavebox{\hlsmallboxdollar}%
+\newsavebox{\hlsmallboxunderscore}%
+\newsavebox{\hlsmallboxand}%
+\newsavebox{\hlsmallboxhash}%
+\newsavebox{\hlsmallboxat}%
+\newsavebox{\hlsmallboxpercent}% 
+\newsavebox{\hlsmallboxhat}%
+\newsavebox{\hlsmallboxsinglequote}%
+\newsavebox{\hlsmallboxbacktick}%
+
+\setbox\hlsmallboxopenbrace=\hbox{\begin{small}\verb.{.\end{small}}%
+\setbox\hlsmallboxclosebrace=\hbox{\begin{small}\verb.}.\end{small}}%
+\setbox\hlsmallboxlessthan=\hbox{\begin{small}\verb.<.\end{small}}%
+\setbox\hlsmallboxdollar=\hbox{\begin{small}\verb.$.\end{small}}%
+\setbox\hlsmallboxunderscore=\hbox{\begin{small}\verb._.\end{small}}%
+\setbox\hlsmallboxand=\hbox{\begin{small}\verb.&.\end{small}}%
+\setbox\hlsmallboxhash=\hbox{\begin{small}\verb.#.\end{small}}%
+\setbox\hlsmallboxat=\hbox{\begin{small}\verb.@.\end{small}}%
+\setbox\hlsmallboxbackslash=\hbox{\begin{small}\verb.\.\end{small}}%
+\setbox\hlsmallboxgreaterthan=\hbox{\begin{small}\verb.>.\end{small}}%
+\setbox\hlsmallboxpercent=\hbox{\begin{small}\verb.%.\end{small}}%
+\setbox\hlsmallboxhat=\hbox{\begin{small}\verb.^.\end{small}}%
+\setbox\hlsmallboxsinglequote=\hbox{\begin{small}\verb.'.\end{small}}%
+\setbox\hlsmallboxbacktick=\hbox{\begin{small}\verb.`.\end{small}}%
+\setbox\hlsmallboxhat=\hbox{\begin{small}\verb.^.\end{small}}%
+
+
+
+\newsavebox{\hllargeboxclosebrace}%
+\newsavebox{\hllargeboxopenbrace}%
+\newsavebox{\hllargeboxbackslash}%
+\newsavebox{\hllargeboxlessthan}%
+\newsavebox{\hllargeboxgreaterthan}%
+\newsavebox{\hllargeboxdollar}%
+\newsavebox{\hllargeboxunderscore}%
+\newsavebox{\hllargeboxand}%
+\newsavebox{\hllargeboxhash}%
+\newsavebox{\hllargeboxat}%
+\newsavebox{\hllargeboxpercent}% 
+\newsavebox{\hllargeboxhat}%
+\newsavebox{\hllargeboxsinglequote}%
+\newsavebox{\hllargeboxbacktick}%
+
+\setbox\hllargeboxopenbrace=\hbox{\begin{large}\verb.{.\end{large}}%
+\setbox\hllargeboxclosebrace=\hbox{\begin{large}\verb.}.\end{large}}%
+\setbox\hllargeboxlessthan=\hbox{\begin{large}\verb.<.\end{large}}%
+\setbox\hllargeboxdollar=\hbox{\begin{large}\verb.$.\end{large}}%
+\setbox\hllargeboxunderscore=\hbox{\begin{large}\verb._.\end{large}}%
+\setbox\hllargeboxand=\hbox{\begin{large}\verb.&.\end{large}}%
+\setbox\hllargeboxhash=\hbox{\begin{large}\verb.#.\end{large}}%
+\setbox\hllargeboxat=\hbox{\begin{large}\verb.@.\end{large}}%
+\setbox\hllargeboxbackslash=\hbox{\begin{large}\verb.\.\end{large}}%
+\setbox\hllargeboxgreaterthan=\hbox{\begin{large}\verb.>.\end{large}}%
+\setbox\hllargeboxpercent=\hbox{\begin{large}\verb.%.\end{large}}%
+\setbox\hllargeboxhat=\hbox{\begin{large}\verb.^.\end{large}}%
+\setbox\hllargeboxsinglequote=\hbox{\begin{large}\verb.'.\end{large}}%
+\setbox\hllargeboxbacktick=\hbox{\begin{large}\verb.`.\end{large}}%
+\setbox\hllargeboxhat=\hbox{\begin{large}\verb.^.\end{large}}%
+
+
+
+\newsavebox{\hlLargeboxclosebrace}%
+\newsavebox{\hlLargeboxopenbrace}%
+\newsavebox{\hlLargeboxbackslash}%
+\newsavebox{\hlLargeboxlessthan}%
+\newsavebox{\hlLargeboxgreaterthan}%
+\newsavebox{\hlLargeboxdollar}%
+\newsavebox{\hlLargeboxunderscore}%
+\newsavebox{\hlLargeboxand}%
+\newsavebox{\hlLargeboxhash}%
+\newsavebox{\hlLargeboxat}%
+\newsavebox{\hlLargeboxpercent}% 
+\newsavebox{\hlLargeboxhat}%
+\newsavebox{\hlLargeboxsinglequote}%
+\newsavebox{\hlLargeboxbacktick}%
+
+\setbox\hlLargeboxopenbrace=\hbox{\begin{Large}\verb.{.\end{Large}}%
+\setbox\hlLargeboxclosebrace=\hbox{\begin{Large}\verb.}.\end{Large}}%
+\setbox\hlLargeboxlessthan=\hbox{\begin{Large}\verb.<.\end{Large}}%
+\setbox\hlLargeboxdollar=\hbox{\begin{Large}\verb.$.\end{Large}}%
+\setbox\hlLargeboxunderscore=\hbox{\begin{Large}\verb._.\end{Large}}%
+\setbox\hlLargeboxand=\hbox{\begin{Large}\verb.&.\end{Large}}%
+\setbox\hlLargeboxhash=\hbox{\begin{Large}\verb.#.\end{Large}}%
+\setbox\hlLargeboxat=\hbox{\begin{Large}\verb.@.\end{Large}}%
+\setbox\hlLargeboxbackslash=\hbox{\begin{Large}\verb.\.\end{Large}}%
+\setbox\hlLargeboxgreaterthan=\hbox{\begin{Large}\verb.>.\end{Large}}%
+\setbox\hlLargeboxpercent=\hbox{\begin{Large}\verb.%.\end{Large}}%
+\setbox\hlLargeboxhat=\hbox{\begin{Large}\verb.^.\end{Large}}%
+\setbox\hlLargeboxsinglequote=\hbox{\begin{Large}\verb.'.\end{Large}}%
+\setbox\hlLargeboxbacktick=\hbox{\begin{Large}\verb.`.\end{Large}}%
+\setbox\hlLargeboxhat=\hbox{\begin{Large}\verb.^.\end{Large}}%
+
+
+
+\newsavebox{\hlLARGEboxclosebrace}%
+\newsavebox{\hlLARGEboxopenbrace}%
+\newsavebox{\hlLARGEboxbackslash}%
+\newsavebox{\hlLARGEboxlessthan}%
+\newsavebox{\hlLARGEboxgreaterthan}%
+\newsavebox{\hlLARGEboxdollar}%
+\newsavebox{\hlLARGEboxunderscore}%
+\newsavebox{\hlLARGEboxand}%
+\newsavebox{\hlLARGEboxhash}%
+\newsavebox{\hlLARGEboxat}%
+\newsavebox{\hlLARGEboxpercent}% 
+\newsavebox{\hlLARGEboxhat}%
+\newsavebox{\hlLARGEboxsinglequote}%
+\newsavebox{\hlLARGEboxbacktick}%
+
+\setbox\hlLARGEboxopenbrace=\hbox{\begin{LARGE}\verb.{.\end{LARGE}}%
+\setbox\hlLARGEboxclosebrace=\hbox{\begin{LARGE}\verb.}.\end{LARGE}}%
+\setbox\hlLARGEboxlessthan=\hbox{\begin{LARGE}\verb.<.\end{LARGE}}%
+\setbox\hlLARGEboxdollar=\hbox{\begin{LARGE}\verb.$.\end{LARGE}}%
+\setbox\hlLARGEboxunderscore=\hbox{\begin{LARGE}\verb._.\end{LARGE}}%
+\setbox\hlLARGEboxand=\hbox{\begin{LARGE}\verb.&.\end{LARGE}}%
+\setbox\hlLARGEboxhash=\hbox{\begin{LARGE}\verb.#.\end{LARGE}}%
+\setbox\hlLARGEboxat=\hbox{\begin{LARGE}\verb.@.\end{LARGE}}%
+\setbox\hlLARGEboxbackslash=\hbox{\begin{LARGE}\verb.\.\end{LARGE}}%
+\setbox\hlLARGEboxgreaterthan=\hbox{\begin{LARGE}\verb.>.\end{LARGE}}%
+\setbox\hlLARGEboxpercent=\hbox{\begin{LARGE}\verb.%.\end{LARGE}}%
+\setbox\hlLARGEboxhat=\hbox{\begin{LARGE}\verb.^.\end{LARGE}}%
+\setbox\hlLARGEboxsinglequote=\hbox{\begin{LARGE}\verb.'.\end{LARGE}}%
+\setbox\hlLARGEboxbacktick=\hbox{\begin{LARGE}\verb.`.\end{LARGE}}%
+\setbox\hlLARGEboxhat=\hbox{\begin{LARGE}\verb.^.\end{LARGE}}%
+
+
+
+\newsavebox{\hlhugeboxclosebrace}%
+\newsavebox{\hlhugeboxopenbrace}%
+\newsavebox{\hlhugeboxbackslash}%
+\newsavebox{\hlhugeboxlessthan}%
+\newsavebox{\hlhugeboxgreaterthan}%
+\newsavebox{\hlhugeboxdollar}%
+\newsavebox{\hlhugeboxunderscore}%
+\newsavebox{\hlhugeboxand}%
+\newsavebox{\hlhugeboxhash}%
+\newsavebox{\hlhugeboxat}%
+\newsavebox{\hlhugeboxpercent}% 
+\newsavebox{\hlhugeboxhat}%
+\newsavebox{\hlhugeboxsinglequote}%
+\newsavebox{\hlhugeboxbacktick}%
+
+\setbox\hlhugeboxopenbrace=\hbox{\begin{huge}\verb.{.\end{huge}}%
+\setbox\hlhugeboxclosebrace=\hbox{\begin{huge}\verb.}.\end{huge}}%
+\setbox\hlhugeboxlessthan=\hbox{\begin{huge}\verb.<.\end{huge}}%
+\setbox\hlhugeboxdollar=\hbox{\begin{huge}\verb.$.\end{huge}}%
+\setbox\hlhugeboxunderscore=\hbox{\begin{huge}\verb._.\end{huge}}%
+\setbox\hlhugeboxand=\hbox{\begin{huge}\verb.&.\end{huge}}%
+\setbox\hlhugeboxhash=\hbox{\begin{huge}\verb.#.\end{huge}}%
+\setbox\hlhugeboxat=\hbox{\begin{huge}\verb.@.\end{huge}}%
+\setbox\hlhugeboxbackslash=\hbox{\begin{huge}\verb.\.\end{huge}}%
+\setbox\hlhugeboxgreaterthan=\hbox{\begin{huge}\verb.>.\end{huge}}%
+\setbox\hlhugeboxpercent=\hbox{\begin{huge}\verb.%.\end{huge}}%
+\setbox\hlhugeboxhat=\hbox{\begin{huge}\verb.^.\end{huge}}%
+\setbox\hlhugeboxsinglequote=\hbox{\begin{huge}\verb.'.\end{huge}}%
+\setbox\hlhugeboxbacktick=\hbox{\begin{huge}\verb.`.\end{huge}}%
+\setbox\hlhugeboxhat=\hbox{\begin{huge}\verb.^.\end{huge}}%
+
+
+
+\newsavebox{\hlHugeboxclosebrace}%
+\newsavebox{\hlHugeboxopenbrace}%
+\newsavebox{\hlHugeboxbackslash}%
+\newsavebox{\hlHugeboxlessthan}%
+\newsavebox{\hlHugeboxgreaterthan}%
+\newsavebox{\hlHugeboxdollar}%
+\newsavebox{\hlHugeboxunderscore}%
+\newsavebox{\hlHugeboxand}%
+\newsavebox{\hlHugeboxhash}%
+\newsavebox{\hlHugeboxat}%
+\newsavebox{\hlHugeboxpercent}% 
+\newsavebox{\hlHugeboxhat}%
+\newsavebox{\hlHugeboxsinglequote}%
+\newsavebox{\hlHugeboxbacktick}%
+
+\setbox\hlHugeboxopenbrace=\hbox{\begin{Huge}\verb.{.\end{Huge}}%
+\setbox\hlHugeboxclosebrace=\hbox{\begin{Huge}\verb.}.\end{Huge}}%
+\setbox\hlHugeboxlessthan=\hbox{\begin{Huge}\verb.<.\end{Huge}}%
+\setbox\hlHugeboxdollar=\hbox{\begin{Huge}\verb.$.\end{Huge}}%
+\setbox\hlHugeboxunderscore=\hbox{\begin{Huge}\verb._.\end{Huge}}%
+\setbox\hlHugeboxand=\hbox{\begin{Huge}\verb.&.\end{Huge}}%
+\setbox\hlHugeboxhash=\hbox{\begin{Huge}\verb.#.\end{Huge}}%
+\setbox\hlHugeboxat=\hbox{\begin{Huge}\verb.@.\end{Huge}}%
+\setbox\hlHugeboxbackslash=\hbox{\begin{Huge}\verb.\.\end{Huge}}%
+\setbox\hlHugeboxgreaterthan=\hbox{\begin{Huge}\verb.>.\end{Huge}}%
+\setbox\hlHugeboxpercent=\hbox{\begin{Huge}\verb.%.\end{Huge}}%
+\setbox\hlHugeboxhat=\hbox{\begin{Huge}\verb.^.\end{Huge}}%
+\setbox\hlHugeboxsinglequote=\hbox{\begin{Huge}\verb.'.\end{Huge}}%
+\setbox\hlHugeboxbacktick=\hbox{\begin{Huge}\verb.`.\end{Huge}}%
+\setbox\hlHugeboxhat=\hbox{\begin{Huge}\verb.^.\end{Huge}}%
+ 
+
+\def\urltilda{\kern -.15em\lower .7ex\hbox{\~{}}\kern .04em}%
+
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.16,0.16,1}{#1}}
+\newcommand{\hlesc}[1]{\textcolor[rgb]{1,0,1}{#1}}
+\newcommand{\hlstr}[1]{\textcolor[rgb]{1,0,0}{#1}}
+\newcommand{\hldstr}[1]{\textcolor[rgb]{0.51,0.51,0}{#1}}
+\newcommand{\hlslc}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
+\newcommand{\hldir}[1]{\textcolor[rgb]{0,0.51,0}{#1}}
+\newcommand{\hlsym}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\hlline}[1]{\textcolor[rgb]{0.33,0.33,0.33}{#1}}
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.51,0,0}{#1}}
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0,0,0.51}{#1}}
+
+
+\input{../../labStyle}
+
+\begin{document}
+
+
+
+
+
+\license{This is a product of OpenIntro that is released under a Creative Commons Attribution-ShareAlike 3.0 Unported (\web{http://creativecommons.org/licenses/by-sa/3.0/}). This lab was written for OpenIntro by Andrew Bray and Mine \c{C}etinkaya-Rundel.}
+
+\section*{Lab 4A: Foundations for statistical inference - Sampling distributions}
+
+In this lab, we investigate the ways in which the statistics from a random sample of data can serve as point estimates for population parameters.  We're interested in formulating a \emph{sampling distribution} of our estimate in order to learn about the properties of the estimate, such as its distribution.
+
+\subsection*{The data}
+We consider real estate data from the city of Ames, Iowa.  The details of every real estate transaction in Ames is recorded by the City Assessor's office.  Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010.  This collection represents our population of interest.  In this lab we would like to learn about these home sales by taking smaller samples from the full population.  Let's load the data.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{download.file}\hlkeyword{(}\hlstring{"{}http://www.openintro.org/stat/data/ames.RData"{}}\hlkeyword{,}{\ }\hlargument{destfile}{\ }\hlargument{=}{\ }\hlstring{"{}ames.RData"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{load}\hlkeyword{(}\hlstring{"{}ames.RData"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+We see that there are quite a few variables in the data set, enough to do a very in-depth analysis.  For this lab, we'll restrict our attention to just two of the variables: the above ground living area of the house in square feet (\hlsymbol{Gr.Liv.Area}) and the sale price (\hlsymbol{SalePrice}).  To save some effort throughout the lab, create two variables with short names that represent these two variables.  
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{area}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlsymbol{ames}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{Gr.Liv.Area}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{price}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlsymbol{ames}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{SalePrice}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Let's look at the distribution of area in our population of home sales by calculating a few summary statistics and making a histogram.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{summary}\hlkeyword{(}\hlsymbol{area}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{area}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{exercise}
+Describe this population distribution.
+\end{exercise}
+
+\subsection*{The unknown sampling distribution}
+In this lab we have access to the entire population, but this is rarely the case in real life.  Gathering information on an entire population is often extremely costly or impossible.  Because of this, we often take a sample of the population and use that to understand the properties of the population.
+
+If we were interested in estimating the mean living area in Ames based on a sample, we can use the following command to survey the population.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{samp1}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+This command collects a simple random sample of size 50 from the vector \hlsymbol{area}, which is assigned to \hlsymbol{samp1}.  This is like going into the City Assessor's database and pulling up the files on 50 random home sales.  Working with these 50 files would be considerably simpler than working with all 2930 home sales.
+
+\begin{exercise}
+Describe the distribution of this sample? How does it compare to the distribution of the population?
+\end{exercise}
+
+If we're interested in estimating the average living area in homes in Ames using the sample, our best single guess is the sample mean.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Depending on which 50 homes you selected, your estimate could be a bit above or a bit below the true population mean of 1499.69 square feet.  In general, though, the sample mean turns out to be a pretty good estimate of the average living area, and we were able to get it by sampling less than 3\% of the population.
+
+\begin{exercise}
+Take a second sample, also of size 50, and call it \hlsymbol{samp2}.  How does the mean of \hlsymbol{samp2} compare with the mean of \hlsymbol{samp1}?  Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more accurate estimate of the population mean?
+\end{exercise}
+
+Not surprisingly, every time we take another random sample, we get a different sample mean.  It's useful to get a sense of just how much variability we should expect when estimating the population mean this way. The distribution of sample means, called the \emph{sampling distribution}, can help us understand this variability. In this lab, because we have access to the population, we can build up the sampling distribution for the sample mean by repeating the above steps many times. Here we will generate 5000 samples and compute the sample mean of each.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rep}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlnumber{5000}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{for}{\ }\hlkeyword{(}\hlsymbol{i}{\ }\hlkeyword{in}{\ }\hlnumber{1}\hlkeyword{:}\hlnumber{5000}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxopenbrace}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlsymbol{i}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{\usebox{\hlnormalsizeboxclosebrace}}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the \hlargument{breaks} argument.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{,}{\ }\hlargument{breaks}{\ }\hlargument{=}{\ }\hlnumber{25}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Here we use R to take 5000 samples of size 50 from the population, calculate the mean of each sample, and store each result in a vector called \hlsymbol{sample\_means50}. On the next page, we'll review how this set of code works.
+
+\begin{exercise}
+How many elements are there in \hlsymbol{sample\_means50}?  Describe the sampling distribution, and be sure to specifically note its center.  Would you expect the distribution to change if we instead collected 50,000 sample means?
+\end{exercise}
+
+\subsection*{Interlude: The \texttt{for} loop}
+Let's take a break from the statistics for a moment to let that last block of code sink in.  You have just run your first for loop, a cornerstone of computer programming.  The idea behind the for loop is \emph{iteration}: it allows you to execute code as many times as you want without having to type out every iteration.  In the case above, we wanted to iterate the two lines of code inside the curly braces that take a random sample of size 50 from \hlsymbol{area} then save the mean of that sample into the \hlsymbol{sample\_means50} vector.  Without the for loop, this would be painful:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rep}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlnumber{5000}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlnumber{2}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlnumber{3}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlnumber{4}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+and so on...
+
+With the for loop, these thousands of lines of code are compressed into a handful of lines. We've added one extra line to the code below, which prints the variable \hlsymbol{i} during each iteration of the for loop. Run this code.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rep}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlnumber{5000}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{for}{\ }\hlkeyword{(}\hlsymbol{i}{\ }\hlkeyword{in}{\ }\hlnumber{1}\hlkeyword{:}\hlnumber{5000}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxopenbrace}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{50}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{[}\hlsymbol{i}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{i}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{\usebox{\hlnormalsizeboxclosebrace}}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Let's consider this code line by line to figure out what it does.  In the first line we \emph{initialized a vector}.  In this case, we created a vector of 5000 zeros called \hlsymbol{sample\_means50}.  This vector will will store values generated within the for loop.
+
+The second line calls the for loop itself.  The syntax can be loosely read as, ``for every element \hlsymbol{i} from 1 to 5000, run the following lines of code''. You can think of \hlsymbol{i} as the counter that keeps track of which loop you're on. Therefore, more precisely, the loop will run once when \hlsymbol{i}\hlkeyword{=}\hlnumber{1}, then once when \hlsymbol{i}\hlkeyword{=}\hlnumber{2}, and so on up to \hlsymbol{i}\hlkeyword{=}\hlnumber{5000}.
+
+The body of the for loop is the part inside the curly braces, and this set of code is run for each value of \hlsymbol{i}.  Here, on every loop, we take a random sample of size 50 from \hlsymbol{area}, take its mean, and store it as the \hlsymbol{i}\textsuperscript{th} element of \hlsymbol{sample\_means50}.
+
+In order to display that this is really happening, we asked R to print \hlsymbol{i} at each iteration. This line of code is optional and is only used for displaying what's going on while the for loop is running.
+
+The for loop allows us to not just run the code 5000 times, but to neatly package the results, element by element, into the empty vector that we initialized at the outset. 
+
+\begin{exercise}
+To make sure you understand what you've done in this loop, try running a smaller version.  Initialize a vector of 100 zeros called \hlsymbol{sample\_means\_small}.  Run a loop that takes a sample of size 50 from \hlsymbol{area} and stores the sample mean in \hlsymbol{sample\_means\_small}, but only iterate from 1 to 100.  Print the output to your screen (type \hlsymbol{sample\_means\_small} into the console and press enter).  How many elements are there in this object called \hlsymbol{sample\_means\_small}? What does each element represent?
+\end{exercise}
+
+\subsection*{Sample size and the sampling distribution}
+Mechanics aside, let's return to the reason we used a for loop: to compute a sampling distribution, specifically, this one.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+The sampling distribution that we computed tells us much about estimating the average living area in homes in Ames.  Because the sample mean is an unbiased estimator, the sampling distribution is centered at the true average living area of the the population, and the spread of the distribution indicates how much variability is induced by sampling only 50 home sales.
+
+To get a sense of the effect that sample size has on our distribution, let's build up two more sampling distributions: one based on a sample size of 10 and another based on a sample size of 100.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means10}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rep}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlnumber{5000}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means100}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rep}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlnumber{5000}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{for}{\ }\hlkeyword{(}\hlsymbol{i}{\ }\hlkeyword{in}{\ }\hlnumber{1}\hlkeyword{:}\hlnumber{5000}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxopenbrace}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means10}\hlkeyword{[}\hlsymbol{i}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{samp}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{sample}\hlkeyword{(}\hlsymbol{area}\hlkeyword{,}{\ }\hlnumber{100}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means100}\hlkeyword{[}\hlsymbol{i}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{samp}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{\usebox{\hlnormalsizeboxclosebrace}}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Here we're able to use a single for loop to build two distributions by adding additional lines inside the curly braces.  Don't worry about the fact that \hlsymbol{samp} is used for the name of two different objects.  In the second command of the for loop, the mean of \hlsymbol{samp} is saved to the relevant place in the vector \hlsymbol{sample\_means10}.  With the mean saved, we're now free to overwrite the object \hlsymbol{samp} with a new sample, this time of size 100.  In general, anytime you create an object using a name that is already in use, the old object will get replaced with the new one.
+
+To see the effect that different sample sizes have on the sampling distribution, plot the three distributions on top of one another.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{par}\hlkeyword{(}\hlargument{mfrow}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{)}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{xlimits}{\ }\hlassignement{=}{\ }\hlfunctioncall{range}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means10}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means10}\hlkeyword{,}{\ }\hlargument{breaks}{\ }\hlargument{=}{\ }\hlnumber{20}\hlkeyword{,}{\ }\hlargument{xlim}{\ }\hlargument{=}{\ }\hlsymbol{xlimits}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means50}\hlkeyword{,}{\ }\hlargument{breaks}{\ }\hlargument{=}{\ }\hlnumber{20}\hlkeyword{,}{\ }\hlargument{xlim}{\ }\hlargument{=}{\ }\hlsymbol{xlimits}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{hist}\hlkeyword{(}\hlsymbol{sample\usebox{\hlnormalsizeboxunderscore}means100}\hlkeyword{,}{\ }\hlargument{breaks}{\ }\hlargument{=}{\ }\hlnumber{20}\hlkeyword{,}{\ }\hlargument{xlim}{\ }\hlargument{=}{\ }\hlsymbol{xlimits}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+The first command specifies that you'd like to divide the plotting area into 3 rows and 1 column of plots\symbolfootnote[2]{You may need to stretch your plotting window to accommodate the extra plots.  To return to the default setting of plotting one plot at a time, run the following command:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{par}\hlkeyword{(}\hlargument{mfrow}{\ }\hlargument{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+}. The \hlargument{breaks} argument specifies the number of bins used in constructing the histogram.  The \hlargument{xlim} argument specifies the range of the x-axis of the histogram, and by setting it equal to \hlsymbol{xlimits} for each histogram, we ensure that all three histograms will be plotted with the same limits on the x-axis.
+
+\begin{exercise}
+When the sample size is larger, what happens to the center?  What about the spread?
+\end{exercise}
+
+\vspace{1cm}
+
+\subsection*{On your own}
+So far, we have only focused on estimating the mean living area in homes in Ames.  Now you'll try to estimate the mean home price.
+
+\begin{enumerate}
+
+\item Take a random sample of size 50 from \hlsymbol{price}. Using this sample, what is your best point estimate of the population mean?
+
+\item Since you have access to the population, simulate the sampling distribution for $\bar{x}_{price}$ by taking 5000 samples from the population of size 50 and computing 5000 sample means.  Store these means in a vector called \hlsymbol{sample\_means50}. Plot the data, then describe the shape of this sampling distribution. Based on this sampling distribution, what would you guess the mean home price of the population to be? Finally, calculate and report the population mean.
+
+\item Change your sample size from 50 to 150, then compute the sampling distribution using the same method as above, and store these means in a new vector called \hlsymbol{sample\_means150}. Describe the shape of this sampling distribution, and compare it to the sampling distribution for a sample size of 50.  Based on this sampling distribution, what would you guess to be the mean sale price of homes in Ames?
+
+\item Of the sampling distributions from 2 and 3, which has a smaller spread?  If we're concerned with making estimates that are more often close to the true value, would we prefer a distribution with a large or small spread?
+
+\item What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
+\end{enumerate}
+
+\vfill
+
+\end{document}

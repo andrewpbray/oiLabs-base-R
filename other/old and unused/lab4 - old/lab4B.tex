@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage{colortbl}
+
+\include{././labStyle}
+
+\begin{document}
+
+\section*{Chapter 4 Lab B: Statistical Inference and Confidence Intervals}
+\subsection*{Sampling from Millbrae, California}
+
+In this lab, we'll investigate the ways in which the estimates that we make based on a random sample of data can inform us about what the population might look like. 
+
+\subsubsection*{The Data}
+The dataset that we'll be considering comes from the town of Millbrae, California, near San Francisco.  The U.S Census Bureau has recorded information on all 20,718 residents of Millbrae, including age and household income.  All residents of Millbrae represent our statistical population.  In this lab we would like to learn as much as we can about the residents by taking smaller samples from the full population.  Let's load the data.
+
+\begin{lstlisting}
+download.file("http://www.openintro.org/stat/data/millbrae2.RData", destfile = "millbrae2.RData")
+load("millbrae2.RData")
+\end{lstlisting}
+
+\subsubsection*{The Set-up}
+Last time we randomly sampled 75 observations from \texttt{ages}
+
+\begin{lstlisting}
+samp1 <- sample(ages,75)
+\end{lstlisting}
+
+and calculated the mean and standard error of the sampling distribution based on this sample
+
+\begin{lstlisting}
+xbar <- mean(samp1)
+se <- sd(samp1)/sqrt(75)
+\end{lstlisting}
+
+We also built a sampling distribution by taking 5,000 samples from the population and recording the sample mean, and made a histogram of this distribution.
+
+\begin{lstlisting}
+sample.means <- rep(0, 5000)
+
+for(i in 1:5000){
+   samp <- sample(ages, 75)
+   sample.means[i] <- mean(samp)
+   }
+
+hist(sample.means)
+\end{lstlisting}
+
+\subsubsection*{Confidence Intervals}
+Return for a moment to the question that first motivated this lab: what is our best estimate of the mean age of the residents of Millbrae?  If we were to take only one random sample, \texttt{samp1}, our best estimate would be $\bar{x}$.  That serves as a good \emph{point estimate} but it would be useful to also communicate how uncertain we are in that estimate.  That is exactly the information that is captured by the sampling distribution that we approximated in the previous lab.  If we provided a histogram of the sampling distribution itself, all but the statisticians would throw up their hands in exasperation (and rightfully so).  Instead, we summarize it with two numbers that make up the \emph{confidence interval}.
+
+According to section 4.2.3, we can calculate a 95\% confidence interval for a sample mean by adding and subtracting 1.96 standard errors to our point estimate.
+
+\begin{lstlisting}
+hi <- xbar + 1.96*se
+lo <- xbar - 1.96*se
+abline(v = xbar, col = "blue")
+abline(v = c(lo,hi), col = "red")
+\end{lstlisting}
+
+The last two commands add to the plot a blue line representing the sample mean, and two red lines representing the confidence interval.  Our aim was to create an interval that would capture the mean age of the population, 42.29.  Though we can see on the plot whether we were successful, we can also verify this using the following custom function.
+
+\begin{lstlisting}
+contains(lo, hi, mean(ages))
+\end{lstlisting}
+
+This function checks to see if the mean is between the \texttt{lo} and \texttt{hi} and returns either TRUE or FALSE.  This will be a useful tool in the following section.
+
+
+\subsubsection*{Interpreting a Confidence Interval}
+What exactly does it mean to be 95\% confident and what exactly are we confident of?  The goal is to get an accurate estimate of the average age of everyone in Millbrae, the population parameter, and after constructing a 95\% confidence interval we say we are 95\% confident that it contains this parameter.  To understand the meaning of ``95\% confident'' we need to consider how well this procedure works when conducted on many different samples.
+
+In the following simulation, we return to the population, from which we will draw 100 different random samples.  For each of the samples, we will calculate the sample mean and standard error and use those to form a 95\% confidence interval.  Then, we check to see if the interval contains the parameter and store that result in a vector called \texttt{results}.  Keep in mind that because we are resampling from the population, this is a hypothetical experiment that usually wouldn't be feasible in the real world.
+
+\begin{lstlisting}
+hi <- rep(0,100)
+lo <- rep(0,100)
+results <- rep(0,100)
+
+for(i in 1:100){
+   samp <- sample(ages,75)
+   xbar <- mean(samp)
+   se <- sd(samp)/sqrt(75)
+   hi[i] <- xbar + 1.96*se
+   lo[i] <- xbar - 1.96*se
+   results[i] <- contains(lo[i], hi[i], mean(ages))
+   }
+\end{lstlisting}
+
+Note that along the way, we are saving three pieces of information: the 100 results, the 100 upper bounds on the intervals (\texttt{hi}), and the 100 lower bounds on the intervals (\texttt{lo}).  To visualize this output, we can plot the first 50 intervals that we have constructed using the following custom function.
+
+\begin{lstlisting}
+plot95ci(lo, hi, mean(ages))
+\end{lstlisting}
+
+Each of the 50 confidence intervals are represented by 50 horizontal lines centered on their 50 sample means (the black dots).  The vertical line represents the population parameter.  It's apparent that our sample means sometimes overestimate and sometimes underestimate the population mean, but that most interval estimate do manage to capture it.  Any interval that fails to contain the population parameter is highlighted in red.
+
+We can tabulate the full results from all 100 samples, keeping in mind that R stores TRUE as 1 and FALSE as 0.
+
+\begin{lstlisting}
+results
+sum(results)
+\end{lstlisting}
+
+\begin{exercise}
+How many of the 100 confidence intervals that you produced contain the population parameter?  Repeat the simulation several more times and note the results.  Using this experiment as a reference, come up with a definition of what we mean by ``95\% confident''.
+\end{exercise}
+
+
+\subsubsection*{On Your Own}
+So far we have only focused on estimating the mean age of the residents of Millbrae.  Now we'll try to estimate the mean household income.  Use \texttt{set.seed(211)} then take a random sample of size 75 from \texttt{incomes}.
+\begin{enumerate}
+\item Using the sample, what is your best point estimate of the population mean?
+\item Check the conditions for the sampling distribution of $\bar{x}_{income}$ to be nearly normal.
+\item Regardless of whether or not the conditions were met, form an interval estimate - a $95\%$ confidence interval - for the mean household income.
+\item Since you have access to the population, compute the sampling distribution for $\bar{x}_{income}$ by taking 5000 samples from the population of size 75 and  computing 5000 sample means.  Describe this sampling distribution.
+\item Explore the interpretation of a 95\% confidence interval by resampling from the population to form a total of 10,000 intervals, each based on a sample of size 75.  What proportion of the intervals capture the true parameter?
+\item What is your conclusion about forming confidence intervals based on the normal model in this circumstance?
+
+\end{enumerate}
+
+
+
+\end{document}
+
+

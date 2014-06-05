@@ -1,0 +1,316 @@
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData"); load("ames.RData")
+ls()
+ames[1:2,]
+area <- ames$Gr.Liv.Area
+price <- ames$SalePrice
+summary(area)
+hist(area)
+samp1 <- sample(area, 50)
+hist(samp1)
+sample_means50 <- rep(0, 5000)for (i in 1:5000) { samp <- sample(area, 50); sample_means50[i] <- mean(samp)}
+hist(sample_means50)
+hist(sample_means50, breaks=50)
+hist(sample_means50, breaks=20)
+hist(sample_means50, breaks=25)
+for(i in 1:10){ print(i) }
+for(){ i <- i+1; if(i > 20){ break } }
+sample_means10 <- rep(0, 5000); sample_means100 <- rep(0, 5000)for (i in 1:5000) { samp <- sample(area, 10); sample_means10[i] <- mean(samp); samp <- sample(area, 100); sample_means100[i] <- mean(samp)}
+par(mfrow = c(3, 1)); hist(sample_means10, breaks = 20, xlim = range(sample_means10));#
+hist(sample_means50, breaks = 20, xlim = range(sample_means10)); hist(sample_means100, breaks = 20, xlim = range(sample_means10))
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
+load("ames.RData")
+ls()
+area <- ames$Gr.Liv.Area ;price <- ames$SalePrice
+ls()
+summary(area) ;hist(area)
+samp1 <- sample(area, 50)
+samp1
+mean(samp1)
+sample_means50 <- rep(0, 5000);for (i in 1:5000) { samp <- sample(area, 50); sample_means50[i] <- mean(samp)} ; hist(sample_means50)
+hist(sample_means50)
+sample_means10 <- rep(0, 5000) ;sample_means100 <- rep(0, 5000)for (i in 1:5000) { samp <- sample(area, 10) ;sample_means10[i] <- mean(samp) ;samp <- sample(area, 100) ;sample_means100[i] <- mean(samp)}
+par(mfrow = c(3, 1)) ;hist(sample_means10, breaks = 20, xlim = range(sample_means10))#
+;hist(sample_means50, breaks = 20, xlim = range(sample_means10)) ;hist(sample_means100, breaks = 20, xlim = range(sample_means10))
+par(mfrow = c(3, 1)) ;hist(sample_means10, breaks = 20, xlim = range(sample_means10))#
+hist(sample_means50, breaks = 20, xlim = range(sample_means10)) ;hist(sample_means100, breaks = 20, xlim = range(sample_means10))
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData") ; load("ames.RData")
+population <- ames$Gr.Liv.Area ; sample <- sample(population, 60)
+lower
+se <- sd(sample)/sqrt(60) ;lower <- sample_mean - 1.96 * se ;upper <- sample_mean + 1.96 * se; c(lower, upper)
+sample_mean <- mean(samp)
+sample_mean <- mean(sample)
+se <- sd(sample)/sqrt(60) ;lower <- sample_mean - 1.96 * se ;upper <- sample_mean + 1.96 * se; c(lower, upper)
+.95^50
+for (i in 1:50) { samp <- sample(population, n) # obtain a sample of size n = 60 from the population; samp_mean[i] <- mean(samp) # save sample mean in ith element of samp_mean ;samp_sd[i] <- sd(samp) # save sample sd in ith element of samp_sd}
+samp_mean <- rep(NA, 50) ;samp_sd <- rep(NA, 50) ;n <- 60
+for (i in 1:50) { samp <- sample(population, n) # obtain a sample of size n = 60 from the population; samp_mean[i] <- mean(samp) # save sample mean in ith element of samp_mean ;samp_sd[i] <- sd(samp) # save sample sd in ith element of samp_sd}
+samp_sd
+for (i in 1:50) { samp <- sample(population, n); samp_mean[i] <- mean(samp)  ;samp_sd[i] <- sd(samp) }
+samp_sd
+plot_ci(lower, upper, mean(population))
+m
+lower
+upper
+lower <- samp_mean - 1.96 * samp_sd/sqrt(n) ;upper <- samp_mean + 1.96 * samp_sd/sqrt(n)
+plot_ci(lower, upper, mean(population))
+library(openintro)
+?countyComplete
+?county
+dim(countyComplete)
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData") load("ames.RData")
+sample_means50 <- rep(0, 5000) for (i in 1:5000) {samp <- sample(area, 50) sample_means50[i] <- mean(samp)} hist(sample_means50)
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")load("ames.RData")
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")#
+load("ames.RData")
+area <- ames$Gr.Liv.Area#
+price <- ames$SalePrice
+sample_means50 <- rep(0, 5000)#
+for (i in 1:5000) {#
+samp <- sample(area, 50)#
+sample_means50[i] <- mean(samp)#
+}#
+hist(sample_means50)
+download.file("http://www.openintro.org/stat/data/piracy.rda", destfile = "piracy.rda")#
+load("piracy.rda")
+_____ Libraries and Data _____##
+library(openintro)#
+library(OIdata)#
+# xtable generates nice LaTeX tables.#
+# LaTeX is like a word processor, but it has much#
+# more power and offers more control over style.#
+library(xtable)#
+data(piracy)#
+data(COL)
+save(piracy, file="piracy.RData")
+download.file("http://www.openintro.org/stat/data/piracy.RData", destfile = "piracy.RData")#
+load("piracy.RData")
+library(OIdata)
+?piracy
+data(piracy)
+dim(piracy)
+?piracy
+?step
+library(OIdata)
+?sp500
+library(help=OIdata)
+?state
+?step
+170*4
+700*3 + 300
+2400*170
+170*170
+150*170
+2400*150
+2400*150*3
+150*5*100
+160*5*100
+1280 / 720
+640 / 360
+install.packages("deldir")
+install.packages("splancs")
+install.packages("spatialkernel")
+install.packages("gpclib")
+library(gpclib)
+install.packages("rgeos")
+library(rgeos)
+36^10
+300000/600
+300000/675
+library(openintro)
+?marioKart
+sample(1e6, 1)
+1/3*7*52
+8.5*11
+8*10
+80/93.5
+library(stockPortfolio)
+library(stockPortfolio)#
+gr <- getReturns(c("VWNDX", "VGENX", "VINEX", "VGSLX"), "week")
+plot(gr)
+plot(gr, log="y")
+50000*.0007
+50000*.0018
+25000*.0025
+26000*.0025
+12/5*8
+.15*127
+.15*129
+365/180*8
+365/150*8
+19.47/.15
+(41919*.014+ 7456*.021)/(41919+ 7456)
+download.file("http://stat.duke.edu/courses/Fall12/sta101.001/labs/lab11.Rmd", destfile = "lab11.Rmd")
+download.file("http://stat.duke.edu/courses/Fall12/sta101.001/labs/acs.RData", destfile =#
+"acs.RData")
+load("acs.RData")
+head(acs)
+acs_sub <- acs[acs$employment == "employed", ]
+dim(acs)
+dim(acs_sub)
+inc_hw <- lm(income ~ hrs_work, acs_sub)
+summary(hrs_work)
+summary(inc_hw)
+plot(inc_hw)
+g <- lm(income ~ gender, acs_sub); summary(g); plot(g)
+g <- lm(hrs_work ~ gender, acs_sub); summary(g); plot(g)
+inc_hw_g <- lm(income ~ hrs_work + gender, data = acs_sub); summary(inc_hw_g)
+inc_hat <- predict(inc_hw_g)
+predict(inc_hw_g, interval = "confidence"); predict(inc_hw_g, interval = "prediction")
+predict(inc_hw_g, interval = "confidence")
+predict(inc_hw_g, interval = "confidence")[1:5,]
+predict(inc_hw_g, interval = "prediction")[1:5,]
+predict(inc_hw_g, interval = "prediction")
+predict(inc_hw_g, interval = "prediction")[1:5,]
+newdata <- data.frame(hrs_work = 40, gender = "male"); predict(inc_hw_g, newdata, interval = "prediction")
+newdata
+predict(inc_hw_g, newdata, interval = "confidence")
+mlr_full = lm(income ~ hrs_work + race + age + gender + citizen + time_to_work + lang + married + edu + disability + birth_qrtr, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + citizen + time_to_work + lang + married + edu + disability, data = acs_sub)summary(mlr_full)
+acs_sub$race
+mlr_full = lm(income ~ hrs_work + I(acs_sub$race=="white") + age + gender + citizen + time_to_work + lang + married + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + citizen + time_to_work + lang + married + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + citizen + lang + married + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + citizen + lang + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + lang + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+plot(mlr_full)
+mlr_full = lm(income ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+acs_sub
+acs_sub[1:10, ]
+na.omit(acs_sub) -> tmp
+dim(tmp)
+tmp[1:10, ]
+plot(mlr_full)
+mlr_full = lm(log(income) ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+plot(mlr_full)
+mlr_full = lm(log(acs_sub$income) ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(log(acs_sub$income) ~ hrs_work + race  + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm(I(log(acs_sub$income)) ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+mlr_full = lm((income) ~ hrs_work + race + age + gender + edu + disability, data = acs_sub)summary(mlr_full)
+hist(acs_sub$income)
+hist(acs_sub$income, 10000)
+sum(acs_sub$income == 0)
+sum(acs_sub$income == 0, na.rm=TRUE)
+mlr_full = lm(log(acs_sub$income) ~ hrs_work + race  + edu + disability, data = na.omit(acs_sub))summary(mlr_full)
+mlr_full = lm(log(acs_sub$income) ~ hrs_work + race  + edu + disability, data = tmp)summary(mlr_full)
+mlr_full = lm(log(acs_sub$income) ~ hrs_work + race  + edu + disability, data = tmp[tmp$income > 0, ])summary(mlr_full)
+mlr_full = lm(log(tmp$income[tmp$income > 0]) ~ hrs_work + race  + edu + disability, data = tmp[tmp$income > 0, ])summary(mlr_full)
+plot(mlr_full)
+x <- matrix(c(15,1,3,10,4,9),2)#
+x
+fisher.test(x)
+?fisher.test
+chisq.test(x)
+X2 <- chisq.test(x)
+names(X2)
+names(X2)$statistic
+X2$statistic
+rep(c("a","b","c"), x[1,])
+rep(1:2, apply(x, 1, sum))
+x <- matrix(c(15,1,3,10,4,9),2)#
+mix <- function (x) {#
+  x1 <- rep(c("a","b","c"), x[1,])#
+  x2 <- rep(1:2, apply(x, 1, sum))#
+  x. <- table(sample(x1), sample(x2))#
+  return(chisq.test(x.)$statistic)#
+}
+x#
+fisher.test(x)#
+#
+X2 <- chisq.test(x)$statistic
+x <- matrix(c(15,1,3,10,4,9),2)#
+mix <- function (x) {#
+  x1 <- rep(c("a","b","c"), x[1,])#
+  x2 <- rep(1:2, apply(x, 1, sum))#
+  x. <- table(sample(x1), sample(x2))#
+  return(chisq.test(x.)$statistic)#
+}#
+#
+x#
+fisher.test(x)#
+X2 <- chisq.test(x)$statistic#
+#
+N  <- 1000#
+XS <- rep(NA, N)#
+for (i in 1:N) {#
+  XS[i] <- mix(x)#
+}
+XS
+mix(x)
+x1 <- rep(c("a","b","c"), x[1,])#
+  x2 <- rep(1:2, apply(x, 1, sum))
+x1
+rep(c("a","b","c"), apply(x, 2, sum))
+x <- matrix(c(15,1,3,10,4,9),2)#
+mix <- function (x) {#
+  x1 <- rep(c("a","b","c"), apply(x, 2, sum))#
+  x2 <- rep(1:2, apply(x, 1, sum))#
+  x. <- table(sample(x1), sample(x2))#
+  return(chisq.test(x.)$statistic)#
+}#
+#
+x#
+fisher.test(x)#
+X2 <- chisq.test(x)$statistic#
+#
+N  <- 1000#
+XS <- rep(NA, N)#
+for (i in 1:N) {#
+  XS[i] <- mix(x)#
+}
+hist(XS)
+X2
+x <- cbind(c(1613, 137, 48, 16, 54), c(105, 15, 10, 4, 5))
+x
+chisq.test(x)
+chisq.test(x)[1:10]
+chisq.test(x)
+fisher.test(x)
+download.file("http://www.openintro.org/stat/data/atheism.RData", destfile = "atheism.RData"); load("atheism.RData")
+read.csv("atheism.csv") -> atheism
+dim(atheism)
+atheism[1:50,]
+summary(atheism)
+save(atheism, file="atheism.RData")
+us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year == "2012")
+dim(us12)
+us12[1:10,]
+summary(us12)
+50/1002
+download.file("http://www.openintro.org/stat/data/nc.RData", destfile = "nc.RData")#
+load("nc.RData")
+ls()
+save(atheism, inference, file="atheism.RData")
+inference(data = us12$response, est = "proportion", type = "ci", method = "theoretical", success = "atheist")
+n <- 100; p <- seq(0, 1, 0.01); me <- 2 * sqrt(p * (1 - p)/n); plot(me ~ p)
+n <- 1000; p <- seq(0, 1, 0.01); me <- 2 * sqrt(p * (1 - p)/n); plot(me ~ p)
+p <- 0.1; n <- 1040; p_hats <- rep(0, 5000)
+for (i in 1:5000) { samp <- sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1 - p)) ; p_hats[i] <- sum(samp == "atheist")/n}
+hist(p_hats, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+index
+hist(p_hats, 50, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+hist(p_hats, 40, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+hist(p_hats, 30, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+hist(p_hats, 150, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+p <- 0.1; n <- 400; p_hats <- rep(0, 5000); for (i in 1:5000) { samp <- sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1 - p)) ; p_hats[i] <- sum(samp == "atheist")/n}; hist(p_hats, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+p <- 0.02; n <- 400; p_hats <- rep(0, 5000); for (i in 1:5000) { samp <- sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1 - p)) ; p_hats[i] <- sum(samp == "atheist")/n}; hist(p_hats, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+p <- 0.02; n <- 200; p_hats <- rep(0, 5000); for (i in 1:5000) { samp <- sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1 - p)) ; p_hats[i] <- sum(samp == "atheist")/n}; hist(p_hats, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+sqrt(0.03*0.97/400)
+atheism[1:3,]
+us <- atheism[atheism$nationality == "United States", ]
+us[1:5,]
+lm(I(us$response == "atheist") ~ us$year)
+summary(lm(I(us$response == "atheist") ~ us$year))
+summary(us)
+us <- atheism[atheism$nationality == "United States" & atheism$year %in% c(2005, 2012), ]
+summary(lm(I(us$response == "atheist") ~ us$year))
+summary(us)
+summary(lm(I(us$response == "atheist") ~ us$year))
+summary(lm(I(us$response == "atheist") ~ as.factor(us$year)))
+rm(list=ls())
+load("atheism.RData")
+ls()
+load("/Users/ddiez/Dropbox/openintro/oi labs/(6) lab6 - in progress/data/atheism.RData")
+ls()
+summary(atheism)
+dim(atheism)

@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+
+% load packages and functions
+\input{../../labStyle}
+%\usepackage{minted}
+\usepackage{multirow}
+
+% document
+\begin{document}
+
+\section*{Lab 5B: Statistical inference for large samples (chi square)}
+
+\subsection*{North Carolina Births}
+In 2004, the state of North Carolina released to the public a large data set containing information on births recorded in this state.  This data set has been of interest to medical researchers who are studying the relation between habits and practices of expectant mothers and the birth of their children. We will work with a sample of observations from this data set.  These cases were chosen at random.
+
+\subsection*{Exploratory Analysis}
+Let's load the \code{nc} data set into our workspace.
+
+\begin{lstlisting}
+nc = read.csv("http://stat.duke.edu/courses/Spring12/sta101.1/labs/nc.csv")
+\end{lstlisting}
+
+We have observations on 13 different variables, some categorical and some numerical.  The meaning of each variable is as follows.
+
+\begin{table}[h] \small
+\begin{tabular}{r | l}
+\texttt{fage} & father's age in years. \\
+\texttt{mage} & mother's age in years. \\
+\texttt{mature} & maturity status of mother. \\
+\texttt{weeks} & length of pregnancy in weeks. \\
+\texttt{premie} & whether the birth was classified as premature (premie) or full-term. \\
+\texttt{visits} & number of hospital visits during pregnancy. \\
+\texttt{gained} & weight gained by mother during pregnancy in pounds. \\
+\texttt{weight} & weight of the baby at birth in pounds. \\
+\texttt{lowbirthweight} & whether baby was classified as low birthweight (\code{low}) or not (\code{not low}). \\
+\texttt{gender} & gender of the baby, \code{female} or \code{male}. \\
+\texttt{habit} & status of the mother as a \code{nonsmoker} or a \code{smoker}. \\
+\texttt{marital} & whether mother is \code{married} or \code{not married} at birth. \\
+\texttt{whitemom} & whether mom is \code{white} or \code{not white}. \\
+\end{tabular}
+\end{table}
+
+\begin{exercise}
+What are the cases in this data set?  How many cases are there in our sample?
+\end{exercise}
+
+Before we begin our analysis let's take a look at features of all the variables in the data set by getting a summary of each.
+
+\begin{lstlisting}
+summary(nc)
+\end{lstlisting}
+
+We will first tackle the relationship between a mother's smoking habit and the health of her baby.  Exploratory analysis is a useful first step when examining data because it helps us notice trends and develop research questions.  By now you have had practice using R commands to summarize and visualize data.
+
+\begin{exercise}
+Make a mosaic plot of \code{habit} and \code{lowbirthweight} that is helpful for visualizing the proportion of low birth weight babies born to nonsmoker and smoker mothers. What does the plot tell us about the relationship between the two variables \code{lowbirthweight} and \code{habit}? (Hint: Think about which variable you should appear in the columns and which variable in the rows. If the plot you get isn't exactly ideal, swap the order of the variables in the code.) 
+\end{exercise}
+
+We can quantify this observed difference as the difference between the proportions of low birthweight babies born to mothers who smoke and do not smoke. 
+
+\begin{exercise}
+Make a contingency table of \code{lowbirthweight} vs. \code{habit}.
+\end{exercise}
+
+%When you do this in R  you should get a table similar to the one shown below, except for the totals.
+%
+%\begin{center}
+%\begin{tabular}{r|rr|r}
+%            & nonsmoker     & smoker    & Total \\ 
+%\hline
+%low         &  92           & 18        & 110 \\ 
+%not low     & 781           & 108       & 889\\
+%\hline
+%Total       & 873           & 126       & 999\\
+%
+%\end{tabular}
+%\end{center}
+
+\begin{exercise}
+Calculate the proportions of low birthweight babies born to non-smoker and smoker mothers, and find the difference between the two proportions. Take note of this value as it will be useful in the next stage of the analysis.
+\end{exercise}
+
+At this stage, though, that's just a descriptive statistic (or a point estimate).  In order to determine if this difference is significant and not due to chance, we need to do inference.
+
+There are two types of hypothesis tests that we have learned so far that we can use in this situation: comparing proportions, and $\chi^2$ test of independence.
+
+%
+
+\subsection*{Inference on proportions}
+
+\begin{exercise}
+State the hypotheses for doing the hypothesis test as a comparison of proportions of low birth weight babies born to smoker and nonsmoker mothers. Then, use the \code{inference} function to conduct this test. You can decide whether it's appropriate to do simulation, theoretical, or either test. What is the conclusion of your hypothesis test?
+\end{exercise}
+
+\subsection*{$\chi^2$ test of independence}
+
+Another way of evaluating this research question is whether or not the two variables \code{habit} and \code{lowbirthweight} are independent of each other.
+
+\begin{exercise}
+State the hypotheses for doing the hypothesis test as a $\chi^2$ test of independence.
+\end{exercise}
+
+The function \code{chisq.test()} implements the classical $\chi^2$ test for independence we have discussed in class last week. Additionally, the \code{chisq.test()} function also allows for a simulation based approach to be used when the assumptions for the classical test are not met. 
+
+\begin{exercise}
+Does the birth data meet the assumptions necessary for the $\chi^2$ test to be valid?
+\end{exercise}
+
+Run the following command to execute the $\chi^2$ test
+
+\begin{lstlisting}
+chisq.test(table(nc$habit,nc$lowbirthweight), correct=FALSE)
+\end{lstlisting}
+
+\begin{exercise}
+Verify the $\chi^2$ statistic, degrees of freedom, and p-value by re-doing the calculations by hand.
+\end{exercise}
+
+\begin{exercise}
+What is the p-value?  Do these data provide convincing evidence that your two variables are associated?
+\end{exercise}
+
+\begin{exercise}
+How does the result of the $\chi^2$ test compare to the result of your test of proportions from earlier?
+\end{exercise}
+
+\subsection*{What if sample size assumptions aren't met?}
+
+If the cell counts are not sufficiently large, 
+
+\begin{lstlisting}
+chisq.test(table(nc$habit,nc$lowbirthweight), correct=FALSE, 
+simulate.p.value = TRUE)
+\end{lstlisting}
+
+to test for an association. By default R will use 2000 simulations, if you would like to use more you can specify the number with the \code{B} function argument. Hint:  If the counts are not large enough to use a $\chi^2$ distribution, R will warn you with the message \code{Chi-squared approximation may be incorrect} at the bottom of the output. If you get this message, you should use the p-value based on simulation instead.
+
+\subsection*{Your turn}
+
+We've considered the association between smoking and low birthweight.  Now it's your turn to analyze pairs of variables that are of interest to you.
+
+\begin{exercise}
+Select two categorical variables from this data set that are of interest to you and conduct a hypothesis test to evaluate if these variables are dependent. What is the research question you will be answering?  What are the null and alternative hypotheses? Conduct the test using the \code{chisq.test} function as well as repeating the calculations by hand (for practice).
+\end{exercise}
+
+There is no homework on the lab this week. Use the rest of the time for review for the midterm. Your team mates are a great resource, as well as your TAs.
+
+%\vfill
+
+\addtoendnotes{This lab was adapted for OpenIntro by Andrew Bray and Mine \c{C}etinkaya-Rundel from a lab written by the faculty and TAs of UCLA Statistics.}
+
+\theendnotes
+
+\end{document}

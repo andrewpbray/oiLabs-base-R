@@ -1,0 +1,72 @@
+Email from David - 9/27/12
+
+- - -
+
+
+Hi Andrew and Mine,
+
+The info requested below will be helpful for planning future labs and also for considerations of transferring lab copyrights to OpenIntro (the copyright cannot be transferred if the lab wasn't an original work). This isn't urgent, but I think it would be good to have this done within a couple weeks, and my estimate for the time it will take is about 2 hours.
+
+1. Could you generate an "inspiration" folder (or some similarly named folder) in the OI labs directory and add copies of all labs that served as inspiration or templates for OpenIntro labs to this folder? Also, this folder could be a place to add future labs you come across that you find interesting, though future OpenIntro labs shouldn't be based on existing labs by outside parties.
+
+2. Could you summarize the following info for each lab and put it in a single file in the primary OI labs folder? Alternative proposals for where to manage this info are welcome; I was thinking that having it the primary folder would be a reminder to update it each time a new lab is finished.
+
++ Name of each contributor. If UCLA-derivative but uncertain who wrote and contributed to the original, okay to put "UCLA Statistics" as a person (and then also guess who contributed).
++ Add 1-2 sentences for each person describing his/her contributions.
++ Add any notes about the lab that would be useful to know, e.g. if it is an original lab or if you think it qualifies as a derivative of a non-OpenIntro lab.
+
+An example of a fictional lab summary is below.
+
+Thanks,
+David
+
+- - -
+
+Lab Intro: Introduction to R and RStudio
++ The final OpenIntro lab should be seen as a derivative work of Mark's lab.
++ Mark Hansen: Retrieved data from R package HistData (http://cran.r-project.org/web/packages/HistData/HistData.pdf), wrote original text and code, supplied image.
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing.
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing and collected data from students to improve the lab.
+
+Lab 1: Introduction to data
++ The final OpenIntro lab should be seen as a derivative work of Mark's lab.
++ Mark Hansen: Retrieved data from the CDC - BRFSS, wrote original text and code.
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Modified the dataset.
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing and collected data from students to improve the lab.
+
+Lab 2: Probability
++ The final OpenIntro lab should be seen as a derivative work of UCLA's lab.
++ UCLA: Retrieved data from the NBA on Kobe Bryant's shots 
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab, and wrote the custom function calc_streak
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing,
+
+Lab 3: Distributions of random variables
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab, wrote the original custom code qqnormsim.
++ Mine Cetinkaya-Rundel: Retrieved data from the JSE article Exploring Relationships in Body Dimensions (http://www.amstat.org/publications/jse/v11n2/datasets.heinz.html), contributed to original OpenIntro lab write-up and editing. Performed in-class testing.
+
+Lab 4A: Foundations for statistical inference - Sampling distributions
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab.
++ Mine Cetinkaya-Rundel: Retrieved data from the JSE article Ames, Iowa: Alternative to the Boston Housing Data as an End of Semester Regression Project (http://www.amstat.org/publications/jse/v19n3/decock.pdf), contributed to original OpenIntro lab write-up and editing. Performed in-class testing.
+
+Lab 4B: Foundations for statistical inference - Confidence levels
++ Uses the same data as Lab 4A
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab.
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing.
+
+Lab 5: Inference for numerical data
++ The final OpenIntro lab should be seen as a derivative work of UCLA's lab.
++ UCLA: Retrieved data from North Carolina births.
++ Andrew Bray: Contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab.
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing. Wrote the original custom function inference used in this and the next lab.
+
+Lab 6: 
+In progress...
+
+Lab 7:
++ The final OpenIntro lab should be seen as a derivative work of UCLA's lab.
++ UCLA: Retrieved data from MLB 2009 Season, this was used as inspiration, but this lab uses MLB 2011 data.
++ Andrew Bray: Retrieved data from MLB 2011 Season, contributed to OpenIntro's lab write-up and editing. Drafted the original code listed in the lab. Wrote the original custom function plot_ss.
++ Mine Cetinkaya-Rundel: Contributed to original OpenIntro lab write-up and editing. Performed in-class testing.
+
+Lab 8:
+In progress...
