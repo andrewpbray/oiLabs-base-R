@@ -1,5 +1,0 @@
-
-hdi: http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index
-dem: http://en.wikipedia.org/wiki/Democracy_Index
-internet: http://en.wikipedia.org/wiki/List_of_Internet_users_by_country
-freepress: http://en.wikipedia.org/wiki/Freedom_of_the_Press_(report)
