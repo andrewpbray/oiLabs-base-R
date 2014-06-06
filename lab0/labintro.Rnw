@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\input{../../labStyle}
+\input{../labStyle}
 
 \begin{document}
 
@@ -14,7 +14,7 @@ As the labs progress, you are encouraged to explore beyond what the labs dictate
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=4.5 in]{rInterface2014.png}
+\includegraphics[width=4.5 in]{more/rInterface2014.png}
 \end{figure}
 
 The panel in the upper right contains your \emph{workspace} as well as a history of the commands that you've previously entered.  Any plots that you generate will show up in the panel in the lower right corner.
