@@ -1,56 +1,6 @@
-\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
+\documentclass{article}
 
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
-
-\input{../../labStyle}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\input{../labStyle}
 
 \begin{document}
 
@@ -83,15 +33,10 @@ The title of the report is ``Global Index of Religiosity and Atheism''. To gener
 \subsection*{The data}
 Turn your attention to Table 6 (pages 15 and 16), which reports the sample size and response percentages for all 57 countries. While this is a useful format to summarize the data, we will base our analysis on the original data set of individual responses to the survey. Load this data set into R with the following command.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{download.file}\hlstd{(}\hlstr{"http://www.openintro.org/stat/data/atheism.RData"}\hlstd{,} \hlkwc{destfile} \hlstd{=} \hlstr{"atheism.RData"}\hlstd{)}
-\hlkwd{load}\hlstd{(}\hlstr{"atheism.RData"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<head-data, eval=FALSE>>=
+download.file("http://www.openintro.org/stat/data/atheism.RData", destfile = "atheism.RData")
+load("atheism.RData")
+@
 
 \begin{exercise}
 What does each row of Table 6 correspond to? What does each row of \hlkwd{atheism} correspond to?
@@ -102,15 +47,9 @@ To investigate the link between these two ways of organizing this data, take a l
 \begin{exercise}
 Using the command below, create a new dataframe called \hlkwd{us12} that contains only the rows in \hlkwd{atheism} associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table~6? If not, why?
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{us12} \hlkwb{<-} \hlkwd{subset}\hlstd{(atheism, atheism}\hlopt{$}\hlstd{nationality} \hlopt{==} \hlstr{"United States"} \hlopt{&} \hlstd{atheism}\hlopt{$}\hlstd{year} \hlopt{==}
-    \hlstr{"2012"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<us-atheism, eval=FALSE>>=
+us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year == "2012")
+@
 \end{exercise}
 
 
@@ -125,15 +64,10 @@ Write out the conditions for inference to construct a 95\% confidence interval f
 
 If the conditions for inference are reasonable, we can either calculate the standard error and construct the interval by hand, or allow the \hlkwd{inference} function to do it for us.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{inference}\hlstd{(}\hlkwc{y} \hlstd{= us12}\hlopt{$}\hlstd{response,} \hlkwc{est} \hlstd{=} \hlstr{"proportion"}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"ci"}\hlstd{,} \hlkwc{method} \hlstd{=} \hlstr{"theoretical"}\hlstd{,}
-          \hlkwc{success} \hlstd{=} \hlstr{"atheist"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<us-atheism-ci, eval=FALSE, tidy = FALSE>>=
+inference(y = us12$response, est = "proportion", type = "ci", method = "theoretical", 
+          success = "atheist")
+@
 
 Note that since the goal is to construct an interval estimate for a proportion, it's necessary to specify what constitutes a ``success'', which here is a response of \hlkwd{atheist}.
 
@@ -154,17 +88,12 @@ Think back to the formula for the standard error: $SE = \sqrt{p(1-p)/n}$. This i
 
 The first step is to make a vector \hlkwd{p} that is a sequence from $0$ to $1$ with each number separated by $0.01$. We can then create a vector of the margin of error (\hlkwd{me}) associated with each of these values of \hlkwd{p} using the familiar approximate formula ($ME = 2 \times SE$). Lastly, we plot the two vectors against each other to reveal their relationship.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{n} \hlkwb{<-} \hlnum{1000}
-\hlstd{p} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.01}\hlstd{)}
-\hlstd{me} \hlkwb{<-} \hlnum{2} \hlopt{*} \hlkwd{sqrt}\hlstd{(p} \hlopt{*} \hlstd{(}\hlnum{1} \hlopt{-} \hlstd{p)}\hlopt{/}\hlstd{n)}
-\hlkwd{plot}\hlstd{(me} \hlopt{~} \hlstd{p)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<me-plot, eval=FALSE>>=
+n <- 1000
+p <- seq(0, 1, 0.01)
+me <- 2*sqrt(p*(1 - p)/n)
+plot(me ~ p)
+@
 
 \begin{exercise}
 Describe the relationship between \hlkwd{p} and \hlkwd{me}.
@@ -175,24 +104,18 @@ The textbook emphasizes that you must always check conditions before making infe
 
 We can investigate the interplay between $n$ and $p$ and the shape of the sampling distribution by using simulations. To start off, we simulate the process of drawing 5000 samples of size 1040 from a population with a true atheist proportion of $0.1$. For each of the 5000 samples we compute $\hat{p}$ and then plot a histogram to visualize their distribution.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{p} \hlkwb{<-} \hlnum{0.1}
-\hlstd{n} \hlkwb{<-} \hlnum{1040}
-\hlstd{p_hats} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{5000}\hlstd{)}
+<<sim-np, eval=FALSE>>=
+p <- 0.1
+n <- 1040
+p_hats <- rep(0, 5000)
 
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5000}\hlstd{) \{}
-    \hlstd{samp} \hlkwb{<-} \hlkwd{sample}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"atheist"}\hlstd{,} \hlstr{"non_atheist"}\hlstd{), n,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlkwd{c}\hlstd{(p,}
-        \hlnum{1} \hlopt{-} \hlstd{p))}
-    \hlstd{p_hats[i]} \hlkwb{<-} \hlkwd{sum}\hlstd{(samp} \hlopt{==} \hlstr{"atheist"}\hlstd{)}\hlopt{/}\hlstd{n}
-\hlstd{\}}
+for(i in 1:5000){
+  samp <- sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1-p))
+  p_hats[i] <- sum(samp == "atheist")/n
+}
 
-\hlkwd{hist}\hlstd{(p_hats,} \hlkwc{main} \hlstd{=} \hlstr{"p = 0.1, n = 1040"}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{0.18}\hlstd{))}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+hist(p_hats, main = "p = 0.1, n = 1040", xlim = c(0, 0.18))
+@
 
 These commands build up the sampling distribution of \hlkwd{p\_hats} using the familiar \hlkwd{for} loop. You can read the sampling procedure for the first line of code inside the \hlkwd{for} loop as, ``take a sample of size $n$ with replacement from the choices of atheist and non-atheist with probabilities $p$ and $1 - p$, respectively.'' The second line in the loop says, ``calculate the proportion of atheists in this sample and record this value.'' The loop allows us to repeat this process 5,000 times to build a good representation of the sampling distribution.
 
