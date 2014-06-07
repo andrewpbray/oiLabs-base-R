@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\input{../../labStyle}
+\input{../labStyle}
 
 \begin{document}
 

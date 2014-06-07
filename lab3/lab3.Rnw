@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\input{../../labStyle}
+\input{../labStyle}
 
 \begin{document}
 
@@ -162,7 +162,7 @@ Write out two probability questions that you would like to answer; one regarding
 
 \begin{figure}[h]
    \centering
-  \includegraphics[width=6.25 in]{histQQmatch.pdf}
+  \includegraphics[width=6.25 in]{more/histQQmatch.pdf}
 \end{figure}
 
 \end{document}
