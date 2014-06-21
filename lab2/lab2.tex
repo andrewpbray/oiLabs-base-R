@@ -173,8 +173,9 @@ While we don't have any data from a shooter we know to have independent shots, t
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{outcomes} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"heads"}\hlstd{,} \hlstr{"tails"}\hlstd{)}
-
-\hlkwd{sample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlkwd{require}\hlstd{(mosaic)}
+\hlcom{# sample(outcomes, size = 1, replace = TRUE)}
+\hlkwd{resample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -189,7 +190,8 @@ If you wanted to simulate flipping a fair coin 100 times, you could either run t
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{sim_fair_coin} \hlkwb{<-} \hlkwd{sample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlcom{# sim_fair_coin <- sample(outcomes, size = 100, replace = TRUE)}
+\hlstd{sim_fair_coin} \hlkwb{<-} \hlkwd{resample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{100}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -213,8 +215,9 @@ Since there are only two elements in \hlstd{outcomes}, the probability that we `
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{sim_unfair_coin} \hlkwb{<-} \hlkwd{sample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.2}\hlstd{,}
-    \hlnum{0.8}\hlstd{))}
+\hlcom{# sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob =}
+\hlcom{# c(0.2, 0.8))}
+\hlstd{sim_unfair_coin} \hlkwb{<-} \hlkwd{resample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{100}\hlstd{,} \hlkwc{prob} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.2}\hlstd{,} \hlnum{0.8}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -248,8 +251,8 @@ Simulating a basketball player who has independent shots uses the same mechanism
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{outcomes} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"H"}\hlstd{,} \hlstr{"M"}\hlstd{)}
-
-\hlstd{sim_basket} \hlkwb{<-} \hlkwd{sample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlcom{# sim_basket <- sample(outcomes, size = 1, replace = TRUE)}
+\hlstd{sim_basket} \hlkwb{<-} \hlkwd{resample}\hlstd{(outcomes,} \hlkwc{size} \hlstd{=} \hlnum{1}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
