@@ -52,29 +52,39 @@ fhgtsd   <- sd(fdims$hgt)
 
 Next we make a density histogram to use as the backdrop and use the \hlkwd{lines} function to overlay a normal probability curve. The difference between a frequency histogram and a density histogram is that while in a frequency histogram the \emph{heights} of the bars add up to the total number of observations, in a density histogram the \emph{areas} of the bars add up to 1. The area of each bar can be calculated as simply the height $\times$ the width of the bar. Using a density histogram allows us to properly overlay a normal distribution curve over the histogram since the curve is a normal probability density function. Frequency and density histograms both display the same exact shape; they only differ in their y-axis. You can verify this by comparing the frequency histogram you constructed earlier and the density histogram created by the commands below.
 
-<<hist-height, eval=FALSE>>=
-hist(fdims$hgt, probability = TRUE)
-
-x <- 140:190
-
-y <- dnorm(x = x, mean = fhgtmean, sd = fhgtsd)
-
-lines(x = x, y = y, col = "blue")
+<<hist-height, eval=FALSE, message=FALSE>>=
+# hist(fdims$hgt, probability = TRUE)
+# x <- 140:190
+# y <- dnorm(x = x, mean = fhgtmean, sd = fhgtsd)
+# lines(x = x, y = y, col = "blue")
+require(mosaic)
+histogram(~hgt, data=fdims, fit="normal", nint=8)
 @
 
 After plotting the density histogram with the first command, we create the x- and y-coordinates for the normal curve.  We chose the \hlstd{x} range as 140 to 190 in order to span the entire range of \hlstd{fheight}.  To create \hlstd{y}, we use \hlkwd{dnorm} to calculate the density of each of those x-values in a distribution that is normal with mean \hlstd{fhgtmean} and standard deviation \hlstd{fhgtsd}.  The final command draws a curve on the existing plot (the density histogram) by connecting each of the points specified by \hlstd{x} and \hlstd{y}. The argument \hlkwc{col} simply sets the color for the line to be drawn. If we left it out, the line would be drawn in black.\symbolfootnote[2]{The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: \texttt{hist(fdims\$hgt, probability = TRUE,  ylim = c(0, 0.06))}.} 
+Notice that adding the \hlsymbol{fit} argument to \hlfunctioncall{histogram} overlays a normal distribution on plot. The optional \hlsymbol{nint} argument simply specificies the number of bins. 
+
+% %\symbolfootnote[2]{The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: 
+% 
+% <<footnote, eval=FALSE>>=
+% hist(fdims$hgt, probability = TRUE,  ylim = c(0, 0.06))
+% @
+%}
 
 \begin{exercise}
 Based on the this plot, does it appear that the data follow a nearly normal distribution?
 \end{exercise}
 
+
+
 \subsection*{Evaluating the normal distribution}
 Eyeballing the shape of the histogram is one way to determine if the data appear to be nearly normally distributed, but it can be frustrating to decide just how close the histogram is to the curve. An alternative approach involves constructing a normal probability plot, also called a normal Q-Q plot for ``quantile-quantile''.
 
 <<qq, eval=FALSE>>=
-qqnorm(fdims$hgt)
+# qqnorm(fdims$hgt)
 
-qqline(fdims$hgt)
+# qqline(fdims$hgt)
+qqmath(~hgt, data=fdims, type=c("p", "r"))
 @
 
 A data set that is nearly normal will result in a probability plot where the points closely follow the line.  Any deviations from normality leads to deviations of these points from the line.  The plot for female heights shows points that tend to follow the line but with some errant points towards the tails.  We're left with the same problem that we encountered with the histogram above: how close is close enough?
@@ -82,7 +92,7 @@ A data set that is nearly normal will result in a probability plot where the poi
 A useful way to address this question is to rephrase it as: what do probability plots look like for data that I \emph{know} came from a normal distribution?  We can answer this by simulating data from a normal distribution using \hlkwd{rnorm}.
 
 <<sim-norm, eval=FALSE>>=
-sim_norm <- rnorm(n = length(fdims$hgt), mean = fhgtmean, sd = fhgtsd)
+sim_norm <- rnorm(n = nrow(fdims), mean = fhgtmean, sd = fhgtsd)
 @
 
 The first argument indicates how many numbers you'd like to generate, which we specify to be the same number of heights in the \hlstd{fdims} data set using the \hlkwd{length} function.  The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated.  We can take a look at the shape of our simulated data set, \hlstd{sim\_norm}, as well as its normal probability plot.
@@ -117,6 +127,13 @@ If we assume that female heights are normally distributed (a very close approxim
 @
 
 Note that the function \hlkwd{pnorm} gives the area under the normal curve below a given value, \hlkwc{q}, with a given mean and standard deviation.  Since we're interested in the probability that someone is taller than 182 cm, we have to take one minus that probability.
+
+For a graphical interpretation, try:
+
+<<eval=FALSE>>=
+xpnorm(q = 182, mean = fhgtmean, sd = fhgtsd, lower.tail=FALSE)
+@
+
 
 Assuming a normal distribution has allowed us to calculate a theoretical probability.  If we want to calculate the probability empirically, we simply need to determine how many observations fall above 182 then divide this number by the total sample size.
 
