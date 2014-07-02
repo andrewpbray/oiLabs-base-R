@@ -61,15 +61,11 @@ require(mosaic)
 histogram(~hgt, data=fdims, fit="normal", nint=8)
 @
 
-After plotting the density histogram with the first command, we create the x- and y-coordinates for the normal curve.  We chose the \hlstd{x} range as 140 to 190 in order to span the entire range of \hlstd{fheight}.  To create \hlstd{y}, we use \hlkwd{dnorm} to calculate the density of each of those x-values in a distribution that is normal with mean \hlstd{fhgtmean} and standard deviation \hlstd{fhgtsd}.  The final command draws a curve on the existing plot (the density histogram) by connecting each of the points specified by \hlstd{x} and \hlstd{y}. The argument \hlkwc{col} simply sets the color for the line to be drawn. If we left it out, the line would be drawn in black.\symbolfootnote[2]{The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: \texttt{hist(fdims\$hgt, probability = TRUE,  ylim = c(0, 0.06))}.} 
-Notice that adding the \hlsymbol{fit} argument to \hlfunctioncall{histogram} overlays a normal distribution on plot. The optional \hlsymbol{nint} argument simply specificies the number of bins. 
+Notice that adding the \hlnum{fit} argument to \hlkwd{histogram} overlays a normal distribution on plot. The optional \hlnum{nint} argument simply specificies the number of bins.
 
-% %\symbolfootnote[2]{The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: 
-% 
-% <<footnote, eval=FALSE>>=
-% hist(fdims$hgt, probability = TRUE,  ylim = c(0, 0.06))
-% @
-%}
+After plotting the density histogram with the first command, we create the x- and y-coordinates for the normal curve.  We chose the \hlstd{x} range as 140 to 190 in order to span the entire range of \hlstd{fheight}.  To create \hlstd{y}, we use \hlkwd{dnorm} to calculate the density of each of those x-values in a distribution that is normal with mean \hlstd{fhgtmean} and standard deviation \hlstd{fhgtsd}.  The final command draws a curve on the existing plot (the density histogram) by connecting each of the points specified by \hlstd{x} and \hlstd{y}. The argument \hlkwc{col} simply sets the color for the line to be drawn. If we left it out, the line would be drawn in black.\symbolfootnote[2]{The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: \texttt{hist(fdims\$hgt, probability = TRUE,  ylim = c(0, 0.06))}.} 
+ 
+
 
 \begin{exercise}
 Based on the this plot, does it appear that the data follow a nearly normal distribution?
