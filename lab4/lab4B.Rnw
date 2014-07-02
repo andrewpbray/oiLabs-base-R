@@ -122,7 +122,7 @@ lower <- samp_mean - 1.96 * samp_sd / sqrt(n)
 upper <- samp_mean + 1.96 * samp_sd / sqrt(n)
 @
 
-Lower bounds of these 50 confidence intervals are stored in \hlsymbol{lower}, and the upper bounds are in \hlsymbol{upper}. Let's view the first interval.
+Lower bounds of these 50 confidence intervals are stored in \hlnum{lower}, and the upper bounds are in \hlnum{upper}. Let's view the first interval.
 
 <<first-interval, eval=FALSE>>=
 c(lower[1],upper[1])
