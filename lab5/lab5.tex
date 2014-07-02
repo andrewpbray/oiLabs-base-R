@@ -124,7 +124,9 @@ The box plots show how the medians of the two distributions compare, but we can 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{by}\hlstd{(nc}\hlopt{$}\hlstd{weight, nc}\hlopt{$}\hlstd{habit, mean)}
+\hlcom{# by(nc$weight, nc$habit, mean)}
+\hlkwd{require}\hlstd{(mosaic)}
+\hlkwd{mean}\hlstd{(weight} \hlopt{~} \hlstd{habit,} \hlkwc{data} \hlstd{= nc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
