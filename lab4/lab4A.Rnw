@@ -80,7 +80,7 @@ for(i in 1:5000){
 hist(sample_means50)
 @
 
-If you are familiar with computer programming, you know that a \hlsymbol{for} loop is a fundamental control-flow construct. However, you may find it easier to write loops using the \hlsymbol{mosaic} function \hlsymbol{do}, which simply repeats a statement and collects the results in a data frame. 
+If you are familiar with computer programming, you know that a \hlnum{for} loop is a fundamental control-flow construct. However, you may find it easier to write loops using the \hlnum{mosaic} function \hlnum{do}, which simply repeats a statement and collects the results in a data frame. 
 
 <<eval=FALSE>>=
 sample_means50 = do(5000) * mean(sample(area, 50))
@@ -89,7 +89,7 @@ histogram(~result, data=sample_means50)
 
 
 
-If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the \hlargument{breaks} argument.
+If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the \hlkwc{breaks} argument.
 
 <<hist-breaks, eval=FALSE>>=
 # hist(sample_means50, breaks = 25)
@@ -102,10 +102,11 @@ Here we use R to take 5000 samples of size 50 from the population, calculate the
 How many elements are there in \hlstd{sample\_means50}?  Describe the sampling distribution, and be sure to specifically note its center.  Would you expect the distribution to change if we instead collected 50,000 sample means?
 \end{exercise}
 
+\paragraph{Nota Bene} The \hlnum{for} loop is an invaluable programming construction. However, everything that you need for this class can be done with \hlnum{do}. Please use whatever is most comfortable for you. 
+
 \subsection*{Interlude: The \texttt{for} loop}
 Let's take a break from the statistics for a moment to let that last block of code sink in.  You have just run your first for loop, a cornerstone of computer programming.  The idea behind the for loop is \emph{iteration}: it allows you to execute code as many times as you want without having to type out every iteration.  In the case above, we wanted to iterate the two lines of code inside the curly braces that take a random sample of size 50 from \hlstd{area} then save the mean of that sample into the \hlstd{sample\_means50} vector.  Without the for loop, this would be painful:
 
-\paragraph{Nota Bene} The \hlsymbol{for} loop is an invaluable programming construction. However, everything that you need for this class can be done with \hlsymbol{do}. Please use whatever is most comfortable for you. 
 <<loop-long, eval=FALSE>>=
 sample_means50 <- rep(0, 5000)
 
@@ -213,13 +214,13 @@ Next, combine these three $5000 \times 1$ data frames into one $15000 \times 1$ 
 samp.dist = rbind(sample_means10, sample_means50, sample_means100)
 @
 
-Then add a new column \hlsymbol{sample.size} to the resulting data frame that indicates the sample size in each case. This new variable is simply $10$ repeated 5000 times, followed by $50$ repeated 5000 times, followed by $100$ repeated 5000 times. The use of the \hlsymbol{factor} function will ensure that \hlsymbol{R} considers this to be a categorical variable, and not a numerical one. 
+Then add a new column \hlnum{sample.size} to the resulting data frame that indicates the sample size in each case. This new variable is simply $10$ repeated 5000 times, followed by $50$ repeated 5000 times, followed by $100$ repeated 5000 times. The use of the \hlnum{factor} function will ensure that \hlnum{R} considers this to be a categorical variable, and not a numerical one. 
 
 <<eval=FALSE>>=
 samp.dist$sample.size = factor(rep(c(10, 50, 100), each=5000))
 @
 
-Finally, draw the histogram using the \hlsymbol{|} formula notation. If you want to have the histograms stacked vertically rather than horizontally, use the \hlargument{layout} argument. 
+Finally, draw the histogram using the \hlnum{|} formula notation. If you want to have the histograms stacked vertically rather than horizontally, use the \hlkwc{layout} argument. 
 
 <<eval=FALSE>>=
 histogram(~result | sample.size, data=samp.dist, nint=20, layout=c(1,3))
