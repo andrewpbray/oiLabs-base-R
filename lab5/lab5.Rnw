@@ -61,8 +61,10 @@ Make a side-by-side boxplot of \hlstd{habit} and \hlstd{weight}. What does the p
 
 The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following function to split the \hlkwd{weight} variable into the \hlkwd{habit} groups, then take the mean of each using the \hlkwd{mean} function.
 
-<<by-means, eval=FALSE>>=
-by(nc$weight, nc$habit, mean)
+<<by-means, eval=FALSE, message=FALSE>>=
+# by(nc$weight, nc$habit, mean)
+require(mosaic)
+mean(weight ~ habit, data=nc)
 @
 % mean color of function
 
