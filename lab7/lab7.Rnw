@@ -39,8 +39,10 @@ What type of plot would you use to display the relationship between \hlkwd{runs}
 
 If the relationship looks linear, we can quantify the strength of the relationship with the correlation coefficient.
 
-<<cor, eval=FALSE>>=
-cor(mlb11$runs, mlb11$at_bats)
+<<cor, eval=FALSE, message=FALSE>>=
+# cor(mlb11$runs, mlb11$at_bats)
+require(mosaic)
+cor(runs ~ at_bats, data=mlb11)
 @
 
 \subsection*{Sum of squared residuals}
@@ -104,9 +106,10 @@ Fit a new model that uses \hlkwd{homeruns} to predict \hlkwd{runs}.  Using the e
 Let's create a scatterplot with the least squares line laid on top.
 
 <<reg-with-line, eval=FALSE>>=
-plot(mlb11$runs ~ mlb11$at_bats)
-
-abline(m1)
+# plot(mlb11$runs ~ mlb11$at_bats)
+# abline(m1)
+xyplot(runs ~ at_bats, data=mlb11)
+ladd(panel.abline(m1))
 @
 
 The function \hlkwd{abline} plots a line based on its slope and intercept.  Here, we used a shortcut by providing the model \hlkwd{m1}, which contains both parameter estimates. This line can be used to predict $y$ at any value of $x$.  When predictions are made for values of $x$ that are beyond the range of the observed data, it is referred to as \emph{extrapolation} and is not usually recommended.  However, predictions made within the range of the data are more reliable.  They're also used to compute the residuals.
@@ -125,9 +128,9 @@ To assess whether the linear model is reliable, we need to check for  (1) linear
 \item Linearity: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats.  Recall that any code following a \hlcom{\#} is intended to be a comment that helps understand the code but is ignored by R.
 
 <<residuals, eval=FALSE>>=
-plot(m1$residuals ~ mlb11$at_bats)
-
-abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
+# plot(m1$residuals ~ mlb11$at_bats)
+# abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
+xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
 @
 
 \begin{exercise}
@@ -137,15 +140,15 @@ Is there any apparent pattern in the residuals plot? What does this indicate abo
 \item Nearly normal residuals: To check this condition, we can look at a histogram
 
 <<hist-res, eval=FALSE>>=
-hist(m1$residuals)
+# hist(m1$residuals)
+histogram(~residuals(m1), fit="normal")
 @
 
 or a normal probability plot of the residuals.
 
 <<qq-res, eval=FALSE>>=
-qqnorm(m1$residuals)
-
-qqline(m1$residuals)  # adds diagonal line to the normal prob plot
+qqnorm(residuals(m1))
+qqline(residuals(m1))  # adds diagonal line to the normal prob plot
 @
 
 \begin{exercise}
