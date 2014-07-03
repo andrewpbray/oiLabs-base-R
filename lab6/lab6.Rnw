@@ -56,7 +56,7 @@ require(mosaic)
 tally(~response, data=us12, format="proportion")
 @
 
-\emph{Hint:} Consider using functions like \hlsymbol{tally, table, sum} and/or \hlsymbol{length}.
+\emph{Hint:} Consider using functions like \hlnum{tally, table, sum} and/or \hlnum{length}.
 
 %Note that the above piece of code first counts how many atheists there are in the sample, and then divides this number by the total sample size.
 \end{exercise}
@@ -141,7 +141,7 @@ Replicate the above simulation three more times but with modified sample sizes a
 
 Once you're done, you can reset the layout of the plotting window by using the command \hlkwd{par(}\hlkwc{mfrow = }\hlkwd{c(}\hlkwd{1,1}\hlkwd{))} or clicking on ``Clear All" above the plotting window (if using RStudio). Note that the latter will get rid of all your previous plots.
 
-Here is another way to perform the above simulations and compare the resulting histograms. Note that the code to generate the \hlsymbol{p\_hats} is exactly the same -- only the code to do the loop and draw the plots is different. 
+Here is another way to perform the above simulations and compare the resulting histograms. Note that the code to generate the \hlnum{p\_hats} is exactly the same -- only the code to do the loop and draw the plots is different. 
 
 <<eval=FALSE>>=
 n = 1040
