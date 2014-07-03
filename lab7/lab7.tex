@@ -92,7 +92,9 @@ If the relationship looks linear, we can quantify the strength of the relationsh
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{cor}\hlstd{(mlb11}\hlopt{$}\hlstd{runs, mlb11}\hlopt{$}\hlstd{at_bats)}
+\hlcom{# cor(mlb11$runs, mlb11$at_bats)}
+\hlkwd{require}\hlstd{(mosaic)}
+\hlkwd{cor}\hlstd{(runs} \hlopt{\mytilde} \hlstd{at_bats,} \hlkwc{data} \hlstd{= mlb11)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -181,9 +183,9 @@ Let's create a scatterplot with the least squares line laid on top.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{plot}\hlstd{(mlb11}\hlopt{$}\hlstd{runs} \hlopt{\mytilde} \hlstd{mlb11}\hlopt{$}\hlstd{at_bats)}
-
-\hlkwd{abline}\hlstd{(m1)}
+\hlcom{# plot(mlb11$runs \mytilde mlb11$at_bats) abline(m1)}
+\hlkwd{xyplot}\hlstd{(runs} \hlopt{\mytilde} \hlstd{at_bats,} \hlkwc{data} \hlstd{= mlb11)}
+\hlkwd{ladd}\hlstd{(}\hlkwd{panel.abline}\hlstd{(m1))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -207,9 +209,9 @@ To assess whether the linear model is reliable, we need to check for  (1) linear
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{plot}\hlstd{(m1}\hlopt{$}\hlstd{residuals} \hlopt{\mytilde} \hlstd{mlb11}\hlopt{$}\hlstd{at_bats)}
-
-\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{3}\hlstd{)}  \hlcom{# adds a horizontal dashed line at y = 0}
+\hlcom{# plot(m1$residuals \mytilde mlb11$at_bats) abline(h = 0, lty = 3) # adds a}
+\hlcom{# horizontal dashed line at y = 0}
+\hlkwd{xyplot}\hlstd{(}\hlkwd{residuals}\hlstd{(m1)} \hlopt{\mytilde} \hlstd{at_bats,} \hlkwc{data} \hlstd{= mlb11,} \hlkwc{type} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"p"}\hlstd{,} \hlstr{"r"}\hlstd{),} \hlkwc{lty} \hlstd{=} \hlnum{3}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -224,7 +226,8 @@ Is there any apparent pattern in the residuals plot? What does this indicate abo
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}
+\hlcom{# hist(m1$residuals)}
+\hlkwd{histogram}\hlstd{(}\hlopt{\mytilde}\hlkwd{residuals}\hlstd{(m1),} \hlkwc{fit} \hlstd{=} \hlstr{"normal"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -235,9 +238,8 @@ or a normal probability plot of the residuals.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{qqnorm}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}
-
-\hlkwd{qqline}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}  \hlcom{# adds diagonal line to the normal prob plot}
+\hlkwd{qqnorm}\hlstd{(}\hlkwd{residuals}\hlstd{(m1))}
+\hlkwd{qqline}\hlstd{(}\hlkwd{residuals}\hlstd{(m1))}  \hlcom{# adds diagonal line to the normal prob plot}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
