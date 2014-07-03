@@ -78,7 +78,8 @@ Excluding \hlstd{score}, select two other variables and describe their relations
 The fundamental phenomenon suggested by the study is that better looking teachers are evaluated more favorably.  Let's create a scatterplot to see if this appears to be the case:
 
 <<scatter-score-bty_avg, eval = FALSE>>=
-plot(evals$score ~ evals$bty_avg)
+# plot(evals$score ~ evals$bty_avg)
+plot(score ~ bty_avg, data=evals)
 @
 
 Before we draw conclusions about the trend, compare the number of observations in the data frame with the approximate number of points on the scatterplot.  Is anything awry?
@@ -100,8 +101,8 @@ Use residual plots to evaluate whether the conditions of least squares regressio
 The data set contains several variables on the beauty score of the professor: individual ratings from each of the six students who were asked to score the physical appearance of the professors and the average of these six scores. Let's take a look at the relationship between one of these scores and the average beauty score.
 
 <<bty-rel, eval = FALSE>>=
-plot(evals$bty_avg ~ evals$bty_f1lower)
-cor(evals$bty_avg, evals$bty_f1lower)
+plot(bty_avg ~ bty_f1lower, data=evals)
+with(evals, cor(bty_avg, bty_f1lower))
 @
 
 As expected the relationship is quite strong -- after all, the average score is calculated using the individual scores. We can actually take a look at the relationships between all beauty variables (columns 13 through 19) using the following command:
