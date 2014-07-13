@@ -91,13 +91,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol style="list-style-type: decimal">
 <li>Using the command below, create a new dataframe called <code>us12</code> that contains only the rows in <code>atheism</code> associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table 6? If not, why?</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">us12 =<span class="st"> </span><span class="kw">subset</span>(atheism, nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>year ==<span class="st"> &quot;2012&quot;</span>)</code></pre>
-<!--
-%sum(us12$response == "atheist") / length(us12$response)
--->
-
-
-<p><em>Hint:</em> Consider using functions like <code>tally</code>, <code>table</code>, <code>sum</code> and/or <code>length</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">us12 &lt;-<span class="st"> </span><span class="kw">subset</span>(atheism, atheism$nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>atheism$year ==
+<span class="st">&quot;2012&quot;</span>)</code></pre>
 </div>
 <div id="inference-on-proportions" class="section level2 unnumbered">
 <h2>Inference on proportions</h2>
@@ -124,7 +119,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
 p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)
 me &lt;-<span class="st"> </span><span class="dv">2</span>*<span class="kw">sqrt</span>(p*(<span class="dv">1</span> -<span class="st"> </span>p)/n)
-<span class="kw">xyplot</span>(me ~<span class="st"> </span>p, <span class="dt">ylab=</span><span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
+<span class="kw">plot</span>(me ~<span class="st"> </span>p, <span class="dt">ylab=</span><span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Describe the relationship between <code>p</code> and <code>me</code>.</li>
 </ol>
@@ -133,7 +128,7 @@ me &lt;-<span class="st"> </span><span class="dv">2</span>*<span class="kw">sqrt
 <h2>Success-failure condition</h2>
 <p>The textbook emphasizes that you must always check conditions before making inference. For inference on proportions, the sample proportion can be assumed to be nearly normal if it is based upon a random sample of independent observations and if both <span class="math">\(np \geq 10\)</span> and <span class="math">\(n(1 - p) \geq 10\)</span>. This rule of thumb is easy enough to follow, but it makes one wonder: what’s so special about the number 10? The short answer is: nothing. You could argue that we would be fine with 9 or that we really should be using 11. What is the “best” value for such a rule of thumb is, at least to some degree, arbitrary.</p>
 <!--
-%However, when $np$ and $n(1-p)$ reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.
+However, when $np$ and $n(1-p)$ reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.
 -->
 
 <p>We can investigate the interplay between <span class="math">\(n\)</span> and <span class="math">\(p\)</span> and the shape of the sampling distribution by using simulations. To start off, we simulate the process of drawing 5000 samples of size 1040 from a population with a true atheist proportion of <span class="math">\(0.1\)</span>. For each of the 5000 samples we compute <span class="math">\(\hat{p}\)</span> and then plot a histogram to visualize their distribution.</p>
@@ -153,17 +148,6 @@ for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
 <li><p>Replicate the above simulation three more times but with modified sample sizes and proportions: for <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.1\)</span>, <span class="math">\(n = 1040\)</span> and <span class="math">\(p = 0.02\)</span>, and <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.02\)</span>. Plot all four histograms together by running the <code>par(mfrow = c(2,2))</code> command before creating the histograms. You may need to expand the plot window to accommodate the larger two-by-two plot. Describe the three new sampling distributions. Based on these limited plots, how does <span class="math">\(n\)</span> appear to affect the distribution of <span class="math">\(\hat{p}\)</span>? How does <span class="math">\(p\)</span> affect the sampling distribution?</p></li>
 </ol>
 <p>Once you’re done, you can reset the layout of the plotting window by using the <code>par(mfrow = c(1,1))</code> command or clicking on “Clear All” above the plotting window (if using RStudio). Note that the latter will get rid of all your previous plots.</p>
-<p>Here is another way to perform the above simulations and compare the resulting histograms. Note that the code to generate the <span class="math">\(p_{hats}\)</span> is exactly the same – only the code to do the loop and draw the plots is different.</p>
-<pre class="sourceCode r"><code class="sourceCode r">n =<span class="st"> </span><span class="dv">1040</span>
-p =<span class="st"> </span><span class="fl">0.1</span>
-sim1 =<span class="st"> </span><span class="kw">do</span>(<span class="dv">1000</span>) *<span class="st"> </span><span class="kw">c</span>(<span class="dt">sample.size =</span> n, <span class="dt">proportion =</span> p, <span class="dt">p_hats =</span> <span class="kw">sum</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;atheist&quot;</span>, <span class="st">&quot;non_atheist&quot;</span>), n, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p)) ==<span class="st"> &quot;atheist&quot;</span>) /<span class="st"> </span>n)
-n =<span class="st"> </span><span class="dv">400</span>
-p =<span class="st"> </span><span class="fl">0.2</span>
-sim2 =<span class="st"> </span><span class="kw">do</span>(<span class="dv">1000</span>) *<span class="st"> </span><span class="kw">c</span>(<span class="dt">sample.size =</span> n, <span class="dt">proportion =</span> p, <span class="dt">p_hats =</span> <span class="kw">sum</span>(<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;atheist&quot;</span>, <span class="st">&quot;non_atheist&quot;</span>), n, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p)) ==<span class="st"> &quot;atheist&quot;</span>) /<span class="st"> </span>n)
-sim =<span class="st"> </span><span class="kw">rbind</span>(sim1, sim2)
-sim =<span class="st"> </span><span class="kw">transform</span>(sim, <span class="dt">sample.size =</span> <span class="kw">as.factor</span>(sample.size))
-sim =<span class="st"> </span><span class="kw">transform</span>(sim, <span class="dt">proportion =</span> <span class="kw">as.factor</span>(proportion))
-<span class="kw">histogram</span>(~p_hats |<span class="st"> </span>proportion +<span class="st"> </span>sample.size, <span class="dt">data=</span>sim)</code></pre>
 <ol style="list-style-type: decimal">
 <li>If you refer to Table 6, you’ll find that Australia has a sample proportion of 0.1 on a sample size of 1040, and that Ecuador has a sample proportion of 0.02 on 400 subjects. Let’s suppose for this exercise that these point estimates are actually the truth. Then given the shape of their respective sampling distributions, do you think it is sensible to proceed with inference and report margin of errors, as the reports does?</li>
 </ol>

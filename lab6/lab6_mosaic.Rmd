@@ -67,9 +67,17 @@ United States. Next, calculate the proportion of atheist responses. Does
 it agree with the percentage in Table 6? If not, why?
 
 ```{r us-atheism, eval=FALSE}
-us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year ==
-"2012")
+us12 = subset(atheism, nationality == "United States" & year == "2012")
 ```
+<!--
+%sum(us12$response == "atheist") / length(us12$response)
+-->
+```{r echo=FALSE, eval=FALSE}
+require(mosaic)
+tally(~response, data=us12, format="proportion")
+```
+
+*Hint:* Consider using functions like `tally`, `table`, `sum` and/or `length`.
 
 Inference on proportions {#inference-on-proportions .unnumbered}
 ------------------------
@@ -146,7 +154,7 @@ two vectors against each other to reveal their relationship.
 n <- 1000
 p <- seq(0, 1, 0.01)
 me <- 2*sqrt(p*(1 - p)/n)
-plot(me ~ p, ylab="Margin of Error", xlab="Population Proportion")
+xyplot(me ~ p, ylab="Margin of Error", xlab="Population Proportion")
 ```
 
   1. Describe the relationship between `p` and `me`.
@@ -165,7 +173,7 @@ we really should be using 11. What is the “best” value for such a rule
 of thumb is, at least to some degree, arbitrary.
 
 <!--
-However, when $np$ and $n(1-p)$ reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.
+%However, when $np$ and $n(1-p)$ reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.
 -->
 
 We can investigate the interplay between $n$ and $p$ and the shape of
@@ -215,6 +223,23 @@ Once you're done, you can reset the layout of the plotting window by
 using the `par(mfrow = c(1,1))` command or clicking on "Clear All" above the plotting
 window (if using RStudio). Note that the latter will get rid of all your
 previous plots.
+
+Here is another way to perform the above simulations and compare the
+resulting histograms. Note that the code to generate the $p_{hats}$ is exactly the
+same – only the code to do the loop and draw the plots is different.
+
+```{r eval=FALSE}
+n = 1040
+p = 0.1
+sim1 = do(1000) * c(sample.size = n, proportion = p, p_hats = sum(sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1-p)) == "atheist") / n)
+n = 400
+p = 0.2
+sim2 = do(1000) * c(sample.size = n, proportion = p, p_hats = sum(sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1-p)) == "atheist") / n)
+sim = rbind(sim1, sim2)
+sim = transform(sim, sample.size = as.factor(sample.size))
+sim = transform(sim, proportion = as.factor(proportion))
+histogram(~p_hats | proportion + sample.size, data=sim)
+```
 
   1. If you refer to Table 6, you'll find that Australia has a sample
 proportion of 0.1 on a sample size of 1040, and that Ecuador has a
