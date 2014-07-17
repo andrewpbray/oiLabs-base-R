@@ -70,7 +70,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <div id="hot-hands" class="section level2">
 <h2>Hot Hands</h2>
-<p>Basketball players who make several baskets in succession are described as having a <em>hot hand</em>. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and showed that successive shots are independent events. This paper started a great controversy that continues to this day, as you can see by Googling <em>hot hand basketball</em>.</p>
+<p>Basketball players who make several baskets in succession are described as having a <em>hot hand</em>. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and <a href="http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf">showed that successive shots are independent events</a>. This paper started a great controversy that continues to this day, as you can see by Googling <em>hot hand basketball</em>.</p>
 <p>We do not expect to resolve this controversy today. However, in this lab we’ll apply one approach to answering questions like this. The goals for this lab are to (1) think about the effects of independent and dependent events, (2) learn how to simulate shooting streaks in R, and (3) to compare a simulation to actual data in order to determine if the hot hand phenomenon appears to be real.</p>
 </div>
 <div id="saving-your-code" class="section level2">
@@ -142,7 +142,7 @@ H M | M | H H M | M | M | M
 <span class="kw">table</span>(sim_fair_coin)</code></pre>
 <p>Since there are only two elements in <code>outcomes</code>, the probability that we <code>flip</code> a coin and it lands heads is 0.5. Say we’re trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called <code>prob</code>, which provides a vector of two probability weights.</p>
 <pre class="sourceCode r"><code class="sourceCode r">sim_unfair_coin &lt;-<span class="st"> </span><span class="kw">sample</span>(outcomes, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</code></pre>
-<p><code>prob=c(0.2,0.8)</code> indicates that for the two elements in the <code>outcomes</code> vector, we want to select the first one, <code>heads</code>, with probability 0.2 and the second one, <code>tails</code> with probability 0.8.</p>
+<p><code>prob=c(0.2,0.8)</code> indicates that for the two elements in the <code>outcomes</code> vector, we want to select the first one, <code>heads</code>, with probability 0.2 and the second one, <code>tails</code> with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled <code>head</code> and 8 chips <code>tail</code>. Therefore at each draw, the probability of drawing a chip that says <code>head</code> is 20%, and <code>tail</code> is 80%.</p>
 <ol style="list-style-type: decimal">
 <li>In your simulation of flipping the unfair coin 100 times, how many flips came up heads?</li>
 </ol>

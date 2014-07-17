@@ -9,7 +9,7 @@ output:
 
 ## Hot Hands
 
-Basketball players who make several baskets in succession are described as having a *hot hand*. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and showed that successive shots are independent events\symbolfootnote[2]{*The Hot Hand in Basketball: On the Misperception of Random Sequences*, Gilovich, T., Vallone, R., Tversky, A., 1985. Cognitive Psychology, 17, pp. 295-314.}. This paper started a great controversy that continues to this day, as you can see by Googling *hot hand basketball*.
+Basketball players who make several baskets in succession are described as having a *hot hand*. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and [showed that successive shots are independent events](http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf). This paper started a great controversy that continues to this day, as you can see by Googling *hot hand basketball*.
 
 We do not expect to resolve this controversy today. However, in this lab we'll apply one approach to answering questions like this. The goals for this lab are to (1) think about the effects of independent and dependent events, (2) learn how to simulate shooting streaks in R, and (3) to compare a simulation to actual data in order to determine if the hot hand phenomenon appears to be real.
 
@@ -117,7 +117,7 @@ Since there are only two elements in `outcomes`, the probability that we `flip` 
 sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob = c(0.2, 0.8))
 ```
 
-`prob=c(0.2,0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8.\symbolfootnote[2]{Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled `head` and 8 chips `tail`. Therefore at each draw, the probability of drawing a chip that says `head` is 20%, and `tail` is 80%.}
+`prob=c(0.2,0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled `head` and 8 chips `tail`. Therefore at each draw, the probability of drawing a chip that says `head` is 20%, and `tail` is 80%.
 
 1. In your simulation of flipping the unfair coin 100 times, how many flips came up heads?
 
