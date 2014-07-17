@@ -254,9 +254,12 @@ boxplot(cdc$height ~ cdc$gender)
 
 The notation here is new. The `~` character can be read `versus` or `as a function of`. So we're asking R to give us a box plots of heights where the groups are defined by gender. 
 
-Next let's consider a new variable that doesn't show up directly in this data set: Body Mass Index (BMI). BMI is a weight to height ratio and can be calculated as.
+Next let's consider a new variable that doesn't show up directly in this data set: [Body Mass Index (BMI)](http://en.wikipedia.org/wiki/Body_mass_index). BMI is a weight to height ratio and can be calculated as:
 
-\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703\symbolfootnote[2]{703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds)} \]
+\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]
+
+703 is the approximate conversion factor to change units from metric (meters and 
+kilograms) to imperial (inches and pounds).
 
 The following two lines first make a new object called `bmi` and then creates box plots of these values, defining groups by the variable `cdc$genhlth`.
 
