@@ -1,10 +1,11 @@
 ---
 title: "Lab 0 - Introduction to R and RStudio"
 output:
+  pdf_document: default
   html_document:
-    theme: cerulean
-    highlight: pygments
     css: ../lab.css
+    highlight: pygments
+    theme: cerulean
 ---
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using throughout the course both to learn the statistical concepts discussed in the texbook and also to analyze real data and come to informed conclusions.  To straighten out which is which: R is the name of the programming language itself and RStudio is a convenient interface.
