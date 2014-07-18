@@ -223,14 +223,14 @@ from 2005 and 2012 for 39 countries.
     always, write out the hypotheses for any tests you conduct and outline the
     status of the conditions for inference.
 
-    +   Is there convincing evidence that Spain has seen a change in its 
-        atheism index between 2005 and 2012?\
-        *Hint:* Create a new data set for respondents from Spain. Form
-        confidence intervals for the true proportion of athiests in both
-        years, and determine whether they overlap.
+    **a.** Is there convincing evidence that Spain has seen a change in its 
+    atheism index between 2005 and 2012?\
+    *Hint:* Create a new data set for respondents from Spain. Form
+    confidence intervals for the true proportion of athiests in both
+    years, and determine whether they overlap.
 
-    +   Is there convincing evidence that the United States has seen a
-        change in its atheism index between 2005 and 2012?
+    **b.** Is there convincing evidence that the United States has seen a
+    change in its atheism index between 2005 and 2012?
 
 -   If in fact there has been no change in the atheism index in the countries 
     listed in Table 4, in how many of those countries would you expect to 

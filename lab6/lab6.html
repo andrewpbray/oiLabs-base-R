@@ -91,8 +91,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol start="4" style="list-style-type: decimal">
 <li>Using the command below, create a new dataframe called <code>us12</code> that contains only the rows in <code>atheism</code> associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table 6? If not, why?</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">us12 &lt;-<span class="st"> </span><span class="kw">subset</span>(atheism, atheism$nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>atheism$year ==
-<span class="st">&quot;2012&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">us12 &lt;-<span class="st"> </span><span class="kw">subset</span>(atheism, atheism$nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>atheism$year ==<span class="st"> &quot;2012&quot;</span>)</code></pre>
 </div>
 <div id="inference-on-proportions" class="section level2">
 <h2>Inference on proportions</h2>
@@ -154,10 +153,8 @@ for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
 <p>The question of atheism was asked by WIN-Gallup International in a similar survey that was conducted in 2005. (We assume here that samplesizes have remained the same.) Table 4 on page 13 of the report summarizes survey results from 2005 and 2012 for 39 countries.</p>
 <ul>
 <li><p>Answer the following two questions using the <code>inference</code> function. As always, write out the hypotheses for any tests you conduct and outline the status of the conditions for inference.</p>
-<ul>
-<li><p>Is there convincing evidence that Spain has seen a change in its atheism index between 2005 and 2012?<br /> <em>Hint:</em> Create a new data set for respondents from Spain. Form confidence intervals for the true proportion of athiests in both years, and determine whether they overlap.</p></li>
-<li><p>Is there convincing evidence that the United States has seen a change in its atheism index between 2005 and 2012?</p></li>
-</ul></li>
+<p><strong>a.</strong> Is there convincing evidence that Spain has seen a change in its atheism index between 2005 and 2012?<br /><em>Hint:</em> Create a new data set for respondents from Spain. Form confidence intervals for the true proportion of athiests in both years, and determine whether they overlap.</p>
+<p><strong>b.</strong> Is there convincing evidence that the United States has seen a change in its atheism index between 2005 and 2012?</p></li>
 <li><p>If in fact there has been no change in the atheism index in the countries listed in Table 4, in how many of those countries would you expect to detect a change (at a significance level of 0.05) simply by chance?<br /> <em>Hint:</em> Look in the textbook index under Type 1 error.</p></li>
 <li><p>Suppose you’re hired by the local government to estimate the proportion of residents that attend a religious service on a weekly basis. According to the guidelines, the estimate must have a margin of error no greater than 1% with 95% confidence. You have no idea what to expect for <span class="math">\(p\)</span>. How many people would you have to sample to ensure that you are within the guidelines?<br /> <em>Hint:</em> Refer to your plot of the relationship between <span class="math">\(p\)</span> and margin of error. Do not use the data set to answer this question.</p></li>
 <li><p>What concepts from the textbook are covered in this lab? What concepts, if any, are not covered in the textbook? Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems? Be specific in your answer.</p></li>
