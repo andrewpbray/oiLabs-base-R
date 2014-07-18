@@ -65,8 +65,7 @@ the same number using the `atheism` data.
     responses. Does it agree with the percentage in Table 6? If not, why?
 
 ```{r us-atheism, eval=FALSE}
-us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year ==
-"2012")
+us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year == "2012")
 ```
 
 ## Inference on proportions

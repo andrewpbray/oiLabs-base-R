@@ -24,6 +24,7 @@ To Do list for Markdown Conversion
     
 6.  Wrap all lines, text and code, at 80 characters.  The counter can be found 
     in the lower left corner of the editor.  Long urls or strings that should 
-    not be segmented can overflow.
+    not be segmented can overflow as can lines of code that become confusing 
+    when broken up.
     
 7.  Force a line break with a backslash (\\).
