@@ -11,7 +11,7 @@ To Do list for Markdown Conversion
 
 2.  Exercises are ordered lists (1., 2., 3., ...), not lazy lists 
     (1., 1., 1., ...) with two spaces after the dot (or one space for numbers 
-    > 9, < 100).  Subsequent lines are hanging-indented four spaces.
+    \> 9, < 100).  Subsequent lines are hanging-indented four spaces.
     
 3.  On Your Own questions are unordered lists (-, -, -, ...) three spaces 
     following each -.
