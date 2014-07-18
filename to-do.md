@@ -13,24 +13,31 @@ To Do list for Markdown Conversion
 
 ## Lab Style Guide
 
--   Section titles are formatted as header 2 (##) and followed by a blank line.
+-   Section titles are formatted as header 2, `##`, and followed by a blank 
+    line.
 
--   Exercises are ordered lists (1., 2., 3., ...), not lazy lists 
-    (1., 1., 1., ...) with two spaces after the dot (or one space for numbers 
-    \> 9, < 100).  Subsequent lines are hanging-indented four spaces.
+-   Exercises are ordered lists (`1.`, `2.`, `3.`, ...), not lazy lists 
+    (`1.`, `1.`, `1.`, ...) with two spaces after the dot (or one space for 
+    numbers \> 9, < 100).  Subsequent lines are hanging-indented four spaces.
     
--   On Your Own questions are unordered lists (-, -, -, ...) three spaces 
-    following each -.
+-   On Your Own questions are unordered lists (`-`, `-`, `-`, ...) with three 
+    spaces following each `-`.
+
+-   For nested lists, see the OYO in lab 6 for an example of the preferred 
+    method.
     
 -   All lists items should be followed by a blank line.
 
 -   In-text numbers and basic math operators are not marked up. Latex is used 
-    for mathematical variables (e.g. n, p) and more complex symbols and 
-    equations.
+    for mathematical variables (e.g. `$nS`, `$p$`) and more complex symbols 
+    and equations.
     
 -   Wrap all lines, text and code, at 80 characters.  The counter can be found 
     in the lower left corner of the editor.  Long urls or strings that should 
     not be segmented can overflow as can lines of code that become confusing 
     when broken up.
     
--   Force a line break with a backslash (\\).
+-   Force a line break with a backslash `\\`.
+
+-   The OYO section should be offset with a horizontal rule that precedes it. 
+    For this, use `* * *`.

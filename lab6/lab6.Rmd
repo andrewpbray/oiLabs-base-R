@@ -94,7 +94,6 @@ inference(us12$response, est = "proportion", type = "ci", method = "theoretical"
           success = "atheist")
 ```
 
-
 Note that since the goal is to construct an interval estimate for a 
 proportion, it's necessary to specify what constitutes a "success", which here 
 is a response of `atheist`.
@@ -212,6 +211,7 @@ your previous plots.
     their respective sampling distributions, do you think it is sensible to 
     proceed with inference and report margin of errors, as the reports does?
 
+* * *
 ## On your own
 
 The question of atheism was asked by WIN-Gallup International in a similar 

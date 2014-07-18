@@ -265,6 +265,7 @@ plotted with the same limits on the x-axis.
 
 6.  When the sample size is larger, what happens to the center?  What about the spread?
 
+* * *
 ## On your own
 
 So far, we have only focused on estimating the mean living area in homes in 

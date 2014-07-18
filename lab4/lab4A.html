@@ -73,15 +73,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>The data</h2>
 <p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the data.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
-
 <span class="kw">load</span>(<span class="st">&quot;ames.RData&quot;</span>)</code></pre>
 <p>We see that there are quite a few variables in the data set, enough to do a very in-depth analysis. For this lab, we’ll restrict our attention to just two of the variables: the above ground living area of the house in square feet (<code>Gr.Liv.Area</code>) and the sale price (<code>SalePrice</code>). To save some effort throughout the lab, create two variables with short names that represent these two variables.</p>
 <pre class="sourceCode r"><code class="sourceCode r">area &lt;-<span class="st"> </span>ames$Gr.Liv.Area
-
 price &lt;-<span class="st"> </span>ames$SalePrice</code></pre>
 <p>Let’s look at the distribution of area in our population of home sales by calculating a few summary statistics and making a histogram.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(area)
-
 <span class="kw">hist</span>(area)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Describe this population distribution.</li>
@@ -180,6 +177,7 @@ xlimits &lt;-<span class="st"> </span><span class="kw">range</span>(sample_means
 <ol start="6" style="list-style-type: decimal">
 <li>When the sample size is larger, what happens to the center? What about the spread?</li>
 </ol>
+<hr />
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On your own</h2>
