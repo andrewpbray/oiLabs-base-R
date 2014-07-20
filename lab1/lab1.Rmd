@@ -121,11 +121,6 @@ We could have accomplished this in two steps by saving the table in one line and
 
 We mentioned that R stores data in data frames, which you might think of as a type of spreadsheet. Each row is a different observation (a different respondent) and each column is a different variable (the first is `genhlth`, the second `exerany` and so on). We can see the size of the data frame next to the object name in the workspace or we can type
 
-
-
-
-
-
 ```{rdim, eval=FALSE}
 dim(cdc)
 ```
@@ -252,7 +247,7 @@ Confirm that the median and upper and lower quartiles reported in the numerical 
 boxplot(cdc$height ~ cdc$gender)
 ```
 
-The notation here is new. The `~` character can be read `versus` or `as a function of`. So we're asking R to give us a box plots of heights where the groups are defined by gender. 
+The notation here is new. The `~` character can be read *versus* or *as a function of*. So we're asking R to give us a box plots of heights where the groups are defined by gender. 
 
 Next let's consider a new variable that doesn't show up directly in this data set: [Body Mass Index (BMI)](http://en.wikipedia.org/wiki/Body_mass_index). BMI is a weight to height ratio and can be calculated as:
 
@@ -291,15 +286,23 @@ Note that you can flip between plots that you've created by clicking the forward
 
 At this point, we've done a good first pass at analyzing the information in the BRFSS questionnaire.  We've found an interesting association between smoking and gender, and we can say something about the relationship between people's assessment of their general health and their own BMI.  We've also picked up essential computing tools -- summary statistics, subsetting, and plots -- that will serve us well throughout this course.
 
+* * *
+
 ## On Your Own
 
-1. Make a scatterplot of weight versus desired weight. Describe the relationship between these two variables.
-1. Let's consider a new variable: the difference between desired weight (`wtdesire`) and current weight (`weight`). Create this new variable by subtracting the two columns in the data frame and assigning them to a new object called `wdiff`.
-1. What type of data is `wdiff`? If an observation `wdiff` is 0, what does this mean about the person's weight and desired weight. What if `wdiff` is positive or negative?
-1. Describe the distribution of `wdiff` in terms of its center, shape, and spread, including any plots you use. What does this tell us about how people feel about their current weight?
-1. Using numerical summaries and a side-by-side box plot, determine if men tend to view their weight differently than women.
-1. Now it's time to get creative. Find the mean and standard deviation of `weight` and determine what proportion of the weights are within one standard deviation of the mean.
-1. What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
+-   Make a scatterplot of weight versus desired weight. Describe the relationship between these two variables.
+
+-   Let's consider a new variable: the difference between desired weight (`wtdesire`) and current weight (`weight`). Create this new variable by subtracting the two columns in the data frame and assigning them to a new object called `wdiff`.
+
+-   What type of data is `wdiff`? If an observation `wdiff` is 0, what does this mean about the person's weight and desired weight. What if `wdiff` is positive or negative?
+
+-   Describe the distribution of `wdiff` in terms of its center, shape, and spread, including any plots you use. What does this tell us about how people feel about their current weight?
+
+-   Using numerical summaries and a side-by-side box plot, determine if men tend to view their weight differently than women.
+
+-   Now it's time to get creative. Find the mean and standard deviation of `weight` and determine what proportion of the weights are within one standard deviation of the mean.
+
+-   What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.
