@@ -33,6 +33,13 @@ To Do list for Markdown Conversion
     not be segmented can overflow as can lines of code that become confusing 
     when broken up.
     
+-   In-text numbers and basic math operators are not marked up. Latex is used 
+    for in-line mathematical variables (e.g. `$nS`, `$p$`) and more complex 
+    symbols.  Full equations should be displayed on a separate line with `\[` 
+    and `\]`.
+    
+-   Any in-text code is marked up with backticks.
+    
 -   Force a line break with a backslash `\\`.
 
 -   The OYO section should be offset with a horizontal rule that precedes it. 
