@@ -30,7 +30,7 @@ To Do list for Markdown Conversion
 
 -   In-text numbers and basic math operators are not marked up. Latex is used 
     for mathematical variables (e.g. `$nS`, `$p$`) and more complex symbols 
-    and equations.
+    and equations. But backticks (`) are still used for code.
     
 -   Wrap all lines, text and code, at 80 characters.  The counter can be found 
     in the lower left corner of the editor.  Long urls or strings that should 

@@ -176,7 +176,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cdc$height)</code></pre>
 <p>Confirm that the median and upper and lower quartiles reported in the numerical summary match those in the graph. The purpose of a boxplot is to provide a thumbnail sketch of a variable for the purpose of comparing across several categories. So we can, for example, compare the heights of men and women with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(cdc$height ~<span class="st"> </span>cdc$gender)</code></pre>
-<p>The notation here is new. The <code>~</code> character can be read <code>versus</code> or <code>as a function of</code>. So we’re asking R to give us a box plots of heights where the groups are defined by gender.</p>
+<p>The notation here is new. The <code>~</code> character can be read <em>versus</em> or <em>as a function of</em>. So we’re asking R to give us a box plots of heights where the groups are defined by gender.</p>
 <p>Next let’s consider a new variable that doesn’t show up directly in this data set: <a href="http://en.wikipedia.org/wiki/Body_mass_index">Body Mass Index (BMI)</a>. BMI is a weight to height ratio and can be calculated as:</p>
 <p><span class="math">\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]</span></p>
 <p>703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).</p>
@@ -196,18 +196,19 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="kw">hist</span>(bmi, <span class="dt">breaks =</span> <span class="dv">50</span>)</code></pre>
 <p>Note that you can flip between plots that you’ve created by clicking the forward and backward arrows in the lower right region of RStudio, just above the plots. How do these two histograms compare?</p>
 <p>At this point, we’ve done a good first pass at analyzing the information in the BRFSS questionnaire. We’ve found an interesting association between smoking and gender, and we can say something about the relationship between people’s assessment of their general health and their own BMI. We’ve also picked up essential computing tools – summary statistics, subsetting, and plots – that will serve us well throughout this course.</p>
+<hr />
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On Your Own</h2>
-<ol style="list-style-type: decimal">
-<li>Make a scatterplot of weight versus desired weight. Describe the relationship between these two variables.</li>
-<li>Let’s consider a new variable: the difference between desired weight (<code>wtdesire</code>) and current weight (<code>weight</code>). Create this new variable by subtracting the two columns in the data frame and assigning them to a new object called <code>wdiff</code>.</li>
-<li>What type of data is <code>wdiff</code>? If an observation <code>wdiff</code> is 0, what does this mean about the person’s weight and desired weight. What if <code>wdiff</code> is positive or negative?</li>
-<li>Describe the distribution of <code>wdiff</code> in terms of its center, shape, and spread, including any plots you use. What does this tell us about how people feel about their current weight?</li>
-<li>Using numerical summaries and a side-by-side box plot, determine if men tend to view their weight differently than women.</li>
-<li>Now it’s time to get creative. Find the mean and standard deviation of <code>weight</code> and determine what proportion of the weights are within one standard deviation of the mean.</li>
-<li>What concepts from the textbook are covered in this lab? What concepts, if any, are not covered in the textbook? Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems? Be specific in your answer.</li>
-</ol>
+<ul>
+<li><p>Make a scatterplot of weight versus desired weight. Describe the relationship between these two variables.</p></li>
+<li><p>Let’s consider a new variable: the difference between desired weight (<code>wtdesire</code>) and current weight (<code>weight</code>). Create this new variable by subtracting the two columns in the data frame and assigning them to a new object called <code>wdiff</code>.</p></li>
+<li><p>What type of data is <code>wdiff</code>? If an observation <code>wdiff</code> is 0, what does this mean about the person’s weight and desired weight. What if <code>wdiff</code> is positive or negative?</p></li>
+<li><p>Describe the distribution of <code>wdiff</code> in terms of its center, shape, and spread, including any plots you use. What does this tell us about how people feel about their current weight?</p></li>
+<li><p>Using numerical summaries and a side-by-side box plot, determine if men tend to view their weight differently than women.</p></li>
+<li><p>Now it’s time to get creative. Find the mean and standard deviation of <code>weight</code> and determine what proportion of the weights are within one standard deviation of the mean.</p></li>
+<li><p>What concepts from the textbook are covered in this lab? What concepts, if any, are not covered in the textbook? Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems? Be specific in your answer.</p></li>
+</ul>
 <div id="license">
 This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was adapted for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.
 </div>

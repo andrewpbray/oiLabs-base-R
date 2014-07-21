@@ -112,17 +112,11 @@ H M | M | H H M | M | M | M
 <p>To answer these questions, let’s return to the idea of <em>independence</em>. Two processes are independent if the outcome of one process doesn’t effect the outcome of the second. If each shot that a player takes is an independent process, having made or missed your first shot will not affect the probability that you will make or miss your second shot.</p>
 <p>A shooter with a hot hand will have shots that are <em>not</em> independent of one another. Specifically, if the shooter makes his first shot, the hot hand model says he will have a <em>higher</em> probability of making his second shot.</p>
 <p>Let’s suppose for a moment that the hot hand model is valid for Kobe. During his career, the percentage of time Kobe makes a basket (i.e. his shooting percentage) is about 45%, or in probability notation,</p>
-<div align="center">
-<em>P(shot 1 = H) = 0.45</em>
-</div>
+<p><span class="math">\[ P(\textrm{shot 1 = H}) = 0.45 \]</span></p>
 <p>If he makes the first shot and has a hot hand (<em>not</em> independent shots), then the probability that he makes his second shot would go up to, let’s say, 60%,</p>
-<div align="center">
-<em>P(shot 2 = H | shot 1 = H) = 0.60</em>
-</div>
+<p><span class="math">\[ P(\textrm{shot 2 = H} \, | \, \textrm{shot 1 = H}) = 0.60 \]</span></p>
 <p>As a result of these increased probabilites, you’d expect Kobe to have longer streaks. Compare this to the skeptical perspective where Kobe does <em>not</em> have a hot hand, where each shot is independent of the next. If he hit his first shot, the probability that he makes the second is still 0.45.</p>
-<div align="center">
-<em>P(shot 2 = H | shot 1 = H) = 0.45</em>
-</div>
+<p><span class="math">\[ P(\textrm{shot 2 = H} \, | \, \textrm{shot 1 = H}) = 0.45 \]</span></p>
 <p>In other words, making the first shot did nothing to effect the probability that he’d make his second shot. If Kobe’s shots are independent, then he’d have the same probability of hitting every shot regardless of his past shots: 45%.</p>
 <p>Now that we’ve phrased the situation in terms of independent shots, let’s return to the question: how do we tell if Kobe’s shooting streaks are long enough to indicate that he has hot hands? We can compare his streak lengths to someone without hot hands: an independent shooter.</p>
 </div>
@@ -166,18 +160,19 @@ sim_basket &lt;-<span class="st"> </span><span class="kw">sample</span>(outcomes
 
 sim_basket</code></pre>
 <p>Both data sets represent the results of 133 shot attempts, each with the same shooting percentage of 45%. We know that our simulated data is from a shooter that has independent shots. That is, we know the simulated shooter does not have a hot hand.</p>
+<hr />
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On your own</h2>
 <div id="comparing-kobe-bryant-to-the-independent-shooter" class="section level3">
 <h3>Comparing Kobe Bryant to the Independent Shooter</h3>
 <p>Using <code>calc_streak</code>, compute the streak lengths of <code>sim_basket</code>.</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li><p>Describe the distribution of streak lengths. What is the typical streak length for this simulated independent shooter with a 45% shooting percentage? How long is the player’s longest streak of baskets in 133 shots?</p></li>
 <li><p>If you were to run the simulation of the independent shooter a second time, how would you expect its streak distribution to compare to the distribution from the question above? Exactly the same? Somewhat similar? Totally different? Explain your reasoning.</p></li>
-<li><p>How does Kobe Bryant’s distribution of streak lengths from page~ compare to the distribution of streak lengths for the simulated shooter? Using this comparison, do you have evidence that the hot hand model fits Kobe’s shooting patterns? Explain.</p></li>
+<li><p>How does Kobe Bryant’s distribution of streak lengths compare to the distribution of streak lengths for the simulated shooter? Using this comparison, do you have evidence that the hot hand model fits Kobe’s shooting patterns? Explain.</p></li>
 <li><p>What concepts from the textbook are covered in this lab? What concepts, if any, are not covered in the textbook? Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems? Be specific in your answer.</p></li>
-</ol>
+</ul>
 <div id="license">
 This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was adapted for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.
 </div>
