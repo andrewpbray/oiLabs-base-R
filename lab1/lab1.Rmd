@@ -11,7 +11,7 @@ Some define Statistics as the field that focuses on turning information into kno
 
 ## Getting started
 
-The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site ([*http://www.cdc.gov/brfss*](http://www.cdc.gov/brfss)) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.
+The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site ([http://www.cdc.gov/brfss](http://www.cdc.gov/brfss)) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.
 
 We will focus on a random sample of 20,000 people from the BRFSS survey conducted in 2000. While there are over 200  variables in this data set, we will work with a small subset.
 

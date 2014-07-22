@@ -41,3 +41,5 @@ To Do list for Markdown Conversion
 
 -   The OYO section should be offset with a horizontal rule that precedes it. 
     For this, use `* * *`.
+  
+-   Don't embed links in text. Do this: "The BRFSS Web site ([http://www.cdc.gov/brfss](http://www.cdc.gov/brfss))...". Not this: "The [BRFSS Web site](http://www.cdc.gov/brfss)...". If teachers print the lab out, we want the links to be visible.

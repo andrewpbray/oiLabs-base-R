@@ -55,3 +55,7 @@ div#license {
 ul {
     list-style-type:decimal;
 }
+
+hr {
+    border: 1px solid #357FAA;
+}
