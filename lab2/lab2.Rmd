@@ -9,7 +9,7 @@ output:
 
 ## Hot Hands
 
-Basketball players who make several baskets in succession are described as having a *hot hand*. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and [showed that successive shots are independent events](http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf). This paper started a great controversy that continues to this day, as you can see by Googling *hot hand basketball*.
+Basketball players who make several baskets in succession are described as having a *hot hand*. Fans and players have long believed in the hot hand phenomenon, which refutes the assumption that each shot is independent of the next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence that contradicted this belief and showed that successive shots are independent events ([http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf](http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf)). This paper started a great controversy that continues to this day, as you can see by Googling *hot hand basketball*.
 
 We do not expect to resolve this controversy today. However, in this lab we'll apply one approach to answering questions like this. The goals for this lab are to (1) think about the effects of independent and dependent events, (2) learn how to simulate shooting streaks in R, and (3) to compare a simulation to actual data in order to determine if the hot hand phenomenon appears to be real.
 
@@ -35,7 +35,7 @@ Just looking at the string of hits and misses, it can be difficult to gauge whet
 
 For example, in Game 1 Kobe had the following sequence of hits and misses from his nine shot attempts in the first quarter:
 
-<div align="center">H M | M | H H M | M | M | M</div>
+\[ \textrm{H M | M | H H M | M | M | M} \]
 
 To verify this use the following command:
 
