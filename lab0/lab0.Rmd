@@ -74,8 +74,9 @@ Notice that the way R has printed these data is different. When we looked at the
 
 R has some powerful functions for making graphics. We can create a simple plot of the number of girls baptized per year with the command
 
-```{r plot-girls-vs-year, eval=FALSE}
-plot(x = arbuthnot$year, y = arbuthnot$girls)
+```{r plot-girls-vs-year, eval=FALSE, message=FALSE}
+require(mosaic)
+xyplot(girls ~ year, data=arbuthnot)
 ```
 
 By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the *Plots* tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with two arguments separated by a comma.  The first argument in the plot function specifies the variable for the x-axis and the second for the y-axis. If we wanted to connect the data points with lines, we could add a third argument, the letter `l` for **l**ine.
