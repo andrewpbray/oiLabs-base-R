@@ -1,17 +1,5 @@
-To Do list for Markdown Conversion
-==================================
-
-1.  Switch to using only a single ordered list for both exercises and OYO?
-
-2.  Add Labs 4B, 5, 7, 8.
-
-3.  Ensure style compliance of Labs 0, 1, 2, 3.
-
-4.  Final review of Labs 4A, 6.
-
-
-
-## Lab Style Guide
+Lab Style Guide
+===============
 
 -   Section titles are formatted as header 2, `##`, and followed by a blank 
     line.
