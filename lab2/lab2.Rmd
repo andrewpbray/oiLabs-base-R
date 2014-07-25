@@ -15,7 +15,9 @@ We do not expect to resolve this controversy today. However, in this lab we'll a
 
 ## Saving your code
 
-You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the \menu{Files} tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
+Click on `File -> New -> R Script`. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the `Run` button, or highlight the code and hit `command+enter` or a mac or `control+enter` on a PC.
+
+You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the `Files` tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
 
 ## Getting Started
 
@@ -71,7 +73,7 @@ Let's suppose for a moment that the hot hand model is valid for Kobe. During his
 
 \[ P(\textrm{shot 1 = H}) = 0.45 \]
 
-If he makes the first shot and has a hot hand (*not* independent shots), then the probability that he makes his second shot would go up to, let's say, 60\%,
+If he makes the first shot and has a hot hand (*not* independent shots), then the probability that he makes his second shot would go up to, let's say, 60%,
 
 \[ P(\textrm{shot 2 = H} \, | \, \textrm{shot 1 = H}) = 0.60 \]
 
