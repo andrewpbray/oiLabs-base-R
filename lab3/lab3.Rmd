@@ -15,7 +15,6 @@ This week we'll be working with measurements of body dimensions.  This data set 
 
 ```{r load-data, eval=FALSE}
 download.file("http://www.openintro.org/stat/data/bdims.RData", destfile = "bdims.RData")
-
 load("bdims.RData")
 ```
 
@@ -31,11 +30,10 @@ Since males and females tend to have different body dimensions, it will be usefu
 
 ```{r male-female, eval=FALSE}
 mdims <- subset(bdims, bdims$sex == 1)
-
 fdims <- subset(bdims, bdims$sex == 0)
 ```
 
-1. Make a histogram of men's heights and a histogram of women's heights.  How would you compare the various aspects of the two distributions?
+1.  Make a histogram of men's heights and a histogram of women's heights.  How would you compare the various aspects of the two distributions?
 
 ## The normal distribution
 
@@ -45,7 +43,6 @@ To see how accurate that description is, we can plot a normal distribution curve
 
 ```{r female-hgt-mean-sd, eval=FALSE}
 fhgtmean <- mean(fdims$hgt)
-
 fhgtsd   <- sd(fdims$hgt)
 ```
 
@@ -53,28 +50,24 @@ Next we make a density histogram to use as the backdrop and use the `lines` func
 
 ```{r hist-height, eval=FALSE}
 hist(fdims$hgt, probability = TRUE)
-
 x <- 140:190
-
 y <- dnorm(x = x, mean = fhgtmean, sd = fhgtsd)
-
 lines(x = x, y = y, col = "blue")
 ```
 
 After plotting the density histogram with the first command, we create the x- and y-coordinates for the normal curve.  We chose the `x` range as 140 to 190 in order to span the entire range of `fheight`.  To create `y`, we use `dnorm` to calculate the density of each of those x-values in a distribution that is normal with mean `fhgtmean` and standard deviation `fhgtsd`.  The final command draws a curve on the existing plot (the density histogram) by connecting each of the points specified by `x` and `y`. The argument `col` simply sets the color for the line to be drawn. If we left it out, the line would be drawn in black.
 
-The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: `hist(fdims\$hgt, probability = TRUE,  ylim = c(0, 0.06))`
+The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: `ylim = c(0, 0.06)`.
 
-1. Based on the this plot, does it appear that the data follow a nearly normal distribution?
+2.  Based on the this plot, does it appear that the data follow a nearly normal distribution?
 
 
 ## Evaluating the normal distribution
 
-Eyeballing the shape of the histogram is one way to determine if the data appear to be nearly normally distributed, but it can be frustrating to decide just how close the histogram is to the curve. An alternative approach involves constructing a normal probability plot, also called a normal Q-Q plot for ``quantile-quantile''.
+Eyeballing the shape of the histogram is one way to determine if the data appear to be nearly normally distributed, but it can be frustrating to decide just how close the histogram is to the curve. An alternative approach involves constructing a normal probability plot, also called a normal Q-Q plot for "quantile-quantile".
 
 ```{r qq, eval=FALSE}
 qqnorm(fdims$hgt)
-
 qqline(fdims$hgt)
 ```
 
@@ -88,17 +81,17 @@ sim_norm <- rnorm(n = length(fdims$hgt), mean = fhgtmean, sd = fhgtsd)
 
 The first argument indicates how many numbers you'd like to generate, which we specify to be the same number of heights in the `fdims` data set using the `length` function.  The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated.  We can take a look at the shape of our simulated data set, `sim_norm`, as well as its normal probability plot.
 
-1. Make a normal probability plot of `sim_norm`.  Do all of the points fall on the line?  How does this plot compare to the probability plot for the real data?
+3.  Make a normal probability plot of `sim_norm`.  Do all of the points fall on the line?  How does this plot compare to the probability plot for the real data?
 
-Even better than comparing the original plot to a single plot generated from a normal distribution is to compare it to many more plots using the following function. It may be helpful to click the `zoom` button in the plot window.
+Even better than comparing the original plot to a single plot generated from a normal distribution is to compare it to many more plots using the following function. It may be helpful to click the zoom button in the plot window.
 
 ```{r qqnormsim, eval=FALSE}
 qqnormsim(fdims$hgt)
 ```
 
-1. Does the normal probability plot for `fdims$hgt` look similar to the plots created for the simulated data?  That is, do plots provide evidence that the female heights are nearly normal?
+4.  Does the normal probability plot for `fdims$hgt` look similar to the plots created for the simulated data?  That is, do plots provide evidence that the female heights are nearly normal?
 
-1. Using the same technique, determine whether or not female weights appear to come from a normal distribution.
+5.  Using the same technique, determine whether or not female weights appear to come from a normal distribution.
 
 ## Normal probabilities
 
@@ -122,7 +115,7 @@ sum(fdims$hgt > 182) / length(fdims$hgt)
 
 Although the probabilities are not exactly the same, they are reasonably close. The closer that your distribution is to being normal, the more accurate the theoretical probabilities will be.
 
-1. Write out two probability questions that you would like to answer; one regarding female heights and one regarding female weights.  Calculate the those probabilities using both the theoretical normal distribution as well as the empirical distribution (four probabilities in all).  Which variable, height or weight, had a closer agreement between the two methods?
+6.  Write out two probability questions that you would like to answer; one regarding female heights and one regarding female weights.  Calculate the those probabilities using both the theoretical normal distribution as well as the empirical distribution (four probabilities in all).  Which variable, height or weight, had a closer agreement between the two methods?
 
 * * *
 
@@ -144,7 +137,7 @@ Although the probabilities are not exactly the same, they are reasonably close. 
 
 -   What concepts from the textbook are covered in this lab?  What concepts, if any, are not covered in the textbook?  Have you seen these concepts elsewhere, e.g. lecture, discussion section, previous labs, or homework problems?  Be specific in your answer.
 
-<img src='more/histQQmatch.pdf'/>
+![histQQmatch](more/histQQmatch.png)
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.

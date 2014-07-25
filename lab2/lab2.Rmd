@@ -15,9 +15,9 @@ We do not expect to resolve this controversy today. However, in this lab we'll a
 
 ## Saving your code
 
-Click on `File -> New -> R Script`. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the `Run` button, or highlight the code and hit `command+enter` or a mac or `control+enter` on a PC.
+Click on File -> New -> R Script. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the Run button, or highlight the code and hit command+enter or a mac or control+enter on a PC.
 
-You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the `Files` tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
+You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the Files tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
 
 ## Getting Started
 
@@ -25,9 +25,7 @@ Our investigation will focus on the performance of one player: Kobe Bryant of th
 
 ```{r load-data, eval=FALSE}
 download.file("http://www.openintro.org/stat/data/kobe.RData", destfile = "kobe.RData")
-
 load("kobe.RData")
-
 head(kobe)
 ```
 
@@ -47,19 +45,18 @@ kobe$basket[1:9]
 
 Within the nine shot attempts, there are six streaks, which are separated by a "|" above. Their lengths are one, zero, two, zero, zero, zero (in order of occurrence).
 
-1. What does a streak length of 1 mean, i.e. how many hits and misses are in a streak of 1? What about a streak length of 0?
+1.  What does a streak length of 1 mean, i.e. how many hits and misses are in a streak of 1? What about a streak length of 0?
 
 The custom function `calc_streak`, which was loaded in with the data, may be used to calculate the lengths of all shooting streaks and then look at the distribution.
 
 ```{r calc-streak-kobe, eval=FALSE}
 kobe_streak <- calc_streak(kobe$basket)
-
 barplot(table(kobe_streak))
 ```
 
 Note that instead of making a histogram, we chose to make a bar plot from a table of the streak data. A bar plot is preferable here since our variable is discrete -- counts -- instead of continuous.
 
-1. Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. What was his typical streak length? How long was his longest streak of baskets?
+2.  Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. What was his typical streak length? How long was his longest streak of baskets?
 
 ## Compared to What?
 
@@ -91,7 +88,6 @@ While we don't have any data from a shooter we know to have independent shots, t
 
 ```{r head-tail, eval=FALSE}
 outcomes <- c("heads", "tails")
-
 sample(outcomes, size = 1, replace = TRUE)
 ```
 
@@ -109,21 +105,20 @@ To view the results of this simulation, type the name of the object and then use
 
 ```{r table-sim-fair-coin, eval=FALSE}
 sim_fair_coin
-
 table(sim_fair_coin)
 ```
 
-Since there are only two elements in `outcomes`, the probability that we `flip` a coin and it lands heads is 0.5. Say we're trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called `prob`, which provides a vector of two probability weights.
+Since there are only two elements in `outcomes`, the probability that we "flip" a coin and it lands heads is 0.5. Say we're trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called `prob`, which provides a vector of two probability weights.
 
 ```{r sim-unfair-coin, eval=FALSE}
 sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob = c(0.2, 0.8))
 ```
 
-`prob=c(0.2,0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled `head` and 8 chips `tail`. Therefore at each draw, the probability of drawing a chip that says `head` is 20%, and `tail` is 80%.
+`prob=c(0.2, 0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled "head" and 8 chips "tail". Therefore at each draw, the probability of drawing a chip that says "head"" is 20%, and "tail" is 80%.
 
-1. In your simulation of flipping the unfair coin 100 times, how many flips came up heads?
+3.  In your simulation of flipping the unfair coin 100 times, how many flips came up heads?
 
-In a sense, we've shrunken the size of the slip of paper that says `heads`, making it less likely to be drawn and we've increased the size of the slip of paper saying `tails`, making it more likely to be drawn. When we simulated the fair coin, both slips of paper were the same size. This happens by default if you don't provide a `prob` argument; all elements in the `outcomes` vector have an equal probability of being drawn.
+In a sense, we've shrunken the size of the slip of paper that says "heads", making it less likely to be drawn and we've increased the size of the slip of paper saying "tails", making it more likely to be drawn. When we simulated the fair coin, both slips of paper were the same size. This happens by default if you don't provide a `prob` argument; all elements in the `outcomes` vector have an equal probability of being drawn.
 
 If you want to learn more about `sample` or any other function, recall that you can always check out its help file.
 
@@ -137,13 +132,12 @@ Simulating a basketball player who has independent shots uses the same mechanism
 
 ```{r sim-basket, eval=FALSE}
 outcomes <- c("H", "M")
-
 sim_basket <- sample(outcomes, size = 1, replace = TRUE)
 ```
 
 To make a valid comparison between Kobe and our simulated independent shooter, we need to align both their shooting percentage and the number of attempted shots.
 
-1. What change needs to be made to the `sample` function so that it reflects a shooting percentage of 45%? Make this adjustment, then run a simulation to sample 133 shots. Assign the output of this simulation to a new object called `sim_basket`.
+4.  What change needs to be made to the `sample` function so that it reflects a shooting percentage of 45%? Make this adjustment, then run a simulation to sample 133 shots. Assign the output of this simulation to a new object called `sim_basket`.
 
 Note that we've named the new vector `sim_basket`, the same name that we gave to the previous vector reflecting a shooting percentage of 50%. In this situation, R overwrites the old object with the new one, so always make sure that you don't need the information in an old vector before reassigning its name.
 
@@ -151,7 +145,6 @@ With the results of the simulation saved as `sim_basket`, we have the data neces
 
 ```{r compare-basket, eval=FALSE}
 kobe$basket
-
 sim_basket
 ```
 
