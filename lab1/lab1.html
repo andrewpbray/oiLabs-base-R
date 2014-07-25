@@ -177,7 +177,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Confirm that the median and upper and lower quartiles reported in the numerical summary match those in the graph. The purpose of a boxplot is to provide a thumbnail sketch of a variable for the purpose of comparing across several categories. So we can, for example, compare the heights of men and women with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(cdc$height ~<span class="st"> </span>cdc$gender)</code></pre>
 <p>The notation here is new. The <code>~</code> character can be read <em>versus</em> or <em>as a function of</em>. So we’re asking R to give us a box plots of heights where the groups are defined by gender.</p>
-<p>Next let’s consider a new variable that doesn’t show up directly in this data set: <a href="http://en.wikipedia.org/wiki/Body_mass_index">Body Mass Index (BMI)</a>. BMI is a weight to height ratio and can be calculated as:</p>
+<p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
 <p><span class="math">\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]</span></p>
 <p>703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).</p>
 <p>The following two lines first make a new object called <code>bmi</code> and then creates box plots of these values, defining groups by the variable <code>cdc$genhlth</code>.</p>
