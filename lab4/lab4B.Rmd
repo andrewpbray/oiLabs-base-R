@@ -153,6 +153,8 @@ and the upper bounds are in `upper_vector`. Let's view the first interval.
 c(lower_vector[1],upper_vector[1])
 ```
 
+* * *
+
 ## On your own
 
 -   Using the following function (which was downloaded with the data set), 
