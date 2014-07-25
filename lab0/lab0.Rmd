@@ -64,11 +64,7 @@ arbuthnot$boys
 
 This command will only show the number of boys baptized each year.
 
-<ol>
-<li>
-What command would you use to extract just the counts of girls baptized? Try it!
-</li>
-</ol>
+1.  What command would you use to extract just the counts of girls baptized? Try it!
 
 Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called *vectors*; they represent a set of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, `5218` follows `[1]`, indicating that `5218` is the first entry in the vector. And if `[43]` starts a line, then that would mean the first number on that line would represent the 43$^{\textrm{rd}}$ entry in the vector.
 
@@ -92,11 +88,7 @@ You might wonder how you are supposed to know that it was possible to add that t
 
 Notice that the help file replaces the plot  in the lower right panel. You can toggle between plots and help files using the tabs at the top of that panel.
 
-<ol>
-<li>
-Is there an apparent trend in the number of girls baptized over the years?  How would you describe it?
-</li>
-</ol>
+2.  Is there an apparent trend in the number of girls baptized over the years?  How would you describe it?
 
 Now, suppose we want to plot the total number of baptisms.  To compute this, we could use the fact that R is really just a big calculator. We can type in mathematical expressions like
 
@@ -144,11 +136,7 @@ arbuthnot$boys / (arbuthnot$boys + arbuthnot$girls)
 
 Note that with R as with your calculator, you need to be conscious of the order of operations.  Here, we want to divide the number of boys by the total number of newborns, so we have to use parentheses.  Without them, R will first do the division, then the addition, giving you something that is not a proportion.
 
-<ol>
-<li>
-Now, make a plot of the proportion of boys over time. What do you see? Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel.  This will save you a lot of typing in the future.
-</li>
-</ol>
+3.  Now, make a plot of the proportion of boys over time. What do you see? Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel.  This will save you a lot of typing in the future.
 
 Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, `>`, less than, `<`, and equality, `==`. For example, we can ask if boys outnumber girls in each year with the expression
 
@@ -170,21 +158,17 @@ source("http://www.openintro.org/stat/data/present.R")
 
 The data are stored in a data frame called `present`.
 
-<ul>
+-   What years are included in this data set? What are the dimensions of the data frame and what are the variable or column names?
 
-<li> What years are included in this data set? What are the dimensions of the data frame and what are the variable or column names?</li>
+-   How do these counts compare to Arbuthnot's? Are they on a similar scale?
 
-<li>How do these counts compare to Arbuthnot's? Are they on a similar scale?</li>
+-   Make a plot that displays the boy-to-girl ratio for every year in the data set. What do
+you see? Does Arbuthnot's observation about boys being born in greater proportion than girls
+hold up in the U.S.? Include the plot in your response.
 
-<li>Make a plot that displays the boy-to-girl ratio for every year in the data set. What do
-you see? Does Arbuthnot'??s observation about boys being born in greater proportion than girls
-hold up in the U.S.? Include the plot in your response.</li>
+-   In what year did we see the most total number of births in the U.S.? You can refer to the help files or the R reference card [http://cran.r-project.org/doc/contrib/Short-refcard.pdf](http://cran.r-project.org/doc/contrib/Short-refcard.pdf) to find helpful commands.
 
-<li>In what year did we see the most total number of births in the U.S.? You can refer to the help files or the R reference card (http://cran.r-project.org/doc/contrib/Short-refcard.pdf) to find helpful commands.</li>
-
-</ul>
-
-These data come from a report by the Centers for Disease Control (http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf). Check it out if you would like to read more about an analysis of sex ratios at birth in the United States.
+These data come from a report by the Centers for Disease Control [http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf](http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf). Check it out if you would like to read more about an analysis of sex ratios at birth in the United States.
 
 That was a short introduction to R and RStudio, but we will provide you with more functions and a more complete sense of the language as the course progresses. Feel free to browse around the websites for [R](http://www.r-project.org) and [RStudio](http://rstudio.org) if you're interested in learning more, or find more labs for practice at http://openintro.org.
 
