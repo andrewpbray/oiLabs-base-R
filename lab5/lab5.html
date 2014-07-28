@@ -152,7 +152,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ol>
 <p>The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following function to split the <code>weight</code> variable into the <code>habit</code> groups, then take the mean of each using the <code>mean</code> function.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">by</span>(nc$weight, nc$habit, mean)</code></pre>
-<p>There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.</p>
+<p>There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test .</p>
 </div>
 <div id="inference" class="section level2">
 <h2>Inference</h2>
@@ -167,7 +167,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol start="5" style="list-style-type: decimal">
 <li>Change the <code>type</code> argument to <code>&quot;ci&quot;</code> to construct and record a confidence interval for the difference between the weights of babies born to smoking and non-smoking mothers.</li>
 </ol>
-<p>By default the function reports an interval for (<span class="math">\(\mu_{nonsmoker} - \mu_{smoker}\)</span>). We can easily change this order by using the <code>order</code> argument:</p>
+<p>By default the function reports an interval for (<span class="math">\(\mu_{nonsmoker} - \mu_{smoker}\)</span>) . We can easily change this order by using the <code>order</code> argument:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inference</span>(<span class="dt">y =</span> nc$weight, <span class="dt">x =</span> nc$habit, <span class="dt">est =</span> <span class="st">&quot;mean&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ci&quot;</span>, <span class="dt">null =</span> <span class="dv">0</span>, 
           <span class="dt">alternative =</span> <span class="st">&quot;twosided&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;theoretical&quot;</span>, 
           <span class="dt">order =</span> <span class="kw">c</span>(<span class="st">&quot;smoker&quot;</span>,<span class="st">&quot;nonsmoker&quot;</span>))</code></pre>
