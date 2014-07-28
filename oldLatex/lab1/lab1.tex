@@ -51,9 +51,7 @@
 
 \input{../labStyle}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-
 \begin{document}
-
 
 
 
@@ -78,7 +76,6 @@ We begin by loading the data set of 20,000 observations into the R workspace. Af
 \end{kframe}
 \end{knitrout}
 
-
 The data set \hlstd{cdc} that shows up in your workspace is a \emph{data matrix}, with each row representing a \emph{case} and each column representing a \emph{variable}.  R calls this data format a \emph{data frame}, which is a term that will be used throughout the labs.
 
 To view the names of the variables, type the command
@@ -90,7 +87,6 @@ To view the names of the variables, type the command
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 This returns the names \hlstd{genhlth}, \hlstd{exerany}, \hlstd{hlthplan}, \hlstd{smoke100}, \hlstd{height}, \hlstd{weight}, \hlstd{wtdesire}, \hlstd{age}, and \hlstd{gender}. Each one of these variables corresponds to a question that was asked in the survey.  For example, for \hlstd{genhlth}, respondents were asked to evaluate their general health, responding either excellent, very good, good, fair or poor. The \hlstd{exerany} variable indicates whether the respondent exercised in the past month (1) or did not (0). Likewise, \hlstd{hlthplan} indicates whether the respondent had some form of health coverage (1) or did not (0). The \hlstd{smoke100} variable indicates whether the respondent had smoked at least 100 cigarettes in her lifetime. The other variables record the respondent's \hlstd{height} in inches, \hlstd{weight} in pounds as well as their desired weight, \hlstd{wtdesire}, \hlstd{age} in years, and \hlstd{gender}.
 
@@ -108,7 +104,6 @@ We can have a look at the first few entries (rows) of our data with the command
 \end{kframe}
 \end{knitrout}
 
-
 and similarly we can look at the last few by typing
 
 \begin{knitrout}
@@ -118,7 +113,6 @@ and similarly we can look at the last few by typing
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 You could also look at \emph{all} of the data frame at once by typing its name into the console, but that might be unwise here.  We know \hlstd{cdc} has 20,000 rows, so viewing the entire data set would mean flooding your screen.  It's better to take small peeks at the data with \hlkwd{head}, \hlkwd{tail} or the subsetting techniques that you'll learn in a moment.
 
@@ -133,7 +127,6 @@ The BRFSS questionnaire is a massive trove of information.  A good first step in
 \end{kframe}
 \end{knitrout}
 
-
 R also functions like a very fancy calculator.  If you wanted to compute the interquartile range for the respondents' weight, you would look at the output from the summary command above and then enter
 
 \begin{knitrout}
@@ -143,7 +136,6 @@ R also functions like a very fancy calculator.  If you wanted to compute the int
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 R also has built-in functions to compute summary statistics one by one.  For instance, to calculate the mean, median, and variance of \hlstd{weight}, type 
 
@@ -161,7 +153,6 @@ R also has built-in functions to compute summary statistics one by one.  For ins
 \end{kframe}
 \end{knitrout}
 
-
 While it makes sense to describe a quantitative variable like \hlstd{weight} in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function \hlkwd{table} does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
 
 \begin{knitrout}
@@ -172,7 +163,6 @@ While it makes sense to describe a quantitative variable like \hlstd{weight} in 
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 or instead look at the relative frequency distribution by typing
 
@@ -185,7 +175,6 @@ or instead look at the relative frequency distribution by typing
 \end{kframe}
 \end{knitrout}
 
-
 Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the last lab; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar plot of the entries in the table by putting the table inside the barplot command.
 
 \begin{knitrout}
@@ -196,7 +185,6 @@ Notice how R automatically divides all entries in the table by 20,000 in the com
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Notice what we've done here! We've computed the table of \hlstd{cdc\$smoke100} and then immediately applied the graphical function, \hlkwd{barplot}. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:
 
@@ -210,7 +198,6 @@ Notice what we've done here! We've computed the table of \hlstd{cdc\$smoke100} a
 \end{kframe}
 \end{knitrout}
 
-
 Here, we've made a new object, a table, called \hlstd{smoke} (the contents of which we can see by typing \hlstd{smoke} into the console) and then used it in as the input for \hlkwd{barplot}. The special symbol \texttt{<-} performs an \emph{assignment}, taking the output of one line of code and saving it into an object in your workspace.   This is another important idea that we'll return to later.
 
 \begin{exercise}
@@ -222,24 +209,20 @@ The \hlkwd{table} command can be used to tabulate any number of variables that y
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# table(cdc$gender,cdc$smoke100)}
-\hlkwd{tally}\hlstd{(gender} \hlopt{\mytilde} \hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{format} \hlstd{=} \hlstr{"count"}\hlstd{)}
+\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{gender,cdc}\hlopt{$}\hlstd{smoke100)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic plot of this table, we would enter the following command.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# mosaicplot(table(cdc$gender,cdc$smoke100))}
-\hlkwd{mosaicplot}\hlstd{(}\hlkwd{tally}\hlstd{(gender} \hlopt{\mytilde} \hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{margins} \hlstd{=} \hlnum{FALSE}\hlstd{))}
+\hlkwd{mosaicplot}\hlstd{(}\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{gender,cdc}\hlopt{$}\hlstd{smoke100))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 We could have accomplished this in two steps by saving the table in one line and applying \hlkwd{mosaicplot} in the next (see the table/barplot example above).
 
@@ -258,17 +241,15 @@ We mentioned that R stores data in data frames, which you might think of as a ty
 \end{kframe}
 \end{knitrout}
 
-
 which will return the number of rows and columns. Now, if we want to access a subset of the full data frame, we can use row-and-column notation. For example, to see the sixth variable of the 567$^{\textrm{th}}$ respondent, use the format
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{cdc[}\hlnum{567}\hlstd{,} \hlnum{6}\hlstd{]}
+\hlstd{cdc[}\hlnum{567}\hlstd{,}\hlnum{6}\hlstd{]}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 which means we want the element of our data set that is in the 567$^{\textrm{th}}$ row (meaning the 567$^{\textrm{th}}$ person or observation) and the 6$^{\textrm{th}}$ column (in this case, weight). We know that \hlstd{weight} is the 6$^{\textrm{th}}$ variable because it is the 6$^{\textrm{th}}$ entry in the list of variable names
 
@@ -280,17 +261,15 @@ which means we want the element of our data set that is in the 567$^{\textrm{th}
 \end{kframe}
 \end{knitrout}
 
-
 To see the weights for the first 10 respondents we can type
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{cdc[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,} \hlnum{6}\hlstd{]}
+\hlstd{cdc[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,}\hlnum{6}\hlstd{]}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 In this expression, we have asked just for rows in the range 1 through 10.  R uses the ``:'' to create a range of values, so 1:10 expands to 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. You can see this by entering
 
@@ -302,28 +281,25 @@ In this expression, we have asked just for rows in the range 1 through 10.  R us
 \end{kframe}
 \end{knitrout}
 
-
 Finally, if we want all of the data for the first 10 respondents, type
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{cdc[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{, ]}
+\hlstd{cdc[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{,]}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 By leaving out an index or a range (we didn't type anything between the comma and the square bracket), we get all the columns. When starting out in R, this is a bit counterintuitive. As a rule, we omit the column number to see all columns in a data frame. Similarly, if we leave out an index or range for the rows, we would access all the observations, not just the 567$^{\textrm{th}}$, or rows 1 through 10. Try the following to see the weights for all 20,000 respondents fly by on your screen
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{cdc[,} \hlnum{6}\hlstd{]}
+\hlstd{cdc[,}\hlnum{6}\hlstd{]}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Recall that column 6 represents respondents' weight, so the command above reported all of the weights in the data set. An alternative method to access the weight data is by referring to the name.  Previously, we typed \hlkwd{names}\hlstd{(}\hlstd{cdc}\hlstd{)} to see all the variables contained in the cdc data set. We can use any of the variable names to select items in our data set. 
 
@@ -335,7 +311,6 @@ Recall that column 6 represents respondents' weight, so the command above report
 \end{kframe}
 \end{knitrout}
 
-
 The dollar-sign tells R to look in data frame \hlstd{cdc} for the column called \hlstd{weight}.  Since that's a single vector, we can subset it with just a single index inside square brackets.  We see the weight for the 567$^{\textrm{th}}$ respondent by typing
 
 \begin{knitrout}
@@ -346,7 +321,6 @@ The dollar-sign tells R to look in data frame \hlstd{cdc} for the column called 
 \end{kframe}
 \end{knitrout}
 
-
 Similarly, for just the first 10 respondents
 
 \begin{knitrout}
@@ -356,7 +330,6 @@ Similarly, for just the first 10 respondents
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 The command above returns the same result as the \hlstd{cdc[1:10,6]} command. Both row-and-column notation and dollar-sign notation are widely used, which one you choose to use depends on your personal preference.
 
@@ -371,7 +344,6 @@ It's often useful to extract all individuals (cases) in a data set that have spe
 \end{kframe}
 \end{knitrout}
 
-
 or
 
 \begin{knitrout}
@@ -381,7 +353,6 @@ or
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 These commands produce a series of \hlnum{TRUE} and \hlnum{FALSE}  values. There is one value for each respondent, where \hlnum{TRUE} indicates that the person was male (via the first command) or older than 30 (second command).
 
@@ -395,7 +366,6 @@ Suppose we want to extract just the data for the men in the sample, or just for 
 \end{kframe}
 \end{knitrout}
 
-
 will create a new data set called \hlstd{mdata} that contains only the men from the \hlstd{cdc} data set. In addition to finding it in your workspace alongside its dimensions, you can take a peek at the first several rows as usual
 
 \begin{knitrout}
@@ -405,7 +375,6 @@ will create a new data set called \hlstd{mdata} that contains only the men from 
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 This new data set contains all the same variables but just under half the rows. It is also possible to tell R to keep only specific variables, which is a topic we'll discuss in a future lab. For now, the important thing is that we can carve up the data based on values of one or more variables.
 
@@ -419,7 +388,6 @@ As an aside, you can use several of these conditions together with \texttt{\&} a
 \end{kframe}
 \end{knitrout}
 
-
 will give you the data for men over the age of 30. The \texttt{|} character is read ``or'' so that
 
 \begin{knitrout}
@@ -429,7 +397,6 @@ will give you the data for men over the age of 30. The \texttt{|} character is r
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 will take people who are men or over the age of 30 (why that's an interesting group is hard to say, but right now the mechanics of this are the important thing). In principle, you may use as many ``and'' and ``or'' clauses as you like when forming a subset.
 
@@ -450,7 +417,6 @@ With our subsetting tools in hand, we'll now return to the task of the day: maki
 \end{kframe}
 \end{knitrout}
 
-
 You can compare the locations of the components of the box by examining the summary statistics.
 
 \begin{knitrout}
@@ -460,7 +426,6 @@ You can compare the locations of the components of the box by examining the summ
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Confirm that the median and upper and lower quartiles reported in the numerical summary match those in the graph. The purpose of a boxplot is to provide a thumbnail sketch of a variable for the purpose of comparing across several categories. So we can, for example, compare the heights of men and women with 
 
@@ -473,7 +438,6 @@ Confirm that the median and upper and lower quartiles reported in the numerical 
 \end{kframe}
 \end{knitrout}
 
-
 The notation here is new. The \texttildelow~character can be read ``versus'' or ``as a function of''. So we're asking R to give us a box plots of heights where the groups are defined by gender. 
 
 Next let's consider a new variable that doesn't show up directly in this data set: Body Mass Index (BMI). BMI is a weight to height ratio and can be calculated as.
@@ -485,14 +449,13 @@ The following two lines first make a new object called \hlstd{bmi} and then crea
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# bmi <- (cdc$weight / cdc$height^2) * 703 boxplot(bmi \mytilde cdc$genhlth)}
+\hlstd{bmi} \hlkwb{<-} \hlstd{(cdc}\hlopt{$}\hlstd{weight} \hlopt{/} \hlstd{cdc}\hlopt{$}\hlstd{height}\hlopt{^}\hlnum{2}\hlstd{)} \hlopt{*} \hlnum{703}
 
 \hlstd{cdc} \hlkwb{=} \hlkwd{transform}\hlstd{(cdc,} \hlkwc{bmi} \hlstd{= (weight}\hlopt{/}\hlstd{height}\hlopt{^}\hlnum{2}\hlstd{)} \hlopt{*} \hlnum{703}\hlstd{)}
 \hlkwd{bwplot}\hlstd{(bmi} \hlopt{\mytilde} \hlstd{genhlth,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Notice that the first line above is just some arithmetic, but it's applied to all 20,000 numbers in the \hlstd{cdc} data set. That is, for each of the 20,000 participants, we take their weight, divide by their height-squared and then multiply by 703. The result is 20,000 BMI values, one for each respondent. This is one reason why we like R: it lets us perform computations like this using very simple expressions.
 
@@ -511,7 +474,6 @@ Finally, let's make some histograms. We can look at the histogram for the age of
 \end{kframe}
 \end{knitrout}
 
-
 Histograms are generally a very good way to see the shape of a single distribution, but that shape can change depending on how the data is split between the different bins.  You can control the number of bins by adding an argument to the command. In the next two lines, we first make a default histogram of \hlstd{bmi} and then one with 50 breaks.
 
 \begin{knitrout}
@@ -524,7 +486,6 @@ Histograms are generally a very good way to see the shape of a single distributi
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-
 
 Note that you can flip between plots that you've created by clicking the forward and backward arrows in the lower right region of RStudio, just above the plots.  How do these two histograms compare?
 
