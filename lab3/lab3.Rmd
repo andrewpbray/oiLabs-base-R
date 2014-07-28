@@ -118,7 +118,7 @@ xpnorm(q = 182, mean = fhgtmean, sd = fhgtsd, lower.tail=FALSE)
 Assuming a normal distribution has allowed us to calculate a theoretical probability.  If we want to calculate the probability empirically, we simply need to determine how many observations fall above 182 then divide this number by the total sample size.
 
 ````{r probability, eval=FALSE}
-sum(fdims$hgt > 182) / length(fdims$hgt)
+with(fdims, sum(hgt > 182) / length(hgt))
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. The closer that your distribution is to being normal, the more accurate the theoretical probabilities will be.
