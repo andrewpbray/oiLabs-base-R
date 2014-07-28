@@ -31,7 +31,7 @@ names(cdc)
 
 This returns the names `genhlth`, `exerany`, `hlthplan`, `smoke100`, `height`, `weight`, `wtdesire`, `age`, and `gender`. Each one of these variables corresponds to a question that was asked in the survey.  For example, for `genhlth`, respondents were asked to evaluate their general health, responding either excellent, very good, good, fair or poor. The `exerany` variable indicates whether the respondent exercised in the past month (1) or did not (0). Likewise, `hlthplan` indicates whether the respondent had some form of health coverage (1) or did not (0). The `smoke100` variable indicates whether the respondent had smoked at least 100 cigarettes in her lifetime. The other variables record the respondent's `height` in inches, `weight` in pounds as well as their desired weight, `wtdesire`, `age` in years, and `gender`.
 
-1. How many cases are there in this data set?  How many variables?  For each variable, identify its data type (e.g. categorical, discrete).
+1.  How many cases are there in this data set?  How many variables?  For each variable, identify its data type (e.g. categorical, discrete).
 
 We can have a look at the first few entries (rows) of our data with the command
 
@@ -98,7 +98,7 @@ barplot(smoke)
 
 Here, we've made a new object, a table, called `smoke` (the contents of which we can see by typing `smoke` into the console) and then used it in as the input for `barplot`. The special symbol `<-` performs an *assignment*, taking the output of one line of code and saving it into an object in your workspace.   This is another important idea that we'll return to later.
 
-1. Create a numerical summary for `height` and `age`, and compute the interquartile range for each. Compute the relative frequency distribution for `gender` and `exerany`. How many males are in the sample? What proportion of the sample reports being in excellent health?
+2.  Create a numerical summary for `height` and `age`, and compute the interquartile range for each. Compute the relative frequency distribution for `gender` and `exerany`. How many males are in the sample? What proportion of the sample reports being in excellent health?
 
 The `table` command can be used to tabulate any number of variables that you provide.  For example, to examine which participants have smoked across each gender, we could use the following.
 
@@ -114,7 +114,7 @@ mosaicplot(tally(gender ~ smoke100, data=cdc, margins=FALSE))
 
 We could have accomplished this in two steps by saving the table in one line and applying `mosaicplot` in the next (see the table/barplot example above).
 
-1. What does the mosaic plot reveal about smoking habits and gender?
+3.  What does the mosaic plot reveal about smoking habits and gender?
 
 ## Interlude: How R thinks about data
 
@@ -142,7 +142,7 @@ To see the weights for the first 10 respondents we can type
 cdc[1:10,6]
 ```
 
-In this expression, we have asked just for rows in the range 1 through 10.  R uses the ``:'' to create a range of values, so 1:10 expands to 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. You can see this by entering
+In this expression, we have asked just for rows in the range 1 through 10.  R uses the `:` to create a range of values, so 1:10 expands to 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. You can see this by entering
 
 ```{r numbers-1to10, eval=FALSE}
 1:10
@@ -174,7 +174,7 @@ cdc$weight[567]
 
 Similarly, for just the first 10 respondents
 
-```{r weight-first10, eval=FALSE}
+```{rweight-first10, eval=FALSE}
 cdc$weight[1:10]
 ```
 
@@ -199,7 +199,7 @@ These commands produce a series of `TRUE` and `FALSE`  values. There is one valu
 Suppose we want to extract just the data for the men in the sample, or just for those over 30. We can use the R function `subset` to do that for us. For example, the command
 
 ```{r males, eval=FALSE}
-mdata <- subset(cdc, gender == "m")
+mdata <- subset(cdc, cdc$gender == "m")
 ```
 
 will create a new data set called `mdata` that contains only the men from the `cdc` data set. In addition to finding it in your workspace alongside its dimensions, you can take a peek at the first several rows as usual
@@ -210,21 +210,21 @@ head(mdata)
 
 This new data set contains all the same variables but just under half the rows. It is also possible to tell R to keep only specific variables, which is a topic we'll discuss in a future lab. For now, the important thing is that we can carve up the data based on values of one or more variables.
 
-As an aside, you can use several of these conditions together with `&` and `|`. The `&` is read *and* so that
+As an aside, you can use several of these conditions together with `&` and `|`. The `&` is read "and" so that
 
 ```{r males-and-over30, eval=FALSE}
-m_and_over30 <- subset(cdc, gender == "m" & age > 30)
+m_and_over30 <- subset(cdc, cdc$gender == "m" & cdc$age > 30)
 ```
 
-will give you the data for men over the age of 30. The `|` character is read *or* so that
+will give you the data for men over the age of 30. The `|` character is read "or" so that
 
 ```{r males-or-over30, eval=FALSE}
-m_or_over30 <- subset(cdc, gender == "m" | age > 30)
+m_or_over30 <- subset(cdc, cdc$gender == "m" | cdc$age > 30)
 ```
 
-will take people who are men or over the age of 30 (why that's an interesting group is hard to say, but right now the mechanics of this are the important thing). In principle, you may use as many *and* and *or* clauses as you like when forming a subset.
+will take people who are men or over the age of 30 (why that's an interesting group is hard to say, but right now the mechanics of this are the important thing). In principle, you may use as many "and" and "or" clauses as you like when forming a subset.
 
-1. Create a new object called `under23_and_smoke` that contains all observations of respondents under the age of 23 that have smoked 100 cigarettes in their lifetime. Write the command you used to create the new object as the answer to this exercise.
+3.  Create a new object called `under23_and_smoke` that contains all observations of respondents under the age of 23 that have smoked 100 cigarettes in their lifetime. Write the command you used to create the new object as the answer to this exercise.
 
 ## Quantitative data
 
@@ -248,11 +248,12 @@ bwplot(height ~ gender, data=cdc)
 
 The notation here is new. The `~` character can be read *versus* or *as a function of*. So we're asking R to give us a box plots of heights where the groups are defined by gender. 
 
-Next let's consider a new variable that doesn't show up directly in this data set: Body Mass Index (BMI). BMI is a weight to height ratio and can be calculated as
+Next let's consider a new variable that doesn't show up directly in this data set: Body Mass Index (BMI) ([http://en.wikipedia.org/wiki/Body_mass_index](http://en.wikipedia.org/wiki/Body_mass_index)). BMI is a weight to height ratio and can be calculated as:
 
 \[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]
 
-703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).
+703 is the approximate conversion factor to change units from metric (meters and 
+kilograms) to imperial (inches and pounds).
 
 The following two lines first make a new object called `bmi` and then creates box plots of these values, defining groups by the variable `cdc$genhlth`.
 
@@ -263,7 +264,7 @@ bwplot(bmi ~ genhlth, data=cdc)
 
 Notice that the first line above is just some arithmetic, but it's applied to all 20,000 numbers in the `cdc` data set. That is, for each of the 20,000 participants, we take their weight, divide by their height-squared and then multiply by 703. The result is 20,000 BMI values, one for each respondent. This is one reason why we like R: it lets us perform computations like this using very simple expressions.
 
-1. What does this box plot show? Pick another categorical variable from the data set and see how it relates to BMI. List the variable you chose, why you might think it would have a relationship to BMI,  and indicate what the figure seems to suggest. 
+4.  What does this box plot show? Pick another categorical variable from the data set and see how it relates to BMI. List the variable you chose, why you might think it would have a relationship to BMI,  and indicate what the figure seems to suggest. 
 
 Finally, let's make some histograms. We can look at the histogram for the age of our respondents with the command
 
