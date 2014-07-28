@@ -126,16 +126,16 @@ the mean of each sample, and store each result in a vector called
     expect the distribution to change if we instead collected 50,000 sample 
     means?
 
-## Interlude: The for loop
+## Interlude: The `for` loop
 
 Let's take a break from the statistics for a moment to let that last block of 
-code sink in.  You have just run your first for loop, a cornerstone of 
+code sink in.  You have just run your first `for` loop, a cornerstone of 
 computer programming.  The idea behind the for loop is *iteration*: it allows 
 you to execute code as many times as you want without having to type out every 
 iteration.  In the case above, we wanted to iterate the two lines of code 
 inside the curly braces that take a random sample of size 50 from `area` then 
 save the mean of that sample into the `sample_means50` vector.  Without the 
-for loop, this would be painful:
+`for` loop, this would be painful:
 
 ```{r loop-long, eval=FALSE}
 sample_means50 <- rep(0, 5000)
@@ -157,7 +157,7 @@ and so on...
 
 With the for loop, these thousands of lines of code are compressed into a 
 handful of lines. We've added one extra line to the code below, which prints 
-the variable `i` during each iteration of the for loop. Run this code.
+the variable `i` during each iteration of the `for` loop. Run this code.
 
 ```{r loop-again, eval=FALSE}
 sample_means50 <- rep(0, 5000)
@@ -172,24 +172,24 @@ for(i in 1:5000){
 Let's consider this code line by line to figure out what it does.  In the 
 first line we *initialized a vector*.  In this case, we created a vector of 
 5000 zeros called `sample_means50`.  This vector will will store values 
-generated within the for loop.
+generated within the `for` loop.
 
-The second line calls the for loop itself.  The syntax can be loosely read as, 
+The second line calls the `for` loop itself.  The syntax can be loosely read as, 
 "for every element `i` from 1 to 5000, run the following lines of code". You 
 can think of `i` as the counter that keeps track of which loop you're on. 
 Therefore, more precisely, the loop will run once when `i = 1`, then once when 
 `i = 2`, and so on up to `i = 5000`.
 
-The body of the for loop is the part inside the curly braces, and this set of 
+The body of the `for` loop is the part inside the curly braces, and this set of 
 code is run for each value of `i`.  Here, on every loop, we take a random 
 sample of size 50 from `area`, take its mean, and store it as the 
-i$^{\textrm{th}}$ element of `sample_means50`.
+$i$<sup>th</sup> element of `sample_means50`.
 
 In order to display that this is really happening, we asked R to print `i` at 
 each iteration. This line of code is optional and is only used for displaying 
-what's going on while the for loop is running.
+what's going on while the `for` loop is running.
 
-The for loop allows us to not just run the code 5000 times, but to neatly 
+The `for` loop allows us to not just run the code 5000 times, but to neatly 
 package the results, element by element, into the empty vector that we 
 initialized at the outset. 
 
@@ -204,7 +204,7 @@ initialized at the outset.
 
 ## Sample size and the sampling distribution
 
-Mechanics aside, let's return to the reason we used a for loop: to compute a 
+Mechanics aside, let's return to the reason we used a `for` loop: to compute a 
 sampling distribution, specifically, this one.
 
 ```{r hist, eval=FALSE}
@@ -233,10 +233,10 @@ for(i in 1:5000){
 }
 ```
 
-Here we're able to use a single for loop to build two distributions by adding 
+Here we're able to use a single `for` loop to build two distributions by adding 
 additional lines inside the curly braces.  Don't worry about the fact that 
 `samp` is used for the name of two different objects.  In the second command 
-of the for loop, the mean of `samp` is saved to the relevant place in the 
+of the `for` loop, the mean of `samp` is saved to the relevant place in the 
 vector `sample_means10`.  With the mean saved, we're now free to overwrite the 
 object `samp` with a new sample, this time of size 100.  In general, anytime 
 you create an object using a name that is already in use, the old object will 
@@ -289,8 +289,8 @@ Ames.  Now you'll try to estimate the mean home price.
     size of 50.  Based on this sampling distribution, what would you guess to 
     be the mean sale price of homes in Ames?
 
--   Of the sampling distributions from 2 and 3, which has a smaller spread?  
-    If we're concerned with making estimates that are more often close to the 
+-   Of the sampling distributions from 2 and 3, which has a smaller spread?  If
+    we're concerned with making estimates that are more often close to the 
     true value, would we prefer a distribution with a large or small spread?
 
 -   What concepts from the textbook are covered in this lab?  What concepts, 
