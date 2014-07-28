@@ -15,11 +15,13 @@ We do not expect to resolve this controversy today. However, in this lab we'll a
 
 ## Saving your code
 
-You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the \menu{Files} tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
+Click on `File -> New -> R Script`. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the `Run` button, or highlight the code and hit `command+enter` or a mac or `control+enter` on a PC.
+
+You'll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you'll see the file appear under the `Files` tab in the lower right panel. You can reopen this file anytime by simply clicking on it.
 
 ## Getting Started
 
-Our investigation will focus on the performance of one player: Kobe Bryant of the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 NBA finals earned him the title *Most Valuable Player* and many spectators commented on how he appeared to show a hot hand. Let's load some data from those games and look at the first several rows.
+Our investigation will focus on the performance of one player: Kobe Bryant of the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 NBA finals earned him the title `Most Valuable Player` and many spectators commented on how he appeared to show a hot hand. Let's load some data from those games and look at the first several rows.
 
 ```{r load-data, eval=FALSE}
 download.file("http://www.openintro.org/stat/data/kobe.RData", destfile = "kobe.RData")
@@ -43,7 +45,7 @@ To verify this use the following command:
 kobe$basket[1:9]
 ```
 
-Within the nine shot attempts, there are six streaks, which are separated by a "|" above. Their lengths are one, zero, two, zero, zero, zero (in order of occurrence).
+Within the nine shot attempts, there are six streaks, which are separated by a | above. Their lengths are one, zero, two, zero, zero, zero (in order of occurrence).
 
 1. What does a streak length of 1 mean, i.e. how many hits and misses are in a streak of 1? What about a streak length of 0?
 
@@ -57,7 +59,7 @@ barplot(table(kobe_streak))
 
 Note that instead of making a histogram, we chose to make a bar plot from a table of the streak data. A bar plot is preferable here since our variable is discrete -- counts -- instead of continuous.
 
-1. Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. What was his typical streak length? How long was his longest streak of baskets?
+2. Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. What was his typical streak length? How long was his longest streak of baskets?
 
 ## Compared to What?
 
@@ -71,7 +73,7 @@ Let's suppose for a moment that the hot hand model is valid for Kobe. During his
 
 \[ P(\textrm{shot 1 = H}) = 0.45 \]
 
-If he makes the first shot and has a hot hand (*not* independent shots), then the probability that he makes his second shot would go up to, let's say, 60\%,
+If he makes the first shot and has a hot hand (*not* independent shots), then the probability that he makes his second shot would go up to, let's say, 60%,
 
 \[ P(\textrm{shot 2 = H} \, | \, \textrm{shot 1 = H}) = 0.60 \]
 
@@ -81,7 +83,7 @@ As a result of these increased probabilites, you'd expect Kobe to have longer st
 
 In other words, making the first shot did nothing to effect the probability that he'd make his second shot. If Kobe's shots are independent, then he'd have the same probability of hitting every shot regardless of his past shots: 45%.
 
-Now that we've phrased the situation in terms of independent shots, let's return to the question: how do we tell if Kobe's shooting streaks are long enough to indicate that he has hot hands? We can compare his streak lengths to someone without hot hands: an independent shooter. 
+Now that we've phrased the situation in terms of independent shots, let's return to the question: how do we tell if Kobe's shooting streaks are long enough to indicate that he has hot hands? We can compare his streak lengths to someone without hot hands: an independent shooter.
 
 ## Simulations in R
 
@@ -89,18 +91,18 @@ While we don't have any data from a shooter we know to have independent shots, t
 
 ```{r head-tail, eval=FALSE}
 outcomes <- c("heads", "tails")
-
-sample(outcomes, size = 1, replace = TRUE)
+require(mosaic)
+resample(outcomes, size = 1)
 ```
 
-The vector `outcomes` can be thought of as a hat with two slips of paper in it: one slip says `heads` and the other says `tails`. The function `sample` draws one slip from the hat and tells us if it was a head or a tail. 
+The vector `outcomes` can be thought of as a hat with two slips of paper in it: one slip says `heads" and the other says `tails". The function `sample` draws one slip from the hat and tells us if it was a head or a tail. 
 
 Run the second command listed above several times. Just like when flipping a coin, sometimes you'll get a heads, sometimes you'll get a tails, but in the long run, you'd expect to get roughly equal numbers of each.
 
 If you wanted to simulate flipping a fair coin 100 times, you could either run the function 100 times or, more simply, adjust the `size` argument, which governs how many samples to draw (the `replace = TRUE` argument indicates we put the slip of paper back in the hat before drawing again). Save the resulting vector of heads and tails in a new object called `sim_fair_coin`.
 
 ```{r sim-fair-coin, eval=FALSE}
-sim_fair_coin <- sample(outcomes, size = 100, replace = TRUE)
+sim_fair_coin <- resample(outcomes, size = 100)
 ```
 
 To view the results of this simulation, type the name of the object and then use `table` to count up the number of heads and tails.
@@ -114,10 +116,10 @@ table(sim_fair_coin)
 Since there are only two elements in `outcomes`, the probability that we `flip` a coin and it lands heads is 0.5. Say we're trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called `prob`, which provides a vector of two probability weights.
 
 ```{r sim-unfair-coin, eval=FALSE}
-sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob = c(0.2, 0.8))
+sim_unfair_coin <- resample(outcomes, size = 100, prob = c(0.2, 0.8))
 ```
 
-`prob=c(0.2,0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled `head` and 8 chips `tail`. Therefore at each draw, the probability of drawing a chip that says `head` is 20%, and `tail` is 80%.
+`prob = c(0.2,0.8)` indicates that for the two elements in the `outcomes` vector, we want to select the first one, `heads`, with probability 0.2 and the second one, `tails` with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled `head" and 8 chips `tail". Therefore at each draw, the probability of drawing a chip that says `head" is 20%, and `tail" is 80%.
 
 1. In your simulation of flipping the unfair coin 100 times, how many flips came up heads?
 
@@ -135,8 +137,7 @@ Simulating a basketball player who has independent shots uses the same mechanism
 
 ```{r sim-basket, eval=FALSE}
 outcomes <- c("H", "M")
-
-sim_basket <- sample(outcomes, size = 1, replace = TRUE)
+sim_basket <- resample(outcomes, size = 1)
 ```
 
 To make a valid comparison between Kobe and our simulated independent shooter, we need to align both their shooting percentage and the number of attempted shots.

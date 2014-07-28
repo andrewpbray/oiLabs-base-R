@@ -142,11 +142,13 @@ R also has built-in functions to compute summary statistics one by one.  For ins
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{mean}\hlstd{(cdc}\hlopt{$}\hlstd{weight)}
-
-\hlkwd{var}\hlstd{(cdc}\hlopt{$}\hlstd{weight)}
-
-\hlkwd{median}\hlstd{(cdc}\hlopt{$}\hlstd{weight)}
+\hlcom{# mean(cdc$weight)}
+\hlkwd{require}\hlstd{(mosaic)}
+\hlkwd{mean}\hlstd{(}\hlopt{\mytilde}\hlstd{weight,} \hlkwc{data} \hlstd{= cdc)}
+\hlcom{# var(cdc$weight)}
+\hlkwd{var}\hlstd{(}\hlopt{\mytilde}\hlstd{weight,} \hlkwc{data} \hlstd{= cdc)}
+\hlcom{# median(cdc$weight)}
+\hlkwd{median}\hlstd{(}\hlopt{\mytilde}\hlstd{weight,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -156,7 +158,8 @@ While it makes sense to describe a quantitative variable like \hlstd{weight} in 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{smoke100)}
+\hlcom{# table(cdc$smoke100)}
+\hlkwd{tally}\hlstd{(}\hlopt{\mytilde}\hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -166,7 +169,8 @@ or instead look at the relative frequency distribution by typing
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{smoke100)}\hlopt{/}\hlnum{20000}
+\hlcom{# table(cdc$smoke100)/20000}
+\hlkwd{tally}\hlstd{(}\hlopt{\mytilde}\hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{format} \hlstd{=} \hlstr{"proportion"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -176,7 +180,8 @@ Notice how R automatically divides all entries in the table by 20,000 in the com
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{smoke100))}
+\hlcom{# barplot(table(cdc$smoke100))}
+\hlkwd{barchart}\hlstd{(}\hlkwd{tally}\hlstd{(}\hlopt{\mytilde}\hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{margins} \hlstd{=} \hlnum{FALSE}\hlstd{),} \hlkwc{horizontal} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -204,7 +209,8 @@ The \hlkwd{table} command can be used to tabulate any number of variables that y
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{gender,cdc}\hlopt{$}\hlstd{smoke100)}
+\hlcom{# table(cdc$gender,cdc$smoke100)}
+\hlkwd{tally}\hlstd{(gender} \hlopt{\mytilde} \hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{format} \hlstd{=} \hlstr{"count"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -214,7 +220,8 @@ Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{mosaicplot}\hlstd{(}\hlkwd{table}\hlstd{(cdc}\hlopt{$}\hlstd{gender,cdc}\hlopt{$}\hlstd{smoke100))}
+\hlcom{# mosaicplot(table(cdc$gender,cdc$smoke100))}
+\hlkwd{mosaicplot}\hlstd{(}\hlkwd{tally}\hlstd{(gender} \hlopt{\mytilde} \hlstd{smoke100,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{margins} \hlstd{=} \hlnum{FALSE}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -356,7 +363,7 @@ Suppose we want to extract just the data for the men in the sample, or just for 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{mdata} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, cdc}\hlopt{$}\hlstd{gender} \hlopt{==} \hlstr{"m"}\hlstd{)}
+\hlstd{mdata} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, gender} \hlopt{==} \hlstr{"m"}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -378,7 +385,7 @@ As an aside, you can use several of these conditions together with \texttt{\&} a
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{m_and_over30} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, cdc}\hlopt{$}\hlstd{gender} \hlopt{==} \hlstr{"m"} \hlopt{&} \hlstd{cdc}\hlopt{$}\hlstd{age} \hlopt{>} \hlnum{30}\hlstd{)}
+\hlstd{m_and_over30} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, gender} \hlopt{==} \hlstr{"m"} \hlopt{&} \hlstd{age} \hlopt{>} \hlnum{30}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -388,7 +395,7 @@ will give you the data for men over the age of 30. The \texttt{|} character is r
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{m_or_over30} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, cdc}\hlopt{$}\hlstd{gender} \hlopt{==} \hlstr{"m"} \hlopt{|} \hlstd{cdc}\hlopt{$}\hlstd{age} \hlopt{>} \hlnum{30}\hlstd{)}
+\hlstd{m_or_over30} \hlkwb{<-} \hlkwd{subset}\hlstd{(cdc, gender} \hlopt{==} \hlstr{"m"} \hlopt{|} \hlstd{age} \hlopt{>} \hlnum{30}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -406,7 +413,8 @@ With our subsetting tools in hand, we'll now return to the task of the day: maki
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{boxplot}\hlstd{(cdc}\hlopt{$}\hlstd{height)}
+\hlcom{# boxplot(cdc$height)}
+\hlkwd{bwplot}\hlstd{(}\hlopt{\mytilde}\hlstd{height,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -426,7 +434,8 @@ Confirm that the median and upper and lower quartiles reported in the numerical 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{boxplot}\hlstd{(cdc}\hlopt{$}\hlstd{height} \hlopt{\mytilde} \hlstd{cdc}\hlopt{$}\hlstd{gender)}
+\hlcom{# boxplot(cdc$height \mytilde cdc$gender)}
+\hlkwd{bwplot}\hlstd{(height} \hlopt{\mytilde} \hlstd{gender,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -442,9 +451,10 @@ The following two lines first make a new object called \hlstd{bmi} and then crea
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{bmi} \hlkwb{<-} \hlstd{(cdc}\hlopt{$}\hlstd{weight} \hlopt{/} \hlstd{cdc}\hlopt{$}\hlstd{height}\hlopt{^}\hlnum{2}\hlstd{)} \hlopt{*} \hlnum{703}
+\hlcom{# bmi <- (cdc$weight / cdc$height^2) * 703 boxplot(bmi \mytilde cdc$genhlth)}
 
-\hlkwd{boxplot}\hlstd{(bmi} \hlopt{\mytilde} \hlstd{cdc}\hlopt{$}\hlstd{genhlth)}
+\hlstd{cdc} \hlkwb{=} \hlkwd{transform}\hlstd{(cdc,} \hlkwc{bmi} \hlstd{= (weight}\hlopt{/}\hlstd{height}\hlopt{^}\hlnum{2}\hlstd{)} \hlopt{*} \hlnum{703}\hlstd{)}
+\hlkwd{bwplot}\hlstd{(bmi} \hlopt{\mytilde} \hlstd{genhlth,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -460,7 +470,8 @@ Finally, let's make some histograms. We can look at the histogram for the age of
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}\hlstd{(cdc}\hlopt{$}\hlstd{age)}
+\hlcom{# hist(cdc$age)}
+\hlkwd{histogram}\hlstd{(}\hlopt{\mytilde}\hlstd{age,} \hlkwc{data} \hlstd{= cdc)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -470,9 +481,10 @@ Histograms are generally a very good way to see the shape of a single distributi
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}\hlstd{(bmi)}
-
-\hlkwd{hist}\hlstd{(bmi,} \hlkwc{breaks} \hlstd{=} \hlnum{50}\hlstd{)}
+\hlcom{# hist(bmi)}
+\hlkwd{histogram}\hlstd{(}\hlopt{\mytilde}\hlstd{bmi,} \hlkwc{data} \hlstd{= cdc)}
+\hlcom{# hist(bmi, breaks = 50)}
+\hlkwd{histogram}\hlstd{(}\hlopt{\mytilde}\hlstd{bmi,} \hlkwc{data} \hlstd{= cdc,} \hlkwc{nint} \hlstd{=} \hlnum{50}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}

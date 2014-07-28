@@ -68,6 +68,7 @@ We consider real estate data from the city of Ames, Iowa.  The details of every 
 \hlkwd{download.file}\hlstd{(}\hlstr{"http://www.openintro.org/stat/data/ames.RData"}\hlstd{,} \hlkwc{destfile} \hlstd{=} \hlstr{"ames.RData"}\hlstd{)}
 
 \hlkwd{load}\hlstd{(}\hlstr{"ames.RData"}\hlstd{)}
+\hlkwd{require}\hlstd{(mosaic)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -93,7 +94,8 @@ Let's look at the distribution of area in our population of home sales by calcul
 \begin{alltt}
 \hlkwd{summary}\hlstd{(area)}
 
-\hlkwd{hist}\hlstd{(area)}
+\hlcom{# hist(area)}
+\hlkwd{histogram}\hlstd{(area)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -158,12 +160,27 @@ Not surprisingly, every time we take another random sample, we get a different s
 \end{knitrout}
 
 
+If you are familiar with computer programming, you know that a \hlnum{for} loop is a fundamental control-flow construct. However, you may find it easier to write loops using the \hlnum{mosaic} function \hlnum{do}, which simply repeats a statement and collects the results in a data frame. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{sample_means50} \hlkwb{=} \hlkwd{do}\hlstd{(}\hlnum{5000}\hlstd{)} \hlopt{*} \hlkwd{mean}\hlstd{(}\hlkwd{sample}\hlstd{(area,} \hlnum{50}\hlstd{))}
+\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{result,} \hlkwc{data} \hlstd{= sample_means50)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+
+
 If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the \hlkwc{breaks} argument.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}\hlstd{(sample_means50,} \hlkwc{breaks} \hlstd{=} \hlnum{25}\hlstd{)}
+\hlcom{# hist(sample_means50, breaks = 25)}
+\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{result,} \hlkwc{data} \hlstd{= sample_means50,} \hlkwc{nint} \hlstd{=} \hlnum{25}\hlstd{)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -174,6 +191,8 @@ Here we use R to take 5000 samples of size 50 from the population, calculate the
 \begin{exercise}
 How many elements are there in \hlstd{sample\_means50}?  Describe the sampling distribution, and be sure to specifically note its center.  Would you expect the distribution to change if we instead collected 50,000 sample means?
 \end{exercise}
+
+\paragraph{Nota Bene} The \hlnum{for} loop is an invaluable programming construction. However, everything that you need for this class can be done with \hlnum{do}. Please use whatever is most comfortable for you. 
 
 \subsection*{Interlude: The \texttt{for} loop}
 Let's take a break from the statistics for a moment to let that last block of code sink in.  You have just run your first for loop, a cornerstone of computer programming.  The idea behind the for loop is \emph{iteration}: it allows you to execute code as many times as you want without having to type out every iteration.  In the case above, we wanted to iterate the two lines of code inside the curly braces that take a random sample of size 50 from \hlstd{area} then save the mean of that sample into the \hlstd{sample\_means50} vector.  Without the for loop, this would be painful:
@@ -238,7 +257,8 @@ Mechanics aside, let's return to the reason we used a for loop: to compute a sam
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{hist}\hlstd{(sample_means50)}
+\hlcom{# hist(sample_means50)}
+\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{result,} \hlkwc{data} \hlstd{= sample_means50)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -252,11 +272,14 @@ To get a sense of the effect that sample size has on our distribution, let's bui
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{sample_means10} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{5000}\hlstd{)}
+\hlstd{sample_means50} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{5000}\hlstd{)}
 \hlstd{sample_means100} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{5000}\hlstd{)}
 
 \hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5000}\hlstd{) \{}
     \hlstd{samp} \hlkwb{<-} \hlkwd{sample}\hlstd{(area,} \hlnum{10}\hlstd{)}
     \hlstd{sample_means10[i]} \hlkwb{<-} \hlkwd{mean}\hlstd{(samp)}
+    \hlstd{samp} \hlkwb{<-} \hlkwd{sample}\hlstd{(area,} \hlnum{50}\hlstd{)}
+    \hlstd{sample_means50[i]} \hlkwb{<-} \hlkwd{mean}\hlstd{(samp)}
     \hlstd{samp} \hlkwb{<-} \hlkwd{sample}\hlstd{(area,} \hlnum{100}\hlstd{)}
     \hlstd{sample_means100[i]} \hlkwb{<-} \hlkwd{mean}\hlstd{(samp)}
 \hlstd{\}}
@@ -296,6 +319,55 @@ The first command specifies that you'd like to divide the plotting area into 3 r
 
 
 }. The \hlkwc{breaks} argument specifies the number of bins used in constructing the histogram.  The \hlkwc{xlim} argument specifies the range of the x-axis of the histogram, and by setting it equal to \hlstd{xlimits} for each histogram, we ensure that all three histograms will be plotted with the same limits on the x-axis.
+
+An alternative, shorter version of the above process works as follows. First, generate the three sets of sample means of different sizes. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{sample_means10} \hlkwb{<-} \hlkwd{do}\hlstd{(}\hlnum{5000}\hlstd{)} \hlopt{*} \hlkwd{mean}\hlstd{(}\hlkwd{sample}\hlstd{(area,} \hlnum{10}\hlstd{))}
+\hlstd{sample_means50} \hlkwb{<-} \hlkwd{do}\hlstd{(}\hlnum{5000}\hlstd{)} \hlopt{*} \hlkwd{mean}\hlstd{(}\hlkwd{sample}\hlstd{(area,} \hlnum{50}\hlstd{))}
+\hlstd{sample_means100} \hlkwb{<-} \hlkwd{do}\hlstd{(}\hlnum{5000}\hlstd{)} \hlopt{*} \hlkwd{mean}\hlstd{(}\hlkwd{sample}\hlstd{(area,} \hlnum{100}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+Next, combine these three $5000 \times 1$ data frames into one $15000 \times 1$ data frame.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{samp.dist} \hlkwb{=} \hlkwd{rbind}\hlstd{(sample_means10, sample_means50, sample_means100)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+Then add a new column \hlnum{sample.size} to the resulting data frame that indicates the sample size in each case. This new variable is simply $10$ repeated 5000 times, followed by $50$ repeated 5000 times, followed by $100$ repeated 5000 times. The use of the \hlnum{factor} function will ensure that \hlnum{R} considers this to be a categorical variable, and not a numerical one. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{samp.dist}\hlopt{$}\hlstd{sample.size} \hlkwb{=} \hlkwd{factor}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{10}\hlstd{,} \hlnum{50}\hlstd{,} \hlnum{100}\hlstd{),} \hlkwc{each} \hlstd{=} \hlnum{5000}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+Finally, draw the histogram using the \hlnum{|} formula notation. If you want to have the histograms stacked vertically rather than horizontally, use the \hlkwc{layout} argument. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{histogram}\hlstd{(}\hlopt{~}\hlstd{result} \hlopt{|} \hlstd{sample.size,} \hlkwc{data} \hlstd{= samp.dist,} \hlkwc{nint} \hlstd{=} \hlnum{20}\hlstd{,} \hlkwc{layout} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}
+    \hlnum{3}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+
 
 \begin{exercise}
 When the sample size is larger, what happens to the center?  What about the spread?

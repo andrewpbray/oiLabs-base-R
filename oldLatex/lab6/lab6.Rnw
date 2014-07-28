@@ -48,8 +48,17 @@ To investigate the link between these two ways of organizing this data, take a l
 Using the command below, create a new dataframe called \hlkwd{us12} that contains only the rows in \hlkwd{atheism} associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table~6? If not, why?
 
 <<us-atheism, eval=FALSE>>=
-us12 <- subset(atheism, atheism$nationality == "United States" & atheism$year == "2012")
+us12 = subset(atheism, nationality == "United States" & year == "2012")
 @
+%sum(us12$response == "atheist") / length(us12$response)
+<<echo=FALSE, eval=FALSE>>=
+require(mosaic)
+tally(~response, data=us12, format="proportion")
+@
+
+\emph{Hint:} Consider using functions like \hlnum{tally, table, sum} and/or \hlnum{length}.
+
+%Note that the above piece of code first counts how many atheists there are in the sample, and then divides this number by the total sample size.
 \end{exercise}
 
 
@@ -65,7 +74,7 @@ Write out the conditions for inference to construct a 95\% confidence interval f
 If the conditions for inference are reasonable, we can either calculate the standard error and construct the interval by hand, or allow the \hlkwd{inference} function to do it for us.
 
 <<us-atheism-ci, eval=FALSE, tidy = FALSE>>=
-inference(y = us12$response, est = "proportion", type = "ci", method = "theoretical", 
+inference(us12$response, est = "proportion", type = "ci", method = "theoretical", 
           success = "atheist")
 @
 
@@ -92,7 +101,7 @@ The first step is to make a vector \hlkwd{p} that is a sequence from $0$ to $1$ 
 n <- 1000
 p <- seq(0, 1, 0.01)
 me <- 2*sqrt(p*(1 - p)/n)
-plot(me ~ p)
+xyplot(me ~ p, ylab="Margin of Error", xlab="Population Proportion")
 @
 
 \begin{exercise}
@@ -101,6 +110,8 @@ Describe the relationship between \hlkwd{p} and \hlkwd{me}.
 
 \subsection*{Success-failure condition}
 The textbook emphasizes that you must always check conditions before making inference. For inference on proportions, the sample proportion can be assumed to be nearly normal if it is based upon a random sample of independent observations and if both $np \geq 10$ and $n(1 - p) \geq 10$. This rule of thumb is easy enough to follow, but it makes one wonder: what's so special about the number 10? The short answer is: nothing. You could argue that we would be fine with 9 or that we really should be using 11. What is the ``best'' value for such a rule of thumb is, at least to some degree, arbitrary.
+
+%However, when $np$ and $n(1-p)$ reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.
 
 We can investigate the interplay between $n$ and $p$ and the shape of the sampling distribution by using simulations. To start off, we simulate the process of drawing 5000 samples of size 1040 from a population with a true atheist proportion of $0.1$. For each of the 5000 samples we compute $\hat{p}$ and then plot a histogram to visualize their distribution.
 
@@ -130,6 +141,22 @@ Replicate the above simulation three more times but with modified sample sizes a
 
 Once you're done, you can reset the layout of the plotting window by using the command \hlkwd{par(}\hlkwc{mfrow = }\hlkwd{c(}\hlkwd{1,1}\hlkwd{))} or clicking on ``Clear All" above the plotting window (if using RStudio). Note that the latter will get rid of all your previous plots.
 
+Here is another way to perform the above simulations and compare the resulting histograms. Note that the code to generate the \hlnum{p\_hats} is exactly the same -- only the code to do the loop and draw the plots is different. 
+
+<<eval=FALSE>>=
+n = 1040
+p = 0.1
+sim1 = do(1000) * c(sample.size = n, proportion = p, p_hats = sum(sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1-p)) == "atheist") / n)
+n = 400
+p = 0.2
+sim2 = do(1000) * c(sample.size = n, proportion = p, p_hats = sum(sample(c("atheist", "non_atheist"), n, replace = TRUE, prob = c(p, 1-p)) == "atheist") / n)
+sim = rbind(sim1, sim2)
+sim = transform(sim, sample.size = as.factor(sample.size))
+sim = transform(sim, proportion = as.factor(proportion))
+histogram(~p_hats | proportion + sample.size, data=sim)
+@
+
+
 \begin{exercise}
 If you refer to Table 6,  you'll find that Australia has a sample proportion of 0.1 on a sample size of 1040, and that Ecuador has a sample proportion of 0.02 on 400 subjects. Let's suppose for this exercise that these point estimates are actually the truth. Then given the shape of their respective sampling distributions, do you think it is sensible to proceed with inference and report margin of errors, as the reports does?
 \end{exercise}
@@ -142,7 +169,7 @@ The question of atheism was asked by WIN-Gallup International in a similar surve
 \item Answer the following two questions using the \hlkwd{inference} function. As always, write out the hypotheses for any tests you conduct and outline the status of the conditions for inference.
 \begin{enumerate}[(a)]
 \item Is there convincing evidence that Spain has seen a change in its atheism index between 2005 and 2012? \\
-\textit{Hint:} Create a new data set for respondents from Spain. Then use their responses as the first input on the \hlkwd{inference}, and use \hlkwd{year} as the grouping variable.
+\textit{Hint:} Create a new data set for respondents from Spain. Form confidence intervals for the true proportion of athiests in both years, and determine whether they overlap. 
 \item Is there convincing evidence that the United States has seen a change in its atheism index between 2005 and 2012?
 \end{enumerate}
 

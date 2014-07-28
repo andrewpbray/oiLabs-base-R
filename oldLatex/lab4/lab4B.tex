@@ -204,20 +204,20 @@ Lastly, we construct the confidence intervals.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{lower_vector} \hlkwb{<-} \hlstd{samp_mean} \hlopt{-} \hlnum{1.96} \hlopt{*} \hlstd{samp_sd}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
+\hlstd{lower} \hlkwb{<-} \hlstd{samp_mean} \hlopt{-} \hlnum{1.96} \hlopt{*} \hlstd{samp_sd}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
 
-\hlstd{upper_vector} \hlkwb{<-} \hlstd{samp_mean} \hlopt{+} \hlnum{1.96} \hlopt{*} \hlstd{samp_sd}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
+\hlstd{upper} \hlkwb{<-} \hlstd{samp_mean} \hlopt{+} \hlnum{1.96} \hlopt{*} \hlstd{samp_sd}\hlopt{/}\hlkwd{sqrt}\hlstd{(n)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
 
 
-Lower bounds of these 50 confidence intervals are stored in \hlkwd{lower\_vector}, and the upper bounds are in \hlkwd{upper\_vector}. Let's view the first interval.
+Lower bounds of these 50 confidence intervals are stored in \hlnum{lower}, and the upper bounds are in \hlnum{upper}. Let's view the first interval.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{c}\hlstd{(lower_vector[}\hlnum{1}\hlstd{], upper_vector[}\hlnum{1}\hlstd{])}
+\hlkwd{c}\hlstd{(lower[}\hlnum{1}\hlstd{], upper[}\hlnum{1}\hlstd{])}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -234,7 +234,7 @@ Lower bounds of these 50 confidence intervals are stored in \hlkwd{lower\_vector
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{plot_ci}\hlstd{(lower_vector, upper_vector,} \hlkwd{mean}\hlstd{(population))}
+\hlkwd{plot_ci}\hlstd{(lower, upper,} \hlkwd{mean}\hlstd{(population))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}

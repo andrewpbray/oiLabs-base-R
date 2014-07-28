@@ -107,8 +107,9 @@ While we don't have any data from a shooter we know to have independent shots, t
 
 <<head-tail, eval=FALSE>>=
 outcomes <- c("heads", "tails")
-
-sample(outcomes, size = 1, replace = TRUE)
+require(mosaic)
+# sample(outcomes, size = 1, replace = TRUE)
+resample(outcomes, size = 1)
 @
 
 The vector \hlstd{outcomes} can be thought of as a hat with two slips of paper in it: one slip says ``heads" and the other says ``tails". The function \hlkwd{sample} draws one slip from the hat and tells us if it was a head or a tail. 
@@ -118,7 +119,8 @@ Run the second command listed above several times. Just like when flipping a coi
 If you wanted to simulate flipping a fair coin 100 times, you could either run the function 100 times or, more simply, adjust the \hlkwc{size} argument, which governs how many samples to draw (the \hlkwc{replace = }\hlnum{TRUE} argument indicates we put the slip of paper back in the hat before drawing again). Save the resulting vector of heads and tails in a new object called \hlstd{sim\_fair\_coin}.
 
 <<sim-fair-coin, eval=FALSE>>=
-sim_fair_coin <- sample(outcomes, size = 100, replace = TRUE)
+# sim_fair_coin <- sample(outcomes, size = 100, replace = TRUE)
+sim_fair_coin <- resample(outcomes, size = 100)
 @
 
 To view the results of this simulation, type the name of the object and then use \hlkwd{table} to count up the number of heads and tails.
@@ -132,7 +134,8 @@ table(sim_fair_coin)
 Since there are only two elements in \hlstd{outcomes}, the probability that we ``flip'' a coin and it lands heads is 0.5. Say we're trying to simulate an unfair coin that we know only lands heads 20\% of the time. We can adjust for this by adding an argument called \hlkwc{prob}, which provides a vector of two probability weights.
 
 <<sim-unfair-coin, eval=FALSE>>=
-sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob = c(0.2, 0.8))
+# sim_unfair_coin <- sample(outcomes, size = 100, replace = TRUE, prob = c(0.2, 0.8))
+sim_unfair_coin <- resample(outcomes, size = 100, prob = c(0.2, 0.8))
 @
 
 \hlkwc{prob}\hlkwc{=}\hlkwd{c}\hlnum{(0.2,0.8)} indicates that for the two elements in the \hlstd{outcomes} vector, we want to select the first one, \hlstr{heads}, with probability 0.2 and the second one, \hlstr{tails} with probability 0.8.\symbolfootnote[2]{Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled ``head" and 8 chips ``tail". Therefore at each draw, the probability of drawing a chip that says ``head" is 20\%, and ``tail" is 80\%.}
@@ -156,8 +159,8 @@ Simulating a basketball player who has independent shots uses the same mechanism
 
 <<sim-basket, eval=FALSE>>=
 outcomes <- c("H", "M")
-
-sim_basket <- sample(outcomes, size = 1, replace = TRUE)
+# sim_basket <- sample(outcomes, size = 1, replace = TRUE)
+sim_basket <- resample(outcomes, size = 1)
 @
 
 To make a valid comparison between Kobe and our simulated independent shooter, we need to align both their shooting percentage and the number of attempted shots.

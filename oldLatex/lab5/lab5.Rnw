@@ -1,56 +1,6 @@
-\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
+\documentclass{article}
 
 \input{../labStyle}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
 \begin{document}
 
@@ -65,16 +15,11 @@ In 2004, the state of North Carolina released a large data set containing inform
 \subsection*{Exploratory analysis}
 Load the \hlstd{nc} data set into our workspace.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{download.file}\hlstd{(}\hlstr{"http://www.openintro.org/stat/data/nc.RData"}\hlstd{,} \hlkwc{destfile} \hlstd{=} \hlstr{"nc.RData"}\hlstd{)}
+<<load-data, eval=FALSE>>=
+download.file("http://www.openintro.org/stat/data/nc.RData", destfile = "nc.RData")
 
-\hlkwd{load}\hlstd{(}\hlstr{"nc.RData"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+load("nc.RData")
+@
 
 We have observations on 13 different variables, some categorical and some numerical. The meaning of each variable is as follows.
 
@@ -102,14 +47,9 @@ What are the cases in this data set? How many cases are there in our sample?
 
 As a first step in the analysis, we should consider summaries of the data. This can be done using the \hlkwd{summary} command:
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{summary}\hlstd{(nc)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<summary, eval=FALSE>>=
+summary(nc)
+@
 
 As you review the variable summaries, consider which variables are categorical and which are numerical. For numerical variables, are there outliers? If you aren't sure or want to take a closer look at the data, make a graph.
 
@@ -121,14 +61,11 @@ Make a side-by-side boxplot of \hlstd{habit} and \hlstd{weight}. What does the p
 
 The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions using the following function to split the \hlkwd{weight} variable into the \hlkwd{habit} groups, then take the mean of each using the \hlkwd{mean} function.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{by}\hlstd{(nc}\hlopt{$}\hlstd{weight, nc}\hlopt{$}\hlstd{habit, mean)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<by-means, eval=FALSE, message=FALSE>>=
+# by(nc$weight, nc$habit, mean)
+require(mosaic)
+mean(weight ~ habit, data=nc)
+@
 % mean color of function
 
 There is an observed difference, but is this difference statistically significant? In order to answer this question we will conduct a hypothesis test.
@@ -145,15 +82,10 @@ Write the hypotheses for testing if the average weights of babies born to smokin
 
 Next, we introduce a new function, \hlkwd{inference}, that we will use for conducting hypothesis tests and constructing confidence intervals. 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{inference}\hlstd{(}\hlkwc{y} \hlstd{= nc}\hlopt{$}\hlstd{weight,} \hlkwc{x} \hlstd{= nc}\hlopt{$}\hlstd{habit,} \hlkwc{est} \hlstd{=} \hlstr{"mean"}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"ht"}\hlstd{,} \hlkwc{null} \hlstd{=} \hlnum{0}\hlstd{,}
-          \hlkwc{alternative} \hlstd{=} \hlstr{"twosided"}\hlstd{,} \hlkwc{method} \hlstd{=} \hlstr{"theoretical"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<inf-weight-habit-ht, eval=FALSE, tidy=FALSE>>=
+inference(y = nc$weight, x = nc$habit, est = "mean", type = "ht", null = 0, 
+          alternative = "twosided", method = "theoretical")
+@
 
 Let's pause for a moment to go through the arguments of this custom function.
 \begin{itemize}
@@ -179,16 +111,11 @@ Change the \hlkwc{type} argument to \hlstr{"ci"} to construct and record a confi
 
 By default the function reports an interval for ($\mu_{nonsmoker} - \mu_{smoker}$). We can easily change this order by using the \hlkwc{order} argument:
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{inference}\hlstd{(}\hlkwc{y} \hlstd{= nc}\hlopt{$}\hlstd{weight,} \hlkwc{x} \hlstd{= nc}\hlopt{$}\hlstd{habit,} \hlkwc{est} \hlstd{=} \hlstr{"mean"}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"ci"}\hlstd{,} \hlkwc{null} \hlstd{=} \hlnum{0}\hlstd{,}
-          \hlkwc{alternative} \hlstd{=} \hlstr{"twosided"}\hlstd{,} \hlkwc{method} \hlstd{=} \hlstr{"theoretical"}\hlstd{,}
-          \hlkwc{order} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"smoker"}\hlstd{,}\hlstr{"nonsmoker"}\hlstd{))}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<inf-weight-habit-ci, eval=FALSE, tidy=FALSE>>=
+inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, 
+          alternative = "twosided", method = "theoretical", 
+          order = c("smoker","nonsmoker"))
+@
 
 \vspace{2cm}
 

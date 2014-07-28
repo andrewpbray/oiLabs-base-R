@@ -1,61 +1,16 @@
-\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
+\documentclass{article}
 
 \input{../labStyle}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
 \begin{document}
 
-
-
+<<setup, include=FALSE, cache=FALSE>>=
+hook_source = knit_hooks$get('source') # the following correct tilde display
+knit_hooks$set(source = function(x, options) {
+  txt = hook_source(x, options)
+  gsub('~', '\\\\mytilde', txt)
+})
+@
 
 \license{This is a product of OpenIntro that is released under a Creative Commons Attribution-ShareAlike 3.0 Unported (\web{http://creativecommons.org/licenses/by-sa/3.0/}). This lab was adapted for OpenIntro by Andrew Bray and Mine \c{C}etinkaya-Rundel from a lab written by the faculty and TAs of UCLA Statistics.}
 
@@ -70,16 +25,11 @@ In this lab we'll be looking at data from all 30 Major League Baseball teams and
 \subsection*{The data}
 Let's load up the data for the 2011 season.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{download.file}\hlstd{(}\hlstr{"http://www.openintro.org/stat/data/mlb11.RData"}\hlstd{,} \hlkwc{destfile} \hlstd{=} \hlstr{"mlb11.RData"}\hlstd{)}
+<<load-data, eval=FALSE>>=
+download.file("http://www.openintro.org/stat/data/mlb11.RData", destfile = "mlb11.RData")
 
-\hlkwd{load}\hlstd{(}\hlstr{"mlb11.RData"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+load("mlb11.RData")
+@
 
 In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins\symbolfootnote[2]{Though it's not necessary for this lab, if you'd like a refresher in the rules of baseball and a description of these statistics, visit \web{http://en.wikipedia.org/wiki/Baseball_rules} and \web{http://en.wikipedia.org/wiki/Baseball_statistics}.}. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging.  For the first portion of the analysis we'll consider the seven traditional variables. At the end of the lab, you'll work with the newer variables on your own.
 
@@ -89,14 +39,11 @@ What type of plot would you use to display the relationship between \hlkwd{runs}
 
 If the relationship looks linear, we can quantify the strength of the relationship with the correlation coefficient.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{cor}\hlstd{(mlb11}\hlopt{$}\hlstd{runs, mlb11}\hlopt{$}\hlstd{at_bats)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<cor, eval=FALSE, message=FALSE>>=
+# cor(mlb11$runs, mlb11$at_bats)
+require(mosaic)
+cor(runs ~ at_bats, data=mlb11)
+@
 
 \subsection*{Sum of squared residuals}
 Think back to the way that we described the distribution of a single variable. Recall that we discussed characteristics such as center, spread, and shape.  It's also useful to be able to describe the relationship of two numerical variables, such as \hlkwd{runs} and \hlkwd{at\_bats} above.
@@ -107,14 +54,9 @@ Looking at your plot from the previous exercise, describe the relationship betwe
 
 Just as we used the mean and standard deviation to summarize a single variable, we can summarize the relationship between these two variables by finding the line that best follows their association.  Use the following interactive function to select the line that you think does the best job of going through the cloud of points.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{plot_ss}\hlstd{(}\hlkwc{x} \hlstd{= mlb11}\hlopt{$}\hlstd{at_bats,} \hlkwc{y} \hlstd{= mlb11}\hlopt{$}\hlstd{runs)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<plotss-atbats-runs, eval=FALSE>>=
+plot_ss(x = mlb11$at_bats, y = mlb11$runs)
+@
 
 After running this command, you'll be prompted to click two points on the plot to define a line.  Once you've done that, the line you specified will be shown in black and the residuals in blue.  Note that there are 30 residuals, one for each of the 30 observations. Recall that the residuals are the difference between the observed values and the values predicted by the line:
 
@@ -122,14 +64,9 @@ After running this command, you'll be prompted to click two points on the plot t
 
 The most common way to do linear regression is to select the line that minimizes the sum of squared residuals.  To visualize the squared residuals, you can rerun the plot command and add the argument \hlkwc{showSquares = }\hlnum{TRUE}.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{plot_ss}\hlstd{(}\hlkwc{x} \hlstd{= mlb11}\hlopt{$}\hlstd{at_bats,} \hlkwc{y} \hlstd{= mlb11}\hlopt{$}\hlstd{runs,} \hlkwc{showSquares} \hlstd{=} \hlnum{TRUE}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<plotss-atbats-runs-squares, eval=FALSE>>=
+plot_ss(x = mlb11$at_bats, y = mlb11$runs, showSquares = TRUE)
+@
 
 Note that the output from the \hlkwd{plot\_ss} function provides you with the slope and intercept of your line as well as the sum of squares.
 
@@ -141,27 +78,17 @@ Using \hlkwd{plot\_ss}, choose a line that does a good job of minimizing the sum
 
 It is rather cumbersome to try to get the correct least squares line, i.e. the line that minimizes the sum of squared residuals, through trial and error. Instead we can use the \hlkwd{lm} function in R to fit the linear model (a.k.a. regression line).
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(runs} \hlopt{\mytilde} \hlstd{at_bats,} \hlkwc{data} \hlstd{= mlb11)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<m1, eval=FALSE>>=
+m1 <- lm(runs ~ at_bats, data = mlb11)
+@
 
 The first argument in the function \hlkwd{lm} is a formula that takes the form \hlkwd{y}\hlkwd{\texttildelow~}\hlkwd{x}.  Here it can be read that we want to make a linear model of \hlkwd{runs} as a function of \hlkwd{at\_bats}.  The second argument specifies that R should look in the \hlkwd{mlb11} data frame to find the \hlkwd{runs} and \hlkwd{at\_bats} variables.
 
 The output of \hlkwd{lm} is an object that contains all of the information we need about the linear model that was just fit.  We can access this information using the summary function.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{summary}\hlstd{(m1)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<summary-m1, eval=FALSE>>=
+summary(m1)
+@
 
 Let's consider this output piece by piece.  First, the formula used to describe the model is shown at the top. After the formula you find the five-number summary of the residuals. The ``Coefficients'' table shown next is key; its first column displays the linear model's y-intercept and the coefficient of \hlkwd{at\_bats}. With this table, we can write down the least squares regression line for the linear model:
 
@@ -178,16 +105,12 @@ Fit a new model that uses \hlkwd{homeruns} to predict \hlkwd{runs}.  Using the e
 
 Let's create a scatterplot with the least squares line laid on top.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{plot}\hlstd{(mlb11}\hlopt{$}\hlstd{runs} \hlopt{\mytilde} \hlstd{mlb11}\hlopt{$}\hlstd{at_bats)}
-
-\hlkwd{abline}\hlstd{(m1)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<reg-with-line, eval=FALSE>>=
+# plot(mlb11$runs ~ mlb11$at_bats)
+# abline(m1)
+xyplot(runs ~ at_bats, data=mlb11)
+ladd(panel.abline(m1))
+@
 
 The function \hlkwd{abline} plots a line based on its slope and intercept.  Here, we used a shortcut by providing the model \hlkwd{m1}, which contains both parameter estimates. This line can be used to predict $y$ at any value of $x$.  When predictions are made for values of $x$ that are beyond the range of the observed data, it is referred to as \emph{extrapolation} and is not usually recommended.  However, predictions made within the range of the data are more reliable.  They're also used to compute the residuals.
 
@@ -204,16 +127,11 @@ To assess whether the linear model is reliable, we need to check for  (1) linear
 \begin{enumerate}[(1)]
 \item Linearity: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats.  Recall that any code following a \hlcom{\#} is intended to be a comment that helps understand the code but is ignored by R.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{plot}\hlstd{(m1}\hlopt{$}\hlstd{residuals} \hlopt{\mytilde} \hlstd{mlb11}\hlopt{$}\hlstd{at_bats)}
-
-\hlkwd{abline}\hlstd{(}\hlkwc{h} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{3}\hlstd{)}  \hlcom{# adds a horizontal dashed line at y = 0}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<residuals, eval=FALSE>>=
+# plot(m1$residuals ~ mlb11$at_bats)
+# abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
+xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
+@
 
 \begin{exercise}
 Is there any apparent pattern in the residuals plot? What does this indicate about the linearity of the relationship between runs and at-bats?
@@ -221,27 +139,17 @@ Is there any apparent pattern in the residuals plot? What does this indicate abo
 
 \item Nearly normal residuals: To check this condition, we can look at a histogram
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{hist}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<hist-res, eval=FALSE>>=
+# hist(m1$residuals)
+histogram(~residuals(m1), fit="normal")
+@
 
 or a normal probability plot of the residuals.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{qqnorm}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}
-
-\hlkwd{qqline}\hlstd{(m1}\hlopt{$}\hlstd{residuals)}  \hlcom{# adds diagonal line to the normal prob plot}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
-
+<<qq-res, eval=FALSE>>=
+qqnorm(residuals(m1))
+qqline(residuals(m1))  # adds diagonal line to the normal prob plot
+@
 
 \begin{exercise}
 Based on the histogram and the normal probability plot, does the nearly normal residuals condition appear to be met?

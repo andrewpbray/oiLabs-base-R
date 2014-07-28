@@ -117,15 +117,15 @@ for(i in 1:50){
 Lastly, we construct the confidence intervals.
 
 <<ci50, eval=FALSE>>=
-lower_vector <- samp_mean - 1.96 * samp_sd / sqrt(n) 
+lower <- samp_mean - 1.96 * samp_sd / sqrt(n) 
 
-upper_vector <- samp_mean + 1.96 * samp_sd / sqrt(n)
+upper <- samp_mean + 1.96 * samp_sd / sqrt(n)
 @
 
-Lower bounds of these 50 confidence intervals are stored in \hlkwd{lower\_vector}, and the upper bounds are in \hlkwd{upper\_vector}. Let's view the first interval.
+Lower bounds of these 50 confidence intervals are stored in \hlnum{lower}, and the upper bounds are in \hlnum{upper}. Let's view the first interval.
 
 <<first-interval, eval=FALSE>>=
-c(lower_vector[1],upper_vector[1])
+c(lower[1],upper[1])
 @
 
 \vspace{1.5cm}
@@ -137,7 +137,7 @@ c(lower_vector[1],upper_vector[1])
 \item Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.\symbolfootnote[2]{This figure should look familiar (See Section 4.2.2.)}
 
 <<plot-ci, eval=FALSE>>=
-plot_ci(lower_vector, upper_vector, mean(population))
+plot_ci(lower, upper, mean(population))
 @
 
 \item Pick a confidence level of your choosing, provided it is not 95\%. What is the appropriate critical value?
