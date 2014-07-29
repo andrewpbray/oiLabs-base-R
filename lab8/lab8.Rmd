@@ -27,8 +27,7 @@ Issue 4, August 2005, Pages 369-376, ISSN 0272-7757,
 In this lab we will analyze the data from this study in order to learn
 what goes into a positive professor evaluation.
 
-The data {#the-data .unnumbered}
---------
+## The data
 
 The data were gathered from end of semester student evaluations for a
 large sample of professors from the University of Texas at Austin. In

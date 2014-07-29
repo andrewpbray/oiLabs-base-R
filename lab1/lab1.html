@@ -177,9 +177,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol style="list-style-type: decimal">
 =======
 <p>As an aside, you can use several of these conditions together with <code>&amp;</code> and <code>|</code>. The <code>&amp;</code> is read “and” so that</p>
-<pre class="sourceCode r"><code class="sourceCode r">m_and_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, cdc$gender ==<span class="st"> &quot;m&quot;</span> &amp;<span class="st"> </span>cdc$age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">m_and_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, gender ==<span class="st"> &quot;m&quot;</span> &amp;<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
 <p>will give you the data for men over the age of 30. The <code>|</code> character is read “or” so that</p>
-<pre class="sourceCode r"><code class="sourceCode r">m_or_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, cdc$gender ==<span class="st"> &quot;m&quot;</span> |<span class="st"> </span>cdc$age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">m_or_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, gender ==<span class="st"> &quot;m&quot;</span> |<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
 <p>will take people who are men or over the age of 30 (why that’s an interesting group is hard to say, but right now the mechanics of this are the important thing). In principle, you may use as many “and” and “or” clauses as you like when forming a subset.</p>
 <ol start="3" style="list-style-type: decimal">
 >>>>>>> 1e08c166fcaa77aedb693ad087eef0328c0a56b2
