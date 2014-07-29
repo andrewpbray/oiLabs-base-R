@@ -212,13 +212,13 @@ This new data set contains all the same variables but just under half the rows. 
 As an aside, you can use several of these conditions together with `&` and `|`. The `&` is read "and" so that
 
 ```{r males-and-over30, eval=FALSE}
-m_and_over30 <- subset(cdc, cdc$gender == "m" & cdc$age > 30)
+m_and_over30 <- subset(cdc, gender == "m" & age > 30)
 ```
 
 will give you the data for men over the age of 30. The `|` character is read "or" so that
 
 ```{r males-or-over30, eval=FALSE}
-m_or_over30 <- subset(cdc, cdc$gender == "m" | cdc$age > 30)
+m_or_over30 <- subset(cdc, gender == "m" | age > 30)
 ```
 
 will take people who are men or over the age of 30 (why that's an interesting group is hard to say, but right now the mechanics of this are the important thing). In principle, you may use as many "and" and "or" clauses as you like when forming a subset.
