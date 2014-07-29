@@ -70,7 +70,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <div id="batter-up" class="section level2">
 <h2>Batter up</h2>
-<p>The movie <em>Moneyball</em> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, better predict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
+<p>The movie “Moneyball” focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, better predict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
 <p>In this lab we’ll be looking at data from all 30 Major League Baseball teams and examining the linear relationship between runs scored in a season and a number of other player statistics. Our aim will be to summarize these relationships both graphically and numerically in order to find which variable, if any, helps us best predict a team’s runs scored in a season.</p>
 </div>
 <div id="the-data" class="section level2">
@@ -135,9 +135,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="model-diagnostics" class="section level2">
 <h2>Model diagnostics</h2>
 <p>To assess whether the linear model is reliable, we need to check for (1) linearity, (2) nearly normal residuals, and (3) constant variability.</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li>Linearity: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats. Recall that any code following a <em>#</em> is intended to be a comment that helps understand the code but is ignored by R.</li>
-</ul>
+</ol>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m1$residuals ~<span class="st"> </span>mlb11$at_bats)
 
 <span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">3</span>)  <span class="co"># adds a horizontal dashed line at y = 0</span></code></pre>
@@ -161,6 +161,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol start="8" style="list-style-type: decimal">
 <li>Based on the plot in (1), does the constant variability condition appear to be met?</li>
 </ol>
+<hr />
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On Your Own</h2>
