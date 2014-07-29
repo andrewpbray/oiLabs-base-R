@@ -17,7 +17,8 @@ predict the ability to score runs than typical statistics like home runs, RBIs
 (runs batted in), and batting average. Obtaining players who excelled in these 
 underused statistics turned out to be much more affordable for the team.
 
-In this lab we'll be looking at data from all 30 Major League Baseball teams and examining the linear relationship between runs scored in a season and a number 
+In this lab we'll be looking at data from all 30 Major League Baseball teams and
+examining the linear relationship between runs scored in a season and a number 
 of other player statistics. Our aim will be to summarize these relationships 
 both graphically and numerically in order to find which variable, if any, helps 
 us best predict a team's runs scored in a season.
@@ -75,7 +76,8 @@ plot_ss(x = mlb11$at_bats, y = mlb11$runs)
 After running this command, you'll be prompted to click two points on the plot 
 to define a line. Once you've done that, the line you specified will be shown in
 black and the residuals in blue. Note that there are 30 residuals, one for each 
-of the 30 observations. Recall that the residuals are the difference between the observed values and the values predicted by the line:
+of the 30 observations. Recall that the residuals are the difference between the
+observed values and the values predicted by the line:
 
 \[
   e_i = y_i - \hat{y}_i
@@ -89,7 +91,8 @@ the plot command and add the argument `showSquares = TRUE`.
 plot_ss(x = mlb11$at_bats, y = mlb11$runs, showSquares = TRUE)
 ```
 
-Note that the output from the `plot_ss` function provides you with the slope and intercept of your line as well as the sum of squares.
+Note that the output from the `plot_ss` function provides you with the slope and
+intercept of your line as well as the sum of squares.
 
 3.  Using `plot_ss`, choose a line that does a good job of minimizing the sum of
     squares. Run the function several times. What was the smallest sum of 
@@ -241,5 +244,8 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
     problems? Be specific in your answer.
 
 <div id="license">
-This is a product of OpenIntro that is released under a [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel from a lab written by the faculty and TAs of UCLA Statistics.
+This is a product of OpenIntro that is released under a [Creative Commons 
+Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). 
+This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel 
+from a lab written by the faculty and TAs of UCLA Statistics.
 </div>
