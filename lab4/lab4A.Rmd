@@ -97,26 +97,23 @@ should expect when estimating the population mean this way. The distribution
 of sample means, called the *sampling distribution*, can help us understand 
 this variability. In this lab, because we have access to the population, we 
 can build up the sampling distribution for the sample mean by repeating the 
-above steps many times. Here we will generate 5000 samples and compute the 
-sample mean of each.
+above steps many times.
+
+Computing a single sample mean is easy:
+
+```{r samp, eval=FALSE}
+samp <- mean(sample(area, 50))
+```
+
+But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the mosaic `do` function:
 
 ```{r loop, eval=FALSE}
-sample_means50 <- rep(0, 5000)
+sample_means50 <- do(5000) * mean(sample(area, 50))
 
-for(i in 1:5000){
-   samp <- sample(area, 50)
-   sample_means50[i] <- mean(samp)
-   }
-
-hist(sample_means50)
-```
-
-If you are familiar with computer programming, you know that a `for` loop is a fundamental control-flow construct. However, you may find it easier to write loops using the `mosaic` function `do`, which simply repeats a statement and collects the results in a data frame. 
-
-```{r eval=FALSE}
-sample_means50 = do(5000) * mean(sample(area, 50))
 histogram(~result, data=sample_means50)
 ```
+
+The do function simply repeats a statement and collects the results in a data frame, under the column "result".
 
 If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the `breaks` argument.
 
@@ -133,80 +130,54 @@ the mean of each sample, and store each result in a vector called
     expect the distribution to change if we instead collected 50,000 sample 
     means?
 
-Note: The `for` loop is an invaluable programming construction. However, everything that you need for this class can be done with `do`. Please use whatever is most comfortable for you. 
+## Interlude: The `do` function
 
-## Interlude: The `for` loop
+Let's take a break from the statistics for a moment to let that last block of code sink in.  The idea behind the do function is *repetition*: it allows you to execute a line of code as many times as you want and put the results in a data frame.  In the case above, we wanted to repeatedly take a random sample of size 50 from `area` and then save the mean of that sample into the `sample_means50` vector.
 
-Let's take a break from the statistics for a moment to let that last block of code sink in.  You have just run your first for loop, a cornerstone of computer programming.  The idea behind the for loop is *iteration*: it allows you to execute code as many times as you want without having to type out every iteration.  In the case above, we wanted to iterate the two lines of code inside the curly braces that take a random sample of size 50 from `area` then save the mean of that sample into the `sample_means50` vector.  Without the for loop, this would be painful:
+Without the do function, this would be painful. First, we'd have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we'd have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the `sample_means50` vector:
 
 ```{r loop-long, eval=FALSE}
 sample_means50 <- rep(0, 5000)
 
-samp <- sample(area, 50)
-sample_means50[1] <- mean(samp)
-
-samp <- sample(area, 50)
-sample_means50[2] <- mean(samp)
-
-samp <- sample(area, 50)
-sample_means50[3] <- mean(samp)
-
-samp <- sample(area, 50)
-sample_means50[4] <- mean(samp)
+sample_means50[1] <- mean(sample(area, 50))
+sample_means50[2] <- mean(sample(area, 50))
+sample_means50[3] <- mean(sample(area, 50))
+sample_means50[4] <- mean(sample(area, 50))
+# ...and so on, 5000 times
 ```
 
-and so on...
+With the do function, these thousands of lines of code are compressed into one line:
 
-With the for loop, these thousands of lines of code are compressed into a 
-handful of lines. We've added one extra line to the code below, which prints 
-the variable `i` during each iteration of the `for` loop. Run this code.
-
-```{r loop-again, eval=FALSE}
-sample_means50 <- rep(0, 5000)
-
-for(i in 1:5000){
-   samp <- sample(area, 50)
-   sample_means50[i] <- mean(samp)
-   print(i)
-   }
+```{r do-again, eval=FALSE}
+sample_means50 <- do(5000) * mean(sample(area, 50))
 ```
 
-Let's consider this code line by line to figure out what it does.  In the 
-first line we *initialized a vector*.  In this case, we created a vector of 
-5000 zeros called `sample_means50`.  This vector will will store values 
-generated within the `for` loop.
+Behind the scenes, our code works like this:
 
-The second line calls the `for` loop itself.  The syntax can be loosely read as, 
-"for every element `i` from 1 to 5000, run the following lines of code". You 
-can think of `i` as the counter that keeps track of which loop you're on. 
-Therefore, more precisely, the loop will run once when `i = 1`, then once when 
-`i = 2`, and so on up to `i = 5000`.
+**1.** Creates an empty data frame with a single column titled "results".
 
-The body of the `for` loop is the part inside the curly braces, and this set of 
-code is run for each value of `i`.  Here, on every loop, we take a random 
-sample of size 50 from `area`, take its mean, and store it as the 
-$i$<sup>th</sup> element of `sample_means50`.
+**2.** Takes a sample of size 50 and computes its mean.
 
-In order to display that this is really happening, we asked R to print `i` at 
-each iteration. This line of code is optional and is only used for displaying 
-what's going on while the `for` loop is running.
+**3.** Repeats step 2 5000 times, putting each sample mean into the next available slot in the "results" column of the data frame.
 
-The `for` loop allows us to not just run the code 5000 times, but to neatly 
-package the results, element by element, into the empty vector that we 
-initialized at the outset. 
+**4.** Puts the data frame inside the variable `sample_means50`.
 
-5.  To make sure you understand what you've done in this loop, try running a 
-    smaller version.  Initialize a vector of 100 zeros called 
-    `sample_means_small`.  Run a loop that takes a sample of size 50 from 
-    `area` and stores the sample mean in `sample_means_small`, but only 
-    iterate from 1 to 100.  Print the output to your screen (type 
-    `sample_means_small` into the console and press enter).  How many elements 
+If we look at the first few entires of `sample_means50` after we run the do function, we can see that our code did exactly this:
+
+```{r head-do, eval=FALSE}
+head(sample_means50)
+```
+
+5.  To make sure you understand what the do function does, try modifying the
+    code to take only 100 sample means and put them in a data frame named
+    `sample_means_small`. Print the output to your screen (type 
+    `sample_means_small` into the console and press enter). How many elements 
     are there in this object called `sample_means_small`? What does each 
     element represent?
 
 ## Sample size and the sampling distribution
 
-Mechanics aside, let's return to the reason we used a `for` loop: to compute a 
+Mechanics aside, let's return to the reason we used the `do` function: to compute a 
 sampling distribution, specifically, this one.
 
 ```{r hist, eval=FALSE}
@@ -220,60 +191,18 @@ living area of the the population, and the spread of the distribution
 indicates how much variability is induced by sampling only 50 home sales.
 
 To get a sense of the effect that sample size has on our distribution, let's 
-build up two more sampling distributions: one based on a sample size of 10 and 
-another based on a sample size of 100.
+build up three sampling distributions: one based on a sample size of 10, one
+based on a sample size of 50, and another based on a sample size of 100.
 
 ```{r samp-10-100, eval=FALSE}
-sample_means10 <- rep(0, 5000)
-sample_means100 <- rep(0, 5000)
-
-for(i in 1:5000){
-  samp <- sample(area, 10)
-  sample_means10[i] <- mean(samp)
-  samp <- sample(area, 100)
-  sample_means100[i] <- mean(samp)
-}
-```
-
-Here we're able to use a single `for` loop to build two distributions by adding 
-additional lines inside the curly braces.  Don't worry about the fact that 
-`samp` is used for the name of two different objects.  In the second command 
-of the `for` loop, the mean of `samp` is saved to the relevant place in the 
-vector `sample_means10`.  With the mean saved, we're now free to overwrite the 
-object `samp` with a new sample, this time of size 100.  In general, anytime 
-you create an object using a name that is already in use, the old object will 
-get replaced with the new one.
-
-To see the effect that different sample sizes have on the sampling 
-distribution, plot the three distributions on top of one another.
-
-```{r plot-samps, eval=FALSE, tidy = FALSE}
-par(mfrow = c(3, 1))
-
-xlimits <- range(sample_means10)
-
-hist(sample_means10, breaks = 20, xlim = xlimits)
-hist(sample_means50, breaks = 20, xlim = xlimits)
-hist(sample_means100, breaks = 20, xlim = xlimits)
-```
-
-The first command specifies that you'd like to divide the plotting area into 3 
-rows and 1 column of plots (to return to the default setting of plotting one 
-at a time, use `par(mfrow = c(1, 1))`). The `breaks` argument specifies the 
-number of bins used in constructing the histogram.  The `xlim` argument 
-specifies the range of the x-axis of the histogram, and by setting it equal 
-to `xlimits` for each histogram, we ensure that all three histograms will be 
-plotted with the same limits on the x-axis.
-
-An alternative, shorter version of the above process works as follows. First, generate the three sets of sample means of different sizes. 
-
-```{r eval=FALSE}
 sample_means10 <- do(5000) * mean(sample(area, 10))
-sample_means50 <- do(5000) * mean(sample(area, 50))
+sample_means10 <- do(5000) * mean(sample(area, 50))
 sample_means100 <- do(5000) * mean(sample(area, 100))
 ```
 
-Next, combine these three $5000 \times 1$ data frames into one $15000 \times 1$ data frame.
+To see the effect that different sample sizes have on the sampling distribution, let's plot the three distributions on top of one another.
+
+To do this, combine these three $5000 \times 1$ data frames into one $15000 \times 1$ data frame.
 
 ```{r eval=FALSE}
 samp.dist = rbind(sample_means10, sample_means50, sample_means100)
