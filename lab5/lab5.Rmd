@@ -21,6 +21,7 @@ observations from this data set.
 Load the `nc` data set into our workspace.
 
 ```{r load-data, eval=FALSE}
+require(mosaic)
 download.file("http://www.openintro.org/stat/data/nc.RData", destfile = "nc.RData")
 load("nc.RData")
 ```
@@ -71,7 +72,6 @@ split the `weight` variable into the `habit` groups, then take the mean of each
 using the `mean` function.
 
 ```{r by-means, eval=FALSE, message=FALSE}
-require(mosaic)
 mean(weight ~ habit, data=nc)
 ```
 
