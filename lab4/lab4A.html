@@ -72,7 +72,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+<span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;ames.RData&quot;</span>)</code></pre>
 <p>We see that there are quite a few variables in the data set, enough to do a very in-depth analysis. For this lab, we’ll restrict our attention to just two of the variables: the above ground living area of the house in square feet (<code>Gr.Liv.Area</code>) and the sale price (<code>SalePrice</code>). To save some effort throughout the lab, create two variables with short names that represent these two variables.</p>
 <pre class="sourceCode r"><code class="sourceCode r">area &lt;-<span class="st"> </span>ames$Gr.Liv.Area
@@ -103,12 +104,13 @@ price &lt;-<span class="st"> </span>ames$SalePrice</code></pre>
 <p>Not surprisingly, every time we take another random sample, we get a different sample mean. It’s useful to get a sense of just how much variability we should expect when estimating the population mean this way. The distribution of sample means, called the <em>sampling distribution</em>, can help us understand this variability. In this lab, because we have access to the population, we can build up the sampling distribution for the sample mean by repeating the above steps many times.</p>
 <p>Computing a single sample mean is easy:</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))</code></pre>
-<p>But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the mosaic <code>do</code> function:</p>
+<p>But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the <code>mosaic</code> function <code>do</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">5000</span>) *<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))
 
 <span class="kw">histogram</span>(~result, <span class="dt">data=</span>sample_means50)</code></pre>
-<p>The do function simply repeats a statement and collects the results in a data frame, under the column “result”.</p>
-<p>If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the <code>breaks</code> argument.</p>
+<p>The do function simply repeats a statement and collects the results in a data frame. If only one quantity is computed in each iteration, the default column name in the resulting data frame is <code>result</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sample_means50)</code></pre>
+<p>If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the <code>nint</code> (for <strong>n</strong>umber of <strong>int</strong>ervals) argument.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~result, <span class="dt">data=</span>sample_means50, <span class="dt">nint=</span><span class="dv">25</span>)</code></pre>
 <p>Here we use R to take 5000 samples of size 50 from the population, calculate the mean of each sample, and store each result in a vector called <code>sample_means50</code>. On the next page, we’ll review how this set of code works.</p>
 <ol start="4" style="list-style-type: decimal">
@@ -118,7 +120,7 @@ price &lt;-<span class="st"> </span>ames$SalePrice</code></pre>
 <div id="interlude-the-do-function" class="section level2">
 <h2>Interlude: The <code>do</code> function</h2>
 <p>Let’s take a break from the statistics for a moment to let that last block of code sink in. The idea behind the do function is <em>repetition</em>: it allows you to execute a line of code as many times as you want and put the results in a data frame. In the case above, we wanted to repeatedly take a random sample of size 50 from <code>area</code> and then save the mean of that sample into the <code>sample_means50</code> vector.</p>
-<p>Without the do function, this would be painful. First, we’d have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we’d have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the <code>sample_means50</code> vector:</p>
+<p>Without the <code>do</code> function, this would be painful. First, we’d have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we’d have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the <code>sample_means50</code> vector:</p>
 <pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5000</span>)
 
 sample_means50[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))
@@ -126,17 +128,11 @@ sample_means50[<span class="dv">2</span>] &lt;-<span class="st"> </span><span cl
 sample_means50[<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))
 sample_means50[<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))
 <span class="co"># ...and so on, 5000 times</span></code></pre>
-<p>With the do function, these thousands of lines of code are compressed into one line:</p>
+<p>With the <code>do</code> function, these thousands of lines of code are compressed into one line:</p>
 <pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">5000</span>) *<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))</code></pre>
-<p>Behind the scenes, our code works like this:</p>
-<p><strong>1.</strong> Creates an empty data frame with a single column titled “results”.</p>
-<p><strong>2.</strong> Takes a sample of size 50 and computes its mean.</p>
-<p><strong>3.</strong> Repeats step 2 5000 times, putting each sample mean into the next available slot in the “results” column of the data frame.</p>
-<p><strong>4.</strong> Puts the data frame inside the variable <code>sample_means50</code>.</p>
-<p>If we look at the first few entires of <code>sample_means50</code> after we run the do function, we can see that our code did exactly this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sample_means50)</code></pre>
+<p>Note that for each of the 5000 times we computed a mean, we did so from a <strong>different</strong> sample!</p>
 <ol start="5" style="list-style-type: decimal">
-<li>To make sure you understand what the do function does, try modifying the code to take only 100 sample means and put them in a data frame named <code>sample_means_small</code>. Print the output to your screen (type <code>sample_means_small</code> into the console and press enter). How many elements are there in this object called <code>sample_means_small</code>? What does each element represent?</li>
+<li>To make sure you understand what the <code>do</code> function does, try modifying the code to take only 100 sample means and put them in a data frame named <code>sample_means_small</code>. Print the output to your screen (type <code>sample_means_small</code> into the console and press enter). How many elements are there in this object called <code>sample_means_small</code>? What does each element represent?</li>
 </ol>
 </div>
 <div id="sample-size-and-the-sampling-distribution" class="section level2">
@@ -152,7 +148,7 @@ sample_means100 &lt;-<span class="st"> </span><span class="kw">do</span>(<span c
 <p>To do this, combine these three <span class="math">\(5000 \times 1\)</span> data frames into one <span class="math">\(15000 \times 1\)</span> data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp.dist =<span class="st"> </span><span class="kw">rbind</span>(sample_means10, sample_means50, sample_means100)</code></pre>
 <p>Then add a new column <code>sample.size</code> to the resulting data frame that indicates the sample size in each case. This new variable is simply <span class="math">\(10\)</span> repeated 5000 times, followed by <span class="math">\(50\)</span> repeated 5000 times, followed by <span class="math">\(100\)</span> repeated 5000 times. The use of the <code>factor</code> function will ensure that <code>R</code> considers this to be a categorical variable, and not a numerical one.</p>
-<pre class="sourceCode r"><code class="sourceCode r">samp.dist$sample.size =<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>), <span class="dt">each=</span><span class="dv">5000</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">samp.dist =<span class="st"> </span><span class="kw">transform</span>(samp.dist, <span class="dt">sample.size =</span> <span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>), <span class="dt">each=</span><span class="dv">5000</span>)))</code></pre>
 <p>Finally, draw the histogram using the <code>|</code> formula notation. If you want to have the histograms stacked vertically rather than horizontally, use the <code>layout</code> argument.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~result |<span class="st"> </span>sample.size, <span class="dt">data=</span>samp.dist, <span class="dt">nint=</span><span class="dv">20</span>, <span class="dt">layout=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</code></pre>
 <ol style="list-style-type: decimal">

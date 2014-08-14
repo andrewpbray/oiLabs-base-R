@@ -23,6 +23,7 @@ interest.  In this lab we would like to learn about these home sales by taking
 smaller samples from the full population.  Let's load the data.
 
 ```{r load-data, eval=FALSE}
+require(mosaic)
 download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
 load("ames.RData")
 ```
@@ -105,7 +106,7 @@ Computing a single sample mean is easy:
 samp <- mean(sample(area, 50))
 ```
 
-But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the mosaic `do` function:
+But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the `mosaic` function `do`:
 
 ```{r loop, eval=FALSE}
 sample_means50 <- do(5000) * mean(sample(area, 50))
@@ -113,9 +114,13 @@ sample_means50 <- do(5000) * mean(sample(area, 50))
 histogram(~result, data=sample_means50)
 ```
 
-The do function simply repeats a statement and collects the results in a data frame, under the column "result".
+The do function simply repeats a statement and collects the results in a data frame. If only one quantity is computed in each iteration, the default column name in the resulting data frame is `result`.
 
-If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the `breaks` argument.
+```{r head, eval=FALSE}
+head(sample_means50)
+```
+
+If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the `nint` (for **n**umber of **int**ervals) argument.
 
 ```{r hist-breaks, eval=FALSE}
 histogram(~result, data=sample_means50, nint=25)
@@ -134,7 +139,7 @@ the mean of each sample, and store each result in a vector called
 
 Let's take a break from the statistics for a moment to let that last block of code sink in.  The idea behind the do function is *repetition*: it allows you to execute a line of code as many times as you want and put the results in a data frame.  In the case above, we wanted to repeatedly take a random sample of size 50 from `area` and then save the mean of that sample into the `sample_means50` vector.
 
-Without the do function, this would be painful. First, we'd have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we'd have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the `sample_means50` vector:
+Without the `do` function, this would be painful. First, we'd have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we'd have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the `sample_means50` vector:
 
 ```{r loop-long, eval=FALSE}
 sample_means50 <- rep(0, 5000)
@@ -146,29 +151,15 @@ sample_means50[4] <- mean(sample(area, 50))
 # ...and so on, 5000 times
 ```
 
-With the do function, these thousands of lines of code are compressed into one line:
+With the `do` function, these thousands of lines of code are compressed into one line:
 
 ```{r do-again, eval=FALSE}
 sample_means50 <- do(5000) * mean(sample(area, 50))
 ```
 
-Behind the scenes, our code works like this:
+Note that for each of the 5000 times we computed a mean, we did so from a **different** sample!
 
-**1.** Creates an empty data frame with a single column titled "results".
-
-**2.** Takes a sample of size 50 and computes its mean.
-
-**3.** Repeats step 2 5000 times, putting each sample mean into the next available slot in the "results" column of the data frame.
-
-**4.** Puts the data frame inside the variable `sample_means50`.
-
-If we look at the first few entires of `sample_means50` after we run the do function, we can see that our code did exactly this:
-
-```{r head-do, eval=FALSE}
-head(sample_means50)
-```
-
-5.  To make sure you understand what the do function does, try modifying the
+5.  To make sure you understand what the `do` function does, try modifying the
     code to take only 100 sample means and put them in a data frame named
     `sample_means_small`. Print the output to your screen (type 
     `sample_means_small` into the console and press enter). How many elements 
@@ -211,7 +202,7 @@ samp.dist = rbind(sample_means10, sample_means50, sample_means100)
 Then add a new column `sample.size` to the resulting data frame that indicates the sample size in each case. This new variable is simply $10$ repeated 5000 times, followed by $50$ repeated 5000 times, followed by $100$ repeated 5000 times. The use of the `factor` function will ensure that `R` considers this to be a categorical variable, and not a numerical one. 
 
 ```{r eval=FALSE}
-samp.dist$sample.size = factor(rep(c(10, 50, 100), each=5000))
+samp.dist = transform(samp.dist, sample.size = factor(rep(c(10, 50, 100), each=5000)))
 ```
 
 Finally, draw the histogram using the `|` formula notation. If you want to have the histograms stacked vertically rather than horizontally, use the `layout` argument. 
