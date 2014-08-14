@@ -93,12 +93,17 @@ the standard error and construct the confidence interval.
 p <- tally(~response, data=us12, format='proportion')["atheist"]
 n <- nrow(us12)
 se <- sqrt(p * (1-p) / n)
-p + c(-1.96, 1.96) * se
+p + qnorm(c(0.025, 0.975)) * se
 ```
 
 Note that since the goal is to construct an interval estimate for a 
 proportion, it's necessary to specify what constitutes a "success", which here 
-is a response of `"atheist"`.
+is a response of `"atheist"`. Secondly, the `qnorm` function helps us find the 
+width (in terms of the number of standard deviations from the mean) that our 
+confidence interval needs to be in order to achieve a 95% confidence level. Note
+that since the normal distribution is symmetric, by cutting off the smallest 2.5%
+and the largest 2.5%, we're left with the middle 95%. By changing the argument
+to `qnorm` we can find intervals that correspond to different confidence levels.
 
 Although formal confidence intervals and hypothesis tests don't show up in the 
 report, suggestions of inference appear at the bottom of page 7: "In general, 
