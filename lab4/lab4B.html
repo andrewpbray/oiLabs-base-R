@@ -75,8 +75,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>In the previous lab we looked at the population data of houses from Ames, Iowa. Let’s start by loading that data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
-
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+<span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;ames.RData&quot;</span>)</code></pre>
 <p>In this lab we’ll start with a simple random sample of size 60 from the population. Specifically, this is a simple random sample of size 60. Note that the data set has information on many housing variables, but for the first portion of the lab we’ll focus on the size of the house, represented by the variable <code>Gr.Liv.Area</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">population &lt;-<span class="st"> </span>ames$Gr.Liv.Area
@@ -125,8 +125,7 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span 
 <li>Use these statistics to calculate 50 confidence intervals.</li>
 </ul>
 <p>We can accomplish this using the <code>do</code> and <code>favstats</code> functions in <code>mosaic</code>. The following lines of code takes a uniform random <code>sample</code> of size 60 from <code>population</code>, computes several summary statistics (including <code>mean</code> and <code>sd</code>), and then does this 50 times and saves the result as a data frame.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
-n &lt;-<span class="st"> </span><span class="dv">60</span>
+<pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">60</span>
 samp &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">50</span>) *<span class="st"> </span><span class="kw">favstats</span>(<span class="kw">sample</span>(population, <span class="dt">size =</span> n))</code></pre>
 <p>Lastly, we construct the confidence intervals.</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp =<span class="st"> </span><span class="kw">transform</span>(samp, <span class="dt">lower =</span> mean -<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>(sd /<span class="st"> </span><span class="kw">sqrt</span>(n)))
@@ -140,7 +139,21 @@ samp =<span class="st"> </span><span class="kw">transform</span>(samp, <span cla
 <ul>
 <li>Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(samp, <span class="kw">plot_ci</span>(lower, upper, <span class="kw">mean</span>(population)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">panel.ci =<span class="st"> </span>function (x, y, mu, data2, ...) {
+  <span class="kw">panel.xyplot</span>(x, y, ...)
+  good =<span class="st"> </span><span class="kw">subset</span>(data2, upper &gt;<span class="st"> </span>mu &amp;<span class="st"> </span>lower &lt;<span class="st"> </span>mu)
+  bad =<span class="st"> </span><span class="kw">subset</span>(data2, upper &lt;<span class="st"> </span>mu |<span class="st"> </span>lower &gt;<span class="st"> </span>mu)
+  <span class="kw">with</span>(good, <span class="kw">panel.arrows</span>(lower, .index, upper, .index, <span class="dt">angle=</span><span class="dv">90</span>, <span class="dt">length =</span> <span class="fl">0.05</span>, <span class="dt">ends=</span><span class="st">&quot;both&quot;</span>))
+  <span class="kw">with</span>(bad, <span class="kw">panel.arrows</span>(lower, .index, upper, .index, <span class="dt">angle=</span><span class="dv">90</span>, <span class="dt">length =</span> <span class="fl">0.05</span>, <span class="dt">ends=</span><span class="st">&quot;both&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">3</span>))
+  <span class="kw">panel.abline</span>(<span class="dt">v=</span>mu, <span class="dt">lty=</span><span class="dv">2</span>)
+}
+
+plot_ci =<span class="st"> </span>function (df, mu, ...) {  
+  space =<span class="st"> </span><span class="fl">0.1</span> *<span class="st"> </span>(<span class="kw">max</span>(df$lower) -<span class="st"> </span><span class="kw">min</span>(df$upper))
+  <span class="kw">xyplot</span>(.index ~<span class="st"> </span>mean, <span class="dt">data=</span>df, <span class="dt">data2 =</span> df, <span class="dt">panel=</span>panel.ci, <span class="dt">mu =</span> mu, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">min</span>(df$lower) -<span class="st"> </span>space, <span class="kw">max</span>(df$upper) +<span class="st"> </span>space), <span class="dt">ylab =</span> <span class="ot">NULL</span>)
+}
+
+<span class="kw">plot_ci</span>(samp, <span class="dt">mu =</span> <span class="kw">mean</span>(population))</code></pre>
 <ul>
 <li><p>Pick a confidence level of your choosing, provided it is not 95%. What is the appropriate critical value?</p></li>
 <li><p>Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the <code>plot_ci</code> function, plot all intervals and calculate the proportion of intervals that include the true population mean. How does this percentage compare to the confidence level level selected for the intervals?</p></li>

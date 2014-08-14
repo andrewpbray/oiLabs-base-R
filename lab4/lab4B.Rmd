@@ -16,8 +16,8 @@ If you have access to data on an entire population, say the size of every house 
 In the previous lab we looked at the population data of houses from Ames, Iowa. Let's start by loading that data set.
 
 ```{r load-data, eval=FALSE}
+require(mosaic)
 download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
-
 load("ames.RData")
 ```
 
@@ -85,7 +85,6 @@ Here is the rough outline:
 We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code takes a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
 
 ```{r loop, eval=FALSE, tidy = FALSE}
-require(mosaic)
 n <- 60
 samp <- do(50) * favstats(sample(population, size = n))
 ```
@@ -110,7 +109,21 @@ samp[1, c("lower", "upper")]
 -   Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.
 
 ```{r plot-ci, eval=FALSE}
-with(samp, plot_ci(lower, upper, mean(population)))
+panel.ci = function (x, y, mu, data2, ...) {
+  panel.xyplot(x, y, ...)
+  good = subset(data2, upper > mu & lower < mu)
+  bad = subset(data2, upper < mu | lower > mu)
+  with(good, panel.arrows(lower, .index, upper, .index, angle=90, length = 0.05, ends="both"))
+  with(bad, panel.arrows(lower, .index, upper, .index, angle=90, length = 0.05, ends="both", col="red", lwd=3))
+  panel.abline(v=mu, lty=2)
+}
+
+plot_ci = function (df, mu, ...) {  
+  space = 0.1 * (max(df$lower) - min(df$upper))
+  xyplot(.index ~ mean, data=df, data2 = df, panel=panel.ci, mu = mu, xlim = c(min(df$lower) - space, max(df$upper) + space), ylab = NULL)
+}
+
+plot_ci(samp, mu = mean(population))
 ```
 
 -   Pick a confidence level of your choosing, provided it is not 95%. What is the appropriate critical value?
