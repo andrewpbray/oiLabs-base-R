@@ -4,3 +4,5 @@
 *.log
 *.synctex.gz
 *-concordance.tex
+*.DS_Store
+*.orig
