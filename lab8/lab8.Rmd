@@ -39,8 +39,8 @@ frame where each row contains a different course and columns represent
 variables about the courses and professors.
 
 ```{r load-data, eval=FALSE}
+require(mosaic)
 download.file("http://www.openintro.org/stat/data/evals.RData", destfile = "evals.RData")
-
 load("evals.RData")
 ```
 
@@ -91,7 +91,7 @@ teachers are evaluated more favorably. Let's create a scatterplot to see
 if this appears to be the case:
 
 ```{r scatter-score-bty_avg, eval = FALSE}
-plot(score ~ bty_avg, data=evals)
+xyplot(score ~ bty_avg, data=evals)
 ```
 
 
@@ -106,7 +106,7 @@ the scatterplot. Is anything awry?
 5.  Let's see if the apparent trend in the plot is something more than
     natural variation. Fit a linear model called `m_bty` to predict average
     professor score by average beauty rating and add the line to your plot
-    using `abline(m_bty)`. Write out the equation for the linear model and
+    using the `type=c("p", "r")` argument. Write out the equation for the linear model and
     interpret the slope. Is average beauty score a statistically significant
     predictor? Does it appear to be a practically significant predictor?
 
@@ -123,17 +123,16 @@ of these six scores. Let's take a look at the relationship between one
 of these scores and the average beauty score.
 
 ```{r bty-rel, eval = FALSE}
-plot(bty_avg ~ bty_f1lower, data=evals)
+xyplot(bty_avg ~ bty_f1lower, data=evals)
 with(evals, cor(bty_avg, bty_f1lower))
 ```
 
 As expected the relationship is quite strong – after all, the average
 score is calculated using the individual scores. We can actually take a
-look at the relationships between all beauty variables (columns 13
-through 19) using the following command:
+look at the relationships between all beauty variables using the `pairs` command:
 
 ```{r bty-rels, eval = FALSE}
-plot(evals[,13:19])
+pairs(evals[, c("bty_f1lower", "bty_f1upper", "bty_f2upper", "bty_m1lower", "bty_m1upper", "bty_m2upper", "bty_avg")])
 ```
 
 These variables are collinear (correlated), and adding more than one of
@@ -175,10 +174,14 @@ leaving the intercept and slope form familiar from simple regression.
 \]
 
 We can plot this line and the line corresponding to males with the
-following custom function.
+following code.
 
 ```{r twoLines, eval = FALSE}
-multiLines(m_bty_gen)
+palette = trellis.par.get("superpose.symbol")$col
+xyplot(score ~ bty_avg, groups = gender, data=evals, auto.key=TRUE)
+f = makeFun(m_bty_gen)
+plotFun(f(bty_avg, gender = "female") ~ bty_avg, add=TRUE, col=palette[1])
+plotFun(f(bty_avg, gender = "male") ~ bty_avg, add=TRUE, col=palette[2])
 ```
 
 9.  What is the equation of the line corresponding to males? (*Hint:* For
