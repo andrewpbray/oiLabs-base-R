@@ -76,43 +76,31 @@ mean(population)
 Using R, we're going to recreate many samples to learn more about how sample means and confidence intervals vary from one sample to another. *Loops* come in handy here. (If you are unfamiliar with loops, review Lab 4A at [http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf](http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf)).
 
 Here is the rough outline:
--   Obtain a random sample.
--   Calculate the sample's mean and standard deviation.
--   Use these statistics to calculate a confidence interval.
--   Repeat steps (1)-(3) 50 times.
 
-But before we do all of this, we need to first create empty vectors where we can save the means and standard deviations that will be calculated from each sample. And while we're at it, let's also store the desired sample size as `n`.
+* Obtain a random sample.
+* Calculate the sample's mean and standard deviation.
+* Repeat steps (1)-(3) 50 times.
+* Use these statistics to calculate 50 confidence intervals.
 
-```{r set-up, eval=FALSE}
-samp_mean <- rep(NA, 50)
-
-samp_sd <- rep(NA, 50)
-
-n <- 60
-```
-
-Now we're ready for the loop where we calculate the means and standard deviations of 50 random samples.
+We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code takes a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
 
 ```{r loop, eval=FALSE, tidy = FALSE}
-for(i in 1:50){
-  samp <- sample(population, n) # obtain a sample of size n = 60 from the population
-  samp_mean[i] <- mean(samp)    # save sample mean in ith element of samp_mean
-  samp_sd[i] <- sd(samp)        # save sample sd in ith element of samp_sd
-}
+require(mosaic)
+n <- 60
+samp <- do(50) * favstats(sample(population, size = n))
 ```
 
 Lastly, we construct the confidence intervals.
 
 ```{r ci50, eval=FALSE}
-lower <- samp_mean - 1.96 * samp_sd / sqrt(n) 
-
-upper <- samp_mean + 1.96 * samp_sd / sqrt(n)
+samp = transform(samp, lower = mean - 1.96 * (sd / sqrt(n)))
+samp = transform(samp, upper = mean + 1.96 * (sd / sqrt(n)))
 ```
 
 Lower bounds of these 50 confidence intervals are stored in `lower`, and the upper bounds are in `upper`. Let's view the first interval.
 
 ```{r first-interval, eval=FALSE}
-c(lower[1],upper[1])
+samp[1, c("lower", "upper")]
 ```
 
 * * *
@@ -122,7 +110,7 @@ c(lower[1],upper[1])
 -   Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.
 
 ```{r plot-ci, eval=FALSE}
-plot_ci(lower, upper, mean(population))
+with(samp, plot_ci(lower, upper, mean(population)))
 ```
 
 -   Pick a confidence level of your choosing, provided it is not 95%. What is the appropriate critical value?
