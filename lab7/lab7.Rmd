@@ -175,9 +175,7 @@ linearity, (2) nearly normal residuals, and (3) constant variability.
 
  *  Linearity: You already checked if the relationship between runs and
     at-bats is linear using a scatterplot. We should also verify this
-    condition with a plot of the residuals vs. at-bats. Recall that any
-    code following a *#* is intended to be a comment that helps
-    understand the code but is ignored by R.
+    condition with a plot of the residuals vs. at-bats.
 
 ```{r residuals, eval=FALSE}
 xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
@@ -193,7 +191,9 @@ xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
 histogram(~residuals(m1), fit="normal")
 ```
 
-    or a normal probability plot of the residuals.
+    or a normal probability plot of the residuals (recall that any
+    code following a *#* is intended to be a comment that helps
+    understand the code but is ignored by R).
 
     ```{r qq-res, eval=FALSE}
 qqnorm(m1$residuals)
