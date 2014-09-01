@@ -6,7 +6,6 @@
 
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="generator" content="pandoc" />
 
 
@@ -75,17 +74,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="saving-your-code" class="section level2">
 <h2>Saving your code</h2>
-<<<<<<< HEAD
-<p>Click on <code>File -&gt; New -&gt; R Script</code>. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the <code>Run</code> button, or highlight the code and hit <code>command+enter</code> or a mac or <code>control+enter</code> on a PC.</p>
-<p>You’ll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you’ll see the file appear under the <code>Files</code> tab in the lower right panel. You can reopen this file anytime by simply clicking on it.</p>
-=======
 <p>Click on File -&gt; New -&gt; R Script. This will open a blank document above the console. As you go along you can copy and paste your code here and save it. This is a good way to keep track of your code and be able to reuse it later. To run your code from this document you can either copy and paste it into the console, highlight the code and hit the Run button, or highlight the code and hit command+enter or a mac or control+enter on a PC.</p>
 <p>You’ll also want to save this script (code document). To do so click on the disk icon. The first time you hit save, RStudio will ask for a file name; you can name it anything you like. Once you hit save you’ll see the file appear under the Files tab in the lower right panel. You can reopen this file anytime by simply clicking on it.</p>
->>>>>>> 1e08c166fcaa77aedb693ad087eef0328c0a56b2
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
-<p>Our investigation will focus on the performance of one player: Kobe Bryant of the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 NBA finals earned him the title <code>Most Valuable Player</code> and many spectators commented on how he appeared to show a hot hand. Let’s load some data from those games and look at the first several rows.</p>
+<p>Our investigation will focus on the performance of one player: Kobe Bryant of the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 NBA finals earned him the title <em>Most Valuable Player</em> and many spectators commented on how he appeared to show a hot hand. Let’s load some data from those games and look at the first several rows.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/kobe.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;kobe.RData&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;kobe.RData&quot;</span>)
 <span class="kw">head</span>(kobe)</code></pre>
@@ -95,12 +89,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><span class="math">\[ \textrm{H M | M | H H M | M | M | M} \]</span></p>
 <p>To verify this use the following command:</p>
 <pre class="sourceCode r"><code class="sourceCode r">kobe$basket[<span class="dv">1</span>:<span class="dv">9</span>]</code></pre>
-<p>Within the nine shot attempts, there are six streaks, which are separated by a | above. Their lengths are one, zero, two, zero, zero, zero (in order of occurrence).</p>
+<p>Within the nine shot attempts, there are six streaks, which are separated by a “|” above. Their lengths are one, zero, two, zero, zero, zero (in order of occurrence).</p>
 <ol style="list-style-type: decimal">
 <li>What does a streak length of 1 mean, i.e. how many hits and misses are in a streak of 1? What about a streak length of 0?</li>
 </ol>
 <p>The custom function <code>calc_streak</code>, which was loaded in with the data, may be used to calculate the lengths of all shooting streaks and then look at the distribution.</p>
 <pre class="sourceCode r"><code class="sourceCode r">kobe_streak &lt;-<span class="st"> </span><span class="kw">calc_streak</span>(kobe$basket)
+
 <span class="kw">barplot</span>(<span class="kw">table</span>(kobe_streak))</code></pre>
 <p>Note that instead of making a histogram, we chose to make a bar plot from a table of the streak data. A bar plot is preferable here since our variable is discrete – counts – instead of continuous.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -125,31 +120,20 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Simulations in R</h2>
 <p>While we don’t have any data from a shooter we know to have independent shots, that sort of data is very easy to simulate in R. In a simulation, you set the ground rules of a random process and then the computer uses random numbers to generate an outcome that adheres to those rules. As a simple example, you can simulate flipping a fair coin with the following.</p>
 <pre class="sourceCode r"><code class="sourceCode r">outcomes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;heads&quot;</span>, <span class="st">&quot;tails&quot;</span>)
-<<<<<<< HEAD
 <span class="kw">require</span>(mosaic)
 <span class="kw">resample</span>(outcomes, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre>
-<p>The vector <code>outcomes</code> can be thought of as a hat with two slips of paper in it: one slip says <code>heads&quot; and the other says</code>tails“. The function <code>sample</code> draws one slip from the hat and tells us if it was a head or a tail.</p>
-=======
-<span class="kw">sample</span>(outcomes, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>The vector <code>outcomes</code> can be thought of as a hat with two slips of paper in it: one slip says <code>heads</code> and the other says <code>tails</code>. The function <code>sample</code> draws one slip from the hat and tells us if it was a head or a tail.</p>
->>>>>>> 1e08c166fcaa77aedb693ad087eef0328c0a56b2
 <p>Run the second command listed above several times. Just like when flipping a coin, sometimes you’ll get a heads, sometimes you’ll get a tails, but in the long run, you’d expect to get roughly equal numbers of each.</p>
 <p>If you wanted to simulate flipping a fair coin 100 times, you could either run the function 100 times or, more simply, adjust the <code>size</code> argument, which governs how many samples to draw (the <code>replace = TRUE</code> argument indicates we put the slip of paper back in the hat before drawing again). Save the resulting vector of heads and tails in a new object called <code>sim_fair_coin</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">sim_fair_coin &lt;-<span class="st"> </span><span class="kw">resample</span>(outcomes, <span class="dt">size =</span> <span class="dv">100</span>)</code></pre>
 <p>To view the results of this simulation, type the name of the object and then use <code>table</code> to count up the number of heads and tails.</p>
 <pre class="sourceCode r"><code class="sourceCode r">sim_fair_coin
+
 <span class="kw">table</span>(sim_fair_coin)</code></pre>
-<<<<<<< HEAD
-<p>Since there are only two elements in <code>outcomes</code>, the probability that we <code>flip</code> a coin and it lands heads is 0.5. Say we’re trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called <code>prob</code>, which provides a vector of two probability weights.</p>
-<pre class="sourceCode r"><code class="sourceCode r">sim_unfair_coin &lt;-<span class="st"> </span><span class="kw">resample</span>(outcomes, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</code></pre>
-<p><code>prob = c(0.2,0.8)</code> indicates that for the two elements in the <code>outcomes</code> vector, we want to select the first one, <code>heads</code>, with probability 0.2 and the second one, <code>tails</code> with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled <code>head&quot; and 8 chips</code>tail“. Therefore at each draw, the probability of drawing a chip that says <code>head&quot; is 20%, and</code>tail” is 80%.</p>
-<ol style="list-style-type: decimal">
-=======
 <p>Since there are only two elements in <code>outcomes</code>, the probability that we “flip” a coin and it lands heads is 0.5. Say we’re trying to simulate an unfair coin that we know only lands heads 20% of the time. We can adjust for this by adding an argument called <code>prob</code>, which provides a vector of two probability weights.</p>
-<pre class="sourceCode r"><code class="sourceCode r">sim_unfair_coin &lt;-<span class="st"> </span><span class="kw">sample</span>(outcomes, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">sim_unfair_coin &lt;-<span class="st"> </span><span class="kw">resample</span>(outcomes, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</code></pre>
 <p><code>prob=c(0.2, 0.8)</code> indicates that for the two elements in the <code>outcomes</code> vector, we want to select the first one, <code>heads</code>, with probability 0.2 and the second one, <code>tails</code> with probability 0.8. Another way of thinking about this is to think of the outcome space as a bag of 10 chips, where 2 chips are labeled “head” and 8 chips “tail”. Therefore at each draw, the probability of drawing a chip that says “head”&quot; is 20%, and “tail” is 80%.</p>
 <ol start="3" style="list-style-type: decimal">
->>>>>>> 1e08c166fcaa77aedb693ad087eef0328c0a56b2
 <li>In your simulation of flipping the unfair coin 100 times, how many flips came up heads?</li>
 </ol>
 <p>In a sense, we’ve shrunken the size of the slip of paper that says “heads”, making it less likely to be drawn and we’ve increased the size of the slip of paper saying “tails”, making it more likely to be drawn. When we simulated the fair coin, both slips of paper were the same size. This happens by default if you don’t provide a <code>prob</code> argument; all elements in the <code>outcomes</code> vector have an equal probability of being drawn.</p>
@@ -160,11 +144,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Simulating the Independent Shooter</h2>
 <p>Simulating a basketball player who has independent shots uses the same mechanism that we use to simulate a coin flip. To simulate a single shot from an independent shooter with a shooting percentage of 50% we type,</p>
 <pre class="sourceCode r"><code class="sourceCode r">outcomes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;M&quot;</span>)
-<<<<<<< HEAD
 sim_basket &lt;-<span class="st"> </span><span class="kw">resample</span>(outcomes, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre>
-=======
-sim_basket &lt;-<span class="st"> </span><span class="kw">sample</span>(outcomes, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre>
->>>>>>> 1e08c166fcaa77aedb693ad087eef0328c0a56b2
 <p>To make a valid comparison between Kobe and our simulated independent shooter, we need to align both their shooting percentage and the number of attempted shots.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>What change needs to be made to the <code>sample</code> function so that it reflects a shooting percentage of 45%? Make this adjustment, then run a simulation to sample 133 shots. Assign the output of this simulation to a new object called <code>sim_basket</code>.</li>
@@ -205,12 +185,12 @@ $(document).ready(function () {
 
 </script>
 
-<!-- dynamically load mathjax for compatibility with --self-contained -->
+<!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
