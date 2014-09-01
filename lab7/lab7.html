@@ -135,7 +135,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Model diagnostics</h2>
 <p>To assess whether the linear model is reliable, we need to check for (1) linearity, (2) nearly normal residuals, and (3) constant variability.</p>
 <ul>
-<li>Linearity: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats. Recall that any code following a <em>#</em> is intended to be a comment that helps understand the code but is ignored by R.</li>
+<li>Linearity: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats.</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">residuals</span>(m1) ~<span class="st"> </span>at_bats, <span class="dt">data=</span>mlb11, <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;r&quot;</span>), <span class="dt">lty=</span><span class="dv">3</span>)</code></pre>
 <ol start="6" style="list-style-type: decimal">
@@ -145,7 +145,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Nearly normal residuals: To check this condition, we can look at a histogram</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~<span class="kw">residuals</span>(m1), <span class="dt">fit=</span><span class="st">&quot;normal&quot;</span>)</code></pre>
-<pre><code>or a normal probability plot of the residuals.
+<pre><code>or a normal probability plot of the residuals (recall that any
+code following a *#* is intended to be a comment that helps
+understand the code but is ignored by R).
 
 
 ```r
