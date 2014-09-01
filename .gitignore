@@ -5,3 +5,5 @@
 *.synctex.gz
 *-concordance.tex
 *.DS_Store
+.gitignore
+oiLabs-mosaic.Rproj
