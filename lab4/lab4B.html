@@ -91,7 +91,7 @@ samp &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <s
 <pre class="sourceCode r"><code class="sourceCode r">sample_mean &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)</code></pre>
 <p>Return for a moment to the question that first motivated this lab: based on this sample, what can we infer about the population? Based only on this single sample, the best estimate of the average living area of houses sold in Ames would be the sample mean, usually denoted as <span class="math">\(\bar{x}\)</span> (here we’re calling it <code>sample_mean</code>). That serves as a good <em>point estimate</em> but it would be useful to also communicate how uncertain we are of that estimate. This can be captured by using a <em>confidence interval</em>.</p>
 <p>We can calculate a 95% confidence interval for a sample mean by adding and subtracting 1.96 standard errors to the point estimate (See Section 4.2.3 if you are unfamiliar with this formula).</p>
-<pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span><span class="kw">sd</span>(samp)/<span class="kw">sqrt</span>(<span class="dv">60</span>)
+<pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span><span class="kw">sd</span>(samp) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">60</span>)
 lower &lt;-<span class="st"> </span>sample_mean -<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>se
 upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>se
 <span class="kw">c</span>(lower, upper)</code></pre>
@@ -115,9 +115,9 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span 
 <p>Here is the rough outline:</p>
 <ul>
 <li>Obtain a random sample.</li>
-<li>Calculate the sample’s mean and standard deviation.</li>
-<li>Use these statistics to calculate a confidence interval.</li>
-<li>Repeat steps (1)-(3) 50 times.</li>
+<li>Calculate and store the sample’s mean and standard deviation.</li>
+<li>Repeat steps (1) and (2) 50 times.</li>
+<li>Use these stored statistics to calculate many confidence intervals.</li>
 </ul>
 <p>But before we do all of this, we need to first create empty vectors where we can save the means and standard deviations that will be calculated from each sample. And while we’re at it, let’s also store the desired sample size as <code>n</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp_mean &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">50</span>)
@@ -133,7 +133,7 @@ n &lt;-<span class="st"> </span><span class="dv">60</span></code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">lower_vector &lt;-<span class="st"> </span>samp_mean -<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>samp_sd /<span class="st"> </span><span class="kw">sqrt</span>(n) 
 upper_vector &lt;-<span class="st"> </span>samp_mean +<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>samp_sd /<span class="st"> </span><span class="kw">sqrt</span>(n)</code></pre>
 <p>Lower bounds of these 50 confidence intervals are stored in <code>lower_vector</code>, and the upper bounds are in <code>upper_vector</code>. Let’s view the first interval.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(lower_vector[<span class="dv">1</span>],upper_vector[<span class="dv">1</span>])</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(lower_vector[<span class="dv">1</span>], upper_vector[<span class="dv">1</span>])</code></pre>
 <hr />
 </div>
 <div id="on-your-own" class="section level2">

@@ -171,7 +171,7 @@ They're also used to compute the residuals.
 To assess whether the linear model is reliable, we need to check for (1) 
 linearity, (2) nearly normal residuals, and (3) constant variability.
 
- *  Linearity: You already checked if the relationship between runs and
+*   Linearity: You already checked if the relationship between runs and
     at-bats is linear using a scatterplot. We should also verify this
     condition with a plot of the residuals vs. at-bats. Recall that any
     code following a *#* is intended to be a comment that helps
@@ -185,7 +185,7 @@ abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
 6.  Is there any apparent pattern in the residuals plot? What does this indicate
     about the linearity of the relationship between runs and at-bats?
 
- *  Nearly normal residuals: To check this condition, we can look at a
+*   Nearly normal residuals: To check this condition, we can look at a
     histogram
 
     ```{r hist-res, eval=FALSE}
@@ -202,7 +202,7 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 7.  Based on the histogram and the normal probability plot, does the nearly 
     normal residuals condition appear to be met?
 
- *  Constant variability:
+*   Constant variability:
 
 8.  Based on the plot in (1), does the constant variability condition appear to 
     be met?
