@@ -191,13 +191,14 @@ The data are stored in a data frame called `present`.
 
 -   What years are included in this data set? What are the dimensions of the data frame and what are the variable or column names?
 
--   How do these counts compare to Arbuthnot's? Are they on a similar scale?
+-   How do the counts of boys and girls in the present day birth records compare to Arbuthnot's? Are they on a similar scale?
 
 -   Make a plot that displays the boy-to-girl ratio for every year in the data set. What do
 you see? Does Arbuthnot's observation about boys being born in greater proportion than girls
 hold up in the U.S.? Include the plot in your response.
 
--   In what year did we see the most total number of births in the U.S.? You can refer to the help files or the R reference card [http://cran.r-project.org/doc/contrib/Short-refcard.pdf](http://cran.r-project.org/doc/contrib/Short-refcard.pdf) to find helpful commands.
+-   In what year did we see the most total number of births in the U.S.? You can refer to the help files or [Minimal R reference card](http://cran.r-project.org/web/packages/mosaic/vignettes/V1MinimalR.pdf) to find helpful commands.
+
 
 These data come from a report by the Centers for Disease Control [http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf](http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf). Check it out if you would like to read more about an analysis of sex ratios at birth in the United States.
 
