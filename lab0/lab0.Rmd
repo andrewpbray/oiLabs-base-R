@@ -134,7 +134,7 @@ with(arbuthnot, boys + girls)
 What you will see are 82 numbers (in that packed display, because we aren't looking at a data frame here), each one representing the sum we're after. Take a look at a few of them and verify that they are right. Therefore, we can make a plot of the total number of baptisms per year with the command
 
 ```{r plot-total-vs-year, eval=FALSE}
-xyplot(boys + girls / year, data=arbuthnot, type = "l")
+xyplot(boys + girls ~ year, data=arbuthnot, type = "l")
 ```
 
 This time, note that we left out the names of the first two arguments.  We can do this because the help file shows that the default for `plot` is for the first argument to be the x-variable and the second argument to be the y-variable.
