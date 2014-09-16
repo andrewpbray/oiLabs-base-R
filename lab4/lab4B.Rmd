@@ -70,7 +70,7 @@ subtracting 1.96 standard errors to the point estimate (See Section 4.2.3 if
 you are unfamiliar with this formula).
 
 ```{r ci, eval=FALSE}
-se <- sd(samp)/sqrt(60)
+se <- sd(samp) / sqrt(60)
 lower <- sample_mean - 1.96 * se
 upper <- sample_mean + 1.96 * se
 c(lower, upper)
@@ -115,9 +115,10 @@ in handy here (If you are unfamiliar with loops, review [Lab 4A](http://www.open
 Here is the rough outline:
 
 -   Obtain a random sample.
--   Calculate the sample's mean and standard deviation.
--   Use these statistics to calculate a confidence interval.
--   Repeat steps (1)-(3) 50 times.
+-   Calculate and store the sample's mean and standard deviation.
+-   Repeat steps (1) and (2) 50 times.
+-   Use these stored statistics to calculate many confidence intervals.
+
 
 But before we do all of this, we need to first create empty vectors where we 
 can save the means and standard deviations that will be calculated from each 
@@ -150,7 +151,7 @@ Lower bounds of these 50 confidence intervals are stored in `lower_vector`,
 and the upper bounds are in `upper_vector`. Let's view the first interval.
 
 ```{r first-interval, eval=FALSE}
-c(lower_vector[1],upper_vector[1])
+c(lower_vector[1], upper_vector[1])
 ```
 
 * * *
