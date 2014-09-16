@@ -98,25 +98,26 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="kw">mean</span>(~weight, <span class="dt">data=</span>cdc)
 <span class="kw">var</span>(~weight, <span class="dt">data=</span>cdc)
 <span class="kw">median</span>(~weight, <span class="dt">data=</span>cdc)</code></pre>
-<p>While it makes sense to describe a quantitative variable like <code>weight</code> in terms of these statistics, what about categorical data? We would instead consider the sample frequency or relative frequency distribution. The function <code>table</code> does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type</p>
+<p>The <code>mosaic</code> command <code>favstats</code>, allows us to compute all of this information (and more) at once.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favstats</span>(~weight, <span class="dt">data=</span>cdc)</code></pre>
+<p>While it makes sense to describe a quantitative variable like <code>weight</code> in terms of these statistics, what about categorical data? We would instead consider the sample frequency or relative frequency distribution. The function <code>tally</code> does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc)</code></pre>
 <p>or instead look at the relative frequency distribution by typing</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">format=</span><span class="st">&quot;proportion&quot;</span>)</code></pre>
-<p>Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the last lab; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar plot of the entries in the table by putting the table inside the barplot command.</p>
+<p>Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the last lab; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar chart of the entries in the table by putting the table inside the <code>barchart</code> command.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barchart</span>(<span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>), <span class="dt">horizontal=</span><span class="ot">FALSE</span>)</code></pre>
-<p>Notice what we’ve done here! We’ve computed the table of <code>cdc$smoke100</code> and then immediately applied the graphical function, <code>barplot</code>. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">smoke &lt;-<span class="st"> </span><span class="kw">table</span>(cdc$smoke100)
-
-<span class="kw">barplot</span>(smoke)</code></pre>
-<p>Here, we’ve made a new object, a table, called <code>smoke</code> (the contents of which we can see by typing <code>smoke</code> into the console) and then used it in as the input for <code>barplot</code>. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace. This is another important idea that we’ll return to later.</p>
+<p>Notice what we’ve done here! We’ve computed the table of <code>cdc$smoke100</code> and then immediately applied the graphical function, <code>barchart</code>. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:</p>
+<pre class="sourceCode r"><code class="sourceCode r">smoke &lt;-<span class="st"> </span><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>)
+<span class="kw">barchart</span>(smoke, <span class="dt">horizontal=</span><span class="ot">FALSE</span>)</code></pre>
+<p>Here, we’ve made a new object, a table, called <code>smoke</code> (the contents of which we can see by typing <code>smoke</code> into the console) and then used it in as the input for <code>barchart</code>. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace. This is another important idea that we’ll return to later.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Create a numerical summary for <code>height</code> and <code>age</code>, and compute the interquartile range for each. Compute the relative frequency distribution for <code>gender</code> and <code>exerany</code>. How many males are in the sample? What proportion of the sample reports being in excellent health?</li>
 </ol>
-<p>The <code>table</code> command can be used to tabulate any number of variables that you provide. For example, to examine which participants have smoked across each gender, we could use the following.</p>
+<p>The <code>tally</code> command can be used to tabulate any number of variables that you provide. For example, to examine which participants have smoked across each gender, we could use the following.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data=</span>cdc, <span class="dt">format=</span><span class="st">&quot;count&quot;</span>)</code></pre>
 <p>Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic plot of this table, we would enter the following command.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>))</code></pre>
-<p>We could have accomplished this in two steps by saving the table in one line and applying <code>mosaicplot</code> in the next (see the table/barplot example above).</p>
+<p>We could have accomplished this in two steps by saving the table in one line and applying <code>mosaicplot</code> in the next (see the <code>tally</code>/<code>barchart</code> example above).</p>
 <ol start="3" style="list-style-type: decimal">
 <li>What does the mosaic plot reveal about smoking habits and gender?</li>
 </ol>

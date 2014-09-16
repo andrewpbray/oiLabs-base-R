@@ -70,7 +70,13 @@ var(~weight, data=cdc)
 median(~weight, data=cdc)
 ```
 
-While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `table` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
+The `mosaic` command `favstats`, allows us to compute all of this information (and more) at once. 
+
+```{r favstats, eval=FALSE}
+favstats(~weight, data=cdc)
+```
+
+While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `tally` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
 tally(~smoke100, data=cdc)
@@ -82,25 +88,24 @@ or instead look at the relative frequency distribution by typing
 tally(~smoke100, data=cdc, format="proportion")
 ```
 
-Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the last lab; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar plot of the entries in the table by putting the table inside the barplot command.
+Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the last lab; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar chart of the entries in the table by putting the table inside the `barchart` command.
 
 ```{r table-smoke-barplot, eval=FALSE}
 barchart(tally(~smoke100, data=cdc, margins=FALSE), horizontal=FALSE)
 ```
 
-Notice what we've done here! We've computed the table of `cdc$smoke100` and then immediately applied the graphical function, `barplot`. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:
+Notice what we've done here! We've computed the table of `cdc$smoke100` and then immediately applied the graphical function, `barchart`. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:
 
 ```{r table-smoke-barplot-twosteps, eval=FALSE}
-smoke <- table(cdc$smoke100)
-
-barplot(smoke)
+smoke <- tally(~smoke100, data=cdc, margins=FALSE)
+barchart(smoke, horizontal=FALSE)
 ```
 
-Here, we've made a new object, a table, called `smoke` (the contents of which we can see by typing `smoke` into the console) and then used it in as the input for `barplot`. The special symbol `<-` performs an *assignment*, taking the output of one line of code and saving it into an object in your workspace.   This is another important idea that we'll return to later.
+Here, we've made a new object, a table, called `smoke` (the contents of which we can see by typing `smoke` into the console) and then used it in as the input for `barchart`. The special symbol `<-` performs an *assignment*, taking the output of one line of code and saving it into an object in your workspace.   This is another important idea that we'll return to later.
 
 2.  Create a numerical summary for `height` and `age`, and compute the interquartile range for each. Compute the relative frequency distribution for `gender` and `exerany`. How many males are in the sample? What proportion of the sample reports being in excellent health?
 
-The `table` command can be used to tabulate any number of variables that you provide.  For example, to examine which participants have smoked across each gender, we could use the following.
+The `tally` command can be used to tabulate any number of variables that you provide.  For example, to examine which participants have smoked across each gender, we could use the following.
 
 ```{r table-smoke-gender, eval=FALSE}
 tally(gender ~ smoke100, data=cdc, format="count")
@@ -112,7 +117,7 @@ Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has 
 mosaicplot(tally(gender ~ smoke100, data=cdc, margins=FALSE))
 ```
 
-We could have accomplished this in two steps by saving the table in one line and applying `mosaicplot` in the next (see the table/barplot example above).
+We could have accomplished this in two steps by saving the table in one line and applying `mosaicplot` in the next (see the `tally`/`barchart` example above).
 
 3.  What does the mosaic plot reveal about smoking habits and gender?
 
