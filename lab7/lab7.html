@@ -142,19 +142,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Is there any apparent pattern in the residuals plot? What does this indicate about the linearity of the relationship between runs and at-bats?</li>
 </ol>
 <ul>
-<li>Nearly normal residuals: To check this condition, we can look at a histogram</li>
+<li>Nearly normal residuals: To check this condition, we can look at a histogram:</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~<span class="kw">residuals</span>(m1), <span class="dt">fit=</span><span class="st">&quot;normal&quot;</span>)</code></pre>
-<pre><code>or a normal probability plot of the residuals (recall that any
-code following a *#* is intended to be a comment that helps
-understand the code but is ignored by R).
+<ul>
+<li>or a normal probability plot of the residuals (recall that any code following a <em>#</em> is intended to be a comment that helps understand the code but is ignored by R).</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(m1$residuals)
 
-
-```r
-qqnorm(m1$residuals)
-
-qqline(m1$residuals)  # adds diagonal line to the normal prob plot
-```</code></pre>
+<span class="kw">qqline</span>(m1$residuals)  <span class="co"># adds diagonal line to the normal prob plot</span></code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Based on the histogram and the normal probability plot, does the nearly normal residuals condition appear to be met?</li>
 </ol>

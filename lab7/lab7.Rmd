@@ -185,17 +185,17 @@ xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
     about the linearity of the relationship between runs and at-bats?
 
  *  Nearly normal residuals: To check this condition, we can look at a
-    histogram
+    histogram:
 
 ```{r hist-res, eval=FALSE}
 histogram(~residuals(m1), fit="normal")
 ```
 
-    or a normal probability plot of the residuals (recall that any
+ *  or a normal probability plot of the residuals (recall that any
     code following a *#* is intended to be a comment that helps
     understand the code but is ignored by R).
 
-    ```{r qq-res, eval=FALSE}
+```{r qq-res, eval=FALSE}
 qqnorm(m1$residuals)
 
 qqline(m1$residuals)  # adds diagonal line to the normal prob plot
