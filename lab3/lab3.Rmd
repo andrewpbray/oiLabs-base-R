@@ -29,8 +29,8 @@ You'll see that for every observation we have 25 measurements, many of which are
 Since males and females tend to have different body dimensions, it will be useful to create two additional data sets: one with only men and another with only women.
 
 ```{r male-female, eval=FALSE}
-mdims <- subset(bdims, bdims$sex == 1)
-fdims <- subset(bdims, bdims$sex == 0)
+mdims <- subset(bdims, sex == 1)
+fdims <- subset(bdims, sex == 0)
 ```
 
 1.  Make a histogram of men's heights and a histogram of women's heights.  How would you compare the various aspects of the two distributions?
