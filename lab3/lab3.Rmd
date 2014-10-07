@@ -29,8 +29,8 @@ You'll see that for every observation we have 25 measurements, many of which are
 Since males and females tend to have different body dimensions, it will be useful to create two additional data sets: one with only men and another with only women.
 
 ```{r male-female, eval=FALSE}
-mdims <- subset(bdims, bdims$sex == 1)
-fdims <- subset(bdims, bdims$sex == 0)
+mdims <- subset(bdims, sex == 1)
+fdims <- subset(bdims, sex == 0)
 ```
 
 1.  Make a histogram of men's heights and a histogram of women's heights.  How would you compare the various aspects of the two distributions?
@@ -46,7 +46,7 @@ fhgtmean <- mean(fdims$hgt)
 fhgtsd   <- sd(fdims$hgt)
 ```
 
-Next we make a density histogram to use as the backdrop and use the `lines` function to overlay a normal probability curve. The difference between a frequency histogram and a density histogram is that while in a frequency histogram the *heights* of the bars add up to the total number of observations, in a density histogram the *areas* of the bars add up to 1. The area of each bar can be calculated as simply the height *times* the width of the bar. Using a density histogram allows us to properly overlay a normal distribution curve over the histogram since the curve is a normal probability density function. Frequency and density histograms both display the same exact shape; they only differ in their y-axis. You can verify this by comparing the frequency histogram you constructed earlier and the density histogram created by the commands below.
+Next we make a density histogram to use as the backdrop and use the `fit` argument to overlay a normal probability curve. The difference between a frequency histogram and a density histogram is that while in a frequency histogram the *heights* of the bars add up to the total number of observations, in a density histogram the *areas* of the bars add up to 1. The area of each bar can be calculated as simply the height *times* the width of the bar. Using a density histogram allows us to properly overlay a normal distribution curve over the histogram since the curve is a normal probability density function. Frequency and density histograms both display the same exact shape; they only differ in their $y$-axis. You can verify this by comparing the frequency histogram you constructed earlier and the density histogram created by the commands below.
 
 ````{r hist-height, eval=FALSE, message=FALSE}
 require(mosaic)
@@ -55,9 +55,6 @@ histogram(~hgt, data=fdims, fit="normal", nint=8)
 
 Notice that adding the `fit` argument to `histogram` overlays a normal distribution on plot. The optional `nint` argument simply specificies the number of bins.
 
-After plotting the density histogram with the first command, we create the x- and y-coordinates for the normal curve.  We chose the `x` range as 140 to 190 in order to span the entire range of `fheight`.  To create `y`, we use `dnorm` to calculate the density of each of those x-values in a distribution that is normal with mean `fhgtmean` and standard deviation `fhgtsd`.  The final command draws a curve on the existing plot (the density histogram) by connecting each of the points specified by `x` and `y`. The argument `col` simply sets the color for the line to be drawn. If we left it out, the line would be drawn in black.
-
-The top of the curve is cut off because the limits of the x- and y-axes are set to best fit the histogram.  To adjust the y-axis you can add a third argument to the histogram function: `ylim = c(0, 0.06)`.
 
 2.  Based on the this plot, does it appear that the data follow a nearly normal distribution?
 
