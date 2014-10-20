@@ -293,11 +293,6 @@ Ames.  Now you'll try to estimate the mean home price.
     we're concerned with making estimates that are more often close to the 
     true value, would we prefer a distribution with a large or small spread?
 
--   What concepts from the textbook are covered in this lab?  What concepts, 
-    if any, are not covered in the textbook?  Have you seen these concepts 
-    elsewhere, e.g. lecture, discussion section, previous labs, or homework 
-    problems?  Be specific in your answer.
-
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
 Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0).

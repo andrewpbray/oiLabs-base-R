@@ -171,11 +171,10 @@ They're also used to compute the residuals.
 To assess whether the linear model is reliable, we need to check for (1) 
 linearity, (2) nearly normal residuals, and (3) constant variability.
 
-*   Linearity: You already checked if the relationship between runs and
-    at-bats is linear using a scatterplot. We should also verify this
-    condition with a plot of the residuals vs. at-bats. Recall that any
-    code following a *#* is intended to be a comment that helps
-    understand the code but is ignored by R.
+*Linearity*: You already checked if the relationship between runs and at-bats
+is linear using a scatterplot. We should also verify this condition with a plot 
+of the residuals vs. at-bats. Recall that any code following a *#* is intended
+to be a comment that helps understand the code but is ignored by R.
 
 ```{r residuals, eval=FALSE}
 plot(m1$residuals ~ mlb11$at_bats)
@@ -185,16 +184,15 @@ abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
 6.  Is there any apparent pattern in the residuals plot? What does this indicate
     about the linearity of the relationship between runs and at-bats?
 
-*   Nearly normal residuals: To check this condition, we can look at a
-    histogram
+*Nearly normal residuals*: To check this condition, we can look at a histogram
 
-    ```{r hist-res, eval=FALSE}
+```{r hist-res, eval=FALSE}
 hist(m1$residuals)
 ```
 
-    or a normal probability plot of the residuals.
+or a normal probability plot of the residuals.
 
-    ```{r qq-res, eval=FALSE}
+```{r qq-res, eval=FALSE}
 qqnorm(m1$residuals)
 qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 ```
@@ -202,7 +200,7 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 7.  Based on the histogram and the normal probability plot, does the nearly 
     normal residuals condition appear to be met?
 
-*   Constant variability:
+*Constant variability*:
 
 8.  Based on the plot in (1), does the constant variability condition appear to 
     be met?
@@ -237,11 +235,6 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 
 -   Check the model diagnostics for the regression model with the variable you 
     decided was the best predictor for runs.
-
--   What concepts from the textbook are covered in this lab? What concepts, if 
-    any, are not covered in the textbook? Have you seen these concepts 
-    elsewhere, e.g. lecture, discussion section, previous labs, or homework 
-    problems? Be specific in your answer.
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
