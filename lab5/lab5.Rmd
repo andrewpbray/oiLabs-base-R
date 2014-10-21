@@ -148,11 +148,6 @@ and/or a confidence interval. Answer your question using the `inference`
 function, report the statistical results, and also provide an explanation in 
 plain language.
 
--   What concepts from the textbook are covered in this lab?  What concepts, if
-any, are not covered in the textbook?  Have you seen these concepts elsewhere, 
-e.g. lecture, discussion section, previous labs, or homework problems?  Be 
-specific in your answer.
-
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
 Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0).

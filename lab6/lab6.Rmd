@@ -246,10 +246,6 @@ from 2005 and 2012 for 39 countries.
     *Hint:* Refer to your plot of the relationship between $p$ and margin of 
     error. Do not use the data set to answer this question.
 
--   What concepts from the textbook are covered in this lab? What concepts, if 
-    any, are not covered in the textbook? Have you seen these concepts 
-    elsewhere, e.g. lecture, discussion section, previous labs, or homework 
-    problems? Be specific in your answer.
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
