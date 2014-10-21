@@ -45,7 +45,6 @@ calculating a few summary statistics and making a histogram.
 
 ```{r area, eval=FALSE}
 summary(area)
-
 histogram(area)
 ```
 
@@ -71,7 +70,7 @@ Assessor's database and pulling up the files on 50 random home sales.  Working
 with these 50 files would be considerably simpler than working with all 2930 
 home sales.
 
-2.  Describe the distribution of this sample? How does it compare to the 
+2.  Describe the distribution of this sample. How does it compare to the 
     distribution of the population?
 
 If we're interested in estimating the average living area in homes in Ames 
@@ -106,21 +105,25 @@ Computing a single sample mean is easy:
 samp <- mean(sample(area, 50))
 ```
 
-But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the `mosaic` function `do`:
+But how can we compute, say, 5000 sample means, and put those results into a data frame 
+to get a sampling distribution? We can use the `mosaic` function `do`:
 
 ```{r loop, eval=FALSE}
-sample_means50 <- do(5000) * mean(sample(area, 50))
+sample_means50 <- rep(NA, 5000)
 
 histogram(~result, data=sample_means50)
 ```
 
-The do function simply repeats a statement and collects the results in a data frame. If only one quantity is computed in each iteration, the default column name in the resulting data frame is `result`.
+The do function simply repeats a statement and collects the results in a data frame. 
+If only one quantity is computed in each iteration, the default column name in the 
+resulting data frame is `result`.
 
 ```{r head, eval=FALSE}
 head(sample_means50)
 ```
 
-If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the `nint` (for **n**umber of **int**ervals) argument.
+If you would like to adjust the bin width of your histogram to show a little more detail, 
+you can do so by changing the `nint` (for **n**umber of **int**ervals) argument.
 
 ```{r hist-breaks, eval=FALSE}
 histogram(~result, data=sample_means50, nint=25)
@@ -137,12 +140,18 @@ the mean of each sample, and store each result in a vector called
 
 ## Interlude: The `do` function
 
-Let's take a break from the statistics for a moment to let that last block of code sink in.  The idea behind the do function is *repetition*: it allows you to execute a line of code as many times as you want and put the results in a data frame.  In the case above, we wanted to repeatedly take a random sample of size 50 from `area` and then save the mean of that sample into the `sample_means50` vector.
+Let's take a break from the statistics for a moment to let that last block of code sink in.  
+The idea behind the do function is *repetition*: it allows you to execute a line of code as 
+many times as you want and put the results in a data frame.  In the case above, we wanted to 
+repeatedly take a random sample of size 50 from `area` and then save the mean of that sample 
+into the `sample_means50` vector.
 
-Without the `do` function, this would be painful. First, we'd have to create an empty vector filled with 0s to hold the 5000 sample means. Then, we'd have to compute each of the 5000 sample means one line at a time, putting them individually into the slots of the `sample_means50` vector:
+Without the `do` function, this would be painful. First, we'd have to create an empty vector 
+filled with 0s to hold the 5000 sample means. Then, we'd have to compute each of the 5000 
+sample means one line at a time, putting them individually into the slots of the `sample_means50` vector:
 
 ```{r loop-long, eval=FALSE}
-sample_means50 <- rep(0, 5000)
+sample_means50 <- rep(NA, 5000)
 
 sample_means50[1] <- mean(sample(area, 50))
 sample_means50[2] <- mean(sample(area, 50))
@@ -240,11 +249,6 @@ Ames.  Now you'll try to estimate the mean home price.
 -   Of the sampling distributions from 2 and 3, which has a smaller spread?  If
     we're concerned with making estimates that are more often close to the 
     true value, would we prefer a distribution with a large or small spread?
-
--   What concepts from the textbook are covered in this lab?  What concepts, 
-    if any, are not covered in the textbook?  Have you seen these concepts 
-    elsewhere, e.g. lecture, discussion section, previous labs, or homework 
-    problems?  Be specific in your answer.
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
