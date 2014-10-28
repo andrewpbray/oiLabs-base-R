@@ -103,14 +103,12 @@ price &lt;-<span class="st"> </span>ames$SalePrice</code></pre>
 <p>Computing a single sample mean is easy:</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))</code></pre>
 <p>But how can we compute, say, 5000 sample means, and put those results into a data frame to get a sampling distribution? We can use the <code>mosaic</code> function <code>do</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
-
+<pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">5000</span>) *<span class="st"> </span><span class="kw">mean</span>(<span class="kw">sample</span>(area, <span class="dv">50</span>))
 <span class="kw">histogram</span>(~result, <span class="dt">data=</span>sample_means50)</code></pre>
-<p>The do function simply repeats a statement and collects the results in a data frame. If only one quantity is computed in each iteration, the default column name in the resulting data frame is <code>result</code>.</p>
+<p>The <code>do</code> function simply repeats a statement and collects the results in a data frame. If only one quantity is computed in each iteration, the default column name in the resulting data frame is <code>result</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sample_means50)</code></pre>
 <p>If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the <code>nint</code> (for <strong>n</strong>umber of <strong>int</strong>ervals) argument.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~result, <span class="dt">data=</span>sample_means50, <span class="dt">nint=</span><span class="dv">25</span>)</code></pre>
-<p>Here we use R to take 5000 samples of size 50 from the population, calculate the mean of each sample, and store each result in a vector called <code>sample_means50</code>. On the next page, we’ll review how this set of code works.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>How many elements are there in <code>sample_means50</code>? Describe the sampling distribution, and be sure to specifically note its center. Would you expect the distribution to change if we instead collected 50,000 sample means?</li>
 </ol>

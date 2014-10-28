@@ -109,12 +109,11 @@ But how can we compute, say, 5000 sample means, and put those results into a dat
 to get a sampling distribution? We can use the `mosaic` function `do`:
 
 ```{r loop, eval=FALSE}
-sample_means50 <- rep(NA, 5000)
-
+sample_means50 <- do(5000) * mean(sample(area, 50))
 histogram(~result, data=sample_means50)
 ```
 
-The do function simply repeats a statement and collects the results in a data frame. 
+The `do` function simply repeats a statement and collects the results in a data frame. 
 If only one quantity is computed in each iteration, the default column name in the 
 resulting data frame is `result`.
 
@@ -128,10 +127,6 @@ you can do so by changing the `nint` (for **n**umber of **int**ervals) argument.
 ```{r hist-breaks, eval=FALSE}
 histogram(~result, data=sample_means50, nint=25)
 ```
-
-Here we use R to take 5000 samples of size 50 from the population, calculate 
-the mean of each sample, and store each result in a vector called 
-`sample_means50`. On the next page, we'll review how this set of code works.
 
 4.  How many elements are there in `sample_means50`?  Describe the sampling 
     distribution, and be sure to specifically note its center.  Would you 
