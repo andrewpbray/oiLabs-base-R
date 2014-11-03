@@ -148,10 +148,6 @@ samp[1, c("lower", "upper")]
 
 ## On your own
 
--   Using the following function (which was downloaded with the data set), 
-    plot all intervals. What proportion of your confidence intervals include 
-    the true population mean? Is this proportion exactly equal to the 
-    confidence level? If not, explain why.
 
 ```{r plot-ci, eval=FALSE}
 panel.ci = function (x, y, mu, data2, ...) {
@@ -167,9 +163,15 @@ plot_ci = function (df, mu, ...) {
   space = 0.1 * (max(df$lower) - min(df$upper))
   xyplot(.index ~ mean, data=df, data2 = df, panel=panel.ci, mu = mu, xlim = c(min(df$lower) - space, max(df$upper) + space), ylab = NULL)
 }
+
 plot_ci(samp, mu = mean(population))
 ```
 
+
+-   Use the `plot_ci` function above to 
+    plot all intervals. What proportion of your confidence intervals include 
+    the true population mean? Is this proportion exactly equal to the 
+    confidence level? If not, explain why.
 -   Pick a confidence level of your choosing, provided it is not 95%. What is 
     the appropriate critical value?
 -   Calculate 50 confidence intervals at the confidence level you chose in the 
