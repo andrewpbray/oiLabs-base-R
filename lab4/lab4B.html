@@ -134,9 +134,6 @@ samp =<span class="st"> </span><span class="kw">transform</span>(samp, <span cla
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On your own</h2>
-<ul>
-<li>Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.</li>
-</ul>
 <pre class="sourceCode r"><code class="sourceCode r">panel.ci =<span class="st"> </span>function (x, y, mu, data2, ...) {
   <span class="kw">panel.xyplot</span>(x, y, ...)
   good =<span class="st"> </span><span class="kw">subset</span>(data2, upper &gt;<span class="st"> </span>mu &amp;<span class="st"> </span>lower &lt;<span class="st"> </span>mu)
@@ -150,8 +147,10 @@ plot_ci =<span class="st"> </span>function (df, mu, ...) {
   space =<span class="st"> </span><span class="fl">0.1</span> *<span class="st"> </span>(<span class="kw">max</span>(df$lower) -<span class="st"> </span><span class="kw">min</span>(df$upper))
   <span class="kw">xyplot</span>(.index ~<span class="st"> </span>mean, <span class="dt">data=</span>df, <span class="dt">data2 =</span> df, <span class="dt">panel=</span>panel.ci, <span class="dt">mu =</span> mu, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">min</span>(df$lower) -<span class="st"> </span>space, <span class="kw">max</span>(df$upper) +<span class="st"> </span>space), <span class="dt">ylab =</span> <span class="ot">NULL</span>)
 }
+
 <span class="kw">plot_ci</span>(samp, <span class="dt">mu =</span> <span class="kw">mean</span>(population))</code></pre>
 <ul>
+<li>Using the <code>plot_ci</code> function above to plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.</li>
 <li>Pick a confidence level of your choosing, provided it is not 95%. What is the appropriate critical value?</li>
 <li>Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the <code>plot_ci</code> function, plot all intervals and calculate the proportion of intervals that include the true population mean. How does this percentage compare to the confidence level level selected for the intervals?</li>
 </ul>
