@@ -141,9 +141,9 @@ against each other to reveal their relationship.
 
 ```{r me-plot, eval=FALSE}
 n <- 1000
-p <- seq(0, 1, 0.01)
+p <- seq(from = 0, to = 1, by = 0.01)
 me <- 2 * sqrt(p * (1 - p)/n)
-plot(me ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
+xyplot(me ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
 ```
 
 8.  Describe the relationship between `p` and `me`.
@@ -178,7 +178,7 @@ p <- 0.1
 n <- 1040
 responses = c("atheist", "non_atheist")
 
-p_hats = do(500) * tally(  resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion'  )["atheist"]
+p_hats = do(5000) * tally(~resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion')["atheist"]
 
 histogram(~p_hats, main = "p = 0.1, n = 1040")
 ```
@@ -187,7 +187,7 @@ These commands build up the sampling distribution of $\hat{p}$ using the
 familiar `do` loop. You can read the sampling procedure for the inner bit of 
 code as, "take a sample of size $n$ with replacement 
 from the choices of atheist and non-atheist with probabilities $p$ and $1 - p$,
-respectively." The second line in the loop says, "calculate the proportion of 
+respectively." The `tally` command says, "calculate the proportion of 
 atheists in this sample and record this value." The loop allows us to repeat 
 this process 5,000 times to build a good representation of the sampling 
 distribution.
