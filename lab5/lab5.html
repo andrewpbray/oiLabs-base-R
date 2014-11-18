@@ -161,19 +161,25 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><p>Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.</p></li>
 </ol>
 <p>Now, let’s conduct that hypothesis test.</p>
-<pre class="sourceCode r"><code class="sourceCode r">weights_nonsmoker =<span class="st"> </span><span class="kw">subset</span>(nc$weight, nc$habit ==<span class="st"> &quot;nonsmoker&quot;</span>)
-weights_smoker =<span class="st"> </span><span class="kw">subset</span>(nc$weight, nc$habit ==<span class="st"> &quot;smoker&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">fv =<span class="st"> </span><span class="kw">favstats</span>(weight ~<span class="st"> </span>habit, <span class="dt">data=</span>nc)
+fv
 
-n_nonsmoker =<span class="st"> </span><span class="kw">length</span>(weights_nonsmoker)
-n_smoker =<span class="st"> </span><span class="kw">length</span>(weights_smoker)
+mean.ns =<span class="st"> </span>fv[<span class="dv">1</span>, <span class="st">&quot;mean&quot;</span>]
+mean.s =<span class="st"> </span>fv[<span class="dv">2</span>, <span class="st">&quot;mean&quot;</span>]
 
-p =<span class="st"> </span><span class="kw">mean</span>(weights_nonsmoker) -<span class="st"> </span><span class="kw">mean</span>(weights_smoker)
-se =<span class="st"> </span><span class="kw">sqrt</span>((<span class="kw">sd</span>(weights_nonsmoker)^<span class="dv">2</span> /<span class="st"> </span>n_nonsmoker) +<span class="st"> </span>(<span class="kw">sd</span>(weights_smoker)^<span class="dv">2</span> /<span class="st"> </span>n_smoker))
+sd.ns =<span class="st"> </span>fv[<span class="dv">1</span>, <span class="st">&quot;sd&quot;</span>]
+sd.s =<span class="st"> </span>fv[<span class="dv">2</span>, <span class="st">&quot;sd&quot;</span>]
+
+n.ns =<span class="st"> </span>fv[<span class="dv">1</span>, <span class="st">&quot;n&quot;</span>]
+n.s =<span class="st"> </span>fv[<span class="dv">2</span>, <span class="st">&quot;n&quot;</span>]
+
+p =<span class="st"> </span>mean.ns -<span class="st"> </span>mean.s
+se =<span class="st"> </span><span class="kw">sqrt</span>((sd.ns^<span class="dv">2</span> /<span class="st"> </span>n.ns) +<span class="st"> </span>(sd.s^<span class="dv">2</span> /<span class="st"> </span>n.s))
 Z =<span class="st"> </span>(p -<span class="st"> </span><span class="dv">0</span>) /<span class="st"> </span>se
 
 <span class="dv">2</span> *<span class="st"> </span><span class="kw">pnorm</span>(-<span class="kw">abs</span>(Z))</code></pre>
 <p>Let’s pause for a moment to go through this code.</p>
-<p>First, we put all of the weights of the babies with non-smoking mothers and smoking mothers into two separate vectors, <code>weights_nonsmoker</code> and <code>weights_smoker</code>. We calculate the length of those vectors and store them in <code>n_nonsmoker</code> and <code>n_smoker</code>.</p>
+<p>First, we compute summary statistics for <code>weight</code> broken down by <code>habit</code>. Those summary statistics include the number of observations (<code>n</code>), the group means (<code>mean</code>), and the group standard deviations (<code>sd</code>).</p>
 <p>Then, we calculate our point estimate, <code>p</code>, which is the difference of the mean weights. We compute the standard error, <code>se</code>, and then our z-score, <code>Z</code>. Finally, we use the <code>pnorm</code> function to compute the p-value of the z-score.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Construct a confidence interval for the difference between the weights of babies born to smoking and non-smoking mothers.</li>

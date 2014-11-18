@@ -92,14 +92,20 @@ smoking and non-smoking mothers are different.
 Now, let's conduct that hypothesis test.
 
 ```{r inf-weight-habit-ht, eval=FALSE, tidy=FALSE}
-weights_nonsmoker = subset(nc$weight, nc$habit == "nonsmoker")
-weights_smoker = subset(nc$weight, nc$habit == "smoker")
+fv = favstats(weight ~ habit, data=nc)
+fv
 
-n_nonsmoker = length(weights_nonsmoker)
-n_smoker = length(weights_smoker)
+mean.ns = fv[1, "mean"]
+mean.s = fv[2, "mean"]
 
-p = mean(weights_nonsmoker) - mean(weights_smoker)
-se = sqrt((sd(weights_nonsmoker)^2 / n_nonsmoker) + (sd(weights_smoker)^2 / n_smoker))
+sd.ns = fv[1, "sd"]
+sd.s = fv[2, "sd"]
+
+n.ns = fv[1, "n"]
+n.s = fv[2, "n"]
+
+p = mean.ns - mean.s
+se = sqrt((sd.ns^2 / n.ns) + (sd.s^2 / n.s))
 Z = (p - 0) / se
 
 2 * pnorm(-abs(Z))
@@ -107,10 +113,7 @@ Z = (p - 0) / se
 
 Let's pause for a moment to go through this code.
 
-First, we put all of the weights of the babies with non-smoking mothers and
-smoking mothers into two separate vectors, `weights_nonsmoker` and 
-`weights_smoker`. We calculate the length of those vectors and store them in
-`n_nonsmoker` and `n_smoker`.
+First, we compute summary statistics for `weight` broken down by `habit`. Those summary statistics include the number of observations (`n`), the group means (`mean`), and the group standard deviations (`sd`). 
 
 Then, we calculate our point estimate, `p`, which is the difference of the mean
 weights. We compute the standard error, `se`, and then our z-score, `Z`.
