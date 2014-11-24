@@ -121,7 +121,7 @@ beauty score.
 
 ```{r bty-rel, eval = FALSE}
 xyplot(bty_avg ~ bty_f1lower, data=evals)
-with(evals, cor(bty_avg, bty_f1lower))
+cor(bty_avg ~ bty_f1lower, data=evals)
 ```
 
 As expected the relationship is quite strong – after all, the average
