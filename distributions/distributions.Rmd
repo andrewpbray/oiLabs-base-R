@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: Distributions of random variables"
+title: "Distributions of random variables"
 output:
   html_document:
     theme: cerulean

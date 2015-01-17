@@ -1,5 +1,5 @@
 ---
-title: "Lab 0 - Introduction to R and RStudio"
+title: "Introduction to R and RStudio"
 output:
   html_document:
     css: ../lab.css

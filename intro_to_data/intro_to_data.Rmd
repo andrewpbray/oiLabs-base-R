@@ -1,5 +1,5 @@
 ---
-title: "Lab 1 - Introduction to data"
+title: "Introduction to data"
 output:
   html_document:
     theme: cerulean
@@ -130,8 +130,8 @@ table(cdc$smoke100)/20000
 ```
 
 Notice how R automatically divides all entries in the table by 20,000 in the 
-command above. This is similar to something we observed in the last lab; when we
-multiplied or divided a vector with a number, R applied that action across 
+command above. This is similar to something we observed in the Introduction to R;
+when we multiplied or divided a vector with a number, R applied that action across 
 entries in the vectors. As we see above, this also works for tables. Next, we 
 make a bar plot of the entries in the table by putting the table inside the 
 barplot command.
