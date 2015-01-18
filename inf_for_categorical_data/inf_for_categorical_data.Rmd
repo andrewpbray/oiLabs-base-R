@@ -1,5 +1,5 @@
 ---
-title: 'Lab 6: Inference for Categorical Data'
+title: 'Inference for categorical data'
 output:
   html_document:
     css: ../lab.css
@@ -190,7 +190,7 @@ distribution.
     *Hint:* Remember that R has functions such as `mean` to calculate summary
     statistics.
 
-10. Replicate the above simulation three more times but with modified sample
+10. Repeat the above simulation three more times but with modified sample
     sizes and proportions: for $n = 400$ and $p = 0.1$, $n = 1040$ and 
     $p = 0.02$, and $n = 400$ and $p = 0.02$. Plot all four histograms
     together by running the `par(mfrow = c(2, 2))` command before creating the 

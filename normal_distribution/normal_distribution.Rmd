@@ -1,5 +1,5 @@
 ---
-title: "Distributions of random variables"
+title: "The normal distribution"
 output:
   html_document:
     theme: cerulean

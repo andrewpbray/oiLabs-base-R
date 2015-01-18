@@ -1,5 +1,5 @@
 ---
-title: "Lab 8 - Multiple linear regression"
+title: "Multiple linear regression"
 output:
   html_document:
     css: ../lab.css
@@ -108,7 +108,7 @@ Is anything awry?
 
 6.  Use residual plots to evaluate whether the conditions of least squares
     regression are reasonable. Provide plots and comments for each one (see
-    Lab 7 for a reminder of how to make these).
+    the Simple Regression Lab for a reminder of how to make these).
 
 ## Multiple linear regression
 

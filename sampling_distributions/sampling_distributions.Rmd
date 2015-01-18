@@ -1,5 +1,5 @@
 ---
-title: 'Lab 4A: Foundations for statistical inference - Sampling distributions'
+title: 'Foundations for statistical inference - Sampling distributions'
 output:
   html_document:
     css: ../lab.css

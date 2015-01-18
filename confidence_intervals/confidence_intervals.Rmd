@@ -1,5 +1,5 @@
 ---
-title: 'Lab 4B: Foundations for statistical inference - Confidence Levels'
+title: 'Foundations for statistical inference - Confidence intervals'
 output:
   html_document:
     css: ../lab.css
@@ -21,8 +21,8 @@ population looks like.
 
 ## The data
 
-In the previous lab we looked at the population data of houses from Ames, 
-Iowa. Let's start by loading that data set.
+In the previous lab, ``Sampling Distributions'', we looked at the population data
+of houses from Ames, Iowa. Let's start by loading that data set.
 
 ```{r load-data, eval=FALSE}
 download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
@@ -110,7 +110,7 @@ population mean.
 
 Using R, we're going to recreate many samples to learn more about how sample 
 means and confidence intervals vary from one sample to another. *Loops* come 
-in handy here (If you are unfamiliar with loops, review [Lab 4A](http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf)).
+in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf)).
 
 Here is the rough outline:
 

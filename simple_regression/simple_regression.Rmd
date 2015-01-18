@@ -1,5 +1,5 @@
 ---
-title: "Lab 7 -  Introduction to linear regression"
+title: "Introduction to linear regression"
 output:
   html_document:
     css: ../lab.css
@@ -10,12 +10,13 @@ output:
 
 ## Batter up 
 
-The movie "Moneyball" focuses on the "quest for the secret of success in
-baseball". It follows a low-budget team, the Oakland Athletics, who believed 
-that underused statistics, such as a player's ability to get on base, better 
-predict the ability to score runs than typical statistics like home runs, RBIs 
-(runs batted in), and batting average. Obtaining players who excelled in these 
-underused statistics turned out to be much more affordable for the team.
+The movie [Moneyball](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
+the "quest for the secret of success in baseball". It follows a low-budget team, 
+the Oakland Athletics, who believed that underused statistics, such as a player's 
+ability to get on base, betterpredict the ability to score runs than typical 
+statistics like home runs, RBIs (runs batted in), and batting average. Obtaining 
+players who excelled in these underused statistics turned out to be much more 
+affordable for the team.
 
 In this lab we'll be looking at data from all 30 Major League Baseball teams and
 examining the linear relationship between runs scored in a season and a number 
