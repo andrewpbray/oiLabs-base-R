@@ -1,3 +1,5 @@
+## LICENSE
+
 These labs are available at http://www.openintro.org under a Creative Commons Attribution-ShareAlike 3.0 Unported license (CC BY-SA):
 
 http://creativecommons.org/licenses/by-sa/3.0/
