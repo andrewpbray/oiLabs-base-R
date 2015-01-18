@@ -6,14 +6,13 @@ This file describes guidelines for when the lab's source files are modified and/
 
 1. Communication obligation. Any derivative work must communicate that it is licensed under a CC BY-SA license, and it also must in some way include the attribution content contained in the footnote on the first page of the original document.
 
-2. Derivative title. No derivative may include "OpenIntro" in the title, unless it is included in text of the form "Derivative of OpenIntro", e.g. one might add a subtitle such as "Derivative of OpenIntro Lab 2".
+2. Derivative title. No derivative may include "OpenIntro" in the title, unless it is included in text of the form "Derivative of OpenIntro", e.g. one might add a subtitle such as "Derivative of OpenIntro Lab: Sampling Distributions".
 
 3. For derivative works, we suggest but do not require that contributing authors' names be listed in chronological order of their contribution.
 
 ----------------------------------
 
-License
-Creative Commons Attribution-ShareAlike 3.0 Unported
+## Creative Commons Attribution-ShareAlike 3.0 Unported
 creativecommons.org/licenses/by-sa/3.0/
 
 THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.
