@@ -19,6 +19,6 @@ These versions are not currently supported, so they will differ slightly from th
 
 It is our hope that these materials are useful for instructors and students of 
 statistics.  If you end up developing some interesting variants of these labs or 
-creating new ones, please let us know!This branch contains a fork of the OpenIntro Labs that have been infused with **mosaic**. Project MOSAIC is a community of educators working to develop a new way to introduce mathematics, statistics, computation and modeling to students in colleges and universities. [The **mosaic** package](https://github.com/rpruim/mosaic) brings the full power of R to  statistics students. 
+creating new ones, please let us know!
 
-It is our hope that these materials are useful for instructors and students of statistics.  If you end up developing some interesting variants of these labs, please let us know!
+This branch contains a fork of the OpenIntro Labs that have been infused with **mosaic**. Project MOSAIC is a community of educators working to develop a new way to introduce mathematics, statistics, computation and modeling to students in colleges and universities. [The **mosaic** package](https://github.com/rpruim/mosaic) brings the full power of R to  statistics students. 
