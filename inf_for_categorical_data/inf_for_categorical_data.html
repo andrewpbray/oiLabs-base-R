@@ -80,7 +80,7 @@ img {
 <div id="the-survey" class="section level2">
 <h2>The survey</h2>
 <p>To access the press release for the poll, conducted by WIN-Gallup International, click on the following link:</p>
-<p><em><a href="http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf">http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf</a></em></p>
+<p><em><a href="http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf" class="uri">http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf</a></em></p>
 <p>Take a moment to review the report then address the following questions.</p>
 <ol style="list-style-type: decimal">
 <li><p>In the first paragraph, several key findings are reported. Do these percentages appear to be <em>sample statistics</em> (derived from the data sample) or <em>population parameters</em>?</p></li>
@@ -90,7 +90,8 @@ img {
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>Turn your attention to Table 6 (pages 15 and 16), which reports the sample size and response percentages for all 57 countries. While this is a useful format to summarize the data, we will base our analysis on the original data set of individual responses to the survey. Load this data set into R with the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/atheism.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;atheism.RData&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+<span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/atheism.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;atheism.RData&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;atheism.RData&quot;</span>)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>What does each row of Table 6 correspond to? What does each row of <code>atheism</code> correspond to?</li>
@@ -108,14 +109,16 @@ img {
 <ol start="5" style="list-style-type: decimal">
 <li>Write out the conditions for inference to construct a 95% confidence interval for the proportion of atheists in the United States in 2012. Are you confident all conditions are met?</li>
 </ol>
-<p>If the conditions for inference are reasonable, we can either calculate the standard error and construct the interval by hand, or allow the <code>inference</code> function to do it for us.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inference</span>(us12$response, <span class="dt">est =</span> <span class="st">&quot;proportion&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ci&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;theoretical&quot;</span>, 
-          <span class="dt">success =</span> <span class="st">&quot;atheist&quot;</span>)</code></pre>
-<p>Note that since the goal is to construct an interval estimate for a proportion, it’s necessary to specify what constitutes a “success”, which here is a response of <code>&quot;atheist&quot;</code>.</p>
+<p>If the conditions for inference are reasonable (check this!), we can calculate the standard error and construct the confidence interval.</p>
+<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">tally</span>(~response, <span class="dt">data=</span>us12, <span class="dt">format=</span><span class="st">'proportion'</span>)[<span class="st">&quot;atheist&quot;</span>]
+n &lt;-<span class="st"> </span><span class="kw">nrow</span>(us12)
+se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(p *<span class="st"> </span>(<span class="dv">1</span>-p) /<span class="st"> </span>n)
+p +<span class="st"> </span><span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) *<span class="st"> </span>se</code></pre>
+<p>Note that since the goal is to construct an interval estimate for a proportion, it’s necessary to specify what constitutes a “success”, which here is a response of <code>&quot;atheist&quot;</code>. Secondly, the <code>qnorm</code> function helps us find the width (in terms of the number of standard deviations from the mean) that our confidence interval needs to be in order to achieve a 95% confidence level. Note that since the normal distribution is symmetric, by cutting off the smallest 2.5% and the largest 2.5%, we’re left with the middle 95%. By changing the argument to <code>qnorm</code> we can find intervals that correspond to different confidence levels.</p>
 <p>Although formal confidence intervals and hypothesis tests don’t show up in the report, suggestions of inference appear at the bottom of page 7: “In general, the error margin for surveys of this kind is <span class="math">\(\pm\)</span> 3-5% at 95% confidence”.</p>
 <ol start="6" style="list-style-type: decimal">
 <li><p>Based on the R output, what is the margin of error for the estimate of the proportion of the proportion of atheists in US in 2012?</p></li>
-<li><p>Using the <code>inference</code> function, calculate confidence intervals for the proportion of atheists in 2012 in two other countries of your choice, and report the associated margins of error. Be sure to note whether the conditions for inference are met. It may be helpful to create new data sets for each of the two countries first, and then use these data sets in the <code>inference</code> function to construct the confidence intervals.</p></li>
+<li><p>Calculate confidence intervals for the proportion of atheists in 2012 in two other countries of your choice, and report the associated margins of error. Be sure to note whether the conditions for inference are met. It may be helpful to create new data sets for each of the two countries first, and then use these data sets to construct the confidence intervals.</p></li>
 </ol>
 </div>
 <div id="how-does-the-proportion-affect-the-margin-of-error" class="section level2">
@@ -124,9 +127,9 @@ img {
 <p>Think back to the formula for the standard error: <span class="math">\(SE = \sqrt{p(1-p)/n}\)</span>. This is then used in the formula for the margin of error for a 95% confidence interval: <span class="math">\(ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n}\)</span>. Since the population proportion <span class="math">\(p\)</span> is in this <span class="math">\(ME\)</span> formula, it should make sense that the margin of error is in some way dependent on the population proportion. We can visualize this relationship by creating a plot of <span class="math">\(ME\)</span> vs. <span class="math">\(p\)</span>.</p>
 <p>The first step is to make a vector <code>p</code> that is a sequence from 0 to 1 with each number separated by 0.01. We can then create a vector of the margin of error (<code>me</code>) associated with each of these values of <code>p</code> using the familiar approximate formula (<span class="math">\(ME = 2 \times SE\)</span>). Lastly, we plot the two vectors against each other to reveal their relationship.</p>
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
-p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)
+p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
 me &lt;-<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span><span class="kw">sqrt</span>(p *<span class="st"> </span>(<span class="dv">1</span> -<span class="st"> </span>p)/n)
-<span class="kw">plot</span>(me ~<span class="st"> </span>p, <span class="dt">ylab =</span> <span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
+<span class="kw">xyplot</span>(me ~<span class="st"> </span>p, <span class="dt">ylab =</span> <span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Describe the relationship between <code>p</code> and <code>me</code>.</li>
 </ol>
@@ -136,24 +139,19 @@ me &lt;-<span class="st"> </span><span class="dv">2</span> *<span class="st"> </
 <p>The textbook emphasizes that you must always check conditions before making inference. For inference on proportions, the sample proportion can be assumed to be nearly normal if it is based upon a random sample of independent observations and if both <span class="math">\(np \geq 10\)</span> and <span class="math">\(n(1 - p) \geq 10\)</span>. This rule of thumb is easy enough to follow, but it makes one wonder: what’s so special about the number 10?</p>
 <p>The short answer is: nothing. You could argue that we would be fine with 9 or that we really should be using 11. What is the “best” value for such a rule of thumb is, at least to some degree, arbitrary. However, when <span class="math">\(np\)</span> and <span class="math">\(n(1-p)\)</span> reaches 10 the sampling distribution is sufficiently normal to use confidence intervals and hypothesis tests that are based on that approximation.</p>
 <p>We can investigate the interplay between <span class="math">\(n\)</span> and <span class="math">\(p\)</span> and the shape of the sampling distribution by using simulations. To start off, we simulate the process of drawing 5000 samples of size 1040 from a population with a true atheist proportion of 0.1. For each of the 5000 samples we compute <span class="math">\(\hat{p}\)</span> and then plot a histogram to visualize their distribution.</p>
+<p>Here, we first <code>resample</code> <span class="math">\(n\)</span> times from the list of <code>responses</code>, with the probability of drawing <code>&quot;atheist&quot;</code> equal to <span class="math">\(p = 0.1\)</span>. Then we <code>tally</code> the proportion of those responses that are <code>&quot;atheist&quot;</code>. We <code>do</code> this 500 times.</p>
 <pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="fl">0.1</span>
 n &lt;-<span class="st"> </span><span class="dv">1040</span>
-p_hats &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">5000</span>)
+responses =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;atheist&quot;</span>, <span class="st">&quot;non_atheist&quot;</span>)
 
-for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
-  samp &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;atheist&quot;</span>, <span class="st">&quot;non_atheist&quot;</span>), n, <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p))
-  p_hats[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(samp ==<span class="st"> &quot;atheist&quot;</span>)/n
-}
+p_hats =<span class="st"> </span><span class="kw">do</span>(<span class="dv">5000</span>) *<span class="st"> </span><span class="kw">tally</span>(~<span class="kw">resample</span>(responses, <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p)), <span class="dt">format =</span> <span class="st">'proportion'</span>)[<span class="st">&quot;atheist&quot;</span>]
 
-<span class="kw">hist</span>(p_hats, <span class="dt">main =</span> <span class="st">&quot;p = 0.1, n = 1040&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.18</span>))</code></pre>
-<p>These commands build up the sampling distribution of <span class="math">\(\hat{p}\)</span> using the familiar <code>for</code> loop. You can read the sampling procedure for the first line of code inside the <code>for</code> loop as, “take a sample of size <span class="math">\(n\)</span> with replacement from the choices of atheist and non-atheist with probabilities <span class="math">\(p\)</span> and <span class="math">\(1 - p\)</span>, respectively.” The second line in the loop says, “calculate the proportion of atheists in this sample and record this value.” The loop allows us to repeat this process 5,000 times to build a good representation of the sampling distribution.</p>
+<span class="kw">histogram</span>(~p_hats, <span class="dt">main =</span> <span class="st">&quot;p = 0.1, n = 1040&quot;</span>)</code></pre>
+<p>These commands build up the sampling distribution of <span class="math">\(\hat{p}\)</span> using the familiar <code>do</code> loop. You can read the sampling procedure for the inner bit of code as, “take a sample of size <span class="math">\(n\)</span> with replacement from the choices of atheist and non-atheist with probabilities <span class="math">\(p\)</span> and <span class="math">\(1 - p\)</span>, respectively.” The <code>tally</code> command says, “calculate the proportion of atheists in this sample and record this value.” The loop allows us to repeat this process 5,000 times to build a good representation of the sampling distribution.</p>
 <ol start="9" style="list-style-type: decimal">
 <li><p>Describe the sampling distribution of sample proportions at <span class="math">\(n = 1040\)</span> and <span class="math">\(p = 0.1\)</span>. Be sure to note the center, spread, and shape.<br /><em>Hint:</em> Remember that R has functions such as <code>mean</code> to calculate summary statistics.</p></li>
-<li><p>Repeat the above simulation three more times but with modified sample sizes and proportions: for <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.1\)</span>, <span class="math">\(n = 1040\)</span> and <span class="math">\(p = 0.02\)</span>, and <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.02\)</span>. Plot all four histograms together by running the <code>par(mfrow = c(2, 2))</code> command before creating the histograms. You may need to expand the plot window to accommodate the larger two-by-two plot. Describe the three new sampling distributions. Based on these limited plots, how does <span class="math">\(n\)</span> appear to affect the distribution of <span class="math">\(\hat{p}\)</span>? How does <span class="math">\(p\)</span> affect the sampling distribution?</p></li>
-</ol>
-<p>Once you’re done, you can reset the layout of the plotting window by using the command <code>par(mfrow = c(1, 1))</code> command or clicking on “Clear All” above the plotting window (if using RStudio). Note that the latter will get rid of all your previous plots.</p>
-<ol start="11" style="list-style-type: decimal">
-<li>If you refer to Table 6, you’ll find that Australia has a sample proportion of 0.1 on a sample size of 1040, and that Ecuador has a sample proportion of 0.02 on 400 subjects. Let’s suppose for this exercise that these point estimates are actually the truth. Then given the shape of their respective sampling distributions, do you think it is sensible to proceed with inference and report margin of errors, as the reports does?</li>
+<li><p>Repeat the above simulation three more times but with modified sample sizes and proportions: for <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.1\)</span>, <span class="math">\(n = 1040\)</span> and <span class="math">\(p = 0.02\)</span>, and <span class="math">\(n = 400\)</span> and <span class="math">\(p = 0.02\)</span>. Plot all four histograms. Describe the three new sampling distributions. Based on these limited plots, how does <span class="math">\(n\)</span> appear to affect the distribution of <span class="math">\(\hat{p}\)</span>? How does <span class="math">\(p\)</span> affect the sampling distribution?</p></li>
+<li><p>If you refer to Table 6, you’ll find that Australia has a sample proportion of 0.1 on a sample size of 1040, and that Ecuador has a sample proportion of 0.02 on 400 subjects. Let’s suppose for this exercise that these point estimates are actually the truth. Then given the shape of their respective sampling distributions, do you think it is sensible to proceed with inference and report margin of errors, as the reports does?</p></li>
 </ol>
 <hr />
 </div>
@@ -161,14 +159,14 @@ for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
 <h2>On your own</h2>
 <p>The question of atheism was asked by WIN-Gallup International in a similar survey that was conducted in 2005. (We assume here that sample sizes have remained the same.) Table 4 on page 13 of the report summarizes survey results from 2005 and 2012 for 39 countries.</p>
 <ul>
-<li><p>Answer the following two questions using the <code>inference</code> function. As always, write out the hypotheses for any tests you conduct and outline the status of the conditions for inference.</p>
+<li><p>Answer the following two questions. As always, write out the hypotheses for any tests you conduct and outline the status of the conditions for inference.</p>
 <p><strong>a.</strong> Is there convincing evidence that Spain has seen a change in its atheism index between 2005 and 2012?<br /><em>Hint:</em> Create a new data set for respondents from Spain. Form confidence intervals for the true proportion of athiests in both years, and determine whether they overlap.</p>
 <p><strong>b.</strong> Is there convincing evidence that the United States has seen a change in its atheism index between 2005 and 2012?</p></li>
 <li><p>If in fact there has been no change in the atheism index in the countries listed in Table 4, in how many of those countries would you expect to detect a change (at a significance level of 0.05) simply by chance?<br /><em>Hint:</em> Look in the textbook index under Type 1 error.</p></li>
 <li><p>Suppose you’re hired by the local government to estimate the proportion of residents that attend a religious service on a weekly basis. According to the guidelines, the estimate must have a margin of error no greater than 1% with 95% confidence. You have no idea what to expect for <span class="math">\(p\)</span>. How many people would you have to sample to ensure that you are within the guidelines?<br /><em>Hint:</em> Refer to your plot of the relationship between <span class="math">\(p\)</span> and margin of error. Do not use the data set to answer this question.</p></li>
 </ul>
 <div id="license">
-This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel.
+<p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel.</p>
 </div>
 </div>
 
