@@ -134,7 +134,7 @@ command above. This is similar to something we observed in the Introduction to R
 when we multiplied or divided a vector with a number, R applied that action across 
 entries in the vectors. As we see above, this also works for tables. Next, we 
 make a bar plot of the entries in the table by putting the table inside the 
-barplot command.
+`barplot` command.
 
 ```{r table-smoke-barplot, eval=FALSE}
 barplot(table(cdc$smoke100))
