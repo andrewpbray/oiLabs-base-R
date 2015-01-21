@@ -110,7 +110,7 @@ population mean.
 
 Using R, we're going to recreate many samples to learn more about how sample 
 means and confidence intervals vary from one sample to another. *Loops* come 
-in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf)).
+in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs/blob/master/sampling_distributions/sampling_distributions.html)).
 
 Here is the rough outline:
 
@@ -175,8 +175,8 @@ c(lower_vector[1], upper_vector[1])
     new intervals based on the sample means and standard deviations you have 
     already collected. Using the `plot_ci` function, plot all intervals and 
     calculate the proportion of intervals that include the true population 
-    mean. How does this percentage compare to the confidence level level 
-    selected for the intervals?
+    mean. How does this percentage compare to the confidence level selected for
+    the intervals?
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 

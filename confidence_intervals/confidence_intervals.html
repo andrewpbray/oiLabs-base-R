@@ -119,7 +119,7 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span 
 <li><p>Does your confidence interval capture the true average size of houses in Ames? If you are working on this lab in a classroom, does your neighbor’s interval capture this value?</p></li>
 <li><p>Each student in your class should have gotten a slightly different confidence interval. What proportion of those intervals would you expect to capture the true population mean? Why? If you are working in this lab in a classroom, collect data on the intervals created by other students in the class and calculate the proportion of intervals that capture the true population mean.</p></li>
 </ol>
-<p>Using R, we’re going to recreate many samples to learn more about how sample means and confidence intervals vary from one sample to another. <em>Loops</em> come in handy here (If you are unfamiliar with loops, review the <a href="http://www.openintro.org/stat/labs/04A_Intro_to_Statistical_Inference.pdf">Sampling Distribution Lab</a>).</p>
+<p>Using R, we’re going to recreate many samples to learn more about how sample means and confidence intervals vary from one sample to another. <em>Loops</em> come in handy here (If you are unfamiliar with loops, review the <a href="http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs/blob/master/sampling_distributions/sampling_distributions.html">Sampling Distribution Lab</a>).</p>
 <p>Here is the rough outline:</p>
 <ul>
 <li>Obtain a random sample.</li>
@@ -150,7 +150,7 @@ upper_vector &lt;-<span class="st"> </span>samp_mean +<span class="st"> </span><
 <li><p>Using the following function (which was downloaded with the data set), plot all intervals. What proportion of your confidence intervals include the true population mean? Is this proportion exactly equal to the confidence level? If not, explain why.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_ci</span>(lower_vector, upper_vector, <span class="kw">mean</span>(population))</code></pre></li>
 <li><p>Pick a confidence level of your choosing, provided it is not 95%. What is the appropriate critical value?</p></li>
-<li><p>Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the <code>plot_ci</code> function, plot all intervals and calculate the proportion of intervals that include the true population mean. How does this percentage compare to the confidence level level selected for the intervals?</p></li>
+<li><p>Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the <code>plot_ci</code> function, plot all intervals and calculate the proportion of intervals that include the true population mean. How does this percentage compare to the confidence level selected for the intervals?</p></li>
 </ul>
 <div id="license">
 This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel.
