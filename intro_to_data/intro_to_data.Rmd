@@ -176,11 +176,11 @@ smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic
 plot of this table, we would enter the following command.
 
 ```{r mosaic-smoke-gender, eval=FALSE}
-mosaicplot(tally(gender ~ smoke100, data=cdc, margins=FALSE))
+mosaicplot(table(cdc$gender,cdc$smoke100))
 ```
 
-We could have accomplished this in two steps by saving the table in one line 
-and applying `mosaicplot` in the next (see the `tally`/`barchart` example above).
+We could have accomplished this in two steps by saving the table in one line and
+applying `mosaicplot` in the next (see the table/barplot example above).
 
 3.  What does the mosaic plot reveal about smoking habits and gender?
 
@@ -349,7 +349,7 @@ plots and histograms.  We can construct a box plot for a single variable with
 the following command.
 
 ```{r boxplot-height, eval=FALSE}
-bwplot(~height, data=cdc)
+boxplot(cdc$height)
 ```
 
 You can compare the locations of the components of the box by examining the 
