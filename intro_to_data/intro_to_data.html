@@ -79,7 +79,7 @@ img {
 <p>Some define Statistics as the field that focuses on turning information into knowledge. The first step in that process is to summarize and describe the raw information - the data. In this lab, you will gain insight into public health by generating simple graphical and numerical summaries of a data set collected by the Centers for Disease Control and Prevention (CDC). As this is a large data set, along the way you’ll also learn the indispensable skills of data processing and subsetting.</p>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
-<p>The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site (<a href="http://www.cdc.gov/brfss"><a href="http://www.cdc.gov/brfss" class="uri">http://www.cdc.gov/brfss</a></a>) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.</p>
+<p>The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site (<a href="http://www.cdc.gov/brfss"><a href="http://www.cdc.gov/brfss">http://www.cdc.gov/brfss</a></a>) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.</p>
 <p>We will focus on a random sample of 20,000 people from the BRFSS survey conducted in 2000. While there are over 200 variables in this data set, we will work with a small subset.</p>
 <p>We begin by loading the data set of 20,000 observations into the R workspace. After launching RStudio, enter the following command.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;http://www.openintro.org/stat/data/cdc.R&quot;</span>)</code></pre>
@@ -112,7 +112,6 @@ img {
 <p>While it makes sense to describe a quantitative variable like <code>weight</code> in terms of these statistics, what about categorical data? We would instead consider the sample frequency or relative frequency distribution. The function <code>tally</code> does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc)</code></pre>
 <p>or instead look at the relative frequency distribution by typing</p>
-<<<<<<< HEAD
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">format=</span><span class="st">&quot;proportion&quot;</span>)</code></pre>
 <p>Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the Introduction to R; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar chart of the entries in the table by putting the table inside the <code>barchart</code> command.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barchart</span>(<span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>), <span class="dt">horizontal=</span><span class="ot">FALSE</span>)</code></pre>
@@ -120,24 +119,14 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r">smoke &lt;-<span class="st"> </span><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>)
 <span class="kw">barchart</span>(smoke, <span class="dt">horizontal=</span><span class="ot">FALSE</span>)</code></pre>
 <p>Here, we’ve made a new object, a table, called <code>smoke</code> (the contents of which we can see by typing <code>smoke</code> into the console) and then used it in as the input for <code>barchart</code>. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace.<br />This is another important idea that we’ll return to later.</p>
-=======
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(cdc$smoke100)/<span class="dv">20000</span></code></pre>
-<p>Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the Introduction to R; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar plot of the entries in the table by putting the table inside the <code>barplot</code> command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="kw">table</span>(cdc$smoke100))</code></pre>
-<p>Notice what we’ve done here! We’ve computed the table of <code>cdc$smoke100</code> and then immediately applied the graphical function, <code>barplot</code>. This is an important idea: R commands can be nested. You could also break this into two steps by typing the following:</p>
-<pre class="sourceCode r"><code class="sourceCode r">smoke &lt;-<span class="st"> </span><span class="kw">table</span>(cdc$smoke100)
-
-<span class="kw">barplot</span>(smoke)</code></pre>
-<p>Here, we’ve made a new object, a table, called <code>smoke</code> (the contents of which we can see by typing <code>smoke</code> into the console) and then used it in as the input for <code>barplot</code>. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace. This is another important idea that we’ll return to later.</p>
->>>>>>> upstream/master
 <ol start="2" style="list-style-type: decimal">
 <li>Create a numerical summary for <code>height</code> and <code>age</code>, and compute the interquartile range for each. Compute the relative frequency distribution for <code>gender</code> and <code>exerany</code>. How many males are in the sample? What proportion of the sample reports being in excellent health?</li>
 </ol>
 <p>The <code>tally</code> command can be used to tabulate any number of variables that you provide. For example, to examine which participants have smoked across each gender, we could use the following.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data=</span>cdc, <span class="dt">format=</span><span class="st">&quot;count&quot;</span>)</code></pre>
 <p>Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic plot of this table, we would enter the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data=</span>cdc, <span class="dt">margins=</span><span class="ot">FALSE</span>))</code></pre>
-<p>We could have accomplished this in two steps by saving the table in one line and applying <code>mosaicplot</code> in the next (see the <code>tally</code>/<code>barchart</code> example above).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(cdc$gender,cdc$smoke100))</code></pre>
+<p>We could have accomplished this in two steps by saving the table in one line and applying <code>mosaicplot</code> in the next (see the table/barplot example above).</p>
 <ol start="3" style="list-style-type: decimal">
 <li>What does the mosaic plot reveal about smoking habits and gender?</li>
 </ol>
@@ -190,13 +179,13 @@ img {
 <div id="quantitative-data" class="section level2">
 <h2>Quantitative data</h2>
 <p>With our subsetting tools in hand, we’ll now return to the task of the day: making basic summaries of the BRFSS questionnaire. We’ve already looked at categorical data such as <code>smoke</code> and <code>gender</code> so now let’s turn our attention to quantitative data. Two common ways to visualize quantitative data are with box plots and histograms. We can construct a box plot for a single variable with the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bwplot</span>(~height, <span class="dt">data=</span>cdc)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(cdc$height)</code></pre>
 <p>You can compare the locations of the components of the box by examining the summary statistics.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cdc$height)</code></pre>
 <p>Confirm that the median and upper and lower quartiles reported in the numerical summary match those in the graph. The purpose of a boxplot is to provide a thumbnail sketch of a variable for the purpose of comparing across several categories. So we can, for example, compare the heights of men and women with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bwplot</span>(height ~<span class="st"> </span>gender, <span class="dt">data=</span>cdc)</code></pre>
 <p>The notation here is new. The <code>~</code> character can be read <em>versus</em> or <em>as a function of</em>. So we’re asking R to give us a box plots of heights where the groups are defined by gender.</p>
-<p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index" class="uri">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
+<p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
 <p><span class="math">\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]</span></p>
 <p>703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).</p>
 <p>The following two lines first make a new object called <code>bmi</code> and then creates box plots of these values, defining groups by the variable <code>cdc$genhlth</code>.</p>
@@ -226,7 +215,7 @@ img {
 <li><p>Now it’s time to get creative. Find the mean and standard deviation of <code>weight</code> and determine what proportion of the weights are within one standard deviation of the mean.</p></li>
 </ul>
 <div id="license">
-<p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was adapted for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.</p>
+This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was adapted for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.
 </div>
 </div>
 
