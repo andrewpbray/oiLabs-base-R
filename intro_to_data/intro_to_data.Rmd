@@ -36,7 +36,8 @@ We begin by loading the data set of 20,000 observations into the R workspace.
 After launching RStudio, enter the following command.
 
 ```{r load-data, eval=FALSE}
-source("http://www.openintro.org/stat/data/cdc.R")
+download.file("https://www.openintro.org/stat/data/cdc.RData", destfile = "cdc.RData")
+load("cdc.RData")
 ```
 
 The data set `cdc` that shows up in your workspace is a *data matrix*, with each
