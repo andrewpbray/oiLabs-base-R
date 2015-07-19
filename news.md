@@ -40,7 +40,7 @@ focus on vectors, constructing data frames, and manipulating them using tidyr.
 Looks like we've been sourcing .R files for the labs that don't have custom 
 functions. Seems really awkward to have the data in an R script. The most
 straightfoward fix would be to have them download and load an RData file
-instead, which is what the latter labs do anyway.
+instead, which is what the latter labs do anyway. Here's an [example](https://github.com/andrewpbray/oiLabs-dplyr/commit/f8f0750f188865832dacccfde8b97982723e760c).
 
 Even better is putting it all in the oiLabs package. Are there any arguments
 in favor of keeping the data hosted on the openintro website instead of in
