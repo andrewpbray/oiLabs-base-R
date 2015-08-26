@@ -35,24 +35,26 @@ and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
 to access data and organize, describe, and invoke statistical computations.
 
-To get you started, enter the following command at the R prompt (i.e. right after
+To get you started, enter the following commands at the R prompt (i.e. right after
 `>` on the console).  You can either type it in manually or copy and paste it
 from this document.
 
 ```{r load-abrbuthnot-data, eval=TRUE}
-source("http://www.openintro.org/stat/data/arbuthnot.R")
+devtools::install_github("andrewpbray/oilabs")
+library(oilabs)
+data(arbuthnot)
 ```
 
-This command instructs R to access the OpenIntro website and fetch some data: 
+This command instructs R to load some data: 
 the Arbuthnot baptism counts for boys and girls. You should see that the 
 workspace area in the upper righthand corner of the RStudio window now lists a 
 data set called `arbuthnot` that has 82 observations on 3 variables. As you 
 interact with R, you will create a series of objects. Sometimes you load them as
 we have done here, and sometimes you create them yourself as the byproduct of a 
 computation or some analysis you have performed. Note that because you are 
-accessing data from the web, this command (and the entire assignment) will work 
-in a computer lab, in the library, or in your dorm room; anywhere you have 
-access to the Internet.
+working on the RStudio server, this data comes preloaded. If you would like to
+run RStudio locally on your own computer please ask me how you can access this 
+data (it's super quick to do).
 
 ## The Data: Dr. Arbuthnot's Baptism Records
 
