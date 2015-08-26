@@ -174,36 +174,44 @@ year, but there is a faster way. We can *mutate* the existing columns in the dat
 set to create a new one.
 
 ```{r calc-total-bapt-vars, eval=FALSE}
+mutate(arbuthnot, total = boys + girls)
+```
+
+You'll see that there is a new column called "total" that has been tacked on to 
+the data frame. Take a look at a few of the rows to verify that the sums are right. 
+
+We'll be using this new column to generate some plots, so we'll need to be sure 
+we make the mutation permanent.
+
+```{r calc-total-bapt-vars-save, eval=FALSE}
 arbuthnot <- mutate(arbuthnot, total = boys + girls)
 ```
 
-What you will see are 82 numbers (in that packed display, because we aren't 
-looking at a data frame here), each one representing the sum we're after. Take a
-look at a few of them and verify that they are right. Therefore, we can make a 
-plot of the total number of baptisms per year with the command
+The special symbol `<-` performs an *assignment*, taking the output of one line 
+of code and saving it into an object in your workspace. In this case, you already
+have an object called `arbuthnot`, so this command updates that data set with the
+new mutated column.
+
+We can make a plot of the total number of baptisms per year with the command
 
 ```{r plot-total-vs-year, eval=FALSE}
-plot(arbuthnot$year, arbuthnot$boys + arbuthnot$girls, type = "l")
+qplot(x = year, y = total, data = arbuthnot, geom = "line")
 ```
 
-This time, note that we left out the names of the first two arguments.  We can 
-do this because the help file shows that the default for `plot` is for the first
-argument to be the x-variable and the second argument to be the y-variable.
-
-Similarly to how we computed the proportion of boys, we can compute the ratio of
-the number of boys to the number of girls baptized in 1629 with
+Similarly to how we computed the total number of births, we can compute the ratio 
+of the number of boys to the number of girls baptized in 1629 with
 
 ```{r calc-prop-boys-to-girls-numbers, eval=FALSE}
 5218 / 4683
 ```
 
-or we can act on the complete vectors with the expression
+or we can act on the complete columns with the expression
 
 ```{r calc-prop-boys-to-girls-vars, eval=FALSE}
-arbuthnot$boys / arbuthnot$girls
+arbuthnot <- mutate(arbuthnot, boys_to_girls_ratio = boys/girls)
 ```
 
-The proportion of newborns that are boys
+We can also compute the proportion of newborns that are boys
 
 ```{r calc-prop-boys-numbers, eval=FALSE}
 5218 / (5218 + 4683)
@@ -212,7 +220,7 @@ The proportion of newborns that are boys
 or this may also be computed for all years simultaneously:
 
 ```{r calc-prop-boys-vars, eval=FALSE}
-arbuthnot$boys / (arbuthnot$boys + arbuthnot$girls)
+arbuthnot <- mutate(arbuthnot, prop_boys = boys/total)
 ```
 
 Note that with R as with your calculator, you need to be conscious of the order 
@@ -232,25 +240,22 @@ division, you can ask R to make comparisons like greater than, `>`, less than,
 year with the expression
 
 ```{r boys-more-than-girls, eval=FALSE}
-arbuthnot$boys > arbuthnot$girls
+mutate(arbuthnot, boys > girls)
 ```
 
-This command returns 82 values of either `TRUE` if that year had more boys than 
-girls, or `FALSE` if that year did not (the answer may surprise you). This 
-output shows a different kind of data than we have considered so far. In the 
-`arbuthnot` data frame our values are numerical (the year, the number of boys 
-and girls). Here, we've asked R to create *logical* data, data where the values
-are either `TRUE` or `FALSE`. In general, data analysis will involve many 
-different kinds of data types, and one reason for using R is that it is able to
-represent and compute with many of them.
+This command adds a column of values of either `TRUE` if that year had more boys
+than girls, or `FALSE` if that year did not (the answer may surprise you). This 
+output shows a different kind of data than we have considered so far. All other
+columns in the `arbuthnot` data frame have values are numerical (the year, the 
+number of boys and girls). Here, we've asked R to create *logical* data, data 
+where the values are either `TRUE` or `FALSE`. In general, data analysis will 
+involve many different kinds of data types, and one reason for using R is that 
+it is able to represent and compute with many of them.
 
 This seems like a fair bit for your first lab, so let's stop here. To exit 
-RStudio you can click the *x* in the upper right corner of the whole window.  
-You will be prompted to save your workspace. If you click *save*, RStudio will 
-save the history of your commands and all the objects in your workspace so that 
-the next time you launch RStudio, you will see `arbuthnot` and you will have 
-access to the commands you typed in your previous session. For now, click *save*,
-then start up RStudio again.
+RStudio you can click on the log out link at the upper right corner of the screen.
+Go ahead and log out and then sign back in. You'll find your R session is just
+as you left it.
 
 * * *
 
@@ -262,7 +267,7 @@ steps, but for present day birth records in the United States.  Load up the
 present day data with the following command.
 
 ```{r load-present-data, eval=FALSE}
-source("http://www.openintro.org/stat/data/present.R")
+data(present)
 ```
 
 The data are stored in a data frame called `present`.
