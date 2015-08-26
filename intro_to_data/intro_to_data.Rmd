@@ -15,7 +15,6 @@ by the Centers for Disease Control and Prevention (CDC).  As this is a large
 data set, along the way you'll also learn the indispensable skills of data 
 processing and subsetting.
 
-
 ## Getting started
 
 The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone 
