@@ -39,9 +39,11 @@ To get you started, enter the following commands at the R prompt (i.e. right aft
 `>` on the console).  You can either type it in manually or copy and paste it
 from this document.
 
-```{r load-abrbuthnot-data, eval=TRUE}
+```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
 devtools::install_github("andrewpbray/oilabs")
 library(oilabs)
+library(dplyr)
+library(ggplot2)
 data(arbuthnot)
 ```
 
@@ -67,7 +69,6 @@ typing its name into the console.
 ```{r view-data, eval=FALSE}
 arbuthnot
 ```
-
 
 What you should see are four columns of numbers, each row representing a 
 different year: the first entry in each row is simply the row number (an index 
@@ -115,54 +116,46 @@ Let's start to examine the data a little more closely. We can access the data in
 a single column of a data frame separately using a command like
 
 ```{r view-boys, eval=FALSE}
-arbuthnot$boys
+select(arbuthnot, boys)
 ```
 
-This command will only show the number of boys baptized each year.
+This selects out of the `arbuthnot` data set only the number of boys baptized 
+each year.
 
 1.  What command would you use to extract just the counts of girls baptized? Try
     it!
-
-Notice that the way R has printed these data is different. When we looked at the
-complete data frame, we saw 82 rows, one on each line of the display. These data
-are no longer structured in a table with other variables, so they are displayed 
-one right after another. Objects that print out in this way are called *vectors*;
-they represent a set of numbers. R has added numbers in [brackets] along the 
-left side of the printout to indicate locations within the vector. For example,
-`5218` follows `[1]`, indicating that `5218` is the first entry in the vector. 
-And if `[43]` starts a line, then that would mean the first number on that line
-would represent the 43<sup>rd</sup> entry in the vector.
 
 R has some powerful functions for making graphics. We can create a simple plot 
 of the number of girls baptized per year with the command
 
 ```{r plot-girls-vs-year, eval=FALSE}
-plot(x = arbuthnot$year, y = arbuthnot$girls)
+qplot(x = year, y = girls, data = arbuthnot)
 ```
 
-By default, R creates a scatterplot with each x,y pair indicated by an open 
-circle. The plot itself should appear under the *Plots* tab of the lower right 
-panel of RStudio. Notice that the command above again looks like a function, 
-this time with two arguments separated by a comma.  The first argument in the 
-plot function specifies the variable for the x-axis and the second for the y-axis.
-If we wanted to connect the data points with lines, we could add a third argument,
-the letter `l` for **l**ine.
+The `qplot()` function (meaning "quick plot") looks at the type of data you have
+provided it and makes the decision to visualize it with a scatterplot. The plot
+should appear under the *Plots* tab of the lower right panel of RStudio. Notice 
+that the command above again looks like a function, this time with three arguments
+separated by commas.  The first two arguments in the `qplot()` function specify 
+the variables for the x-axis and the y-axis and the third provides the name of the
+data set where they can be found. If we wanted to connect the data points with 
+lines, we could add a fourth argument to specify the geometry that we'd like.
 
 ```{r plot-girls-vs-year-line, eval=FALSE}
-plot(x = arbuthnot$year, y = arbuthnot$girls, type = "l")
+qplot(x = year, y = girls, data = arbuthnot, geom = "line")
 ```
 
 You might wonder how you are supposed to know that it was possible to add that 
-third argument.  Thankfully, R documents all of its functions extensively. To 
+fourth argument.  Thankfully, R documents all of its functions extensively. To 
 read what a function does and learn the arguments that are available to you, 
 just type in a question mark followed by the name of the function that you're 
 interested in. Try the following.
 
 ```{r plot-help, eval=FALSE, tidy = FALSE}
-?plot
+?qplot
 ```
 
-Notice that the help file replaces the plot  in the lower right panel. You can 
+Notice that the help file replaces the plot in the lower right panel. You can 
 toggle between plots and help files using the tabs at the top of that panel.
 
 2.  Is there an apparent trend in the number of girls baptized over the years?  
@@ -177,11 +170,11 @@ mathematical expressions like
 ```
 
 to see the total number of baptisms in 1629. We could repeat this once for each 
-year, but there is a faster way. If we add the vector for baptisms for boys and
-girls, R will compute all sums simultaneously.
+year, but there is a faster way. We can *mutate* the existing columns in the data
+set to create a new one.
 
 ```{r calc-total-bapt-vars, eval=FALSE}
-arbuthnot$boys + arbuthnot$girls
+arbuthnot <- mutate(arbuthnot, total = boys + girls)
 ```
 
 What you will see are 82 numbers (in that packed display, because we aren't 
