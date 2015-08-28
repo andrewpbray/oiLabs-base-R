@@ -113,50 +113,36 @@ median(cdc$weight)
 
 While it makes sense to describe a quantitative variable like `weight` in terms
 of these statistics, what about categorical data?  We would instead consider the
-sample frequency or relative frequency distribution.  The function `table` does
-this for you by counting the number of times each kind of response was given.
-For example, to see the number of people who have smoked 100 cigarettes in their
-lifetime, type
+sample frequencies.  The function `count` does this for you by counting the number 
+of times each kind of response was given. For example, to see the number of 
+people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
-table(cdc$smoke100)
+count(cdc, smoke100)
+summarise(cdc, count(smoke100))
+cdc %>% group_by(smoke100) %>%
+  summarise(count = n())
 ```
 
-or instead look at the relative frequency distribution by typing
+We can visualize these counts by creating a barplot.
 
-```{r table-smoke-prop, eval=FALSE}
-table(cdc$smoke100)/20000
-```
-
-Notice how R automatically divides all entries in the table by 20,000 in the 
-command above. This is similar to something we observed in the Introduction to R;
-when we multiplied or divided a vector with a number, R applied that action across 
-entries in the vectors. As we see above, this also works for tables. Next, we 
-make a bar plot of the entries in the table by putting the table inside the 
-`barplot` command.
-
-```{r table-smoke-barplot, eval=FALSE}
+```{r smoke-barplot, eval=FALSE}
 qplot(x = smoke100, data = cdc)
 ```
 
-Notice what we've done here! We've computed the table of `cdc$smoke100` and then
-immediately applied the graphical function, `barplot`. This is an important 
-idea: R commands can be nested. You could also break this into two steps by 
-typing the following:
+Unlike the scatter or line plot from the Intro to R lab, here we only have one
+variable that we want to visualize, `smoke100`, so we don't fill in the `y =` 
+argument. `qplot()` makes a smart guess at the type of plot that you want based
+on the data you've given it. If you want to be more explicit, you can specify
+the geometry that you'd like the data to take.
 
-```{r table-smoke-barplot-twosteps, eval=FALSE}
-smoke <- table(cdc$smoke100)
-
-barplot(smoke)
+```{r smoke-barplot, eval=FALSE}
+qplot(x = smoke100, data = cdc, geom = "bar")
 ```
 
-Here, we've made a new object, a table, called `smoke` (the contents of which we
-can see by typing `smoke` into the console) and then used it in as the input for
-`barplot`. The special symbol `<-` performs an *assignment*, taking the output 
-of one line of code and saving it into an object in your workspace.   This is 
-another important idea that we'll return to later.
+Which should generate the exact same plot.
 
-2.  Create a numerical summary for `height` and `age`, and compute the 
+2.  Calculate numerical summaries for `height` and `age`, and compute the 
     interquartile range for each. Compute the relative frequency distribution for
     `gender` and `exerany`. How many males are in the sample? What proportion of
     the sample reports being in excellent health?
