@@ -3,5 +3,4 @@
 .RData
 oiLabs-dplyr-ggplot.Rproj
 .DS_Store
-news.html
-README.html
+*.html
