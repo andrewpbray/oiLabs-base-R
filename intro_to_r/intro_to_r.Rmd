@@ -294,10 +294,7 @@ The data are stored in a data frame called `present`.
     greater proportion than girls hold up in the U.S.? Include the plot in your 
     response.
 
--   In what year did we see the most total number of births in the U.S.? You can
-    refer to the help files or the R reference card 
-    [http://cran.r-project.org/doc/contrib/Short-refcard.pdf](http://cran.r-project.org/doc/contrib/Short-refcard.pdf)
-    to find helpful commands.
+-   In what year did we see the most total number of births in the U.S.?
 
 These data come from a report by the Centers for Disease Control 
 [http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf](http://www.cdc.gov/nchs/data/nvsr/nvsr53/nvsr53_20.pdf). 
