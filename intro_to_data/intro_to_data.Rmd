@@ -113,15 +113,12 @@ median(cdc$weight)
 
 While it makes sense to describe a quantitative variable like `weight` in terms
 of these statistics, what about categorical data?  We would instead consider the
-sample frequencies.  The function `count` does this for you by counting the number 
+sample frequencies.  The function `table` does this for you by counting the number 
 of times each kind of response was given. For example, to see the number of 
 people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
-count(cdc, smoke100)
-summarise(cdc, count(smoke100))
-cdc %>% group_by(smoke100) %>%
-  summarise(count = n())
+table(cdc$smoke100)
 ```
 
 We can visualize these counts by creating a barplot.
