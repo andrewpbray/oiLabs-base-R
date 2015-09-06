@@ -262,7 +262,7 @@ choose to use depends on your personal preference.
 ## A little more on subsetting
 
 It's often useful to extract all individuals (cases) in a data set that have 
-specific characteristics. We accomplish this through *conditioning* commands. 
+specific characteristics. We accomplish this through *logical operators*. 
 First, consider expressions like
 
 ```{r true-male, eval=FALSE}
@@ -300,7 +300,7 @@ It is also possible to tell R to keep only specific variables, which is a topic
 we'll discuss in a future lab. For now, the important thing is that we can carve
 up the data based on values of one or more variables.
 
-As an aside, you can use several of these conditions together with `&` and `|`.
+As an aside, you can use several of these logical operators together with `&` and `|`.
 The `&` is read "and" so that
 
 ```{r males-and-over30, eval=FALSE}
