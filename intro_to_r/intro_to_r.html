@@ -84,8 +84,7 @@ img {
 <p>To get you started, enter the following commands at the R prompt (i.e. right after <code>&gt;</code> on the console). You can either type it in manually or copy and paste it from this document.</p>
 <pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;andrewpbray/oilabs&quot;</span>)
 <span class="kw">library</span>(oilabs)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(mosaic)
 <span class="kw">data</span>(arbuthnot)</code></pre>
 <p>This command instructs R to load some data: the Arbuthnot baptism counts for boys and girls. You should see that the workspace area in the upper righthand corner of the RStudio window now lists a data set called <code>arbuthnot</code> that has 82 observations on 3 variables. As you interact with R, you will create a series of objects. Sometimes you load them as we have done here, and sometimes you create them yourself as the byproduct of a computation or some analysis you have performed. Note that because you are working on the RStudio server, this data comes preloaded. If you would like to run RStudio locally on your own computer please ask me how you can access this data (it’s super quick to do).</p>
 <div id="the-data-dr.arbuthnots-baptism-records" class="section level2">
@@ -111,8 +110,7 @@ img {
 <ol style="list-style-type: decimal">
 <li>What command would you use to extract just the counts of girls baptized? Try it!</li>
 </ol>
-<<<<<<< HEAD
-<p>Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called <em>vectors</em>; they represent a set of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, <code>5218</code> follows <code>[1]</code>, indicating that <code>5218</code> is the first entry in the vector. And if <code>[43]</code> starts a line, then that would mean the first number on that line would represent the 43<sup>rd</sup> entry in the vector.</p>
+<p>Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called vectors; they represent a set of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, 5218 follows [1], indicating that 5218 is the first entry in the vector. And if [43] starts a line, then that would mean the first number on that line would represent the 43rd entry in the vector.</p>
 <div id="mosaic" class="section level3">
 <h3>mosaic</h3>
 <p>There is an additional package for R called <code>mosaic</code> that streamlines all of the commands that you will need in this course. This package is specifically designed by a team of NSF-funded educators to make R more accessible to introductory statistics students like you. The <code>mosaic</code> package doesn’t provide new functionality so much as it makes existing functionality more logical, consistent, all the while emphasizing importants concepts in statistics.</p>
@@ -122,54 +120,33 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)</code></pre>
 <p>Note that you will have to do this <em>every</em> time you start a new R session.</p>
 <p>R has some powerful functions for making graphics.</p>
-<p>The centerpiece of the <code>mosaic</code> syntax is the use of the <em>modeling language</em>. This involves the use of a tilde (~), which can be read as “is a function of”. For example, to plot the number of girls as a function of the year:</p>
+<p>The centerpiece of the <code>mosaic</code> syntax is the use of the <em>modeling language</em>. This involves the use of a tilde (~), which can be read as “is a function of”.</p>
 <p>We can create a simple plot of the number of girls baptized per year with the command</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(girls ~<span class="st"> </span>year, <span class="dt">data=</span>arbuthnot)</code></pre>
-<p>By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the <em>Plots</em> tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with two arguments separated by a comma. The first argument in the plot function specifies the variable for the x-axis and the second for the y-axis. If we wanted to connect the data points with lines, we could add a third argument, the letter <code>l</code> for <strong>l</strong>ine.</p>
+<p>By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the <em>Plots</em> tab of the lower right panel of RStudio. Notice that the command above is a function called <code>xyplot</code> that takes two arguments separated by a comma. The first argument to the <code>xyplot</code> function is a formula of the form <code>y ~ x</code> that specifies which variable should go on the vertical (<code>y</code>) axis and which should go on the horizontal (<code>x</code>) axis. The <code>data</code> argument tell R where to find the <code>girls</code> and <code>year</code> variables – in this case, they are inside the data frame called <code>arbuthnot</code>. You will find that you can perform most of the operations that you will see in this class using this simple template. [Please see the <a href="https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html">Less Volume, More Creativity</a> vignette for more information about this.]</p>
+<p>If we wish to plot <code>l</code>ines instead of <code>p</code>oints, we can add the <code>type</code> argument.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(girls ~<span class="st"> </span>year, <span class="dt">data=</span>arbuthnot, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
 <p>You might wonder how you are supposed to know that it was possible to add that third argument. Thankfully, R documents all of its functions extensively. To read what a function does and learn the arguments that are available to you, just type in a question mark followed by the name of the function that you’re interested in. Try the following.</p>
 <pre class="sourceCode r"><code class="sourceCode r">?xyplot</code></pre>
-=======
-<p>Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called vectors; they represent a set of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, 5218 follows [1], indicating that 5218 is the first entry in the vector. And if [43] starts a line, then that would mean the first number on that line would represent the 43rd entry in the vector.</p>
-<p>R has some powerful functions for making graphics. We can create a simple plot of the number of girls baptized per year with the command</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> girls, <span class="dt">data =</span> arbuthnot)</code></pre>
-<p>The <code>qplot()</code> function (meaning “quick plot”) looks at the type of data you have provided it and makes the decision to visualize it with a scatterplot. The plot should appear under the <em>Plots</em> tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with three arguments separated by commas. The first two arguments in the <code>qplot()</code> function specify the variables for the x-axis and the y-axis and the third provides the name of the data set where they can be found. If we wanted to connect the data points with lines, we could add a fourth argument to specify the geometry that we’d like.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> girls, <span class="dt">data =</span> arbuthnot, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
-<p>You might wonder how you are supposed to know that it was possible to add that fourth argument. Thankfully, R documents all of its functions extensively. To read what a function does and learn the arguments that are available to you, just type in a question mark followed by the name of the function that you’re interested in. Try the following.</p>
-<pre class="sourceCode r"><code class="sourceCode r">?qplot</code></pre>
->>>>>>> upstream/master
 <p>Notice that the help file replaces the plot in the lower right panel. You can toggle between plots and help files using the tabs at the top of that panel.</p>
 <ol start="2" style="list-style-type: decimal">
-<li>Is there an apparent trend in the number of girls baptized over the years? How would you describe it?</li>
+<li>Is there an apparent trend in the number of girls baptized over the years?<br />How would you describe it?</li>
 </ol>
 <p>Now, suppose we want to plot the total number of baptisms. To compute this, we could use the fact that R is really just a big calculator. We can type in mathematical expressions like</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span></code></pre>
-<p>to see the total number of baptisms in 1629. We could repeat this once for each year, but there is a faster way. If we add the vector for baptisms for boys to that of girls, R will compute all sums simultaneously.</p>
+<p>to see the total number of baptisms in 1629. We could repeat this once for each year, but there is a faster way. If we add the vector for baptisms for boys and girls, R will compute all sums simultaneously.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys +<span class="st"> </span>arbuthnot$girls</code></pre>
-<<<<<<< HEAD
-<p>You can also use <code>with</code> to avoid repeatedly typing the name of the data frame. <code>with</code> instructs R to interpret everything else from within the data frame that you specify.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(arbuthnot, boys +<span class="st"> </span>girls)</code></pre>
-<p>What you will see are 82 numbers (in that packed display, because we aren’t looking at a data frame here), each one representing the sum we’re after. Take a look at a few of them and verify that they are right. Therefore, we can make a plot of the total number of baptisms per year with the command</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(boys +<span class="st"> </span>girls ~<span class="st"> </span>year, <span class="dt">data=</span>arbuthnot, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
-<p>This time, note that we left out the names of the first two arguments. We can do this because the help file shows that the default for <code>plot</code> is for the first argument to be the x-variable and the second argument to be the y-variable.</p>
-<p>Similarly to how we computed the proportion of boys, we can compute the ratio of the number of boys to the number of girls baptized in 1629 with</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span><span class="dv">4683</span></code></pre>
-<p>or we can act on the complete vectors with the expression</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(arbuthnot, boys/girls)</code></pre>
-<p>The proportion of newborns that are boys</p>
-=======
 <p>What you will see are 82 numbers (in that packed display, because we aren’t looking at a data frame here), each one representing the sum we’re after. Take a look at a few of them and verify that they are right.</p>
 <p>We’ll be using this new vector to generate some plots, so we’ll want to save it as a permanent column in our data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
 <p>You’ll see that there is now a new column called “total” that has been tacked on to the data frame. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace. In this case, you already have an object called <code>arbuthnot</code>, so this command updates that data set with the new mutated column.</p>
 <p>We can make a plot of the total number of baptisms per year with the command</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> total, <span class="dt">data =</span> arbuthnot, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(boys +<span class="st"> </span>girls ~<span class="st"> </span>year, <span class="dt">data=</span>arbuthnot, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
 <p>Similarly to how we computed the total number of births, we can compute the ratio of the number of boys to the number of girls baptized in 1629 with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span><span class="dv">4683</span></code></pre>
 <p>or we can act on the complete columns with the expression</p>
-<pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys /<span class="st"> </span>arbuthnot$girls</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(arbuthnot, boys/girls)</code></pre>
 <p>We can also compute the proportion of newborns that are boys</p>
->>>>>>> upstream/master
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span>(<span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span>)</code></pre>
 <p>or this may also be computed for all years simultaneously:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(arbuthnot, boys/(boys +<span class="st"> </span>girls))</code></pre>
@@ -178,15 +155,9 @@ img {
 <li>Now, <em>mutate</em> the data frame once more to include a new column for the proportion of newborns that are boys, then generate a plot of that proportion over time. What do you see? Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel. This will save you a lot of typing in the future.</li>
 </ol>
 <p>Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, <code>&gt;</code>, less than, <code>&lt;</code>, and equality, <code>==</code>. For example, we can ask if boys outnumber girls in each year with the expression</p>
-<<<<<<< HEAD
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(arbuthnot, boys &gt;<span class="st"> </span>girls)</code></pre>
-<p>This command returns 82 values of either <code>TRUE</code> if that year had more boys than girls, or <code>FALSE</code> if that year did not (the answer may surprise you). This output shows a different kind of data than we have considered so far. In the <code>arbuthnot</code> data frame our values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create <em>logical</em> data, data where the values are either <code>TRUE</code> or <code>FALSE</code>. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.</p>
-<p>This seems like a fair bit for your first lab, so let’s stop here. To exit RStudio you can click the <em>x</em> in the upper right corner of the whole window.<br />You will be prompted to save your workspace. If you click <em>save</em>, RStudio will save the history of your commands and all the objects in your workspace so that the next time you launch RStudio, you will see <code>arbuthnot</code> and you will have access to the commands you typed in your previous session. For now, click <em>save</em>, then start up RStudio again.</p>
-=======
-<pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys &gt;<span class="st"> </span>arbuthnot$girls</code></pre>
 <p>This command returns 82 values of either <code>TRUE</code> if that year had more boys than girls, or <code>FALSE</code> if that year did not (the answer may surprise you). This output shows a different kind of data than we have considered so far. All other columns in the <code>arbuthnot</code> data frame have values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create <em>logical</em> data, data where the values are either <code>TRUE</code> or <code>FALSE</code>. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.</p>
 <p>This seems like a fair bit for your first lab, so let’s stop here. To exit RStudio you can click on the log out link at the upper right corner of the screen. Go ahead and log out and then sign back in. You’ll find your R session is just as you left it.</p>
->>>>>>> upstream/master
 <hr />
 </div>
 </div>

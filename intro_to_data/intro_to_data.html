@@ -79,10 +79,10 @@ img {
 <p>Some define Statistics as the field that focuses on turning information into knowledge. The first step in that process is to summarize and describe the raw information - the data. In this lab, you will gain insight into public health by generating simple graphical and numerical summaries of a data set collected by the Centers for Disease Control and Prevention (CDC). As this is a large data set, along the way you’ll also learn the indispensable skills of data processing and subsetting.</p>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
-<p>The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site (<a href="http://www.cdc.gov/brfss"><a href="http://www.cdc.gov/brfss">http://www.cdc.gov/brfss</a></a>) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.</p>
+<p>The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey of 350,000 people in the United States. As its name implies, the BRFSS is designed to identify risk factors in the adult population and report emerging health trends. For example, respondents are asked about their diet and weekly physical activity, their HIV/AIDS status, possible tobacco use, and even their level of healthcare coverage. The BRFSS Web site (<a href="http://www.cdc.gov/brfss"><a href="http://www.cdc.gov/brfss" class="uri">http://www.cdc.gov/brfss</a></a>) contains a complete description of the survey, including the research questions that motivate the study and many interesting results derived from the data.</p>
 <p>We will focus on a random sample of 20,000 people from the BRFSS survey conducted in 2000. While there are over 200 variables in this data set, we will work with a small subset.</p>
 <p>We begin by loading the data set of 20,000 observations into the R workspace. After launching RStudio, enter the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;http://www.openintro.org/stat/data/cdc.R&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cdc)</code></pre>
 <p>The data set <code>cdc</code> that shows up in your workspace is a <em>data matrix</em>, with each row representing a <em>case</em> and each column representing a <em>variable</em>. R calls this data format a <em>data frame</em>, which is a term that will be used throughout the labs.</p>
 <p>To view the names of the variables, type the command</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(cdc)</code></pre>
@@ -100,7 +100,7 @@ img {
 <h2>Summaries and tables</h2>
 <p>The BRFSS questionnaire is a massive trove of information. A good first step in any analysis is to distill all of that information into a few summary statistics and graphics. As a simple example, the function <code>summary</code> returns a numerical summary: minimum, first quartile, median, mean, second quartile, and maximum. For <code>weight</code> this is</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cdc$weight)</code></pre>
-<p>R also functions like a very fancy calculator. If you wanted to compute the interquartile range for the respondents’ weight, you would look at the output from the summary command above and then enter</p>
+<p>R also functions like a very fancy calculator. If you wanted to compute the interquartile range for the respondents’ weight, you could look at the output from the summary command above and then enter</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">190</span> -<span class="st"> </span><span class="dv">140</span></code></pre>
 <p>R also has built-in functions to compute summary statistics one by one. For instance, to calculate the mean, median, and variance of <code>weight</code>, type</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
@@ -110,7 +110,7 @@ img {
 <p>The <code>mosaic</code> command <code>favstats</code>, allows us to compute all of this information (and more) at once.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">favstats</span>(~weight, <span class="dt">data=</span>cdc)</code></pre>
 <p>While it makes sense to describe a quantitative variable like <code>weight</code> in terms of these statistics, what about categorical data? We would instead consider the sample frequency or relative frequency distribution. The function <code>tally</code> does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(cdc$smoke100)</code></pre>
 <p>or instead look at the relative frequency distribution by typing</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(~smoke100, <span class="dt">data=</span>cdc, <span class="dt">format=</span><span class="st">&quot;proportion&quot;</span>)</code></pre>
 <p>Notice how R automatically divides all entries in the table by 20,000 in the command above. This is similar to something we observed in the Introduction to R; when we multiplied or divided a vector with a number, R applied that action across entries in the vectors. As we see above, this also works for tables. Next, we make a bar chart of the entries in the table by putting the table inside the <code>barchart</code> command.</p>
@@ -157,7 +157,7 @@ img {
 </div>
 <div id="a-little-more-on-subsetting" class="section level2">
 <h2>A little more on subsetting</h2>
-<p>It’s often useful to extract all individuals (cases) in a data set that have specific characteristics. We accomplish this through <em>conditioning</em> commands. First, consider expressions like</p>
+<p>It’s often useful to extract all individuals (cases) in a data set that have specific characteristics. We accomplish this through <em>logical operators</em>. First, consider expressions like</p>
 <pre class="sourceCode r"><code class="sourceCode r">cdc$gender ==<span class="st"> &quot;m&quot;</span></code></pre>
 <p>or</p>
 <pre class="sourceCode r"><code class="sourceCode r">cdc$age &gt;<span class="st"> </span><span class="dv">30</span></code></pre>
@@ -167,7 +167,7 @@ img {
 <p>will create a new data set called <code>mdata</code> that contains only the men from the <code>cdc</code> data set. In addition to finding it in your workspace alongside its dimensions, you can take a peek at the first several rows as usual</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mdata)</code></pre>
 <p>This new data set contains all the same variables but just under half the rows. It is also possible to tell R to keep only specific variables, which is a topic we’ll discuss in a future lab. For now, the important thing is that we can carve up the data based on values of one or more variables.</p>
-<p>As an aside, you can use several of these conditions together with <code>&amp;</code> and <code>|</code>. The <code>&amp;</code> is read “and” so that</p>
+<p>As an aside, you can use several of these logical operators together with <code>&amp;</code> and <code>|</code>. The <code>&amp;</code> is read “and” so that</p>
 <pre class="sourceCode r"><code class="sourceCode r">m_and_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, gender ==<span class="st"> &quot;m&quot;</span> &amp;<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
 <p>will give you the data for men over the age of 30. The <code>|</code> character is read “or” so that</p>
 <pre class="sourceCode r"><code class="sourceCode r">m_or_over30 &lt;-<span class="st"> </span><span class="kw">subset</span>(cdc, gender ==<span class="st"> &quot;m&quot;</span> |<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
@@ -185,7 +185,7 @@ img {
 <p>Confirm that the median and upper and lower quartiles reported in the numerical summary match those in the graph. The purpose of a boxplot is to provide a thumbnail sketch of a variable for the purpose of comparing across several categories. So we can, for example, compare the heights of men and women with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bwplot</span>(height ~<span class="st"> </span>gender, <span class="dt">data=</span>cdc)</code></pre>
 <p>The notation here is new. The <code>~</code> character can be read <em>versus</em> or <em>as a function of</em>. So we’re asking R to give us a box plots of heights where the groups are defined by gender.</p>
-<p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
+<p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index" class="uri">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
 <p><span class="math">\[ BMI = \frac{weight~(lb)}{height~(in)^2} * 703 \]</span></p>
 <p>703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).</p>
 <p>The following two lines first make a new object called <code>bmi</code> and then creates box plots of these values, defining groups by the variable <code>cdc$genhlth</code>.</p>
