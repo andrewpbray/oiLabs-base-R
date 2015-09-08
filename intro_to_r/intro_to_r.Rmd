@@ -42,8 +42,7 @@ from this document.
 ```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
 devtools::install_github("andrewpbray/oilabs")
 library(oilabs)
-library(dplyr)
-library(ggplot2)
+library(mosaic)
 data(arbuthnot)
 ```
 
@@ -156,7 +155,7 @@ Note that you will have to do this *every* time you start a new R session.
 
 R has some powerful functions for making graphics. 
 
-The centerpiece of the `mosaic` syntax is the use of the *modeling language*. This involves the use of a tilde (~), which can be read as "is a function of". For example, to plot the number of girls as a function of the year:
+The centerpiece of the `mosaic` syntax is the use of the *modeling language*. This involves the use of a tilde (~), which can be read as "is a function of".
 
 We can create a simple plot of the number of girls baptized per year with the command
 
@@ -164,7 +163,9 @@ We can create a simple plot of the number of girls baptized per year with the co
 xyplot(girls ~ year, data=arbuthnot)
 ```
 
-By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the *Plots* tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with two arguments separated by a comma.  The first argument in the plot function specifies the variable for the x-axis and the second for the y-axis. If we wanted to connect the data points with lines, we could add a third argument, the letter `l` for **l**ine.
+By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the *Plots* tab of the lower right panel of RStudio. Notice that the command above is a function called `xyplot` that takes two arguments separated by a comma.  The first argument to the `xyplot` function is a formula of the form `y ~ x` that specifies which variable should go on the vertical (`y`) axis and which should go on the horizontal (`x`) axis. The `data` argument tell R where to find the `girls` and `year` variables -- in this case, they are inside the data frame called `arbuthnot`. You will find that you can perform most of the operations that you will see in this class using this simple template. [Please see the [Less Volume, More Creativity](https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html) vignette for more information about this.]
+
+If we wish to plot `l`ines instead of `p`oints, we can add the `type` argument. 
 
 ```{r plot-girls-vs-year-line, eval=FALSE}
 xyplot(girls ~ year, data=arbuthnot, type = "l")
