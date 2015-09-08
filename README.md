@@ -9,8 +9,8 @@ be found at [http://www.openintro.org/stat/labs.php](http://www.openintro.org/st
 
 This repository is a fork of the original labs that is intended to incorporate
 the syntax from the dplyr package. The conversion will occur over summer 2015,
-with classroom testing in fall 2015, and release on www.openintro.org in January
-2016.
+with classroom testing in fall 2015, and release on 
+[www.openintro.org](www.openintro.org) in January 2016.
 
 We currently support our source files in the .Rmd format, which can be output into
 html format (though output to pdf is also possible). The source files are processed

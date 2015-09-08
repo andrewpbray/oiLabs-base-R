@@ -1,13 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
-*.log
-*.synctex.gz
-*-concordance.tex
-*.DS_Store
-<<<<<<< HEAD
-.gitignore
-oiLabs-mosaic.Rproj
-=======
-*.orig
->>>>>>> 5b279d0a1cf1e32f5918922db9c2eeaca95a5814
+oiLabs-dplyr-ggplot.Rproj
+.DS_Store
+*.html

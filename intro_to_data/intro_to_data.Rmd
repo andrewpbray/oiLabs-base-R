@@ -8,10 +8,10 @@ output:
 ---
 
 Some define Statistics as the field that focuses on turning information into
-knowledge.  The first step in that process is to summarize and describe the raw
-information - the data.  In this lab, you will gain insight into public health
+knowledge. The first step in that process is to summarize and describe the raw
+information - the data. In this lab, you will gain insight into public health
 by generating simple graphical and numerical summaries of a data set collected 
-by the Centers for Disease Control and Prevention (CDC).  As this is a large 
+by the Centers for Disease Control and Prevention (CDC). As this is a large 
 data set, along the way you'll also learn the indispensable skills of data 
 processing and subsetting.
 
@@ -36,8 +36,7 @@ We begin by loading the data set of 20,000 observations into the R workspace.
 After launching RStudio, enter the following command.
 
 ```{r load-data, eval=FALSE}
-download.file("https://www.openintro.org/stat/data/cdc.RData", destfile = "cdc.RData")
-load("cdc.RData")
+data(cdc)
 ```
 
 The data set `cdc` that shows up in your workspace is a *data matrix*, with each
@@ -53,7 +52,7 @@ names(cdc)
 
 This returns the names `genhlth`, `exerany`, `hlthplan`, `smoke100`, `height`, 
 `weight`, `wtdesire`, `age`, and `gender`. Each one of these variables 
-corresponds to a question that was asked in the survey.  For example, for 
+corresponds to a question that was asked in the survey. For example, for 
 `genhlth`, respondents were asked to evaluate their general health, responding
 either excellent, very good, good, fair or poor. The `exerany` variable 
 indicates whether the respondent exercised in the past month (1) or did not (0).
@@ -63,7 +62,7 @@ respondent had smoked at least 100 cigarettes in her lifetime. The other
 variables record the respondent's `height` in inches, `weight` in pounds as well
 as their desired weight, `wtdesire`, `age` in years, and `gender`.
 
-1.  How many cases are there in this data set?  How many variables?  For each 
+1.  How many cases are there in this data set? How many variables? For each 
     variable, identify its data type (e.g. categorical, discrete).
 
 We can have a look at the first few entries (rows) of our data with the command
@@ -80,15 +79,15 @@ tail(cdc)
 
 You could also look at *all* of the data frame at once by typing its name into 
 the console, but that might be unwise here.  We know `cdc` has 20,000 rows, so 
-viewing the entire data set would mean flooding your screen.  It's better to 
+viewing the entire data set would mean flooding your screen. It's better to 
 take small peeks at the data with `head`, `tail` or the subsetting techniques 
 that you'll learn in a moment.
 
 ## Summaries and tables
 
-The BRFSS questionnaire is a massive trove of information.  A good first step in
+The BRFSS questionnaire is a massive trove of information. A good first step in
 any analysis is to distill all of that information into a few summary statistics
-and graphics.  As a simple example, the function `summary` returns a numerical 
+and graphics. As a simple example, the function `summary` returns a numerical 
 summary: minimum, first quartile, median, mean, second quartile, and maximum. 
 For `weight` this is
 
@@ -96,8 +95,8 @@ For `weight` this is
 summary(cdc$weight)
 ```
 
-R also functions like a very fancy calculator.  If you wanted to compute the 
-interquartile range for the respondents' weight, you would look at the output 
+R also functions like a very fancy calculator. If you wanted to compute the 
+interquartile range for the respondents' weight, you could look at the output 
 from the summary command above and then enter
 
 ```{r weight-range-arith, eval=FALSE}
@@ -123,7 +122,7 @@ favstats(~weight, data=cdc)
 While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `tally` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
-tally(~smoke100, data=cdc)
+table(cdc$smoke100)
 ```
 
 or instead look at the relative frequency distribution by typing
@@ -278,7 +277,7 @@ choose to use depends on your personal preference.
 ## A little more on subsetting
 
 It's often useful to extract all individuals (cases) in a data set that have 
-specific characteristics. We accomplish this through *conditioning* commands. 
+specific characteristics. We accomplish this through *logical operators*. 
 First, consider expressions like
 
 ```{r true-male, eval=FALSE}
@@ -316,7 +315,7 @@ It is also possible to tell R to keep only specific variables, which is a topic
 we'll discuss in a future lab. For now, the important thing is that we can carve
 up the data based on values of one or more variables.
 
-As an aside, you can use several of these conditions together with `&` and `|`.
+As an aside, you can use several of these logical operators together with `&` and `|`.
 The `&` is read "and" so that
 
 ```{r males-and-over30, eval=FALSE}
