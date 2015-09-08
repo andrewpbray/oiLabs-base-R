@@ -1,4 +1,4 @@
-OpenIntro Labs
+OpenIntro Labs - dplyr
 ==============
 
 OpenIntro Labs promote the understanding and application of statistics through 
@@ -7,15 +7,14 @@ particular chapters in all three versions of OpenIntro Statistics, a free and
 open-source textbook. The textbook as well as the html version of the labs can
 be found at [http://www.openintro.org/stat/labs.php](http://www.openintro.org/stat/labs.php).
 
+This repository is a fork of the original labs that is intended to incorporate
+the syntax from the dplyr package. The conversion will occur over summer 2015,
+with classroom testing in fall 2015, and release on www.openintro.org in January
+2016.
+
 We currently support our source files in the .Rmd format, which can be output into
 html format (though output to pdf is also possible). The source files are processed
-using the [knitr](http://yihui.name/knitr/) package in R. If you are using RStudio, 
-be sure that you've adjusted your settings to compile source files using this
-package. If you are unfamiliar with working with these file types, you may consider
-creating your own copy of the Google Doc version of each lab, which are archived at
-[http://www.openintro.org/stat/labs.php](http://www.openintro.org/stat/labs.php). 
-These versions are not currently supported, so they will differ slightly from the
-.Rmd labs found here.
+using the [knitr](http://yihui.name/knitr/) package in R.
 
 It is our hope that these materials are useful for instructors and students of 
 statistics.  If you end up developing some interesting variants of these labs or 
