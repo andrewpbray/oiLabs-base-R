@@ -114,6 +114,7 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(boys)</code></pre>
 <p>This command will only show the number of boys baptized each year.</p>
+<p>Notice that the special operator <code>%&gt;%</code> is being used here. The <code>%&gt;%</code> is called the ‘pipe’ operator. Many languages have pipe operators, and they allow functions to pass things along a chain of commands. In R, we often read <code>%&gt;%</code> as the English word ‘then.’ So, we could read this code as saying, ‘take the <code>arbuthnot</code> data, then select the <code>boys</code> variable.’</p>
 <ol style="list-style-type: decimal">
 <li>What command would you use to extract just the counts of girls baptized? Try it!</li>
 </ol>
@@ -132,12 +133,13 @@ img {
 <p>to see the total number of baptisms in 1629. We could repeat this once for each year, but there is a faster way. If we add the variable for baptisms for boys to that of girls, R will compute all sums simultaneously.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
+<p>Again, we can read this chunk of code by saying, ‘take the <code>arbuthnot</code> data, and then mutate it so there is an additional column called total, which is comprised of the columns <code>boys</code> and <code>girls</code> added together.’</p>
 <p>You’ll see that there is now a new column called “total” that has been tacked on to the data frame. What “total” contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.</p>
 <p>While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>
 <span class="st">  </span>arbuthnot %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
-<p>The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your environment. In this case, you already have an object called <code>arbuthnot</code>, so this command updates that data set with the new mutated column.</p>
+<p>The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of a line of code or series of piped commands, and saving it into an object in your environment. In this case, you already have an object called <code>arbuthnot</code>, so this command updates that data set with the new mutated column.</p>
 <p>We can make a plot of the total number of baptisms per year with the command</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> total, <span class="dt">data =</span> arbuthnot, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
 <p>Similarly to how we computed the total number of births, we can compute the ratio of the number of boys to the number of girls baptized in 1629 with</p>
@@ -151,9 +153,15 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> boys /<span class="st"> </span>(boys +<span class="st"> </span>girls))</code></pre>
 <p>Note that with R as with your calculator, you need to be conscious of the order of operations. Here, we want to divide the number of boys by the total number of newborns, so we have to use parentheses. Without them, R will first do the division, then the addition, giving you something that is not a proportion.</p>
+<p>We can also pipe data into plots, as in</p>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> boys /<span class="st"> </span>(boys +<span class="st"> </span>girls)) %&gt;%
+<span class="st">  </span><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> prop, <span class="dt">data =</span> ., <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
+<p>In this case, we had to use the <code>.</code> operator, which allows us to perform piped operations where the data is not always flowing into the first argument of a function. In this case, we have taken the arbuthnot data, then mutated it so it has an additional column, and then we want to create a plot. However, <code>qplot</code> expects to have data flowing in after the named <code>data=</code> argument. Because <code>data=</code> is not the first piece of the <code>qplot()</code> call, we have to tell R where to put the piped in data. The <code>.</code> does that.</p>
 <ol start="3" style="list-style-type: decimal">
-<li>Now, <em>mutate</em> the data frame once more to include a new column for the proportion of newborns that are girls, then generate a plot of that proportion over time. Remember, you have to use assignment to save over your old version of the data frame. What do you see? Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel. This will save you a lot of typing in the future.</li>
+<li>Now, <em>mutate</em> the data frame once more to include a new column for the proportion of newborns that are girls, then generate a plot of that proportion over time. Remember, if you are going to use <code>qplot</code> as a standalone function you have to use assignment to save over your old version of the data frame. Otherwise, you can pipe together a series of data manipulations and then plot in one chain. What does the plot show you?</li>
 </ol>
+<p>Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel. This will save you a lot of typing in the future.</p>
 <p>Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, <code>&gt;</code>, less than, <code>&lt;</code>, and equality, <code>==</code>. For example, we can ask if boys outnumber girls in each year with the expression</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(boys&gt;girls)</code></pre>
