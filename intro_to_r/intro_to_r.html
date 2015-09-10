@@ -111,7 +111,8 @@ img {
 <div id="some-exploration" class="section level2">
 <h2>Some Exploration</h2>
 <p>Let’s start to examine the data a little more closely. We can access the data in a single column of a data frame separately using a command like</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(arbuthnot, boys)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(boys)</code></pre>
 <p>This command will only show the number of boys baptized each year.</p>
 <ol style="list-style-type: decimal">
 <li>What command would you use to extract just the counts of girls baptized? Try it!</li>
@@ -129,27 +130,33 @@ img {
 <p>Now, suppose we want to plot the total number of baptisms. To compute this, we could use the fact that R is really just a big calculator. We can type in mathematical expressions like</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span></code></pre>
 <p>to see the total number of baptisms in 1629. We could repeat this once for each year, but there is a faster way. If we add the variable for baptisms for boys to that of girls, R will compute all sums simultaneously.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
 <p>You’ll see that there is now a new column called “total” that has been tacked on to the data frame. What “total” contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.</p>
 <p>While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it.</p>
-<pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>
+<span class="st">  </span>arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
 <p>The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your environment. In this case, you already have an object called <code>arbuthnot</code>, so this command updates that data set with the new mutated column.</p>
 <p>We can make a plot of the total number of baptisms per year with the command</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> total, <span class="dt">data =</span> arbuthnot, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre>
 <p>Similarly to how we computed the total number of births, we can compute the ratio of the number of boys to the number of girls baptized in 1629 with</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span><span class="dv">4683</span></code></pre>
 <p>or we can act on the complete columns with the expression</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(arbuthnot, <span class="dt">ratio =</span> boys /<span class="st"> </span>girls)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> boys /<span class="st"> </span>girls)</code></pre>
 <p>We can also compute the proportion of newborns that are boys</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span>(<span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span>)</code></pre>
 <p>or this may also be computed for all years simultaneously:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(arbuthnot, <span class="dt">prop =</span> boys /<span class="st"> </span>(boys +<span class="st"> </span>girls))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> boys /<span class="st"> </span>(boys +<span class="st"> </span>girls))</code></pre>
 <p>Note that with R as with your calculator, you need to be conscious of the order of operations. Here, we want to divide the number of boys by the total number of newborns, so we have to use parentheses. Without them, R will first do the division, then the addition, giving you something that is not a proportion.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Now, <em>mutate</em> the data frame once more to include a new column for the proportion of newborns that are girls, then generate a plot of that proportion over time. Remember, you have to use assignment to save over your old version of the data frame. What do you see? Tip: If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel. This will save you a lot of typing in the future.</li>
 </ol>
 <p>Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, <code>&gt;</code>, less than, <code>&lt;</code>, and equality, <code>==</code>. For example, we can ask if boys outnumber girls in each year with the expression</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(arbuthnot, boys&gt;girls)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(boys&gt;girls)</code></pre>
 <p>This command returns a dataframe with an additional variable tacked on. The values of this variable are either <code>TRUE</code> if that year had more boys than girls, or <code>FALSE</code> if that year did not (the answer may surprise you). This output shows a different kind of data than we have considered so far. All other columns in the <code>arbuthnot</code> data frame have values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create <em>logical</em> data, data where the values are either <code>TRUE</code> or <code>FALSE</code>. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.</p>
 <p>This seems like a fair bit for your first lab, so let’s stop here. To exit RStudio you can click on the log out link at the upper right corner of the screen. Go ahead and log out and then sign back in. You’ll find your R session is just as you left it.</p>
 <hr />

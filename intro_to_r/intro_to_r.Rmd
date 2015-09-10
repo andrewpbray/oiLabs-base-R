@@ -131,7 +131,8 @@ Let's start to examine the data a little more closely. We can access the data in
 a single column of a data frame separately using a command like
 
 ```{r view-boys}
-select(arbuthnot, boys)
+arbuthnot %>% 
+  select(boys)
 ```
 
 This command will only show the number of boys baptized each year.
@@ -189,7 +190,8 @@ year, but there is a faster way. If we add the variable for baptisms for boys to
 that of girls, R will compute all sums simultaneously.
 
 ```{r calc-total-bapt-vars}
-mutate(arbuthnot, total = boys + girls)
+arbuthnot %>%
+  mutate(total = boys + girls)
 ```
 
 You'll see that there is now a new column called "total" that has been tacked on
@@ -198,7 +200,9 @@ to the data frame. What "total" contains is a list of 82 numbers, each one repre
 While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it. 
 
 ```{r calc-total-bapt-vars-save}
-arbuthnot <- mutate(arbuthnot, total = boys + girls)
+arbuthnot <- 
+  arbuthnot %>%
+  mutate(total = boys + girls)
 ```
 
 The special symbol `<-` performs an *assignment*, taking the 
@@ -222,7 +226,8 @@ of the number of boys to the number of girls baptized in 1629 with
 or we can act on the complete columns with the expression
 
 ```{r calc-prop-boys-to-girls-vars}
-mutate(arbuthnot, ratio = boys / girls)
+arbuthnot %>%
+  mutate(ratio = boys / girls)
 ```
 
 We can also compute the proportion of newborns that are boys
@@ -234,7 +239,8 @@ We can also compute the proportion of newborns that are boys
 or this may also be computed for all years simultaneously:
 
 ```{r calc-prop-boys-vars}
-mutate(arbuthnot, prop = boys / (boys + girls))
+arbuthnot %>%
+  mutate(prop = boys / (boys + girls))
 ```
 
 Note that with R as with your calculator, you need to be conscious of the order 
@@ -256,7 +262,8 @@ division, you can ask R to make comparisons like greater than, `>`, less than,
 year with the expression
 
 ```{r boys-more-than-girls}
-mutate(arbuthnot, boys>girls)
+arbuthnot %>%
+  mutate(boys>girls)
 ```
 
 This command returns a dataframe with an additional variable tacked on. The values of this variable are either `TRUE` if that year had more boys
