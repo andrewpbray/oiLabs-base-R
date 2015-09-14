@@ -36,7 +36,7 @@ After launching RStudio, enter the following command.
 
 ```{r opts, eval=TRUE, echo=FALSE}
 library(knitr)
-opts_chunk$set(eval=TRUE)
+opts_chunk$set(eval=FALSE)
 require(oilabs)
 ```
 
