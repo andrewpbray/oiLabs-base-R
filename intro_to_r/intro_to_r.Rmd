@@ -39,8 +39,13 @@ To get you started, enter the following commands at the R prompt (i.e. right aft
 `>` on the console).  You can either type it in manually or copy and paste it
 from this document.
 
-```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
+If you do not have the `oilabs` package installed, use the following command. 
+```{r load-devtools-oilabs, eval=FALSE, message = FALSE}
 devtools::install_github("andrewpbray/oilabs")
+```
+
+Then, load the packages and data. 
+```{r load-abrbuthnot-data, eval=TRUE}
 library(oilabs)
 library(mosaic)
 data(arbuthnot)
@@ -90,9 +95,7 @@ dim(arbuthnot)
 ```
 
 This command should output `[1] 82 3`, indicating that there are 82 rows and 3 
-columns (we'll get to what the `[1]` means in a bit), just as it says next to 
-the object in your workspace. You can see the names of these columns (or 
-variables) by typing:
+columns, just as it says next to the object in your workspace. You can see the names of these columns (or variables) by typing:
 
 ```{r names-data, eval=TRUE}
 names(arbuthnot)
@@ -116,24 +119,14 @@ Let's start to examine the data a little more closely. We can access the data in
 a single column of a data frame separately using a command like
 
 ```{r view-boys, eval=FALSE}
-arbuthnot$boys
+select(arbuthnot, boys)
 ```
 
-This command will only show the number of boys baptized each year.
+This command will show just the number of boys baptized each year.
 
 1.  What command would you use to extract just the counts of girls baptized? Try
     it!
     
-Notice that the way R has printed these data is different. When we looked at the
-complete data frame, we saw 82 rows, one on each line of the display. These data
-are no longer structured in a table with other variables, so they are displayed 
-one right after another. Objects that print out in this way are called vectors; 
-they represent a set of numbers. R has added numbers in [brackets] along the left
-side of the printout to indicate locations within the vector. For example, 5218 
-follows [1], indicating that 5218 is the first entry in the vector. And if [43] 
-starts a line, then that would mean the first number on that line would represent
-the 43rd entry in the vector.
-
 
 ### mosaic
 
@@ -200,15 +193,9 @@ year, but there is a faster way. If we add the vector for baptisms for boys and
 girls, R will compute all sums simultaneously.
 
 ```{r calc-total-bapt-vars, eval=FALSE}
-arbuthnot$boys + arbuthnot$girls
+mutate(arbuthnot, total = boys+girls)
 ```
-
-What you will see are 82 numbers (in that packed display, because we aren’t 
-looking at a data frame here), each one representing the sum we’re after. Take a
-look at a few of them and verify that they are right.
-
-We'll be using this new vector to generate some plots, so we'll want to save it 
-as a permanent column in our data frame.
+Take a look at a few of the totals and verify that they are right. We'll be using this new vector to generate some plots, so we'll want to save it as a permanent column in our data frame.
 
 ```{r calc-total-bapt-vars-save, eval=FALSE}
 arbuthnot <- mutate(arbuthnot, total = boys + girls)

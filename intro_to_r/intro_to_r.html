@@ -105,7 +105,7 @@ img {
 <div id="some-exploration" class="section level2">
 <h2>Some Exploration</h2>
 <p>Let’s start to examine the data a little more closely. We can access the data in a single column of a data frame separately using a command like</p>
-<pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(arbuthnot, boys)</code></pre>
 <p>This command will only show the number of boys baptized each year.</p>
 <ol style="list-style-type: decimal">
 <li>What command would you use to extract just the counts of girls baptized? Try it!</li>
@@ -135,9 +135,8 @@ img {
 <p>Now, suppose we want to plot the total number of baptisms. To compute this, we could use the fact that R is really just a big calculator. We can type in mathematical expressions like</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span></code></pre>
 <p>to see the total number of baptisms in 1629. We could repeat this once for each year, but there is a faster way. If we add the vector for baptisms for boys and girls, R will compute all sums simultaneously.</p>
-<pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys +<span class="st"> </span>arbuthnot$girls</code></pre>
-<p>What you will see are 82 numbers (in that packed display, because we aren’t looking at a data frame here), each one representing the sum we’re after. Take a look at a few of them and verify that they are right.</p>
-<p>We’ll be using this new vector to generate some plots, so we’ll want to save it as a permanent column in our data frame.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys+girls)</code></pre>
+<p>Take a look at a few of the totals and verify that they are right. We’ll be using this new vector to generate some plots, so we’ll want to save it as a permanent column in our data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre>
 <p>You’ll see that there is now a new column called “total” that has been tacked on to the data frame. The special symbol <code>&lt;-</code> performs an <em>assignment</em>, taking the output of one line of code and saving it into an object in your workspace. In this case, you already have an object called <code>arbuthnot</code>, so this command updates that data set with the new mutated column.</p>
 <p>We can make a plot of the total number of baptisms per year with the command</p>

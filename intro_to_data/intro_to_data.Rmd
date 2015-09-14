@@ -87,15 +87,16 @@ that you'll learn in a moment.
 
 The BRFSS questionnaire is a massive trove of information. A good first step in
 any analysis is to distill all of that information into a few summary statistics
-and graphics. As a simple example, the function `summary` returns a numerical 
-summary: minimum, first quartile, median, mean, second quartile, and maximum. 
+and graphics. As a simple example, the function `favstats` returns a numerical 
+summary: minimum, first quartile, median, third quartile, maximum, mean, standard deviation, number of observations, and number of missing values.
 For `weight` this is
 
 ```{r summary-weight, eval=FALSE}
-summary(cdc$weight)
+require(mosaic)
+favstats(weight, data=cdc)
 ```
 
-R also functions like a very fancy calculator. If you wanted to compute the 
+As we have seen, R can function like a very fancy calculator. If you wanted to compute the 
 interquartile range for the respondents' weight, you could look at the output 
 from the summary command above and then enter
 
@@ -107,22 +108,15 @@ R also has built-in functions to compute summary statistics one by one.  For
 instance, to calculate the mean, median, and variance of `weight`, type 
 
 ```{r weight-mean-var-median, eval=FALSE, message=FALSE}
-require(mosaic)
 mean(~weight, data=cdc)
 var(~weight, data=cdc)
 median(~weight, data=cdc)
 ```
 
-The `mosaic` command `favstats`, allows us to compute all of this information (and more) at once. 
-
-```{r favstats, eval=FALSE}
-favstats(~weight, data=cdc)
-```
-
 While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `tally` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
-table(cdc$smoke100)
+tally(~smoke100, data=cdc)
 ```
 
 or instead look at the relative frequency distribution by typing
@@ -142,7 +136,7 @@ make a bar chart of the entries in the table by putting the table inside the
 barchart(tally(~smoke100, data=cdc, margins=FALSE), horizontal=FALSE)
 ```
 
-Notice what we've done here! We've computed the table of `cdc$smoke100` and 
+Notice what we've done here! We've computed the table of `smoke100` and 
 then immediately applied the graphical function, `barchart`. This is an 
 important idea: R commands can be nested. You could also break this into two 
 steps by typing the following:
@@ -176,7 +170,7 @@ smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic
 plot of this table, we would enter the following command.
 
 ```{r mosaic-smoke-gender, eval=FALSE}
-mosaicplot(table(cdc$gender,cdc$smoke100))
+mosaicplot(tally(gender~smoke100, data=cdc))
 ```
 
 We could have accomplished this in two steps by saving the table in one line and
@@ -349,14 +343,14 @@ plots and histograms.  We can construct a box plot for a single variable with
 the following command.
 
 ```{r boxplot-height, eval=FALSE}
-boxplot(cdc$height)
+bwplot(~height, data=cdc)
 ```
 
 You can compare the locations of the components of the box by examining the 
 summary statistics.
 
 ```{r summary-height, eval=FALSE}
-summary(cdc$height)
+favstats(~height, data=cdc)
 ```
 
 Confirm that the median and upper and lower quartiles reported in the numerical 
