@@ -78,15 +78,16 @@ img {
 
 <div id="batter-up" class="section level2">
 <h2>Batter up</h2>
-<p>The movie <a href="http://en.wikipedia.org/wiki/Moneyball_(film)">Moneyball</a> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, betterpredict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
+<p>The movie <a href="http://en.wikipedia.org/wiki/Moneyball_(film)">Moneyball</a> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, better predict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
 <p>In this lab we’ll be looking at data from all 30 Major League Baseball teams and examining the linear relationship between runs scored in a season and a number of other player statistics. Our aim will be to summarize these relationships both graphically and numerically in order to find which variable, if any, helps us best predict a team’s runs scored in a season.</p>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>Let’s load up the data for the 2011 season.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/mlb11.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;mlb11.RData&quot;</span>)
-<span class="kw">load</span>(<span class="st">&quot;mlb11.RData&quot;</span>)</code></pre>
-<p>In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging. For the first portion of the analysis we’ll consider the seven traditional variables. At the end of the lab, you’ll work with the newer variables on your own.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(oilabs)
+<span class="kw">library</span>(dplyr)  
+<span class="kw">data</span>(mlb11)</code></pre>
+<p>In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging. For the first portion of the analysis we’ll consider the seven traditional variables. At the end of the lab, you’ll work with the three newer variables on your own.</p>
 <ol style="list-style-type: decimal">
 <li>What type of plot would you use to display the relationship between <code>runs</code> and one of the other numerical variables? Plot this relationship using the variable <code>at_bats</code> as the predictor. Does the relationship look linear? If you knew a team’s <code>at_bats</code>, would you be comfortable using a linear model to predict the number of runs?</li>
 </ol>
@@ -121,7 +122,7 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m1)</code></pre>
 <p>Let’s consider this output piece by piece. First, the formula used to describe the model is shown at the top. After the formula you find the five-number summary of the residuals. The “Coefficients” table shown next is key; its first column displays the linear model’s y-intercept and the coefficient of <code>at_bats</code>. With this table, we can write down the least squares regression line for the linear model:</p>
 <p><span class="math">\[
-  \hat{y} = -2789.2429 + 0.6305 * atbats
+  \hat{y} = -2789.2429 + 0.6305 \times at\_bats
 \]</span></p>
 <p>One last piece of information we will discuss from the summary output is the Multiple R-squared, or more simply, <span class="math">\(R^2\)</span>. The <span class="math">\(R^2\)</span> value represents the proportion of variability in the response variable that is explained by the explanatory variable. For this model, 37.3% of the variability in runs is explained by at-bats.</p>
 <ol start="4" style="list-style-type: decimal">
@@ -164,7 +165,7 @@ img {
 <div id="on-your-own" class="section level2">
 <h2>On Your Own</h2>
 <ul>
-<li><p>Choose another traditional variable from <code>mlb11</code> that you think might be a good predictor of <code>runs</code>. Produce a scatterplot of the two variables and fit a linear model. At a glance, does there seem to be a linear relationship?</p></li>
+<li><p>Choose another one of the seven traditional variables from <code>mlb11</code> besides <code>at_bats</code> that you think might be a good predictor of <code>runs</code>. Produce a scatterplot of the two variables and fit a linear model. At a glance, does there seem to be a linear relationship?</p></li>
 <li><p>How does this relationship compare to the relationship between <code>runs</code> and <code>at_bats</code>? Use the R<span class="math">\(^2\)</span> values from the two model summaries to compare. Does your variable seem to predict <code>runs</code> better than <code>at_bats</code>? How can you tell?</p></li>
 <li><p>Now that you can summarize the linear relationship between two variables, investigate the relationships between <code>runs</code> and each of the other five traditional variables. Which variable best predicts <code>runs</code>? Support your conclusion using the graphical and numerical methods we’ve discussed (for the sake of conciseness, only include output for the best variable, not all five).</p></li>
 <li><p>Now examine the three newer variables. These are the statistics used by the author of <em>Moneyball</em> to predict a teams success. In general, are they more or less effective at predicting runs that the old variables? Explain using appropriate graphical and numerical evidence. Of all ten variables we’ve analyzed, which seems to be the best predictor of <code>runs</code>? Using the limited (or not so limited) information you know about these baseball statistics, does your result make sense?</p></li>
