@@ -36,6 +36,7 @@ We begin by loading the data set of 20,000 observations into the R workspace.
 After launching RStudio, enter the following command.
 
 ```{r load-data, eval=FALSE}
+require(oilabs)
 data(cdc)
 ```
 
@@ -93,7 +94,7 @@ For `weight` this is
 
 ```{r summary-weight, eval=FALSE}
 require(mosaic)
-favstats(weight, data=cdc)
+favstats(~weight, data = cdc)
 ```
 
 As we have seen, R can function like a very fancy calculator. If you wanted to compute the 
@@ -108,21 +109,21 @@ R also has built-in functions to compute summary statistics one by one.  For
 instance, to calculate the mean, median, and variance of `weight`, type 
 
 ```{r weight-mean-var-median, eval=FALSE, message=FALSE}
-mean(~weight, data=cdc)
-var(~weight, data=cdc)
-median(~weight, data=cdc)
+mean(~weight, data = cdc)
+var(~weight, data = cdc)
+median(~weight, data = cdc)
 ```
 
 While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `tally` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
 
 ```{r table-smoke, eval=FALSE}
-tally(~smoke100, data=cdc)
+tally(~smoke100, data = cdc)
 ```
 
 or instead look at the relative frequency distribution by typing
 
 ```{r table-smoke-prop, eval=FALSE}
-tally(~smoke100, data=cdc, format="proportion")
+tally(~smoke100, data = cdc, format = "proportion")
 ```
 
 Notice how R automatically divides all entries in the table by 20,000 in the 
@@ -133,7 +134,7 @@ make a bar chart of the entries in the table by putting the table inside the
 `barchart` command.
 
 ```{r table-smoke-barplot, eval=FALSE}
-barchart(tally(~smoke100, data=cdc, margins=FALSE), horizontal=FALSE)
+barchart(tally(~smoke100, data = cdc, margins=FALSE), horizontal=FALSE)
 ```
 
 Notice what we've done here! We've computed the table of `smoke100` and 
@@ -142,7 +143,7 @@ important idea: R commands can be nested. You could also break this into two
 steps by typing the following:
 
 ```{r table-smoke-barplot-twosteps, eval=FALSE}
-smoke <- tally(~smoke100, data=cdc, margins=FALSE)
+smoke <- tally(~smoke100, data = cdc, margins=FALSE)
 barchart(smoke, horizontal=FALSE)
 ```
 
@@ -162,7 +163,7 @@ provide.  For example, to examine which participants have smoked across each
 gender, we could use the following.
 
 ```{r table-smoke-gender, eval=FALSE}
-tally(gender ~ smoke100, data=cdc, format="count")
+tally(gender ~ smoke100, data = cdc, format = "count")
 ```
 
 Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has
@@ -170,7 +171,7 @@ smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic
 plot of this table, we would enter the following command.
 
 ```{r mosaic-smoke-gender, eval=FALSE}
-mosaicplot(tally(gender~smoke100, data=cdc))
+mosaicplot(tally(gender ~ smoke100, data = cdc))
 ```
 
 We could have accomplished this in two steps by saving the table in one line and
@@ -210,7 +211,7 @@ names(cdc)
 To see the weights for the first 10 respondents we can type
 
 ```{r first-10-rows-sixth-column, eval=FALSE}
-cdc[1:10,6]
+cdc[1:10, 6]
 ```
 
 In this expression, we have asked just for rows in the range 1 through 10.  R 
@@ -236,7 +237,7 @@ through 10. Try the following to see the weights for all 20,000 respondents fly
 by on your screen
 
 ```{r 6th-column, eval=FALSE}
-cdc[,6]
+cdc[, 6]
 ```
 
 Recall that column 6 represents respondents' weight, so the command above 
@@ -293,7 +294,7 @@ those over 30. We can use the R function `subset` to do that for us. For example
 the command
 
 ```{r males, eval=FALSE}
-mdata <- subset(cdc, cdc$gender == "m")
+mdata <- filter(cdc, gender == "m")
 ```
 
 will create a new data set called `mdata` that contains only the men from the 
@@ -320,7 +321,7 @@ will give you the data for men over the age of 30. The `|` character is read
 "or" so that
 
 ```{r males-or-over30, eval=FALSE}
-m_or_over30 <- subset(cdc, gender == "m" | age > 30)
+m_or_over30 <- filter(cdc, gender == "m" | age > 30)
 ```
 
 will take people who are men or over the age of 30 (why that's an interesting 
@@ -343,14 +344,14 @@ plots and histograms.  We can construct a box plot for a single variable with
 the following command.
 
 ```{r boxplot-height, eval=FALSE}
-bwplot(~height, data=cdc)
+bwplot(~height, data = cdc)
 ```
 
 You can compare the locations of the components of the box by examining the 
 summary statistics.
 
 ```{r summary-height, eval=FALSE}
-favstats(~height, data=cdc)
+favstats(~height, data = cdc)
 ```
 
 Confirm that the median and upper and lower quartiles reported in the numerical 
@@ -359,7 +360,7 @@ thumbnail sketch of a variable for the purpose of comparing across several
 categories. So we can, for example, compare the heights of men and women with 
 
 ```{r boxplot-height-gender, eval=FALSE}
-bwplot(height ~ gender, data=cdc)
+bwplot(height ~ gender, data = cdc)
 ```
 
 The notation here is new. The `~` character can be read *versus* or 
@@ -380,8 +381,8 @@ The following two lines first make a new object called `bmi` and then creates
 box plots of these values, defining groups by the variable `cdc$genhlth`.
 
 ```{r boxplot-bmi, eval=FALSE}
-cdc = transform(cdc, bmi = (weight / height^2) * 703)
-bwplot(bmi ~ genhlth, data=cdc)
+cdc <- mutate(cdc, bmi = (weight / height^2) * 703)
+bwplot(bmi ~ genhlth, data = cdc)
 ```
 
 Notice that the first line above is just some arithmetic, but it's applied to 
@@ -400,7 +401,7 @@ Finally, let's make some histograms. We can look at the histogram for the age of
 our respondents with the command
 
 ```{r hist-age, eval=FALSE}
-histogram(~age, data=cdc)
+histogram(~age, data = cdc)
 ```
 
 Histograms are generally a very good way to see the shape of a single 
@@ -410,8 +411,8 @@ argument to the command. In the next two lines, we first make a default
 histogram of `bmi` and then one with 50 breaks.
 
 ```{r hist-bmi, eval=FALSE}
-histogram(~bmi, data=cdc)
-histogram(~bmi, data=cdc, nint=50)
+histogram(~bmi, data = cdc)
+histogram(~bmi, data = cdc, nint = 50)
 ```
 
 Note that you can flip between plots that you've created by clicking the forward
