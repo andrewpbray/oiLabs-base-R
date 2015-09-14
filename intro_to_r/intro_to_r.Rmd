@@ -39,21 +39,33 @@ To get you started, enter the following commands at the R prompt (i.e. right aft
 `>` on the console).  You can either type it in manually or copy and paste it
 from this document.
 
-If you do not have the `oilabs` package installed, use the following command. 
-```{r load-devtools-oilabs, eval=FALSE, message = FALSE}
-devtools::install_github("andrewpbray/oilabs")
+R has a number of additional packages that help you perform specific tasks. In order to use these packages, they must be installed (you only have to do this once) and loaded (you have to do this every time you start an R session). 
+
+```{r opts, eval=TRUE, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval=FALSE)
 ```
 
-Then, load the packages and data. 
-```{r load-abrbuthnot-data, eval=TRUE}
+If you have not installed the packages already, run these commands:
+```{r load-devtools-oilabs, message = FALSE, eval=FALSE}
+devtools::install_github("andrewpbray/oilabs")
+install.packages(c("dplyr", "ggplot2"))
+```
+
+Then, we can load the packages
+```{r load-packages, eval=TRUE, message = FALSE}
 library(oilabs)
-library(mosaic)
+library(dplyr)
+library(ggplot2)
+```
+and finally, load in some data:
+```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
 data(arbuthnot)
 ```
 
-This command instructs R to load some data: 
-the Arbuthnot baptism counts for boys and girls. You should see that the 
-workspace area in the upper righthand corner of the RStudio window now lists a 
+
+The data are Arbuthnot baptism counts for boys and girls. You should see that the 
+environment area in the upper righthand corner of the RStudio window now lists a 
 data set called `arbuthnot` that has 82 observations on 3 variables. As you 
 interact with R, you will create a series of objects. Sometimes you load them as
 we have done here, and sometimes you create them yourself as the byproduct of a 
@@ -70,10 +82,9 @@ boys to newborn girls, so he gathered the baptism records for children born in
 London for every year from 1629 to 1710.  We can take a look at the data by 
 typing its name into the console.
 
-```{r view-data, eval=FALSE}
+```{r view-data}
 arbuthnot
 ```
-
 
 What you should see are four columns of numbers, each row representing a 
 different year: the first entry in each row is simply the row number (an index 
@@ -95,7 +106,8 @@ dim(arbuthnot)
 ```
 
 This command should output `[1] 82 3`, indicating that there are 82 rows and 3 
-columns, just as it says next to the object in your workspace. You can see the names of these columns (or variables) by typing:
+columns, just as it says next to the object in your environment. You can see the names of these columns (or 
+variables) by typing:
 
 ```{r names-data, eval=TRUE}
 names(arbuthnot)
@@ -109,7 +121,7 @@ example, each took a single argument, the name of a data frame.
 
 One advantage of RStudio is that it comes with a built-in data viewer. Click on
 the name `arbuthnot` in the *Environment* pane (upper right window) that lists 
-the objects in your workspace. This will bring up an alternative display of the 
+the objects in your environment. This will bring up an alternative display of the 
 data set in the *Data Viewer* (upper left window). You can close the data viewer
 by clicking on the *x* in the upper lefthand corner.
 
@@ -118,17 +130,21 @@ by clicking on the *x* in the upper lefthand corner.
 Let's start to examine the data a little more closely. We can access the data in
 a single column of a data frame separately using a command like
 
-```{r view-boys, eval=FALSE}
-select(arbuthnot, boys)
+```{r view-boys}
+arbuthnot %>% 
+  select(boys)
 ```
 
-This command will show just the number of boys baptized each year.
+This command will only show the number of boys baptized each year.
+
+Notice that the special operator `%>%` is being used here. The `%>%` is called the 'pipe' operator. Many languages have pipe operators, and they allow functions to pass things along a chain of commands. In R, we often read `%>%` as the English word 'then.' So, we could read this code as saying, 'take the `arbuthnot` data, then select the `boys` variable.' 
 
 1.  What command would you use to extract just the counts of girls baptized? Try
     it!
     
 
-### mosaic
+R has some powerful functions for making graphics. We can create a simple plot 
+of the number of girls baptized per year with the command
 
 There is an additional package for R called `mosaic` that streamlines all of the commands that you will need in this course. This package is specifically designed by a team of NSF-funded educators to make R more accessible to introductory statistics students like you. The `mosaic` package doesn't provide new functionality so much as it makes existing functionality more logical, consistent, all the while emphasizing importants concepts in statistics. 
 
@@ -174,68 +190,77 @@ interested in. Try the following.
 ?xyplot
 ```
 
-Notice that the help file replaces the plot  in the lower right panel. You can 
+Notice that the help file replaces the plot in the lower right panel. You can 
 toggle between plots and help files using the tabs at the top of that panel.
 
-2.  Is there an apparent trend in the number of girls baptized over the years?  
-    How would you describe it?
+2.  Is there an apparent trend in the number of girls baptized over the years? 
+How would you describe it?
 
 Now, suppose we want to plot the total number of baptisms.  To compute this, we 
 could use the fact that R is really just a big calculator. We can type in 
 mathematical expressions like
 
-```{r calc-total-bapt-numbers, eval=FALSE}
+```{r calc-total-bapt-numbers}
 5218 + 4683
 ```
 
 to see the total number of baptisms in 1629. We could repeat this once for each 
-year, but there is a faster way. If we add the vector for baptisms for boys and
-girls, R will compute all sums simultaneously.
+year, but there is a faster way. If we add the variable for baptisms for boys to 
+that of girls, R will compute all sums simultaneously.
 
-```{r calc-total-bapt-vars, eval=FALSE}
-mutate(arbuthnot, total = boys+girls)
+```{r calc-total-bapt-vars}
+arbuthnot %>%
+  mutate(total = boys + girls)
 ```
-Take a look at a few of the totals and verify that they are right. We'll be using this new vector to generate some plots, so we'll want to save it as a permanent column in our data frame.
 
-```{r calc-total-bapt-vars-save, eval=FALSE}
-arbuthnot <- mutate(arbuthnot, total = boys + girls)
-```
+Again, we can read this chunk of code by saying, 'take the `arbuthnot` data, and then mutate it so there is an additional column called total, which is comprised of the columns `boys` and `girls` added together.'
 
 You'll see that there is now a new column called "total" that has been tacked on
-to the data frame. The special symbol `<-` performs an *assignment*, taking the 
-output of one line of code and saving it into an object in your workspace. In 
+to the data frame. What "total" contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.
+
+While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it. 
+
+```{r calc-total-bapt-vars-save}
+arbuthnot <- 
+  arbuthnot %>%
+  mutate(total = boys + girls)
+```
+
+The special symbol `<-` performs an *assignment*, taking the output of a line of code or series of piped commands, and saving it into an object in your environment. In 
 this case, you already have an object called `arbuthnot`, so this command updates
 that data set with the new mutated column.
 
 We can make a plot of the total number of baptisms per year with the command
 
-```{r plot-total-vs-year, eval=FALSE}
+```{r plot-total-vs-year}
 xyplot(boys + girls ~ year, data=arbuthnot, type = "l")
 ```
 
 Similarly to how we computed the total number of births, we can compute the ratio 
 of the number of boys to the number of girls baptized in 1629 with
 
-```{r calc-prop-boys-to-girls-numbers, eval=FALSE}
+```{r calc-prop-boys-to-girls-numbers}
 5218 / 4683
 ```
 
 or we can act on the complete columns with the expression
 
-```{r calc-prop-boys-to-girls-vars, eval=FALSE}
-with(arbuthnot, boys/girls)
+```{r calc-prop-boys-to-girls-vars}
+arbuthnot %>%
+  mutate(ratio = boys / girls)
 ```
 
 We can also compute the proportion of newborns that are boys
 
-```{r calc-prop-boys-numbers, eval=FALSE}
+```{r calc-prop-boys-numbers}
 5218 / (5218 + 4683)
 ```
 
 or this may also be computed for all years simultaneously:
 
-```{r calc-prop-boys-vars, eval=FALSE}
-with(arbuthnot, boys/(boys + girls))
+```{r calc-prop-boys-vars}
+arbuthnot %>%
+  mutate(prop = boys / (boys + girls))
 ```
 
 Note that with R as with your calculator, you need to be conscious of the order 
@@ -255,11 +280,12 @@ division, you can ask R to make comparisons like greater than, `>`, less than,
 `<`, and equality, `==`. For example, we can ask if boys outnumber girls in each 
 year with the expression
 
-```{r boys-more-than-girls, eval=FALSE}
-with(arbuthnot, boys > girls)
+```{r boys-more-than-girls}
+arbuthnot %>%
+  mutate(boys>girls)
 ```
 
-This command returns 82 values of either `TRUE` if that year had more boys
+This command returns a dataframe with an additional variable tacked on. The values of this variable are either `TRUE` if that year had more boys
 than girls, or `FALSE` if that year did not (the answer may surprise you). This 
 output shows a different kind of data than we have considered so far. All other
 columns in the `arbuthnot` data frame have values are numerical (the year, the 
