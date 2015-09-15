@@ -146,7 +146,7 @@ Notice that the special operator `%>%` is being used here. The `%>%` is called t
 R has some powerful functions for making graphics. We can create a simple plot 
 of the number of girls baptized per year with the command
 
-There is an additional package for R called `mosaic` that streamlines all of the commands that you will need in this course. This package is specifically designed by a team of NSF-funded educators to make R more accessible to introductory statistics students like you. The `mosaic` package doesn't provide new functionality so much as it makes existing functionality more logical, consistent, all the while emphasizing importants concepts in statistics. 
+There is an additional package for R called `mosaic` that streamlines all of the commands that you will need in this course. This package is specifically designed by a team of NSF-funded educators to make R more accessible to introductory statistics students like you. The [`mosaic` package](https://cran.r-project.org/web/packages/mosaic/index.html) doesn't provide new functionality so much as it makes existing functionality more logical, consistent, all the while emphasizing importants concepts in statistics. 
 
 To use the package, you will first need to install it.
 
