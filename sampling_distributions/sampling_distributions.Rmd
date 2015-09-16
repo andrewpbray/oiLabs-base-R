@@ -191,7 +191,7 @@ based on a sample size of 50, and another based on a sample size of 100.
 
 ```{r samp-10-100, eval=FALSE}
 sample_means10 <- do(5000) * mean(sample(area, 10))
-sample_means10 <- do(5000) * mean(sample(area, 50))
+sample_means50 <- do(5000) * mean(sample(area, 50))
 sample_means100 <- do(5000) * mean(sample(area, 100))
 ```
 
