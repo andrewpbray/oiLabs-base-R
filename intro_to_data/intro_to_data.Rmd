@@ -37,10 +37,10 @@ After launching RStudio, enter the following command.
 ```{r opts, eval=TRUE, echo=FALSE}
 library(knitr)
 opts_chunk$set(eval=TRUE)
-require(oilabs)
 ```
 
 ```{r load-data}
+require(oilabs)
 data(cdc)
 ```
 
