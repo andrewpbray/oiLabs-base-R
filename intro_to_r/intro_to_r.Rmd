@@ -10,7 +10,7 @@ output:
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
 throughout the course both to learn the statistical concepts discussed in the 
-texbook and also to analyze real data and come to informed conclusions.  To 
+textbook and also to analyze real data and come to informed conclusions.  To 
 straighten out which is which: R is the name of the programming language itself 
 and RStudio is a convenient interface.
 
@@ -35,21 +35,21 @@ and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
 to access data and organize, describe, and invoke statistical computations.
 
-To get you started, enter the following commands at the R prompt (i.e. right after
-`>` on the console).  You can either type it in manually or copy and paste it
+To get you started, enter all commands at the R prompt (i.e. right after
+`>` on the console); you can either type them in manually or copy and paste them
 from this document.
 
-R has a number of additional packages that help you perform specific tasks. In order to use these packages, they must be installed (you only have to do this once) and loaded (you have to do this every time you start an R session). 
+R has a number of additional packages that help you perform specific tasks. In order to use these packages, they must be installed (you only have to do this once) and loaded (you have to do this every time you start a new R session). 
 
 ```{r opts, eval=TRUE, echo=FALSE}
 library(knitr)
 opts_chunk$set(eval=FALSE)
 ```
 
-If you have not installed the packages already, run these commands:
+If you have not installed the packages already, run the commands below. It may take a few minutes; you'll know when the packages have finished installing when you see the R prompt return in your console.
 ```{r load-devtools-oilabs, message = FALSE, eval=FALSE}
+install.packages(c("dplyr", "ggplot2", "devtools"))
 devtools::install_github("andrewpbray/oilabs")
-install.packages(c("dplyr", "ggplot2"))
 ```
 
 Then, we can load the packages
@@ -58,14 +58,17 @@ library(oilabs)
 library(dplyr)
 library(ggplot2)
 ```
-and finally, load in some data:
+
+
+## The Data: Dr. Arbuthnot's Baptism Records
+
+The data for this lab are Arbuthnot baptism counts for boys and girls, which we load into R as follows:
+
 ```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
 data(arbuthnot)
 ```
 
-
-The data are Arbuthnot baptism counts for boys and girls. You should see that the 
-environment area in the upper righthand corner of the RStudio window now lists a 
+You should see that the environment area in the upper righthand corner of the RStudio window now lists a 
 data set called `arbuthnot` that has 82 observations on 3 variables. As you 
 interact with R, you will create a series of objects. Sometimes you load them as
 we have done here, and sometimes you create them yourself as the byproduct of a 
@@ -73,8 +76,6 @@ computation or some analysis you have performed. Note that because you are
 working on the RStudio server, this data comes preloaded. If you would like to
 run RStudio locally on your own computer please ask me how you can access this 
 data (it's super quick to do).
-
-## The Data: Dr. Arbuthnot's Baptism Records
 
 The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century 
 physician, writer, and mathematician.  He was interested in the ratio of newborn
@@ -141,10 +142,6 @@ Notice that the special operator `%>%` is being used here. The `%>%` is called t
 
 1.  What command would you use to extract just the counts of girls baptized? Try
     it!
-    
-
-R has some powerful functions for making graphics. We can create a simple plot 
-of the number of girls baptized per year with the command
 
 There is an additional package for R called `mosaic` that streamlines all of the commands that you will need in this course. This package is specifically designed by a team of NSF-funded educators to make R more accessible to introductory statistics students like you. The [`mosaic` package](https://cran.r-project.org/web/packages/mosaic/index.html) doesn't provide new functionality so much as it makes existing functionality more logical, consistent, all the while emphasizing importants concepts in statistics. 
 
@@ -157,7 +154,7 @@ install.packages("mosaic")
 Note that you will only have to do this *once*. However, once the package is installed, you will have to load it into the current workspace before it can be used. 
 
 ```{r require-mosaic, message=FALSE}
-require(mosaic)
+library(mosaic)
 ```
 
 Note that you will have to do this *every* time you start a new R session. 
@@ -174,7 +171,7 @@ xyplot(girls ~ year, data=arbuthnot)
 
 By default, R creates a scatterplot with each x,y pair indicated by an open circle. The plot itself should appear under the *Plots* tab of the lower right panel of RStudio. Notice that the command above is a function called `xyplot` that takes two arguments separated by a comma.  The first argument to the `xyplot` function is a formula of the form `y ~ x` that specifies which variable should go on the vertical (`y`) axis and which should go on the horizontal (`x`) axis. The `data` argument tell R where to find the `girls` and `year` variables -- in this case, they are inside the data frame called `arbuthnot`. You will find that you can perform most of the operations that you will see in this class using this simple template. [Please see the [Less Volume, More Creativity](https://cran.r-project.org/web/packages/mosaic/vignettes/LessVolume-MoreCreativity.html) vignette for more information about this.]
 
-If we wish to plot `l`ines instead of `p`oints, we can add the `type` argument. 
+If we wish to plot `l`ines instead of `p`oints, we can add the `type` argument. Note below that the `type` argument is the letter `l` and not the number `1`.  
 
 ```{r plot-girls-vs-year-line, eval=FALSE}
 xyplot(girls ~ year, data=arbuthnot, type = "l")
@@ -215,8 +212,8 @@ arbuthnot %>%
 
 Again, we can read this chunk of code by saying, 'take the `arbuthnot` data, and then mutate it so there is an additional column called total, which is comprised of the columns `boys` and `girls` added together.'
 
-You'll see that there is now a new column called "total" that has been tacked on
-to the data frame. What "total" contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.
+You'll see that there is now a new column called `total` that has been tacked on
+to the data frame. What `total` contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.
 
 While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it. 
 
@@ -276,8 +273,8 @@ also access it by clicking on the history tab in the upper right panel.  This
 will save you a lot of typing in the future.
 
 Finally, in addition to simple mathematical operators like subtraction and 
-division, you can ask R to make comparisons like greater than, `>`, less than,
-`<`, and equality, `==`. For example, we can ask if boys outnumber girls in each 
+division, you can ask R to make comparisons like greater than, `>`, greater than or equal, `>=`, less than,
+`<`, less than or equal, `<=`, and equality, `==`. For example, we can ask if boys outnumber girls in each 
 year with the expression
 
 ```{r boys-more-than-girls}
@@ -335,7 +332,7 @@ That was a short introduction to R and RStudio, but we will provide you with mor
 functions and a more complete sense of the language as the course progresses. 
 Feel free to browse around the websites for [R](http://www.r-project.org) and 
 [RStudio](http://rstudio.org) if you're interested in learning more, or find 
-more labs for practice at http://openintro.org.
+more labs for practice at the [OpenIntro](http://openintro.org) webpage.
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
