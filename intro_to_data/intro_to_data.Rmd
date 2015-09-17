@@ -246,8 +246,7 @@ cdc[,6]
 
 Recall that column 6 represents respondents' weight, so the command above 
 reported all of the weights in the data set. An alternative method to access the
-weight data is by using the `select` command. `select` is in the [`dplyr` package](https://cran.r-project.org/web/packages/dplyr/index.html), 
-so we need to load it
+weight data is by using the `select` command. `select` is in the [`dplyr` package](https://cran.r-project.org/web/packages/dplyr/index.html), so we need to load it
 
 ```{r dplyr-load}
 require(dplyr)
