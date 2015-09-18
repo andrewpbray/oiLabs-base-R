@@ -39,7 +39,9 @@ To get you started, enter the following commands at the R prompt (i.e. right aft
 `>` on the console).  You can either type it in manually or copy and paste it
 from this document.
 
-R has a number of additional packages that help you perform specific tasks. In order to use these packages, they must be installed (you only have to do this once) and loaded (you have to do this every time you start an R session). 
+R has a number of additional packages that help you perform specific tasks. 
+In order to use these packages, they must be installed (you only have to do this 
+once) and loaded (you have to do this every time you start an R session). 
 
 ```{r opts, eval=TRUE, echo=FALSE}
 library(knitr)
@@ -106,8 +108,8 @@ dim(arbuthnot)
 ```
 
 This command should output `[1] 82 3`, indicating that there are 82 rows and 3 
-columns, just as it says next to the object in your environment. You can see the names of these columns (or 
-variables) by typing:
+columns, just as it says next to the object in your environment. You can see 
+the names of these columns (or variables) by typing:
 
 ```{r names-data, eval=TRUE}
 names(arbuthnot)
@@ -137,7 +139,11 @@ arbuthnot %>%
 
 This command will only show the number of boys baptized each year.
 
-Notice that the special operator `%>%` is being used here. The `%>%` is called the 'pipe' operator. Many languages have pipe operators, and they allow functions to pass things along a chain of commands. In R, we often read `%>%` as the English word 'then.' So, we could read this code as saying, 'take the `arbuthnot` data, then select the `boys` variable.' 
+Notice that the special operator `%>%` is being used here. The `%>%` is called the 
+'pipe' operator. Many languages have pipe operators, and they allow functions to 
+pass things along a chain of commands. In R, we often read `%>%` as the English 
+word 'then.' So, we could read this code as saying, 'take the `arbuthnot` data, 
+then select the `boys` variable.' 
 
 1.  What command would you use to extract just the counts of girls baptized? Try
     it!
@@ -196,12 +202,18 @@ arbuthnot %>%
   mutate(total = boys + girls)
 ```
 
-Again, we can read this chunk of code by saying, 'take the `arbuthnot` data, and then mutate it so there is an additional column called total, which is comprised of the columns `boys` and `girls` added together.'
+Again, we can read this chunk of code by saying, 'take the `arbuthnot` data, and 
+then mutate it so there is an additional column called total, which is comprised 
+of the columns `boys` and `girls` added together.'
 
 You'll see that there is now a new column called "total" that has been tacked on
-to the data frame. What "total" contains is a list of 82 numbers, each one representing the sum we’re after. Take a look at a few of them and verify that they are right.
+to the data frame. What "total" contains is a list of 82 numbers, each one 
+representing the sum we’re after. Take a look at a few of them and verify that 
+they are right.
 
-While this output looks like our original dataset with an additional column added, it was just temporarily shown to us in the console. In order to use that column again, we have to save it. 
+While this output looks like our original dataset with an additional column 
+added, it was just temporarily shown to us in the console. In order to use that 
+column again, we have to save it. 
 
 ```{r calc-total-bapt-vars-save}
 arbuthnot <- 
@@ -209,8 +221,9 @@ arbuthnot <-
   mutate(total = boys + girls)
 ```
 
-The special symbol `<-` performs an *assignment*, taking the output of a line of code or series of piped commands, and saving it into an object in your environment. In 
-this case, you already have an object called `arbuthnot`, so this command updates
+The special symbol `<-` performs an *assignment*, taking the output of a line of 
+code or series of piped commands, and saving it into an object in your environment. 
+In this case, you already have an object called `arbuthnot`, so this command updates
 that data set with the new mutated column.
 
 We can make a plot of the total number of baptisms per year with the command
@@ -251,18 +264,13 @@ of operations.  Here, we want to divide the number of boys by the total number
 of newborns, so we have to use parentheses.  Without them, R will first do the 
 division, then the addition, giving you something that is not a proportion.
 
-We can also pipe data into plots, as in
-```{r piped-plot}
-arbuthnot %>%
-  mutate(prop = boys / (boys + girls)) %>%
-  qplot(x = year, y = prop, data = ., geom = "line")
-```
-
-In this case, we had to use the `.` operator, which allows us to perform piped operations where the data is not always flowing into the first argument of a function. In this case, we have taken the arbuthnot data, then mutated it so it has an additional column, and then we want to create a plot. However, `qplot` expects to have data flowing in after the named `data=` argument. Because `data=` is not the first piece of the `qplot()` call, we have to tell R where to put the piped in data. The `.` does that. 
 
 3.  Now, *mutate* the data frame once more to include a new column for the 
 proportion of newborns that are girls, then generate a plot of that proportion 
-over time. Remember, if you are going to use `qplot` as a standalone function you have to use assignment to save over your old version of the data frame. Otherwise, you can pipe together a series of data manipulations and then plot in one chain. 
+over time. Remember, if you are going to use `qplot` as a standalone function 
+you have to use assignment to save over your old version of the data frame. 
+Otherwise, you can pipe together a series of data manipulations and then plot 
+in one chain. 
 What does the plot show you? 
 
 Tip: If you use the up and down arrow keys, you can 
@@ -280,7 +288,8 @@ arbuthnot %>%
   mutate(boys>girls)
 ```
 
-This command returns a dataframe with an additional variable tacked on. The values of this variable are either `TRUE` if that year had more boys
+This command returns a dataframe with an additional variable tacked on. 
+The values of this variable are either `TRUE` if that year had more boys
 than girls, or `FALSE` if that year did not (the answer may surprise you). This 
 output shows a different kind of data than we have considered so far. All other
 columns in the `arbuthnot` data frame have values are numerical (the year, the 
