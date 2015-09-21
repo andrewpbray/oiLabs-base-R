@@ -29,8 +29,8 @@ us best predict a team's runs scored in a season.
 Let's load up the data for the 2011 season.
 
 ```{r load-data, eval=FALSE}
-download.file("http://www.openintro.org/stat/data/mlb11.RData", destfile = "mlb11.RData")
-load("mlb11.RData")
+require(oilabs)
+data(mlb11)
 ```
 
 In addition to runs scored, there are seven traditionally used variables in the 
