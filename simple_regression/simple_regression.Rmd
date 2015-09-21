@@ -29,8 +29,8 @@ us best predict a team's runs scored in a season.
 Let's load up the data for the 2011 season.
 
 ```{r load-data, eval=FALSE}
-download.file("http://www.openintro.org/stat/data/mlb11.RData", destfile = "mlb11.RData")
-load("mlb11.RData")
+require(oilabs)
+data(mlb11)
 ```
 
 In addition to runs scored, there are seven traditionally used variables in the 
@@ -151,13 +151,14 @@ explained by at-bats.
 Let's create a scatterplot with the least squares line laid on top.
 
 ```{r reg-with-line, eval=FALSE}
-xyplot(runs ~ at_bats, data=mlb11)
-ladd(panel.abline(m1))
+plotModel(m1)
 ```
 
-The function `abline` plots a line based on its slope and intercept. Here, we 
-used a shortcut by providing the model `m1`, which contains both parameter 
-estimates. This line can be used to predict $y$ at any value of $x$. When 
+The function `plotModel` plots the linear model in the "data space". Here, 
+the model `m1`, contains all the information needed to plot both the 
+original data and the line that represents the model fit to that data. 
+
+This line can be used to predict $y$ at any value of $x$. When 
 predictions are made for values of $x$ that are beyond the range of the observed
 data, it is referred to as *extrapolation* and is not usually recommended. 
 However, predictions made within the range of the data are more reliable. 
