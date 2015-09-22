@@ -13,7 +13,7 @@ output:
 The movie [Moneyball](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
 the "quest for the secret of success in baseball". It follows a low-budget team, 
 the Oakland Athletics, who believed that underused statistics, such as a player's 
-ability to get on base, betterpredict the ability to score runs than typical 
+ability to get on base, better predict the ability to score runs than typical 
 statistics like home runs, RBIs (runs batted in), and batting average. Obtaining 
 players who excelled in these underused statistics turned out to be much more 
 affordable for the team.
@@ -132,7 +132,7 @@ With this table, we can write down the least squares regression line for the
 linear model:
 
 \[
-  \hat{y} = -2789.2429 + 0.6305 * atbats
+  \hat{y} = -2789.2429 + 0.6305 \cdot atbats
 \]
 
 One last piece of information we will discuss from the summary output is the 
