@@ -163,9 +163,9 @@ However, predictions made within the range of the data are more reliable.
 They're also used to compute the residuals.
 
 5.  If a team manager saw the least squares regression line and not the actual 
-    data, how many runs would he or she predict for a team with 5,578 at-bats? 
-    Is this an overestimate or an underestimate, and by how much? In other 
-    words, what is the residual for this prediction?
+    data, how many runs would he or she predict for a team with 5,579 at-bats? 
+    Is this an overestimate or an underestimate for the Philadelphia Phillies, 
+    and by how much? In other words, what is the residual for this prediction?
 
 ## Model diagnostics
 
