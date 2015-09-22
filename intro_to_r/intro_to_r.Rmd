@@ -285,7 +285,7 @@ year with the expression
 
 ```{r boys-more-than-girls}
 arbuthnot %>%
-  mutate(boys>girls)
+  mutate(boys > girls)
 ```
 
 This command returns a dataframe with an additional variable tacked on. 
