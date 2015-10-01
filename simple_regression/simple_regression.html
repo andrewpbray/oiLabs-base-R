@@ -78,14 +78,14 @@ img {
 
 <div id="batter-up" class="section level2">
 <h2>Batter up</h2>
-<p>The movie <a href="http://en.wikipedia.org/wiki/Moneyball_(film)">Moneyball</a> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, betterpredict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
+<p>The movie <a href="http://en.wikipedia.org/wiki/Moneyball_(film)">Moneyball</a> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, better predict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
 <p>In this lab we’ll be looking at data from all 30 Major League Baseball teams and examining the linear relationship between runs scored in a season and a number of other player statistics. Our aim will be to summarize these relationships both graphically and numerically in order to find which variable, if any, helps us best predict a team’s runs scored in a season.</p>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>Let’s load up the data for the 2011 season.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/mlb11.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;mlb11.RData&quot;</span>)
-<span class="kw">load</span>(<span class="st">&quot;mlb11.RData&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(oilabs)
+<span class="kw">data</span>(mlb11)</code></pre>
 <p>In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging. For the first portion of the analysis we’ll consider the seven traditional variables. At the end of the lab, you’ll work with the newer variables on your own.</p>
 <ol style="list-style-type: decimal">
 <li>What type of plot would you use to display the relationship between <code>runs</code> and one of the other numerical variables? Plot this relationship using the variable <code>at_bats</code> as the predictor. Does the relationship look linear? If you knew a team’s <code>at_bats</code>, would you be comfortable using a linear model to predict the number of runs?</li>
@@ -122,7 +122,7 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m1)</code></pre>
 <p>Let’s consider this output piece by piece. First, the formula used to describe the model is shown at the top. After the formula you find the five-number summary of the residuals. The “Coefficients” table shown next is key; its first column displays the linear model’s y-intercept and the coefficient of <code>at_bats</code>. With this table, we can write down the least squares regression line for the linear model:</p>
 <p><span class="math">\[
-  \hat{y} = -2789.2429 + 0.6305 * atbats
+  \hat{y} = -2789.2429 + 0.6305 \cdot atbats
 \]</span></p>
 <p>One last piece of information we will discuss from the summary output is the Multiple R-squared, or more simply, <span class="math">\(R^2\)</span>. The <span class="math">\(R^2\)</span> value represents the proportion of variability in the response variable that is explained by the explanatory variable. For this model, 37.3% of the variability in runs is explained by at-bats.</p>
 <ol start="4" style="list-style-type: decimal">
@@ -132,9 +132,9 @@ img {
 <div id="prediction-and-prediction-errors" class="section level2">
 <h2>Prediction and prediction errors</h2>
 <p>Let’s create a scatterplot with the least squares line laid on top.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(runs ~<span class="st"> </span>at_bats, <span class="dt">data=</span>mlb11)
-<span class="kw">ladd</span>(<span class="kw">panel.abline</span>(m1))</code></pre>
-<p>The function <code>abline</code> plots a line based on its slope and intercept. Here, we used a shortcut by providing the model <code>m1</code>, which contains both parameter estimates. This line can be used to predict <span class="math">\(y\)</span> at any value of <span class="math">\(x\)</span>. When predictions are made for values of <span class="math">\(x\)</span> that are beyond the range of the observed data, it is referred to as <em>extrapolation</em> and is not usually recommended. However, predictions made within the range of the data are more reliable. They’re also used to compute the residuals.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotModel</span>(m1)</code></pre>
+<p>The function <code>plotModel</code> plots the linear model in the “data space”. Here, the model <code>m1</code>, contains all the information needed to plot both the original data and the line that represents the model fit to that data.</p>
+<p>This line can be used to predict <span class="math">\(y\)</span> at any value of <span class="math">\(x\)</span>. When predictions are made for values of <span class="math">\(x\)</span> that are beyond the range of the observed data, it is referred to as <em>extrapolation</em> and is not usually recommended. However, predictions made within the range of the data are more reliable. They’re also used to compute the residuals.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>If a team manager saw the least squares regression line and not the actual data, how many runs would he or she predict for a team with 5,578 at-bats? Is this an overestimate or an underestimate, and by how much? In other words, what is the residual for this prediction?</li>
 </ol>
