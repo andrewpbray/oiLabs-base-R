@@ -1,6 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
-oiLabs-dplyr-ggplot.Rproj
+*.Rproj
 .DS_Store
 *.html
