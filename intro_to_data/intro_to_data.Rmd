@@ -343,7 +343,7 @@ will give you the data for men over the age of 30. The `|` character is read
 "or" so that
 
 ```{r males-or-over30}
-m_and_over30 <- 
+m_or_over30 <- 
   cdc %>% 
   filter(gender == "m" | age > 30)
 ```
@@ -421,7 +421,7 @@ When creating a similarly split boxplot for a categorical variable that has `TRU
 values, we need to add `as.factor()` around the variable name. So for example, to compare `bmi` for smokers and
 non-smokers, we run:
 
-```{r boxplot-bmi}
+```{r boxplot-bmi2}
 bwplot(bmi ~ as.factor(smoke100), data = cdc)
 ```
 
