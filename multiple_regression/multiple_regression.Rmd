@@ -170,7 +170,9 @@ score is calculated using the individual scores. We can actually take a
 look at the relationships between all beauty variables using the `pairs` command:
 
 ```{r bty-rels}
-pairs(evals[, c("bty_f1lower", "bty_f1upper", "bty_f2upper", "bty_m1lower", "bty_m1upper", "bty_m2upper", "bty_avg")])
+evals %>%
+  select(contains("bty")) %>%
+  pairs()
 ```
 
 These variables are collinear (correlated), and adding more than one of these 
