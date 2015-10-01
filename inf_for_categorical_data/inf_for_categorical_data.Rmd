@@ -8,11 +8,15 @@ output:
   pdf_document: default
 ---
 
+```{r opts, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 In August of 2012, news outlets ranging from the [Washington
 Post](http://www.washingtonpost.com/national/on-faith/poll-shows-atheism-on-the-rise-in-the-us/2012/08/13/90020fd6-e57d-11e1-9739-eef99c5fb285_story.html) to the [Huffington
 Post](http://www.huffingtonpost.com/2012/08/14/atheism-rise-religiosity-decline-in-america_n_1777031.html)
 ran a story about the rise of atheism in America. The source for the story was 
-a poll that asked people, "Irrespective of whether you attend a place of 
+a poll that asked people "Irrespective of whether you attend a place of 
 worship or not, would you say you are a religious person, not a religious 
 person or a convinced atheist?" This type of question, which asks people to 
 classify themselves in one way or another, is common in polling and generates 
@@ -22,18 +26,13 @@ categorical data.
 
 ## The survey
 
-To access the press release for the poll, conducted by WIN-Gallup 
-International, click on the following link:
-
-*<http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf>*
-
-Take a moment to review the report then address the following questions.
+Take a moment to review the [press release for the poll](http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf) conducted by WIN-Gallup International then address the following questions. 
 
 1.  In the first paragraph, several key findings are reported. Do these 
     percentages appear to be *sample statistics* (derived from the data 
     sample) or *population parameters*?
 
-2.  The title of the report is "Global Index of Religiosity and Atheism". To
+2.  The title of the report is "Global Index of Religiosity and Atheism." To
     generalize the report's findings to the global human population, what must 
     we assume about the sampling method? Does that seem like a reasonable 
     assumption?
@@ -43,13 +42,13 @@ Take a moment to review the report then address the following questions.
 Turn your attention to Table 6 (pages 15 and 16), which reports the
 sample size and response percentages for all 57 countries. While this is
 a useful format to summarize the data, we will base our analysis on the
-original data set of individual responses to the survey. Load this data
-set into R with the following command.
+original data set of individual responses to the survey. Load the necessary 
+packages and the data set into R with the following command.
 
-```{r head-data, eval=FALSE}
-require(mosaic)
-download.file("http://www.openintro.org/stat/data/atheism.RData", destfile = "atheism.RData")
-load("atheism.RData")
+```{r load-data, message=FALSE}
+library(oilabs)
+library(dplyr)	
+data(atheism)
 ```
 
 3.  What does each row of Table 6 correspond to? What does each row of 
@@ -60,13 +59,15 @@ look at the estimated proportion of atheists in the United States. Towards
 the bottom of Table 6, we see that this is 5%. We should be able to come to 
 the same number using the `atheism` data.
 
-4.  Using the command below, create a new dataframe called `us12` that contains
+4.  Using the command below, create a new data frame called `us12` that contains
     only the rows in `atheism` associated with respondents to the 2012 survey 
     from the United States. Next, calculate the proportion of atheist 
     responses. Does it agree with the percentage in Table 6? If not, why?
 
-```{r us-atheism, eval=FALSE}
-us12 <- subset(atheism, nationality == "United States" & year == "2012")
+```{r us-atheism}
+us12 <- 
+  atheism %>% 
+  filter(nationality == "United States" & year == "2012")
 ```
 
 ## Inference on proportions
@@ -107,7 +108,7 @@ to `qnorm` we can find intervals that correspond to different confidence levels.
 
 Although formal confidence intervals and hypothesis tests don't show up in the 
 report, suggestions of inference appear at the bottom of page 7: "In general, 
-the error margin for surveys of this kind is $\pm$ 3-5% at 95% confidence".
+the error margin for surveys of this kind is $\pm$ 3-5% at 95% confidence."
 
 6.  Based on the R output, what is the margin of error for the estimate of the 
     proportion of the proportion of atheists in US in 2012?
@@ -131,22 +132,23 @@ is then used in the formula for the margin of error for a 95% confidence
 interval: $ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n}$. Since the 
 population proportion $p$ is in this $ME$ formula, it should make sense that 
 the margin of error is in some way dependent on the population proportion. We 
-can visualize this relationship by creating a plot of $ME$ vs. $p$.
+can visualize this relationship by creating a plot of $ME$ vs. $p$ for all
+values of $p$ between 0 and 1.
 
 The first step is to make a vector `p` that is a sequence from 0 to 1 with 
 each number separated by 0.01. We can then create a vector of the margin of 
-error (`me`) associated with each of these values of `p` using the familiar 
-approximate formula ($ME = 2 \times SE$). Lastly, we plot the two vectors 
+error (`ME`) associated with each of these values of `p` using the familiar 
+approximate formula ($ME = 1.96 \times SE$). Lastly, we plot the two vectors 
 against each other to reveal their relationship.
 
-```{r me-plot, eval=FALSE}
+```{r me-plot}
 n <- 1000
 p <- seq(from = 0, to = 1, by = 0.01)
-me <- 2 * sqrt(p * (1 - p)/n)
-xyplot(me ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
+ME <- 2 * sqrt(p * (1 - p)/n)
+plot(ME ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
 ```
 
-8.  Describe the relationship between `p` and `me`.
+8.  Describe the relationship between `p` and `ME`.
 
 ## Success-failure condition
 
@@ -173,7 +175,7 @@ Here, we first `resample` $n$ times from the list of `responses`, with the
 probability of drawing `"atheist"` equal to $p = 0.1$. Then we `tally` the 
 proportion of those responses that are `"atheist"`. We `do` this 500 times. 
 
-```{r sim-np, eval=FALSE, tidy=FALSE}
+```{r sim-np, tidy=FALSE}
 p <- 0.1
 n <- 1040
 responses = c("atheist", "non_atheist")
@@ -203,6 +205,7 @@ distribution.
     the three new sampling distributions. 
     Based on these limited plots, how does $n$ appear to affect the 
     distribution of $\hat{p}$? How does $p$ affect the sampling distribution?
+
 
 11. If you refer to Table 6, you'll find that Australia has a sample 
     proportion of 0.1 on a sample size of 1040, and that Ecuador has a sample 

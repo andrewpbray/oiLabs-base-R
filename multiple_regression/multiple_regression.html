@@ -78,15 +78,26 @@ img {
 
 <div id="grading-the-professor" class="section level2">
 <h2>Grading the professor</h2>
+<<<<<<< HEAD
 <p>Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. The article titled, “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” (Hamermesh and Parker, 2005) found that instructors who are viewed to be better looking receive higher instructional ratings. (Daniel S. Hamermesh, Amy Parker, Beauty in the classroom: instructors pulchritude and putative pedagogical productivity, <em>Economics of Education Review</em>, Volume 24, Issue 4, August 2005, Pages 369-376, ISSN 0272-7757, 10.1016/j.econedurev.2004.07.013. <a href="http://www.sciencedirect.com/science/article/pii/S0272775704001165"><a href="http://www.sciencedirect.com/science/article/pii/S0272775704001165" class="uri">http://www.sciencedirect.com/science/article/pii/S0272775704001165</a></a>.)</p>
+=======
+<p>Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. The article titled, “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” <span class="citation">(Hamermesh and Parker 2005)</span> found that instructors who are viewed to be better looking receive higher instructional ratings.</p>
+>>>>>>> upstream/master
 <p>In this lab we will analyze the data from this study in order to learn what goes into a positive professor evaluation.</p>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
+<<<<<<< HEAD
 <p>The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin. In addition, six students rated the professors’ physical appearance. (This is aslightly modified version of the original data set that was released as part of the replication data for <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em> (Gelman and Hill, 2007).) The result is a data frame where each row contains a different course and columns represent variables about the courses and professors.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
 <span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/evals.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;evals.RData&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;evals.RData&quot;</span>)</code></pre>
+=======
+<p>The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin. In addition, six students rated the professors’ physical appearance. (This is a slightly modified version of the original data set that was released as part of the replication data for <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em> <span class="citation">(Gelman and Hill 2007)</span>.) The result is a data frame where each row contains a different course and columns represent variables about the courses and professors.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(oilabs)
+<span class="kw">library</span>(dplyr)  
+<span class="kw">data</span>(evals)</code></pre>
+>>>>>>> upstream/master
 <table>
 <thead>
 <tr class="header">
@@ -196,18 +207,31 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(score ~<span class="st"> </span>bty_avg, <span class="dt">data=</span>evals)</code></pre>
 <p>Before we draw conclusions about the trend, compare the number of observations in the data frame with the approximate number of points on the scatterplot. Is anything awry?</p>
 <ol start="4" style="list-style-type: decimal">
+<<<<<<< HEAD
 <li><p>Replot the scatterplot, but this time use the function <code>jitter()</code> on the <span class="math">\(y\)</span>- or the <span class="math">\(x\)</span>-coordinate. (Use <code>?jitter</code> to learn more.) What was misleading about the initial scatterplot?</p></li>
 <li><p>Let’s see if the apparent trend in the plot is something more than natural variation. Fit a linear model called <code>m_bty</code> to predict average professor score by average beauty rating and add the line to your plot using the <code>type=c(&quot;p&quot;, &quot;r&quot;)</code> argument. Write out the equation for the linear model and interpret the slope. Is average beauty score a statistically significant predictor? Does it appear to be a practically significant predictor?</p></li>
+=======
+<li><p>Replot the scatterplot, but this time use the function <code>jitter()</code> on the <span class="math">\(y\)</span> or the <span class="math">\(x\)</span>-coordinate. (Use <code>?jitter</code> to learn more.) What was misleading about the initial scatterplot?</p></li>
+<li><p>Let’s see if the apparent trend in the plot is something more than natural variation. Fit a linear model called <code>m_bty</code> to predict average professor score by average beauty rating and add the line to your plot using <code>abline(m_bty)</code>. Write out the equation for the linear model and interpret the slope. Is average beauty score a statistically significant predictor? Does it appear to be a practically significant predictor?</p></li>
+>>>>>>> upstream/master
 <li><p>Use residual plots to evaluate whether the conditions of least squares regression are reasonable. Provide plots and comments for each one (see the Simple Regression Lab for a reminder of how to make these).</p></li>
 </ol>
 </div>
 <div id="multiple-linear-regression" class="section level2">
 <h2>Multiple linear regression</h2>
 <p>The data set contains several variables on the beauty score of the professor: individual ratings from each of the six students who were asked to score the physical appearance of the professors and the average of these six scores. Let’s take a look at the relationship between one of these scores and the average beauty score.</p>
+<<<<<<< HEAD
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data=</span>evals)
 <span class="kw">cor</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data=</span>evals)</code></pre>
 <p>As expected the relationship is quite strong – after all, the average score is calculated using the individual scores. We can actually take a look at the relationships between all beauty variables using the <code>pairs</code> command:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(evals[, <span class="kw">c</span>(<span class="st">&quot;bty_f1lower&quot;</span>, <span class="st">&quot;bty_f1upper&quot;</span>, <span class="st">&quot;bty_f2upper&quot;</span>, <span class="st">&quot;bty_m1lower&quot;</span>, <span class="st">&quot;bty_m1upper&quot;</span>, <span class="st">&quot;bty_m2upper&quot;</span>, <span class="st">&quot;bty_avg&quot;</span>)])</code></pre>
+=======
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(evals$bty_avg ~<span class="st"> </span>evals$bty_f1lower)
+evals %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">cor</span>(bty_avg, bty_f1lower))</code></pre>
+<p>As expected the relationship is quite strong - after all, the average score is calculated using the individual scores. We can actually take a look at the relationships between all beauty variables (columns 13 through 19) using the following command:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(evals[,<span class="dv">13</span>:<span class="dv">19</span>])</code></pre>
+>>>>>>> upstream/master
 <p>These variables are collinear (correlated), and adding more than one of these variables to the model would not add much value to the model. In this application and with these highly-correlated predictors, it is reasonable to use the average beauty score as the single representative of these variables.</p>
 <p>In order to see if beauty is still a significant predictor of professor score after we’ve accounted for the gender of the professor, we can add the gender term into the model.</p>
 <pre class="sourceCode r"><code class="sourceCode r">m_bty_gen &lt;-<span class="st"> </span><span class="kw">lm</span>(score ~<span class="st"> </span>bty_avg +<span class="st"> </span>gender, <span class="dt">data =</span> evals)
@@ -261,6 +285,11 @@ f =<span class="st"> </span><span class="kw">makeFun</span>(m_bty_gen)
 </ol>
 <div id="license">
 This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written by Mine Çetinkaya-Rundel and Andrew Bray.
+</div>
+<div class="references">
+<h2>References</h2>
+<p>Gelman, Andrew, and Jennifer Hill. 2007. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. 1st ed. Cambridge University Press.</p>
+<p>Hamermesh, Daniel S., and Amy Parker. 2005. “Beauty in the Classroom - Instructors’ Pulchritude and Putative Pedagogical Productivity” 24 (4). Economics of Education Review: 369–76. doi:<a href="http://dx.doi.org/10.1016/j.econedurev.2004.07.013">10.1016/j.econedurev.2004.07.013</a>.</p>
 </div>
 </div>
 

@@ -24,8 +24,6 @@ library(knitr)
 opts_chunk$set(eval=FALSE)
 ```
 
-
-
 ```{r load-data}
 require(oilabs)
 data(bdims)
@@ -49,8 +47,10 @@ only women.
 
 ```{r male-female}
 require(dplyr)
-mdims <- filter(bdims, sex == "m")
-fdims <- filter(bdims, sex == "f")
+mdims <- bdims %>%
+  filter(sex == "m")
+fdims <- bdims %>%
+  filter(sex == "f")
 ```
 
 1.  Make a histogram of men's heights and a histogram of women's heights.  How 

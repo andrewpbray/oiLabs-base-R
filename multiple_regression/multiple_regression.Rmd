@@ -6,7 +6,47 @@ output:
     highlight: pygments
     theme: cerulean
   pdf_document: default
+  
+references:
+- id: Hamermesh2005
+  title: Beauty in the Classroom - Instructors’ Pulchritude and Putative Pedagogical Productivity
+  author:
+  - family: Hamermesh
+    given: Daniel S.
+  - family: Parker
+    given: Amy
+  volume: 24
+  URL: 'http://www.sciencedirect.com/science/article/pii/S0272775704001165'
+  DOI: 10.1016/j.econedurev.2004.07.013
+  publisher: Economics of Education Review
+  ISSN: 0272-7757
+  issue: 4
+  page: 369-376
+  type: article-journal
+  issued:
+    year: 2005
+    month: 8
+- id: Gelman2007
+  title: Data Analysis Using Regression and Multilevel/Hierarchical Models
+  author:
+  - family: Gelman
+    given: Andrew
+  - family: Hill
+    given: Jennifer
+  publisher: Cambridge University Press
+  city:
+  type: book
+  issued:
+    year: 2007
+  edition: 1
+  ISBN: 9780521686891
 ---
+
+
+```{r opts, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 
 ## Grading the professor
 
@@ -16,30 +56,30 @@ evaluations as an indicator of course quality and teaching effectiveness is
 often criticized because these measures may reflect the influence of 
 non-teaching related characteristics, such as the physical appearance of the 
 instructor. The article titled, "Beauty in the classroom: instructors' 
-pulchritude and putative pedagogical productivity" (Hamermesh and Parker, 2005) 
+pulchritude and putative pedagogical productivity" [@Hamermesh2005] 
 found that instructors who are viewed to be better looking receive higher 
-instructional ratings. (Daniel S. Hamermesh, Amy Parker, Beauty in the 
-classroom: instructors pulchritude and  putative pedagogical productivity, 
-*Economics of Education Review*, Volume 24, Issue 4, August 2005, Pages 369-376, 
-ISSN 0272-7757, 10.1016/j.econedurev.2004.07.013. [http://www.sciencedirect.com/science/article/pii/S0272775704001165](http://www.sciencedirect.com/science/article/pii/S0272775704001165).)
+instructional ratings. 
 
 In this lab we will analyze the data from this study in order to learn what goes 
 into a positive professor evaluation.
+
+
 
 ## The data
 
 The data were gathered from end of semester student evaluations for a large 
 sample of professors from the University of Texas at Austin. In addition, six 
-students rated the professors' physical appearance. (This is aslightly modified 
+students rated the professors' physical appearance. (This is a slightly modified 
 version of the original data set that was released as part of the replication 
 data for *Data Analysis Using Regression and Multilevel/Hierarchical Models* 
-(Gelman and Hill, 2007).) The result is a data frame where each row contains a 
-different course and columns represent variables about the courses and professors.
+[@Gelman2007].) The result is a data frame where each row contains a 
+different course and columns represent variables about the courses and 
+professors.
 
-```{r load-data, eval=FALSE}
-require(mosaic)
-download.file("http://www.openintro.org/stat/data/evals.RData", destfile = "evals.RData")
-load("evals.RData")
+```{r load-data, message=FALSE}
+library(oilabs)
+library(dplyr)	
+data(evals)
 ```
 
 variable         | description
@@ -87,7 +127,7 @@ The fundamental phenomenon suggested by the study is that better looking teacher
 are evaluated more favorably. Let's create a scatterplot to see if this appears 
 to be the case:
 
-```{r scatter-score-bty_avg, eval = FALSE}
+```{r scatter-score-bty_avg}
 xyplot(score ~ bty_avg, data=evals)
 ```
 
@@ -97,7 +137,7 @@ in the data frame with the approximate number of points on the scatterplot.
 Is anything awry?
 
 4.  Replot the scatterplot, but this time use the function `jitter()` on the
-    $y$- or the $x$-coordinate. (Use `?jitter` to learn more.) What was
+    $y$ or the $x$-coordinate. (Use `?jitter` to learn more.) What was
     misleading about the initial scatterplot?
 
 5.  Let's see if the apparent trend in the plot is something more than
@@ -119,7 +159,7 @@ physical appearance of the professors and the average of these six scores. Let's
 take a look at the relationship between one of these scores and the average 
 beauty score.
 
-```{r bty-rel, eval = FALSE}
+```{r bty-rel}
 xyplot(bty_avg ~ bty_f1lower, data=evals)
 cor(bty_avg ~ bty_f1lower, data=evals)
 ```
@@ -128,7 +168,7 @@ As expected the relationship is quite strong – after all, the average
 score is calculated using the individual scores. We can actually take a
 look at the relationships between all beauty variables using the `pairs` command:
 
-```{r bty-rels, eval = FALSE}
+```{r bty-rels}
 pairs(evals[, c("bty_f1lower", "bty_f1upper", "bty_f2upper", "bty_m1lower", "bty_m1upper", "bty_m2upper", "bty_avg")])
 ```
 
@@ -141,7 +181,7 @@ In order to see if beauty is still a significant predictor of professor score
 after we've accounted for the gender of the professor, we can add the gender 
 term into the model.
 
-```{r scatter-score-bty_avg_gender, eval = FALSE}
+```{r scatter-score-bty_avg_gender}
 m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
 summary(m_bty_gen)
 ```
@@ -172,12 +212,8 @@ the intercept and slope form familiar from simple regression.
 We can plot this line and the line corresponding to males with the
 following code.
 
-```{r twoLines, eval = FALSE}
-palette = trellis.par.get("superpose.symbol")$col
-xyplot(score ~ bty_avg, groups = gender, data=evals, auto.key=TRUE)
-f = makeFun(m_bty_gen)
-plotFun(f(bty_avg, gender = "female") ~ bty_avg, add=TRUE, col=palette[1])
-plotFun(f(bty_avg, gender = "male") ~ bty_avg, add=TRUE, col=palette[2])
+```{r twoLines}
+plotModel(m_bty_gen)
 ```
 
 9.  What is the equation of the line corresponding to males? (*Hint:* For
@@ -217,7 +253,7 @@ picture color.
 
 Let's run the model...
 
-```{r m_full, eval = FALSE, tidy = FALSE}
+```{r m_full, tidy = FALSE}
 m_full <- lm(score ~ rank + ethnicity + gender + language + age + cls_perc_eval 
              + cls_students + cls_level + cls_profs + cls_credits + bty_avg 
              + pic_outfit + pic_color, data = evals)
