@@ -170,7 +170,7 @@ need to determine how many observations fall above 182 then divide this number
 by the total sample size.
 
 ```{r probability}
-sum(~hgt>182, data=fdims) / nrow(fdims)
+sum(~hgt > 182, data = fdims) / nrow(fdims)
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. 

@@ -84,16 +84,10 @@ img {
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>Let’s load up the data for the 2011 season.</p>
-<<<<<<< HEAD
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(oilabs)
-<span class="kw">data</span>(mlb11)</code></pre>
-<p>In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging. For the first portion of the analysis we’ll consider the seven traditional variables. At the end of the lab, you’ll work with the newer variables on your own.</p>
-=======
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(oilabs)
 <span class="kw">library</span>(dplyr)  
 <span class="kw">data</span>(mlb11)</code></pre>
 <p>In addition to runs scored, there are seven traditionally used variables in the data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, and wins. There are also three newer variables: on-base percentage, slugging percentage, and on-base plus slugging. For the first portion of the analysis we’ll consider the seven traditional variables. At the end of the lab, you’ll work with the three newer variables on your own.</p>
->>>>>>> upstream/master
 <ol style="list-style-type: decimal">
 <li>What type of plot would you use to display the relationship between <code>runs</code> and one of the other numerical variables? Plot this relationship using the variable <code>at_bats</code> as the predictor. Does the relationship look linear? If you knew a team’s <code>at_bats</code>, would you be comfortable using a linear model to predict the number of runs?</li>
 </ol>
@@ -128,14 +122,9 @@ img {
 <p>The output of <code>lm</code> is an object that contains all of the information we need about the linear model that was just fit. We can access this information using the summary function.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m1)</code></pre>
 <p>Let’s consider this output piece by piece. First, the formula used to describe the model is shown at the top. After the formula you find the five-number summary of the residuals. The “Coefficients” table shown next is key; its first column displays the linear model’s y-intercept and the coefficient of <code>at_bats</code>. With this table, we can write down the least squares regression line for the linear model:</p>
-<<<<<<< HEAD
 <p><span class="math">\[
   \hat{y} = -2789.2429 + 0.6305 \cdot atbats
 \]</span></p>
-=======
-<p>[  = -2789.2429 + 0.6305 at_bats</p>
-<p> = -2789.2429 + 0.6305 at_bats ]</p>
->>>>>>> upstream/master
 <p>One last piece of information we will discuss from the summary output is the Multiple R-squared, or more simply, <span class="math">\(R^2\)</span>. The <span class="math">\(R^2\)</span> value represents the proportion of variability in the response variable that is explained by the explanatory variable. For this model, 37.3% of the variability in runs is explained by at-bats.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Fit a new model that uses <code>homeruns</code> to predict <code>runs</code>. Using the estimates from the R output, write the equation of the regression line. What does the slope tell us in the context of the relationship between success of a team and its home runs?</li>

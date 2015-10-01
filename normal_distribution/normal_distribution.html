@@ -87,8 +87,10 @@ img {
 <p>You’ll see that for every observation we have 25 measurements, many of which are either diameters or girths. A key to the variable names can be found at <a href="http://www.openintro.org/stat/data/bdims.php"><a href="http://www.openintro.org/stat/data/bdims.php" class="uri">http://www.openintro.org/stat/data/bdims.php</a></a>, but we’ll be focusing on just three columns to get started: weight in kg (<code>wgt</code>), height in cm (<code>hgt</code>), and <code>sex</code> (<code>1</code> indicates male, <code>0</code> indicates female).</p>
 <p>Since males and females tend to have different body dimensions, it will be useful to create two additional data sets: one with only men and another with only women.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(dplyr)
-mdims &lt;-<span class="st"> </span><span class="kw">filter</span>(bdims, sex ==<span class="st"> &quot;m&quot;</span>)
-fdims &lt;-<span class="st"> </span><span class="kw">filter</span>(bdims, sex ==<span class="st"> &quot;f&quot;</span>)</code></pre>
+mdims &lt;-<span class="st"> </span>bdims %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(sex ==<span class="st"> &quot;m&quot;</span>)
+fdims &lt;-<span class="st"> </span>bdims %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(sex ==<span class="st"> &quot;f&quot;</span>)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Make a histogram of men’s heights and a histogram of women’s heights. How would you compare the various aspects of the two distributions?</li>
 </ol>
@@ -134,7 +136,7 @@ sdFheight &lt;-<span class="st"> </span><span class="kw">sd</span>(~hgt, <span c
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">182</span>, <span class="dt">mean =</span> meanFheight, <span class="dt">sd =</span> sdFheight)</code></pre>
 <p>Note that the function <code>pnorm</code> gives the area under the normal curve below a given value, <code>q</code>, with a given mean and standard deviation. Since we’re interested in the probability that someone is taller than 182 cm, we have to take one minus that probability.</p>
 <p>Assuming a normal distribution has allowed us to calculate a theoretical probability. If we want to calculate the probability empirically, we simply need to determine how many observations fall above 182 then divide this number by the total sample size.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(~hgt&gt;<span class="dv">182</span>, <span class="dt">data=</span>fdims) /<span class="st"> </span><span class="kw">nrow</span>(fdims)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(~hgt &gt;<span class="st"> </span><span class="dv">182</span>, <span class="dt">data =</span> fdims) /<span class="st"> </span><span class="kw">nrow</span>(fdims)</code></pre>
 <p>Although the probabilities are not exactly the same, they are reasonably close. The closer that your distribution is to being normal, the more accurate the theoretical probabilities will be.</p>
 <ol start="6" style="list-style-type: decimal">
 <li>Write out two probability questions that you would like to answer; one regarding female heights and one regarding female weights. Calculate the those probabilities using both the theoretical normal distribution as well as the empirical distribution (four probabilities in all). Which variable, height or weight, had a closer agreement between the two methods?</li>

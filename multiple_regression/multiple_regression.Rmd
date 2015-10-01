@@ -78,7 +78,7 @@ professors.
 
 ```{r load-data, message=FALSE}
 library(oilabs)
-library(dplyr)	
+library(dplyr)
 data(evals)
 ```
 
@@ -128,6 +128,7 @@ are evaluated more favorably. Let's create a scatterplot to see if this appears
 to be the case:
 
 ```{r scatter-score-bty_avg}
+require(mosaic)
 xyplot(score ~ bty_avg, data=evals)
 ```
 

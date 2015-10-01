@@ -167,7 +167,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;andrewpb
 </ol>
 <p>Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, <code>&gt;</code>, greater than or equal, <code>&gt;=</code>, less than, <code>&lt;</code>, less than or equal, <code>&lt;=</code>, and equality, <code>==</code>. For example, we can ask if boys outnumber girls in each year with the expression</p>
 <pre class="sourceCode r"><code class="sourceCode r">arbuthnot %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(boys&gt;girls)</code></pre>
+<span class="st">  </span><span class="kw">mutate</span>(boys &gt;<span class="st"> </span>girls)</code></pre>
 <p>This command returns a dataframe with an additional variable tacked on. The values of this variable are either <code>TRUE</code> if that year had more boys than girls, or <code>FALSE</code> if that year did not (the answer may surprise you). This output shows a different kind of data than we have considered so far. All other columns in the <code>arbuthnot</code> data frame have values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create <em>logical</em> data, data where the values are either <code>TRUE</code> or <code>FALSE</code>. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.</p>
 <p>This seems like a fair bit for your first lab, so let’s stop here. To exit RStudio you can click on the log out link at the upper right corner of the screen. Go ahead and log out and then sign back in. You’ll find your R session is just as you left it.</p>
 <hr />
