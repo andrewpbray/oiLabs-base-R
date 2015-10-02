@@ -1,6 +1,13 @@
+.html
 .Rproj.user
 .Rhistory
 .RData
 *.Rproj
 .DS_Store
+<<<<<<< HEAD
 *.html
+=======
+news.html
+README.html
+changes
+>>>>>>> 47d09205c0e00399a5baf70f4fa6706fb73c5cfb
