@@ -7,6 +7,10 @@ output:
     css: ../lab.css
 ---
 
+```{r echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 In this lab we'll investigate the probability distribution that is most central
 to statistics: the normal distribution.  If we are confident that our data are 
 nearly normal, that opens the door to many powerful statistical methods.  Here 
@@ -17,29 +21,26 @@ learn how to generate random numbers from a normal distribution.
 
 This week we'll be working with measurements of body dimensions.  This data set 
 contains measurements from 247 men and 260 women, most of whom were considered 
-healthy young adults.
-
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(eval=FALSE)
-```
+healthy young adults. Let's take a quick peek at the first few rows of the data.
 
 ```{r load-data}
-require(oilabs)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
 data(bdims)
-```
-
-Let's take a quick peek at the first few rows of the data.
-
-```{r head-data}
 head(bdims)
 ```
 
 You'll see that for every observation we have 25 measurements, many of which are
-either diameters or girths.  A key to the variable names can be found at 
-[http://www.openintro.org/stat/data/bdims.php](http://www.openintro.org/stat/data/bdims.php),
-but we'll be focusing on just three columns to get started: weight in kg (`wgt`), 
-height in cm (`hgt`), and `sex` (`1` indicates male, `0` indicates female).
+either diameters or girths.  You can learn about what the variable names mean by
+bringing up the help page.
+
+```{r help-bdims}
+?bdims
+```
+
+We'll be focusing on just three columns to get started: weight in kg (`wgt`), 
+height in cm (`hgt`), and `sex` (`m` indicates male, `f` indicates female).
 
 Since males and females tend to have different body dimensions, it will be 
 useful to create two additional data sets: one with only men and another with 
@@ -111,10 +112,15 @@ plots look like for data that I *know* came from a normal distribution?  We can
 answer this by simulating data from a normal distribution using `rnorm`.
 
 ````{r sim-norm}
-sim_norm <- rnorm(n = nrow(fdims), mean = meanFheight, sd =sdFheight)
+sim_norm <- rnorm(n = nrow(fdims), mean = meanFheight, sd = sdFheight)
 ```
 
-The first argument indicates how many numbers you'd like to generate, which we specify to be the same number of heights in the `fdims` data set using the `nrow` function.  The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated.  We can take a look at the shape of our simulated data set, `sim_norm`, as well as its normal probability plot.
+The first argument indicates how many numbers you'd like to generate, which we 
+specify to be the same number of heights in the `fdims` data set using the 
+`nrow()` function.  The last two arguments determine the mean and standard 
+deviation of the normal distribution from which the simulated sample will be 
+generated.  We can take a look at the shape of our simulated data set, `sim_norm`, 
+as well as its normal probability plot.
 
 3.  Make a normal probability plot of `sim_norm`.  Do all of the points fall on 
     the line?  How does this plot compare to the probability plot for the real 
@@ -153,13 +159,13 @@ exercise.)
 If we assume that female heights are normally distributed (a very close 
 approximation is also okay), we can find this probability by calculating a Z 
 score and consulting a Z table (also called a normal probability table).  In R, 
-this is done in one step with the function `pnorm`.
+this is done in one step with the function `pnorm()`.
 
 ```{r pnorm}
 1 - pnorm(q = 182, mean = meanFheight, sd = sdFheight)
 ```
 
-Note that the function `pnorm` gives the area under the normal curve below a 
+Note that the function `pnorm()` gives the area under the normal curve below a 
 given value, `q`, with a given mean and standard deviation.  Since we're 
 interested in the probability that someone is taller than 182 cm, we have to 
 take one minus that probability.
@@ -170,7 +176,9 @@ need to determine how many observations fall above 182 then divide this number
 by the total sample size.
 
 ```{r probability}
-sum(~hgt > 182, data = fdims) / nrow(fdims)
+fdims %>% 
+  filter(hgt > 182) %>%
+  summarise(percent = n() / nrow(fdims))
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. 
