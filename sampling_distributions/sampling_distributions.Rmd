@@ -159,7 +159,7 @@ sample of size 50 from `area` and then save the mean of that sample into
 the `sample_means50` vector.
 
 Without the `do` function, this would be painful. First, we'd have to create 
-an empty vector filled with 0s to hold the 2000 sample means. Then, we'd have 
+an empty vector filled with `NA`s to hold the 2000 sample means. Then, we'd have 
 to compute each of the 2000 sample means one line at a time, putting them 
 individually into the slots of the `sample_means50` vector:
 
