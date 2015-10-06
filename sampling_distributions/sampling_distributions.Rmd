@@ -87,7 +87,7 @@ samp1 <- ames %>%
   sample_n(50)
 ```
 
-This command collects a simple random sample of size 50 from the `ames` dataset 
+The `sample_n` function collects a simple random sample of size 50 from the `ames` dataset 
 `area`, which is assigned to `samp1`. This is like going into the City 
 Assessor's database and pulling up the files on 50 random home sales. Working 
 with these 50 files would be considerably simpler than working with all 2930 
