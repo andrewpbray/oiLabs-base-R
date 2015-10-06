@@ -99,7 +99,7 @@ If we're interested in estimating the average living area in homes in Ames
 using the sample, our best single guess is the sample mean.
 
 ```{r mean-samp1}
-samp1 <- mean(~area, data = samp1)
+mean(~area, data = samp1)
 ```
 
 Depending on which 50 homes you selected, your estimate could be a bit above 
@@ -132,7 +132,7 @@ Here we use R to take 2000 samples of size 50 from the population, calculate
 the mean of each sample, and store each result in a vector called 
 `sample_means50`. On the next page, we'll review how this set of code works.
 
-1.  How many elements are there in `sample_means50`?  Describe the sampling 
+1.  How many rows are there in `sample_means50`?  Describe the sampling 
     distribution, and be sure to specifically note its center. Would you 
     expect the distribution to change if we instead collected 10,000 sample 
     means?
@@ -209,7 +209,7 @@ same scale so that we can easily compare their shapes, centers, and spreads to
 each other.
 
 -- **Step 2a:** Combine these three sampling distributions (three $2000 \times 1$ data 
-frames) into one $12000 \times 1$ data frame. Note that we're just doing this 
+frames) into one $6000 \times 1$ data frame. Note that we're just doing this 
 for ease in plotting later. To combine data frames by row, we use the `bind_rows` function.
 
 ```{r samp-dist}
