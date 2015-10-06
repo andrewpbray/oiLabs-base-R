@@ -237,11 +237,11 @@ same scale so that we can easily compare their shapes, centers, and spreads to
 each other.
 
 -- **Step 2a:** Combine these three sampling distributions (three $2000 \times 1$ data 
-frames) into one $12000 \times 1$ data frame. Note that we're just doing this 
-for ease in plotting later. To combine data frames by row, we use the `rbind` function, which stands for **r**ow bind.
+frames) into one $6000 \times 1$ data frame. Note that we're just doing this 
+for ease in plotting later. To combine data frames by row, we use the `bind_rows` function.
 
 ```{r samp-dist}
-sampling_dist <- rbind(sample_means10, sample_means50, sample_means100)
+sampling_dist <- bind_rows(sample_means10, sample_means50, sample_means100)
 ```
 
 -- **Step 2b:** Add a new column called `sample_size` to the data frame you just
@@ -256,7 +256,7 @@ function to create new variables in data frames.
 
 ```{r samp-dist-labeled}
 sampling_dist <- sampling_dist %>%
-  mutate(sample_size = factor(rep(10, 2000), rep(50, 2000), rep(100, 2000)))
+  mutate(sample_size = factor(c(rep(10, 2000), rep(50, 2000), rep(100, 2000))))
 ```
 
 -- **Step 2c:** Finally, draw three histograms representing these three sampling 
