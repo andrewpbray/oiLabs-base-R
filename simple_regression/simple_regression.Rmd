@@ -8,12 +8,16 @@ output:
   pdf_document: default
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 ## Batter up 
 
 The movie [Moneyball](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
 the "quest for the secret of success in baseball". It follows a low-budget team, 
 the Oakland Athletics, who believed that underused statistics, such as a player's 
-ability to get on base, betterpredict the ability to score runs than typical 
+ability to get on base, better predict the ability to score runs than typical 
 statistics like home runs, RBIs (runs batted in), and batting average. Obtaining 
 players who excelled in these underused statistics turned out to be much more 
 affordable for the team.
@@ -28,9 +32,10 @@ us best predict a team's runs scored in a season.
 
 Let's load up the data for the 2011 season.
 
-```{r load-data, eval=FALSE}
-download.file("http://www.openintro.org/stat/data/mlb11.RData", destfile = "mlb11.RData")
-load("mlb11.RData")
+```{r load-data}
+library(oilabs)
+library(dplyr)	
+data(mlb11)
 ```
 
 In addition to runs scored, there are seven traditionally used variables in the 
@@ -38,7 +43,7 @@ data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases,
 and wins. There are also three newer variables: on-base percentage, slugging 
 percentage, and on-base plus slugging. For the first portion of the analysis 
 we'll consider the seven traditional variables. At the end of the lab, you'll 
-work with the newer variables on your own.
+work with the three newer variables on your own.
 
 1.  What type of plot would you use to display the relationship between `runs` 
     and one of the other numerical variables? Plot this relationship using the 
@@ -49,10 +54,8 @@ work with the newer variables on your own.
 If the relationship looks linear, we can quantify the strength of the
 relationship with the correlation coefficient.
 
-```{r cor, eval=FALSE}
-library(dplyr)
-mlb11 %>%
-  summarise(cor(runs, at_bats))
+```{r cor}
+cor(mlb11$runs, mlb11$at_bats)
 ```
 
 ## Sum of squared residuals
@@ -72,7 +75,7 @@ line that best follows their association. Use the following interactive
 function to select the line that you think does the best job of going through 
 the cloud of points.
 
-```{r plotss-atbats-runs, eval=FALSE}
+```{r plotss-atbats-runs}
 plot_ss(x = mlb11$at_bats, y = mlb11$runs)
 ```
 
@@ -90,7 +93,7 @@ The most common way to do linear regression is to select the line that minimizes
 the sum of squared residuals. To visualize the squared residuals, you can rerun 
 the plot command and add the argument `showSquares = TRUE`.
 
-```{r plotss-atbats-runs-squares, eval=FALSE}
+```{r plotss-atbats-runs-squares}
 plot_ss(x = mlb11$at_bats, y = mlb11$runs, showSquares = TRUE)
 ```
 
@@ -108,7 +111,7 @@ line that minimizes the sum of squared residuals, through trial and error.
 Instead we can use the `lm` function in R to fit the linear model (a.k.a. 
 regression line).
 
-```{r m1, eval=FALSE}
+```{r m1}
 m1 <- lm(runs ~ at_bats, data = mlb11)
 ```
 
@@ -121,7 +124,7 @@ The output of `lm` is an object that contains all of the information we need
 about the linear model that was just fit. We can access this information using 
 the summary function.
 
-```{r summary-m1, eval=FALSE}
+```{r summary-m1}
 summary(m1)
 ```
 
@@ -133,7 +136,7 @@ With this table, we can write down the least squares regression line for the
 linear model:
 
 \[
-  \hat{y} = -2789.2429 + 0.6305 * atbats
+  \hat{y} = -2789.2429 + 0.6305 \times at\_bats
 \]
 
 One last piece of information we will discuss from the summary output is the 
@@ -151,7 +154,7 @@ explained by at-bats.
 
 Let's create a scatterplot with the least squares line laid on top.
 
-```{r reg-with-line, eval=FALSE}
+```{r reg-with-line}
 plot(mlb11$runs ~ mlb11$at_bats)
 abline(m1)
 ```
@@ -179,7 +182,7 @@ is linear using a scatterplot. We should also verify this condition with a plot
 of the residuals vs. at-bats. Recall that any code following a *#* is intended
 to be a comment that helps understand the code but is ignored by R.
 
-```{r residuals, eval=FALSE}
+```{r residuals}
 plot(m1$residuals ~ mlb11$at_bats)
 abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
 ```
@@ -189,13 +192,13 @@ abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
 
 *Nearly normal residuals*: To check this condition, we can look at a histogram
 
-```{r hist-res, eval=FALSE}
+```{r hist-res}
 hist(m1$residuals)
 ```
 
 or a normal probability plot of the residuals.
 
-```{r qq-res, eval=FALSE}
+```{r qq-res}
 qqnorm(m1$residuals)
 qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 ```
@@ -212,9 +215,10 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 
 ## On Your Own
 
--   Choose another traditional variable from `mlb11` that you think might be a 
-    good predictor of `runs`. Produce a scatterplot of the two variables and fit 
-    a linear model. At a glance, does there seem to be a linear relationship?
+-   Choose another one of the seven traditional variables from `mlb11` besides 
+    `at_bats` that you think might be a good predictor of `runs`. Produce a 
+    scatterplot of the two variables and fit a linear model. At a glance, does 
+    there seem to be a linear relationship?
 
 -   How does this relationship compare to the relationship between `runs` and 
     `at_bats`? Use the R$^2$ values from the two model summaries to compare. 
