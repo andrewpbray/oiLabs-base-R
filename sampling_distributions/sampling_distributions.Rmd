@@ -152,7 +152,7 @@ the mean of each sample, and store each result in a vector called
 ## Interlude: The `do` function
 
 Let's take a break from the statistics for a moment to let that last block 
-of code sink in. The idea behind the do function is *repetition*: it allows 
+of code sink in. The idea behind the `do` function is *repetition*: it allows 
 you to execute a line of code as many times as you want and put the results 
 in a data frame.  In the case above, we wanted to repeatedly take a random 
 sample of size 50 from `area` and then save the mean of that sample into 
