@@ -10,8 +10,6 @@ output:
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
-library(dplyr)
-library(ggplot2)
 library(mosaic)
 library(oilabs)
 ```
@@ -33,6 +31,10 @@ smaller samples from the full population. Let's load the data.
 ```{r load-data}
 data(ames)
 head(ames)
+# rename two variables to make life easier
+ames <- ames %>%
+  rename(area = Gr.Liv.Area) %>%
+  rename(price = SalePrice)
 ```
 
 We see that there are quite a few variables in the data set, enough to do a 
@@ -45,23 +47,16 @@ sales visually and with summary statistics. Let's first create a visualization,
 a histogram:
 
 ```{r area-hist}
-histogram(~area, data = ames, binwidth = 250)
+histogram(~area, data = ames)
 ```
 
 Let's also obtain some summary statistics. Note that we can do this using the
-`summarise` function. We can calculate as many statistics as we want using this
-function, and just string along the results. Some of the functions below should
-be self explanatory (like `mean`, `median`, `sd`, `IQR`, `min`, and `max`). A
-new function here is the `quantile` function which we can use to calculate 
-values corresponding to specific percentile cutoffs in the distribution. For
-example `quantile(x, 0.25)` will yield the cutoff value for the 25th percentile (Q1)
-in the distribution of x. Finding these values are useful for describing the 
+`favstats` function. Finding these values are useful for describing the 
 distribution, as we can use them for descriptions like *"the middle 50% of the 
 homes have areas between such and such square feet"*.
 
 ```{r area, eval=FALSE}
-summary(area)
-hist(area)
+favstats(~area, data = ames)
 ```
 
 1.  Describe this population distribution using the visualization and the summary
@@ -85,14 +80,14 @@ samp1 <- ames %>%
   sample_n(50)
 ```
 
-This command collects a simple random sample of size 50 from the `ames` dataset 
+The `sample_n` function collects a simple random sample of size 50 from the `ames` dataset 
 `area`, which is assigned to `samp1`. This is like going into the City 
 Assessor's database and pulling up the files on 50 random home sales. Working 
 with these 50 files would be considerably simpler than working with all 2930 
 home sales.
 
 1.  Describe the distribution of area in this sample. How does it compare to the 
-    distribution of the population? **Hint:** `sample_n` function takes a random
+    distribution of the population? **Hint:** the `sample_n` function takes a random
     sample of observations (i.e. rows) from the dataset, you can still refer to 
     the variables in the dataset with the same names. Code you used in the 
     previous exercise will also be helpful for visualizing and summarizing the sample,
@@ -104,8 +99,7 @@ If we're interested in estimating the average living area in homes in Ames
 using the sample, our best single guess is the sample mean.
 
 ```{r mean-samp1}
-samp1 %>%
-  summarise(x_bar = mean(area))
+samp1 <- mean(~area, data = samp1)
 ```
 
 Depending on which 50 homes you selected, your estimate could be a bit above 
@@ -126,16 +120,12 @@ of sample means, called the *sampling distribution*, can help us understand
 this variability. In this lab, because we have access to the population, we 
 can build up the sampling distribution for the sample mean by repeating the 
 above steps many times. Here we will generate 2000 samples and compute the 
-sample mean of each. Note that we are sampling with replacement, 
-`replace = TRUE` since sampling distributions are constructed with sampling
-with replacement.
+sample mean of each. Note that we since we are sampling with replacement, we 
+use the `resample` function instead of `sample_n`. 
 
 ```{r loop}
-sample_means50 <- do(2000) * ames %>% 
-                              sample_n(50, replace = TRUE) %>%
-                              summarise(x_bar = mean(area))
-                          
-qplot(data = sample_means50, x = x_bar)
+sample_means50 <- do(2000) * mean(~area, data = resample(ames, 50))
+histogram(~mean, data = sample_means50)
 ```
 
 Here we use R to take 2000 samples of size 50 from the population, calculate 
@@ -150,32 +140,24 @@ the mean of each sample, and store each result in a vector called
 ## Interlude: The `do` function
 
 Let's take a break from the statistics for a moment to let that last block 
-of code sink in. The idea behind the do function is *repetition*: it allows 
+of code sink in. The idea behind the `do` function is *repetition*: it allows 
 you to execute a line of code as many times as you want and put the results 
 in a data frame.  In the case above, we wanted to repeatedly take a random 
 sample of size 50 from `area` and then save the mean of that sample into 
 the `sample_means50` vector.
 
 Without the `do` function, this would be painful. First, we'd have to create 
-an empty vector filled with 0s to hold the 2000 sample means. Then, we'd have 
+an empty vector filled with `NA`s to hold the 2000 sample means. Then, we'd have 
 to compute each of the 2000 sample means one line at a time, putting them 
 individually into the slots of the `sample_means50` vector:
 
 ```{r do-long}
 sample_means50 <- rep(NA, 2000)
 
-sample_means50[1] <-  ames %>%
-                        sample_n(50, replace = TRUE) %>%
-                        summarise(x_bar = mean(area))
-sample_means50[2] <- ames %>%
-                        sample_n(50, replace = TRUE) %>%
-                        summarise(x_bar = mean(area))
-sample_means50[3] <- ames %>%
-                        sample_n(50, replace = TRUE) %>%
-                        summarise(x_bar = mean(area))
-sample_means50[4] <- ames %>%
-                        sample_n(50, replace = TRUE) %>%
-                        summarise(x_bar = mean(area))
+sample_means50[1] <- mean(~area, data = resample(ames, 50))
+sample_means50[2] <- mean(~area, data = resample(ames, 50))
+sample_means50[3] <- mean(~area, data = resample(ames, 50))
+sample_means50[4] <- mean(~area, data = resample(ames, 50))
 # ...and so on, 2000 times
 ```
 
@@ -183,15 +165,13 @@ With the `do` function, these thousands of lines of code are compressed
 into one line:
 
 ```{r do-again}
-sample_means50 <- do(2000) * ames %>%
-                              sample_n(50, replace = TRUE) %>%
-                              summarise(x_bar = mean(area))
+sample_means50 <- do(2000) * mean(~area, data = resample(ames, 50))
 ```
 
 Note that for each of the 2,000 times we computed a mean, we did so from a 
 **different** sample!
 
-1.  To make sure you understand what the `sample_n` and `do` function do, try
+1.  To make sure you understand what the `resample` and `do` function do, try
     modifying the code to take only **25 sample means** from **samples of size 10**, 
     and put them in a data frame named `sample_means_small`. Print the output. 
     How many elements are there in this object called `sample_means_small`? What does 
@@ -203,7 +183,7 @@ Mechanics aside, let's return to the reason we used the `do` function: to comput
 sampling distribution, specifically, this one.
 
 ```{r hist, eval=FALSE}
-histogram(~result, data=sample_means50)
+histogram(~mean, data = sample_means50)
 ```
 
 The sampling distribution that we computed tells us much about estimating 
@@ -219,15 +199,9 @@ sample size has on our sampling distribution
 with sample means coming from samples of size $n = 10$, $n = 50$, and $n = 100$.
 
 ```{r samp-10-100}
-sample_means10 <- do(2000) * ames %>%
-                              sample_n(10, replace = TRUE) %>%
-                              summarise(x_bar = mean(area))
-sample_means50 <- do(2000) * ames %>%
-                              sample_n(50, replace = TRUE) %>%
-                              summarise(x_bar = mean(area))
-sample_means100 <- do(2000) * ames %>%
-                              sample_n(100, replace = TRUE) %>%
-                              summarise(x_bar = mean(area))
+sample_means10 <- do(2000) * mean(~area, data = resample(ames, 10))
+sample_means50 <- do(2000) * mean(~area, data = resample(ames, 50))
+sample_means100 <- do(2000) * mean(~area, data = resample(ames, 100))
 ```
 
 **Step 2:** Plot these three sampling distributions on top of each other on the
@@ -236,10 +210,10 @@ each other.
 
 -- **Step 2a:** Combine these three sampling distributions (three $2000 \times 1$ data 
 frames) into one $12000 \times 1$ data frame. Note that we're just doing this 
-for ease in plotting later. To combine data frames by row, we use the `rbind` function, which stands for **r**ow bind.
+for ease in plotting later. To combine data frames by row, we use the `bind_rows` function.
 
 ```{r samp-dist}
-sampling_dist <- rbind(sample_means10, sample_means50, sample_means100)
+sampling_dist <- bind_rows(sample_means10, sample_means50, sample_means100)
 ```
 
 -- **Step 2b:** Add a new column called `sample_size` to the data frame you just
@@ -254,21 +228,19 @@ function to create new variables in data frames.
 
 ```{r samp-dist-labeled}
 sampling_dist <- sampling_dist %>%
-  mutate(sample_size = factor(rep(10, 2000), rep(50, 2000), rep(100, 2000)))
+  mutate(sample_size = factor(c(rep(10, 2000), rep(50, 2000), rep(100, 2000))))
 ```
 
--- **Step 2c:** Finally, draw three histograms representing these three sampling 
-distributions. We can do this via *faceting*, i.e. creating a separate facet in the 
-plot for each of the three distributions. Remember that we identify the distributions
-with the `sample_size` variable we created earlier, so that's what we use to
-create our `facets`. The formula `sample_size ~ .` is new: it splits the y-axis of our
-plot into facets by `sample_size` and doesn't split the plot on the x-axis, which
-means the plots of the three sampling distributions will be placed on top of each 
-other, as opposed to next to each other. We choose this to make it easier to visually 
-compare their spreads.
+-- **Step 2c:** Finally, draw three histograms or densityplots representing these three sampling 
+distributions. We can do this in two different ways: first, by using the `groups`
+argument to overlay the three density plots; second, by using the `|` to create a
+separate facet in the plot for each of the three histograms. Remember that 
+in either case, we identify the distributions with the `sample_size` variable we
+created earlier.
 
 ```{r eval=FALSE}
-histogram(~result | sample.size, data = sampling_dist, nint=20, layout=c(1,3))
+densityplot(~mean, groups = sample_size, data = sampling_dist)
+histogram(~mean | sample_size, data = sampling_dist, layout=c(1,3))
 ```
 
 1.  When the sample size is larger, what happens to the center?  What about the 
