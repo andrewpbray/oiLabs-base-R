@@ -306,7 +306,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   }
 }
 
-pdf("histQQmatch.pdf", height = 20, width = 15)
+png("more/histQQmatch.png", height = 1600, width = 1200, res = 150)
 multiplot(p1, p2, p3, p4, p5, p6, p7, p8,
           layout = matrix(1:8, ncol = 2, byrow = TRUE))
 dev.off()
