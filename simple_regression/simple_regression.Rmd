@@ -13,7 +13,7 @@ output:
 The movie [Moneyball](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
 the "quest for the secret of success in baseball". It follows a low-budget team, 
 the Oakland Athletics, who believed that underused statistics, such as a player's 
-ability to get on base, betterpredict the ability to score runs than typical 
+ability to get on base, better predict the ability to score runs than typical 
 statistics like home runs, RBIs (runs batted in), and batting average. Obtaining 
 players who excelled in these underused statistics turned out to be much more 
 affordable for the team.
@@ -132,7 +132,7 @@ With this table, we can write down the least squares regression line for the
 linear model:
 
 \[
-  \hat{y} = -2789.2429 + 0.6305 * atbats
+  \hat{y} = -2789.2429 + 0.6305 \cdot atbats
 \]
 
 One last piece of information we will discuss from the summary output is the 
@@ -151,22 +151,23 @@ explained by at-bats.
 Let's create a scatterplot with the least squares line laid on top.
 
 ```{r reg-with-line, eval=FALSE}
-xyplot(runs ~ at_bats, data=mlb11)
-ladd(panel.abline(m1))
+plotModel(m1)
 ```
 
-The function `abline` plots a line based on its slope and intercept. Here, we 
-used a shortcut by providing the model `m1`, which contains both parameter 
-estimates. This line can be used to predict $y$ at any value of $x$. When 
+The function `plotModel` plots the linear model in the "data space". Here, 
+the model `m1`, contains all the information needed to plot both the 
+original data and the line that represents the model fit to that data. 
+
+This line can be used to predict $y$ at any value of $x$. When 
 predictions are made for values of $x$ that are beyond the range of the observed
 data, it is referred to as *extrapolation* and is not usually recommended. 
 However, predictions made within the range of the data are more reliable. 
 They're also used to compute the residuals.
 
 5.  If a team manager saw the least squares regression line and not the actual 
-    data, how many runs would he or she predict for a team with 5,578 at-bats? 
-    Is this an overestimate or an underestimate, and by how much? In other 
-    words, what is the residual for this prediction?
+    data, how many runs would he or she predict for a team with 5,579 at-bats? 
+    Is this an overestimate or an underestimate for the Philadelphia Phillies, 
+    and by how much? In other words, what is the residual for this prediction?
 
 ## Model diagnostics
 
