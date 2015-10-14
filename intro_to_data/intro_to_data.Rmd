@@ -159,7 +159,7 @@ gender, we could use the following.
 table(cdc$gender, cdc$smoke100)
 ```
 
-Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has
+Here, we see column labels of TRUE and FALSE. Recall that TRUE indicates a respondent has
 smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic 
 plot of this table, we would enter the following command.
 
