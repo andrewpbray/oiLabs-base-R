@@ -170,7 +170,7 @@ gender, we could use the following.
 tally(gender ~ smoke100, data = cdc, format = "count")
 ```
 
-Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has
+Here, we see column labels of TRUE and FALSE. Recall that TRUE indicates a respondent has
 smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic 
 plot (no relation to the package name) of this table, we would enter the following command.
 
@@ -343,7 +343,7 @@ will give you the data for men over the age of 30. The `|` character is read
 "or" so that
 
 ```{r males-or-over30}
-m_and_over30 <- 
+m_or_over30 <- 
   cdc %>% 
   filter(gender == "m" | age > 30)
 ```
@@ -401,7 +401,7 @@ BMI is a weight to height ratio and can be calculated as:
 kilograms) to imperial (inches and pounds).
 
 The following two lines first make a new object called `bmi` and then creates 
-box plots of these values, defining groups by the variable `genhlth`.
+box plots of these values, defining groups by the categorical variable `genhlth`.
 
 ```{r boxplot-bmi}
 cdc <- 
@@ -416,6 +416,14 @@ participants, we take their weight, divide by their height-squared and then
 multiply by 703. The result is 20,000 BMI values, one for each respondent. This 
 is one reason why we like R: it lets us perform computations like this using 
 very simple expressions.
+
+When creating a similarly split boxplot for a categorical variable that has `TRUE/FALSE`
+values, we need to add `as.factor()` around the variable name. So for example, to compare `bmi` for smokers and
+non-smokers, we run:
+
+```{r boxplot-bmi2}
+bwplot(bmi ~ as.factor(smoke100), data = cdc)
+```
 
 4.  What does this box plot show? Pick another categorical variable from the 
     data set and see how it relates to BMI. List the variable you chose, why you

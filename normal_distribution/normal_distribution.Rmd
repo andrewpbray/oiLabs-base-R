@@ -21,10 +21,10 @@ healthy young adults.
 
 ```{r, echo=FALSE}
 library(knitr)
-opts_chunk$set(eval=FALSE)
+opts_chunk$set(eval = FALSE)
 ```
 
-```{r load-data}
+```{r load-data, eval=TRUE, message=FALSE}
 require(mosaic)
 require(oilabs)
 require(dplyr)
@@ -46,7 +46,7 @@ Since males and females tend to have different body dimensions, it will be
 useful to create two additional data sets: one with only men and another with 
 only women.
 
-```{r male-female}
+```{r male-female, eval=TRUE}
 mdims <- filter(bdims, sex == "m")
 fdims <- filter(bdims, sex == "f")
 ```
@@ -66,15 +66,15 @@ This normal curve should have the same mean and standard deviation as the data.
 We'll be working with women's heights, so let's store them as a separate object 
 and then calculate some statistics that will be referenced later. 
 
-```{r female-hgt-mean-sd}
-meanFheight <- mean(~hgt, data=fdims)
-sdFheight <- sd(~hgt, data=fdims)
+```{r female-hgt-mean-sd, eval=TRUE}
+meanFheight <- mean(~hgt, data = fdims)
+sdFheight <- sd(~hgt, data = fdims)
 ```
 
 Next we want to make a density histogram to use as the backdrop and use the `fit` argument to overlay a normal probability curve. The `histogram()` command has a parameter called `type` that allows us to specify if we want to see `count`, `percent` or `density` in our histogram. Setting `type="count"` produces a frequency histogram, which shows the number of data points that fall into a particular bin. In a frequency histogram, the *heights* of the bars add up to the total number of observations. 
 
 ```{r mosaic-hist1}
-histogram(~hgt, data=mdims, type="count")
+histogram(~hgt, data = mdims, type="count")
 ```
 
 Setting `type="percent"` changes the labels to percentages of the data that fall into each bin. Now, the *heights* of the bars all add up to 1. 
@@ -86,14 +86,14 @@ histogram(~hgt, data=mdims, type="percent")
 Finally, `type="density"` creates a density histogram. In a density histogram the *areas* of the bars add up to 1. The area of each bar can be calculated as simply the height *times* the width of the bar.
 
 ```{r mosaic-hist3}
-histogram(~hgt, data=mdims, type="density")
+histogram(~hgt, data = mdims, type = "density")
 ```
 
 Frequency, percent, and density histograms all display the same shape; they only differ in their $y$-axis. You can verify this by comparing the three histograms we just constructed.
 
 Using a density histogram allows us to properly overlay a normal distribution curve over the histogram since the curve is a normal probability density function. R is helpful and won't allow you to run this command with any type other than `density`. 
 ````{r hist-height, message=FALSE}
-histogram(~hgt, data=fdims, fit="normal", nint=8, type="density")
+histogram(~hgt, data = fdims, fit = "normal", nint = 8, type = "density")
 ```
 
 Notice that adding the `fit` argument to `histogram` overlays a normal distribution on plot. The optional `nint` argument simply specificies the number of bins.
@@ -112,7 +112,7 @@ constructing a normal probability plot, also called a normal Q-Q plot for
 "quantile-quantile".
 
 ````{r qq}
-qqmath(~hgt, data=fdims, type=c("p", "r"))
+qqmath(~hgt, data = fdims, type = c("p", "r"))
 ```
 
 In this command, the `p` signifies points and the `r` says to add a regression line. 
@@ -143,7 +143,7 @@ normal distribution is to compare it to many more plots using the following
 function. It may be helpful to click the zoom button in the plot window.
 
 ```{r qqnormsim, message=FALSE}
-qqnormsim(hgt, data=fdims)
+qqnormsim(hgt, data = fdims)
 ```
 
 4.  Does the normal probability plot for `hgt` look similar to the plots 
@@ -176,16 +176,6 @@ this is done in one step with the function `pnorm`.
 1 - pnorm(q = 182, mean = meanFheight, sd = sdFheight)
 ```
 
-```{r norm-plot, echo=FALSE}
-x <- seq(-4,4,length=100)*sdFheight + meanFheight
-hx <- dnorm(x,meanFheight,sdFheight)
-xyplot(hx~x, type="l", ylim=c(0, 0.065), ylab="Density", xlab="hgt", panel = function(x, y, ...){
-          panel.polygon(x,y, col="#0080ff" )
-          panel.polygon(c(182,190, 190, 182), c(0,0,0.02, 0.02), col="white", border=NA)
-           panel.abline(v=182)
-          panel.xyplot(x,y, type="l", ylim=c(0.02,0.06))
-          })
-```
 
 
 Note that the function `pnorm` gives the area under the normal curve below a 
@@ -193,6 +183,7 @@ given value, `q`, with a given mean and standard deviation.
 
 ![norm-plot](more/norm-plot.jpeg)
 
+=======
 Since we're interested in the probability that someone is taller than 182 cm, we have to 
 take one minus that probability.
 
@@ -202,7 +193,7 @@ need to determine how many observations fall above 182 then divide this number
 by the total sample size.
 
 ```{r probability}
-sum(~hgt>182, data=fdims) / nrow(fdims)
+sum(~ hgt > 182, data = fdims) / nrow(fdims)
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. 
@@ -248,7 +239,8 @@ theoretical probabilities will be.
     your findings.
 
 
-![histQQmatch](more/histQQmatch.png)
+![histQQmatch](more/histQQmatchgg.png)
+
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
