@@ -66,6 +66,7 @@ This normal curve should have the same mean and standard deviation as the data.
 We'll be working with women's heights, so let's store them as a separate object 
 and then calculate some statistics that will be referenced later. 
 
+
 ```{r female-hgt-mean-sd, eval=TRUE}
 meanFheight <- mean(~hgt, data = fdims)
 sdFheight <- sd(~hgt, data = fdims)
@@ -123,6 +124,18 @@ deviations of these points from the line.  The plot for female heights shows
 points that tend to follow the line but with some errant points towards the 
 tails.  We're left with the same problem that we encountered with the histogram 
 above: how close is close enough?
+=======
+The x-axis values correspond to the quantiles of a theoretically normal curve 
+with mean 0 and standard deviation 1 AKA the standard normal distribution.  The 
+y-axis values correspond to the quantiles of the original unstandardized sample 
+data. However, even if we were to standardize the sample data values, the Q-Q
+plot would look identical. A data set that is nearly normal will result in a
+probability plot where the points closely follow the line.  Any deviations from
+normality leads to deviations of these points from the line.
+
+The plot for female heights shows points that tend to follow the line but with
+some errant points towards the tails.  We're left with the same problem that we
+encountered with the histogram above: how close is close enough?
 
 A useful way to address this question is to rephrase it as: what do probability 
 plots look like for data that I *know* came from a normal distribution?  We can 
@@ -140,7 +153,9 @@ The first argument indicates how many numbers you'd like to generate, which we s
 
 Even better than comparing the original plot to a single plot generated from a 
 normal distribution is to compare it to many more plots using the following 
-function. It may be helpful to click the zoom button in the plot window.
+function. It shows the Q-Q plot corresponding to the original data in the top
+left corner, and the Q-Q plots of 8 different simulated normal data.  It may be
+helpful to click the zoom button in the plot window.
 
 ```{r qqnormsim, message=FALSE}
 qqnormsim(hgt, data = fdims)
@@ -239,7 +254,9 @@ theoretical probabilities will be.
     your findings.
 
 
+
 ![histQQmatch](more/histQQmatchgg.png)
+
 
 
 <div id="license">
