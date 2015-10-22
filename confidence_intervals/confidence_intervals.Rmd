@@ -81,15 +81,22 @@ to also communicate how uncertain we are of that estimate. This can be
 captured by using a *confidence interval*.
 
 We can calculate a 95% confidence interval for a sample mean by adding and 
-subtracting 1.96 standard errors to the point estimate (See Section 4.2.3 if 
-you are unfamiliar with this formula).
+subtracting a particular number of standard errors. You might have that number memorized 
+for the 95% confidence interval, but lets use `qnorm()` to confirm.
+
+```{r zstar}
+zstar <- qnorm(0.975) #why 0.975?
+zstar
+```
+
+Now we can build the confidence interval. 
 
 ```{r ci}
 se <- sd(~area, data = samp) / sqrt(60)
 
-lower <- sample_mean - 1.96 * se
+lower <- sample_mean - zstar * se
 
-upper <- sample_mean + 1.96 * se
+upper <- sample_mean + zstar * se
 
 c(lower, upper)
 ```
@@ -148,8 +155,8 @@ Lastly, we construct the confidence intervals.
 
 ```{r ci50}
 samp <- samp %>%
-  mutate( lower = mean - 1.96 * (sd / sqrt(n))) %>%
-  mutate( upper = mean + 1.96 * (sd / sqrt(n)))
+  mutate( lower = mean - zstar * (sd / sqrt(n))) %>%
+  mutate( upper = mean + zstar * (sd / sqrt(n)))
 ```
 
 Lower bounds of these 50 confidence intervals are stored in `lower`, and the 

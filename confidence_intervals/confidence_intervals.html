@@ -104,12 +104,15 @@ samp &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <s
 <p>One of the most common ways to describe the typical or central value of a distribution is to use the mean. In this case we can calculate the mean of the sample using,</p>
 <pre class="sourceCode r"><code class="sourceCode r">sample_mean &lt;-<span class="st"> </span><span class="kw">mean</span>(~area, <span class="dt">data =</span> samp)</code></pre>
 <p>Return for a moment to the question that first motivated this lab: based on this sample, what can we infer about the population? Based only on this single sample, the best estimate of the average living area of houses sold in Ames would be the sample mean, usually denoted as <span class="math">\(\bar{x}\)</span> (here we’re calling it <code>sample_mean</code>). That serves as a good <em>point estimate</em> but it would be useful to also communicate how uncertain we are of that estimate. This can be captured by using a <em>confidence interval</em>.</p>
-<p>We can calculate a 95% confidence interval for a sample mean by adding and subtracting 1.96 standard errors to the point estimate (See Section 4.2.3 if you are unfamiliar with this formula).</p>
+<p>We can calculate a 95% confidence interval for a sample mean by adding and subtracting a particular number of standard errors. You might have that number memorized for the 95% confidence interval, but lets use <code>qnorm()</code> to confirm.</p>
+<pre class="sourceCode r"><code class="sourceCode r">zstar &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="fl">0.975</span>) <span class="co">#why 0.975?</span>
+zstar</code></pre>
+<p>Now we can build the confidence interval.</p>
 <pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span><span class="kw">sd</span>(~area, <span class="dt">data =</span> samp) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">60</span>)
 
-lower &lt;-<span class="st"> </span>sample_mean -<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>se
+lower &lt;-<span class="st"> </span>sample_mean -<span class="st"> </span>zstar *<span class="st"> </span>se
 
-upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>se
+upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span>zstar *<span class="st"> </span>se
 
 <span class="kw">c</span>(lower, upper)</code></pre>
 <p>This is an important inference that we’ve just made: even though we don’t know what the full population looks like, we’re 95% confident that the true average size of houses in Ames lies between the values <em>lower</em> and <em>upper</em>. There are a few conditions that must be met for this interval to be valid.</p>
@@ -141,8 +144,8 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span 
 samp &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">50</span>) *<span class="st"> </span><span class="kw">favstats</span>(~area, <span class="dt">data =</span> <span class="kw">sample</span>(population, <span class="dt">size =</span> n))</code></pre>
 <p>Lastly, we construct the confidence intervals.</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp &lt;-<span class="st"> </span>samp %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">lower =</span> mean -<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>(sd /<span class="st"> </span><span class="kw">sqrt</span>(n))) %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">upper =</span> mean +<span class="st"> </span><span class="fl">1.96</span> *<span class="st"> </span>(sd /<span class="st"> </span><span class="kw">sqrt</span>(n)))</code></pre>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">lower =</span> mean -<span class="st"> </span>zstar *<span class="st"> </span>(sd /<span class="st"> </span><span class="kw">sqrt</span>(n))) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">upper =</span> mean +<span class="st"> </span>zstar *<span class="st"> </span>(sd /<span class="st"> </span><span class="kw">sqrt</span>(n)))</code></pre>
 <p>Lower bounds of these 50 confidence intervals are stored in <code>lower</code>, and the upper bounds are in <code>upper</code>. Let’s view the first interval.</p>
 <pre class="sourceCode r"><code class="sourceCode r">samp %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(upper, lower) %&gt;%<span class="st"> </span>
