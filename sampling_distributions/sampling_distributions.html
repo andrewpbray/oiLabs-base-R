@@ -80,7 +80,9 @@ img {
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(ames)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaic)
+<span class="kw">library</span>(oilabs)
+<span class="kw">data</span>(ames)
 <span class="kw">head</span>(ames)
 <span class="co"># rename two variables to make life easier</span>
 ames &lt;-<span class="st"> </span>ames %&gt;%

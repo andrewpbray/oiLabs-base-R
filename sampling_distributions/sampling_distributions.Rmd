@@ -29,6 +29,8 @@ interest. In this lab we would like to learn about these home sales by taking
 smaller samples from the full population. Let's load the data.
 
 ```{r load-data}
+library(mosaic)
+library(oilabs)
 data(ames)
 head(ames)
 # rename two variables to make life easier
