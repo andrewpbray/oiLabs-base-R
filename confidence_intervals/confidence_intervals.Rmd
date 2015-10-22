@@ -32,7 +32,6 @@ opts_chunk$set(eval = FALSE)
 ```{r load-data, message=FALSE}
 require(mosaic)
 require(oilabs)
-require(dplyr)
 data(ames)
 head(ames)
 ```
