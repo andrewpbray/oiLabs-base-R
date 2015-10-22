@@ -10,8 +10,6 @@ output:
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
-library(mosaic)
-library(oilabs)
 ```
 
 In this lab, we investigate the ways in which the statistics from a random 
