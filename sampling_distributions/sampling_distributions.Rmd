@@ -128,9 +128,8 @@ of sample means, called the *sampling distribution*, can help us understand
 this variability. In this lab, because we have access to the population, we 
 can build up the sampling distribution for the sample mean by repeating the 
 above steps many times. Here we will generate 2000 samples and compute the 
-sample mean of each. Note that we are sampling with replacement, 
-`replace = TRUE` since sampling distributions are constructed with sampling
-with replacement.
+sample mean of each. Note that we are sampling with replacement. Thus, we set 
+`replace = TRUE`.
 
 ```{r loop}
 sample_means50 <- do(2000) * ames %>% 
