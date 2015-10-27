@@ -21,7 +21,7 @@ population looks like.
 
 ## The data
 
-In the previous lab, ``Sampling Distributions'', we looked at the population data
+In the previous lab, "Sampling Distributions", we looked at the population data
 of houses from Ames, Iowa. Let's start by loading that data set.
 
 ```{r, echo=FALSE}
@@ -38,7 +38,7 @@ head(ames)
 ```
 
 In this lab we'll start with a simple random sample of size 60 from the 
-population. Specifically, this is a simple random sample of size 60. Note that 
+population. Note that 
 the data set has information on many housing variables, but for the first 
 portion of the lab we'll focus on the size of the house, represented by the 
 variable `Gr.Liv.Area`.
