@@ -79,8 +79,22 @@ img {
 <p>In this lab, we investigate the ways in which the statistics from a random sample of data can serve as point estimates for population parameters. We’re interested in formulating a <em>sampling distribution</em> of our estimate in order to learn about the properties of the estimate, such as its distribution.</p>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
+<<<<<<< HEAD
 <p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the data.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://stat.duke.edu/~mc301/data/ames.RData&quot;</span>)) <span class="co"># will need to be updated</span></code></pre>
+=======
+<p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the necessary packages and data.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(mosaic)
+<span class="kw">library</span>(oilabs)
+<span class="kw">data</span>(ames)
+<span class="kw">head</span>(ames)
+<span class="co"># rename two variables to make life easier</span>
+ames &lt;-<span class="st"> </span>ames %&gt;%
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">area =</span> Gr.Liv.Area) %&gt;%
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">price =</span> SalePrice)</code></pre>
+>>>>>>> upstream/master
 <p>We see that there are quite a few variables in the data set, enough to do a very in-depth analysis. For this lab, we’ll restrict our attention to just two of the variables: the above ground living area of the house in square feet (<code>area</code>) and the sale price (<code>price</code>).</p>
 <p>We can explore the distribution of areas of homes in the population of home sales visually and with summary statistics. Let’s first create a visualization, a histogram:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">data =</span> ames, <span class="dt">x =</span> area, <span class="dt">binwidth =</span> <span class="dv">250</span>)</code></pre>
@@ -110,7 +124,11 @@ img {
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">x_bar =</span> <span class="kw">mean</span>(area))</code></pre>
 <p>Depending on which 50 homes you selected, your estimate could be a bit above or a bit below the true population mean of 1499.69 square feet. In general, though, the sample mean turns out to be a pretty good estimate of the average living area, and we were able to get it by sampling less than 3% of the population.</p>
 <ol style="list-style-type: decimal">
+<<<<<<< HEAD
 <li>Take a second sample, also of size 50, and call it <code>samp2</code>. How does the mean of <code>samp2</code> compare with the mean of <code>samp1</code>? Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more accurate estimate of the population mean?</li>
+=======
+<li>Take a second sample, also of size 50, and call it <code>samp2</code>. How does the mean of <code>samp2</code> compare with the mean of <code>samp1</code>? Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more precise estimate of the population mean?</li>
+>>>>>>> upstream/master
 </ol>
 <p>Not surprisingly, every time we take another random sample, we get a different sample mean. It’s useful to get a sense of just how much variability we should expect when estimating the population mean this way. The distribution of sample means, called the <em>sampling distribution</em>, can help us understand this variability. In this lab, because we have access to the population, we can build up the sampling distribution for the sample mean by repeating the above steps many times. Here we will generate 2000 samples and compute the sample mean of each. Note that we are sampling with replacement, <code>replace = TRUE</code> since sampling distributions are constructed with sampling with replacement.</p>
 <pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">2000</span>) *<span class="st"> </span>ames %&gt;%<span class="st"> </span>
@@ -172,7 +190,11 @@ sample_means100 &lt;-<span class="st"> </span><span class="kw">do</span>(<span c
 <pre class="sourceCode r"><code class="sourceCode r">sampling_dist &lt;-<span class="st"> </span><span class="kw">rbind</span>(sample_means10, sample_means50, sample_means100)</code></pre>
 <p>– <strong>Step 2b:</strong> Add a new column called <code>sample_size</code> to the data frame you just created that indicates the sample size that each case (each sample mean) came from. Remember the first 2,000 sample means came from samples of size 10, the next 2,000 sample means came from samples of size 50, and the last 2,000 sample means came from samples of size 100. Hence, this new variable is simply <span class="math">\(10\)</span> <code>rep</code>eated 2,000 times, followed by <span class="math">\(50\)</span> repeated 2000 times, followed by <span class="math">\(100\)</span> repeated 2,000 times. The use of the <code>factor</code> function will ensure that <code>R</code> considers this to be a categorical variable, and not a numerical one. Also remember that we use the <code>mutate</code> function to create new variables in data frames.</p>
 <pre class="sourceCode r"><code class="sourceCode r">sampling_dist &lt;-<span class="st"> </span>sampling_dist %&gt;%
+<<<<<<< HEAD
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sample_size =</span> <span class="kw">factor</span>(<span class="kw">rep</span>(<span class="dv">10</span>, <span class="dv">2000</span>), <span class="kw">rep</span>(<span class="dv">50</span>, <span class="dv">2000</span>), <span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">2000</span>)))</code></pre>
+=======
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sample_size =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">10</span>, <span class="dv">2000</span>), <span class="kw">rep</span>(<span class="dv">50</span>, <span class="dv">2000</span>), <span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">2000</span>))))</code></pre>
+>>>>>>> upstream/master
 <p>– <strong>Step 2c:</strong> Finally, draw three histograms representing these three sampling distributions. We can do this via <em>faceting</em>, i.e. creating a separate facet in the plot for each of the three distributions. Remember that we identify the distributions with the <code>sample_size</code> variable we created earlier, so that’s what we use to create our <code>facets</code>. The formula <code>sample_size ~ .</code> is new: it splits the y-axis of our plot into facets by <code>sample_size</code> and doesn’t split the plot on the x-axis, which means the plots of the three sampling distributions will be placed on top of each other, as opposed to next to each other. We choose this to make it easier to visually compare their spreads.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">data =</span> sampling_dist, <span class="dt">x =</span> x_bar, <span class="dt">facets =</span> sample_size ~<span class="st"> </span>. )</code></pre>
 <ol style="list-style-type: decimal">

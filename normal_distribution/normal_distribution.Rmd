@@ -7,6 +7,10 @@ output:
     css: ../lab.css
 ---
 
+```{r echo = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 In this lab we'll investigate the probability distribution that is most central
 to statistics: the normal distribution.  If we are confident that our data are 
 nearly normal, that opens the door to many powerful statistical methods.  Here 
@@ -17,32 +21,36 @@ learn how to generate random numbers from a normal distribution.
 
 This week we'll be working with measurements of body dimensions.  This data set 
 contains measurements from 247 men and 260 women, most of whom were considered 
-healthy young adults.
+healthy young adults. Let's take a quick peek at the first few rows of the data.
 
-```{r load-data, eval=FALSE}
-download.file("http://www.openintro.org/stat/data/bdims.RData", destfile = "bdims.RData")
-load("bdims.RData")
-```
-
-Let's take a quick peek at the first few rows of the data.
-
-```{r head-data, eval=FALSE}
+```{r load-data}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+data(bdims)
 head(bdims)
 ```
 
 You'll see that for every observation we have 25 measurements, many of which are
-either diameters or girths.  A key to the variable names can be found at 
-[http://www.openintro.org/stat/data/bdims.php](http://www.openintro.org/stat/data/bdims.php),
-but we'll be focusing on just three columns to get started: weight in kg (`wgt`), 
-height in cm (`hgt`), and `sex` (`1` indicates male, `0` indicates female).
+either diameters or girths.  You can learn about what the variable names mean by
+bringing up the help page.
+
+```{r help-bdims}
+?bdims
+```
+
+We'll be focusing on just three columns to get started: weight in kg (`wgt`), 
+height in cm (`hgt`), and `sex` (`m` indicates male, `f` indicates female).
 
 Since males and females tend to have different body dimensions, it will be 
 useful to create two additional data sets: one with only men and another with 
 only women.
 
-```{r male-female, eval=FALSE}
-mdims <- subset(bdims, sex == 1)
-fdims <- subset(bdims, sex == 0)
+```{r male-female}
+mdims <- bdims %>%
+  filter(sex == "m")
+fdims <- bdims %>%
+  filter(sex == "f")
 ```
 
 1.  Make a histogram of men's heights and a histogram of women's heights.  How 
@@ -60,7 +68,7 @@ This normal curve should have the same mean and standard deviation as the data.
 We'll be working with women's heights, so let's store them as a separate object 
 and then calculate some statistics that will be referenced later. 
 
-```{r female-hgt-mean-sd, eval=FALSE}
+```{r female-hgt-mean-sd}
 fhgtmean <- mean(fdims$hgt)
 fhgtsd   <- sd(fdims$hgt)
 ```
@@ -69,33 +77,28 @@ Next we make a density histogram to use as the backdrop and use the `lines`
 function to overlay a normal probability curve. The difference between a 
 frequency histogram and a density histogram is that while in a frequency 
 histogram the *heights* of the bars add up to the total number of observations, 
-in a density histogram the *areas* of the bars add up to 1. The area of each bar 
+in a density histogram the *areas* of the bars add up to 1. The area of each bar
 can be calculated as simply the height *times* the width of the bar. Using a 
-density histogram allows us to properly overlay a normal distribution curve over 
-the histogram since the curve is a normal probability density function.
-Frequency and density histograms both display the same exact shape; they only 
-differ in their y-axis. You can verify this by comparing the frequency histogram 
-you constructed earlier and the density histogram created by the commands below.
+density histogram allows us to properly overlay a normal distribution curve over
+the histogram since the curve is a normal probability density function that also
+has area under the curve of 1. Frequency and density histograms both display the
+same exact shape; they only differ in their y-axis. You can verify this by
+comparing the frequency histogram you constructed earlier and the density
+histogram created by the commands below.
 
-```{r hist-height, eval=FALSE}
-hist(fdims$hgt, probability = TRUE)
-x <- 140:190
-y <- dnorm(x = x, mean = fhgtmean, sd = fhgtsd)
-lines(x = x, y = y, col = "blue")
+```{r hist-height}
+qplot(x = hgt, data = fdims, geom = "blank") +
+  geom_histogram(aes(y = ..density..)) +
+  stat_function(fun = dnorm, args = c(mean = fhgtmean, sd = fhgtsd), col = "tomato")
 ```
 
-After plotting the density histogram with the first command, we create the x- 
-and y-coordinates for the normal curve.  We chose the `x` range as 140 to 190 in 
-order to span the entire range of `fheight`.  To create `y`, we use `dnorm` to 
-calculate the density of each of those x-values in a distribution that is normal
-with mean `fhgtmean` and standard deviation `fhgtsd`.  The final command draws a
-curve on the existing plot (the density histogram) by connecting each of the 
-points specified by `x` and `y`. The argument `col` simply sets the color for 
-the line to be drawn. If we left it out, the line would be drawn in black.
-
-The top of the curve is cut off because the limits of the x- and y-axes are set 
-to best fit the histogram.  To adjust the y-axis you can add a third argument to
-the histogram function: `ylim = c(0, 0.06)`.
+After initializing a blank plot with the first command, the `ggplot2` package
+allows us to add additional layers. The first layer is a density histogram. The
+second layer is a statistical function - the density of the normal curve, `dnorm`.
+We specify that we want the curve to have the same mean and standard deviation 
+as the column of female heights. The argument `col` simply sets the color for 
+the line to be drawn. If we left it out, the line would be drawn in black. Which
+is no fun.
 
 2.  Based on the this plot, does it appear that the data follow a nearly normal 
     distribution?
@@ -109,29 +112,33 @@ close the histogram is to the curve. An alternative approach involves
 constructing a normal probability plot, also called a normal Q-Q plot for 
 "quantile-quantile".
 
-```{r qq, eval=FALSE}
-qqnorm(fdims$hgt)
-qqline(fdims$hgt)
+```{r qq}
+qplot(sample = hgt, data = fdims, stat = "qq")
 ```
 
-A data set that is nearly normal will result in a probability plot where the 
-points closely follow the line.  Any deviations from normality leads to 
-deviations of these points from the line.  The plot for female heights shows 
-points that tend to follow the line but with some errant points towards the 
-tails.  We're left with the same problem that we encountered with the histogram 
-above: how close is close enough?
+The x-axis values correspond to the quantiles of a theoretically normal curve 
+with mean 0 and standard deviation 1 AKA the standard normal distribution.  The 
+y-axis values correspond to the quantiles of the original unstandardized sample 
+data. However, even if we were to standardize the sample data values, the Q-Q
+plot would look identical. A data set that is nearly normal will result in a
+probability plot where the points closely follow the line.  Any deviations from
+normality leads to deviations of these points from the line.
+
+The plot for female heights shows points that tend to follow the line but with
+some errant points towards the tails.  We're left with the same problem that we
+encountered with the histogram above: how close is close enough?
 
 A useful way to address this question is to rephrase it as: what do probability 
 plots look like for data that I *know* came from a normal distribution?  We can 
 answer this by simulating data from a normal distribution using `rnorm`.
 
-```{r sim-norm, eval=FALSE}
+```{r sim-norm}
 sim_norm <- rnorm(n = length(fdims$hgt), mean = fhgtmean, sd = fhgtsd)
 ```
 
 The first argument indicates how many numbers you'd like to generate, which we 
 specify to be the same number of heights in the `fdims` data set using the 
-`length` function.  The last two arguments determine the mean and standard 
+`length()` function.  The last two arguments determine the mean and standard 
 deviation of the normal distribution from which the simulated sample will be 
 generated.  We can take a look at the shape of our simulated data set, `sim_norm`, 
 as well as its normal probability plot.
@@ -142,13 +149,15 @@ as well as its normal probability plot.
 
 Even better than comparing the original plot to a single plot generated from a 
 normal distribution is to compare it to many more plots using the following 
-function. It may be helpful to click the zoom button in the plot window.
+function. It shows the Q-Q plot corresponding to the original data in the top
+left corner, and the Q-Q plots of 8 different simulated normal data.  It may be
+helpful to click the zoom button in the plot window.
 
-```{r qqnormsim, eval=FALSE}
-qqnormsim(fdims$hgt)
+```{r qqnormsim}
+qqnormsim(sample = hgt, data = fdims)
 ```
 
-4.  Does the normal probability plot for `fdims$hgt` look similar to the plots 
+4.  Does the normal probability plot for female heights look similar to the plots 
     created for the simulated data?  That is, do plots provide evidence that the
     female heights are nearly normal?
 
@@ -172,13 +181,13 @@ exercise.)
 If we assume that female heights are normally distributed (a very close 
 approximation is also okay), we can find this probability by calculating a Z 
 score and consulting a Z table (also called a normal probability table).  In R, 
-this is done in one step with the function `pnorm`.
+this is done in one step with the function `pnorm()`.
 
-```{r pnorm, eval=FALSE}
+```{r pnorm}
 1 - pnorm(q = 182, mean = fhgtmean, sd = fhgtsd)
 ```
 
-Note that the function `pnorm` gives the area under the normal curve below a 
+Note that the function `pnorm()` gives the area under the normal curve below a 
 given value, `q`, with a given mean and standard deviation.  Since we're 
 interested in the probability that someone is taller than 182 cm, we have to 
 take one minus that probability.
@@ -188,7 +197,7 @@ probability.  If we want to calculate the probability empirically, we simply
 need to determine how many observations fall above 182 then divide this number 
 by the total sample size.
 
-```{r probability, eval=FALSE}
+```{r probability}
 sum(fdims$hgt > 182) / length(fdims$hgt)
 ```
 
@@ -235,7 +244,84 @@ theoretical probabilities will be.
     your findings.
 
 
-![histQQmatch](more/histQQmatch.png)
+```{r hists-and-qqs, echo=FALSE, eval=FALSE}
+sdata <- fdims %>%
+  mutate(sdata = (bii.di - mean(bii.di))/sd(bii.di)) %>%
+  select(sdata)
+p1 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for female bii.di")
+p4 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot B")
+sdata <- fdims %>%
+  mutate(sdata = (elb.di - mean(elb.di))/sd(elb.di)) %>%
+  select(sdata)
+p3 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for female elb.di")
+p6 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot C")
+sdata <- bdims %>%
+  mutate(sdata = (age - mean(age))/sd(age)) %>%
+  select(sdata)
+p5 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for general age")
+p8 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot D")
+sdata <- fdims %>%
+  mutate(sdata = (che.de - mean(che.de))/sd(che.de)) %>%
+  select(sdata)
+p7 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for general age")
+p2 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot A")
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+png("more/histQQmatch.png", height = 1600, width = 1200, res = 150)
+multiplot(p1, p2, p3, p4, p5, p6, p7, p8,
+          layout = matrix(1:8, ncol = 2, byrow = TRUE))
+dev.off()
+```
+
+
+![histQQmatchgg](more/histQQmatchgg.png)
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
