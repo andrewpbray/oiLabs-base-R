@@ -148,13 +148,13 @@ We can accomplish this using the `do` and `favstats` functions in `mosaic`. The 
 
 ```{r loop, tidy = FALSE}
 n <- 60
-samp <- do(50) * favstats(~area, data = sample(population, size = n))
+samp_ci <- do(50) * favstats(~area, data = sample(population, size = n))
 ```
 
 Lastly, we construct the confidence intervals.
 
 ```{r ci50}
-samp <- samp %>%
+samp_ci <- samp_ci %>%
   mutate( se = sd / sqrt(n)) %>%
   mutate( lower = mean - zstar * se) %>%
   mutate( upper = mean + zstar * se)
@@ -164,7 +164,7 @@ Lower bounds of these 50 confidence intervals are stored in `lower`, and the
 upper bounds are in `upper`. Let's view the first interval.
 
 ```{r first-interval}
-samp %>% 
+samp_ci %>% 
   select(upper, lower) %>% 
   slice(1)
 ```
@@ -172,7 +172,7 @@ samp %>%
 Now, we can plot how many of our confidence intervals intersect the true population mean using the `plot_ci` function.
 
 ```{r plot-ci}
-with(samp, plot_ci(lower, upper, m = mean(~area, data = population)))
+with(samp_ci, plot_ci(lower, upper, m = mean(~area, data = population)))
 ```
 
 7. How many of your confidence intervals contained the true mean? Is this the number you expected to see?
@@ -186,12 +186,12 @@ So far, we have only focused on estimating the mean living area in homes in Ames
 - Create 50 random samples of size 60. Generate 95% confidence intervals for each of your samples, and plot the confidence intervals with the `plot_ci` function.  What proportion of your confidence intervals include the true population mean of `home price`? Is this proportion exactly equal to the confidence level? If not, explain why.
 
 ```{r plot-ci2, eval=FALSE}
-with(samp, plot_ci(lower, upper, m = mean(~area, data = population)))
+with(samp_ci, plot_ci(lower, upper, m = mean(~area, data = population)))
 ```
 
 - Pick a confidence level of your choosing, provided it is not 95% or 99%. What is the appropriate critical value?
 
-- Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the *plot_ci* function, plot all intervals and calculate the proportion of intervals that include the true population mean of `home price`. How does this percentage compare to the confidence level level selected for the intervals?
+- Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the *plot_ci* function, plot all intervals and calculate the proportion of intervals that include the true population mean of `home price`. How does this percentage compare to the confidence level selected for the intervals?
 
 
 <div id="license">

@@ -141,18 +141,18 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span>zstar 
 </ul>
 <p>We can accomplish this using the <code>do</code> and <code>favstats</code> functions in <code>mosaic</code>. The following lines of code take a uniform random <code>sample</code> of size 60 from <code>population</code>, computes several summary statistics (including <code>mean</code> and <code>sd</code>), and then does this 50 times and saves the result as a data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">60</span>
-samp &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">50</span>) *<span class="st"> </span><span class="kw">favstats</span>(~area, <span class="dt">data =</span> <span class="kw">sample</span>(population, <span class="dt">size =</span> n))</code></pre>
+samp_ci &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">50</span>) *<span class="st"> </span><span class="kw">favstats</span>(~area, <span class="dt">data =</span> <span class="kw">sample</span>(population, <span class="dt">size =</span> n))</code></pre>
 <p>Lastly, we construct the confidence intervals.</p>
-<pre class="sourceCode r"><code class="sourceCode r">samp &lt;-<span class="st"> </span>samp %&gt;%
+<pre class="sourceCode r"><code class="sourceCode r">samp_ci &lt;-<span class="st"> </span>samp_ci %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>( <span class="dt">se =</span> sd /<span class="st"> </span><span class="kw">sqrt</span>(n)) %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>( <span class="dt">lower =</span> mean -<span class="st"> </span>zstar *<span class="st"> </span>se) %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>( <span class="dt">upper =</span> mean +<span class="st"> </span>zstar *<span class="st"> </span>se)</code></pre>
 <p>Lower bounds of these 50 confidence intervals are stored in <code>lower</code>, and the upper bounds are in <code>upper</code>. Let’s view the first interval.</p>
-<pre class="sourceCode r"><code class="sourceCode r">samp %&gt;%<span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">samp_ci %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(upper, lower) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>)</code></pre>
 <p>Now, we can plot how many of our confidence intervals intersect the true population mean using the <code>plot_ci</code> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(samp, <span class="kw">plot_ci</span>(lower, upper, <span class="dt">m =</span> <span class="kw">mean</span>(~area, <span class="dt">data =</span> population)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(samp_ci, <span class="kw">plot_ci</span>(lower, upper, <span class="dt">m =</span> <span class="kw">mean</span>(~area, <span class="dt">data =</span> population)))</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>How many of your confidence intervals contained the true mean? Is this the number you expected to see?</li>
 </ol>
@@ -164,7 +164,7 @@ samp &lt;-<span class="st"> </span><span class="kw">do</span>(<span class="dv">5
 <ul>
 <li>Create 50 random samples of size 60. Generate 95% confidence intervals for each of your samples, and plot the confidence intervals with the <code>plot_ci</code> function. What proportion of your confidence intervals include the true population mean of <code>home price</code>? Is this proportion exactly equal to the confidence level? If not, explain why.</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(samp, <span class="kw">plot_ci</span>(lower, upper, <span class="dt">m =</span> <span class="kw">mean</span>(~area, <span class="dt">data =</span> population)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(samp_ci, <span class="kw">plot_ci</span>(lower, upper, <span class="dt">m =</span> <span class="kw">mean</span>(~area, <span class="dt">data =</span> population)))</code></pre>
 <ul>
 <li><p>Pick a confidence level of your choosing, provided it is not 95% or 99%. What is the appropriate critical value?</p></li>
 <li><p>Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the <em>plot_ci</em> function, plot all intervals and calculate the proportion of intervals that include the true population mean of <code>home price</code>. How does this percentage compare to the confidence level level selected for the intervals?</p></li>
