@@ -21,7 +21,7 @@ population looks like.
 
 ## The data
 
-In the previous lab, ``Sampling Distributions'', we looked at the population data
+In the previous lab, "Sampling Distributions", we looked at the population data
 of houses from Ames, Iowa. Let's start by loading that data set.
 
 ```{r, echo=FALSE}
@@ -44,7 +44,7 @@ ames <- ames %>%
 ```
 
 In this lab we'll start with a simple random sample of size 60 from the 
-population. Specifically, this is a simple random sample of size 60. Note that 
+population. Note that 
 the data set has information on many housing variables, but for the first 
 portion of the lab we'll focus on the size of the house, represented by the 
 variable `area`.
@@ -85,7 +85,7 @@ subtracting a particular number of standard errors. You might have that number m
 for the 95% confidence interval, but lets use `qnorm()` to confirm.
 
 ```{r zstar}
-zstar <- qnorm(0.975) #why 0.975?
+zstar <- qnorm(0.975) # why 0.975?
 zstar
 ```
 
@@ -112,7 +112,7 @@ met for this to be true?
 
 ## Confidence levels
 
-4.  What does "95% confidence" mean? If you're not sure, see Section 4.2.2.
+4.  What does "95% confidence" mean? If you're not sure, see Section 2.8.4.
 
 In this case we have the luxury of knowing the true population mean since we 
 have data on the entire population. This value can be calculated using the 
@@ -144,7 +144,7 @@ Here is the rough outline:
 -   Repeat steps (1) and (2) 50 times.
 -   Use these stored statistics to calculate many confidence intervals.
 
-We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code takes a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
+We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code take a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
 
 ```{r loop, tidy = FALSE}
 n <- 60
@@ -155,8 +155,9 @@ Lastly, we construct the confidence intervals.
 
 ```{r ci50}
 samp <- samp %>%
-  mutate( lower = mean - zstar * (sd / sqrt(n))) %>%
-  mutate( upper = mean + zstar * (sd / sqrt(n)))
+  mutate( se = sd / sqrt(n)) %>%
+  mutate( lower = mean - zstar * se) %>%
+  mutate( upper = mean + zstar * se)
 ```
 
 Lower bounds of these 50 confidence intervals are stored in `lower`, and the 
@@ -184,7 +185,7 @@ So far, we have only focused on estimating the mean living area in homes in Ames
 
 - Create 50 random samples of size 60. Generate 95% confidence intervals for each of your samples, and plot the confidence intervals with the `plot_ci` function.  What proportion of your confidence intervals include the true population mean of `home price`? Is this proportion exactly equal to the confidence level? If not, explain why.
 
-```{r plot-ci, eval=FALSE}
+```{r plot-ci2, eval=FALSE}
 with(samp, plot_ci(lower, upper, m = mean(~area, data = population)))
 ```
 
