@@ -27,26 +27,20 @@ every real estate transaction in Ames is recorded by the City Assessor's
 office. Our particular focus for this lab will be all residential home sales 
 in Ames between 2006 and 2010.  This collection represents our population of 
 interest. In this lab we would like to learn about these home sales by taking 
-<<<<<<< HEAD
-smaller samples from the full population. Let's load the data.
+smaller samples from the full population. Let's first load some packages that
+we will use in this lab
 
-```{r load-data}
-load(url("https://stat.duke.edu/~mc301/data/ames.RData")) # will need to be updated
-=======
-smaller samples from the full population. Let's load the necessary packages and data.
-
-```{r load-data}
+```{r load-packages}
 library(dplyr)
 library(ggplot2)
 library(mosaic)
 library(oilabs)
-data(ames)
-head(ames)
-# rename two variables to make life easier
-ames <- ames %>%
-  rename(area = Gr.Liv.Area) %>%
-  rename(price = SalePrice)
->>>>>>> upstream/master
+```
+
+and then load the data from the `oilabs` package.
+
+```{r load-data}
+data(ames.RData)
 ```
 
 We see that there are quite a few variables in the data set, enough to do a 
@@ -272,11 +266,7 @@ function to create new variables in data frames.
 
 ```{r samp-dist-labeled}
 sampling_dist <- sampling_dist %>%
-<<<<<<< HEAD
-  mutate(sample_size = factor(rep(10, 2000), rep(50, 2000), rep(100, 2000)))
-=======
   mutate(sample_size = factor(c(rep(10, 2000), rep(50, 2000), rep(100, 2000))))
->>>>>>> upstream/master
 ```
 
 -- **Step 2c:** Finally, draw three histograms representing these three sampling 
