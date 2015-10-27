@@ -10,6 +10,9 @@ output:
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
 ```
 
 In this lab, we investigate the ways in which the statistics from a random 
@@ -171,7 +174,7 @@ sample_means50 <- do(2000) * mean(~area, data = resample(ames, 50))
 Note that for each of the 2,000 times we computed a mean, we did so from a 
 **different** sample!
 
-1.  To make sure you understand what the `resample` and `do` function do, try
+1.  To make sure you understand what the `resample` and `do` functions do, try
     modifying the code to take only **25 sample means** from **samples of size 10**, 
     and put them in a data frame named `sample_means_small`. Print the output. 
     How many elements are there in this object called `sample_means_small`? What does 
