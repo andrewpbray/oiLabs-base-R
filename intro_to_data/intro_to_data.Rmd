@@ -41,7 +41,7 @@ We begin by loading the data set of 20,000 observations into the R workspace.
 After launching RStudio, enter the following command.
 
 ```{r load-data}
-load(url("https://stat.duke.edu/~mc301/data/cdc.RData"))
+data(cdc)
 ```
 
 The data set `cdc` that shows up in your workspace is a *data matrix*, with each
@@ -398,8 +398,6 @@ will serve us well throughout this course.
 
 * * *
 
-<div class="oyo">
-
 ## On Your Own
 
 -   Make a scatterplot of weight versus desired weight. Describe the 
@@ -425,8 +423,6 @@ will serve us well throughout this course.
 -   Now it's time to get creative. Find the mean and standard deviation of 
     `weight` and determine what proportion of the weights are within one 
     standard deviation of the mean.
-
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
