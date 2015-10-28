@@ -185,7 +185,7 @@ img {
 <span class="st">  </span>cdc %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(gender ==<span class="st"> &quot;m&quot;</span> &amp;<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
 <p>will give you the data for men over the age of 30. The <code>|</code> character is read “or” so that</p>
-<pre class="sourceCode r"><code class="sourceCode r">m_and_over30 &lt;-<span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">m_or_over30 &lt;-<span class="st"> </span>
 <span class="st">  </span>cdc %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(gender ==<span class="st"> &quot;m&quot;</span> |<span class="st"> </span>age &gt;<span class="st"> </span><span class="dv">30</span>)</code></pre>
 <p>can be read as take the cdc dataset, then filter the data for cases who are men or over the age of 30. (Why that’s an interesting group is hard to say, but right now the mechanics of this are the important thing.) In principle, you may use as many “and” and “or” clauses as you like when forming a filter.</p>
@@ -205,12 +205,14 @@ img {
 <p>Next let’s consider a new variable that doesn’t show up directly in this data set: Body Mass Index (BMI) (<a href="http://en.wikipedia.org/wiki/Body_mass_index"><a href="http://en.wikipedia.org/wiki/Body_mass_index" class="uri">http://en.wikipedia.org/wiki/Body_mass_index</a></a>). BMI is a weight to height ratio and can be calculated as:</p>
 <p><span class="math">\[ BMI = \frac{weight~(lb)}{height~(in)^2} \cdot 703 \]</span></p>
 <p>703 is the approximate conversion factor to change units from metric (meters and kilograms) to imperial (inches and pounds).</p>
-<p>The following two lines first make a new object called <code>bmi</code> and then creates box plots of these values, defining groups by the variable <code>genhlth</code>.</p>
+<p>The following two lines first make a new object called <code>bmi</code> and then creates box plots of these values, defining groups by the categorical variable <code>genhlth</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">cdc &lt;-<span class="st"> </span>
 <span class="st">  </span>cdc %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bmi =</span> (weight /<span class="st"> </span>height^<span class="dv">2</span>) *<span class="st"> </span><span class="dv">703</span>)
 <span class="kw">bwplot</span>(bmi ~<span class="st"> </span>genhlth, <span class="dt">data =</span> cdc)</code></pre>
 <p>Notice that the third line above is just some arithmetic, but it’s applied to all 20,000 numbers in the <code>cdc</code> data set. That is, for each of the 20,000 participants, we take their weight, divide by their height-squared and then multiply by 703. The result is 20,000 BMI values, one for each respondent. This is one reason why we like R: it lets us perform computations like this using very simple expressions.</p>
+<p>When creating a similarly split boxplot for a categorical variable that has <code>TRUE/FALSE</code> values, we need to add <code>as.factor()</code> around the variable name. So for example, to compare <code>bmi</code> for smokers and non-smokers, we run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bwplot</span>(bmi ~<span class="st"> </span><span class="kw">as.factor</span>(smoke100), <span class="dt">data =</span> cdc)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>What does this box plot show? Pick another categorical variable from the data set and see how it relates to BMI. List the variable you chose, why you might think it would have a relationship to BMI, and indicate what the figure seems to suggest.</li>
 </ol>

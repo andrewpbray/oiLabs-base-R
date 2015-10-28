@@ -76,31 +76,31 @@ img {
 </div>
 
 
-<p>In August of 2012, news outlets ranging from the <a href="http://www.washingtonpost.com/national/on-faith/poll-shows-atheism-on-the-rise-in-the-us/2012/08/13/90020fd6-e57d-11e1-9739-eef99c5fb285_story.html">Washington Post</a> to the <a href="http://www.huffingtonpost.com/2012/08/14/atheism-rise-religiosity-decline-in-america_n_1777031.html">Huffington Post</a> ran a story about the rise of atheism in America. The source for the story was a poll that asked people, “Irrespective of whether you attend a place of worship or not, would you say you are a religious person, not a religious person or a convinced atheist?” This type of question, which asks people to classify themselves in one way or another, is common in polling and generates categorical data. In this lab we take a look at the atheism survey and explore what’s at play when making inference about population proportions using categorical data.</p>
+<p>In August of 2012, news outlets ranging from the <a href="http://www.washingtonpost.com/national/on-faith/poll-shows-atheism-on-the-rise-in-the-us/2012/08/13/90020fd6-e57d-11e1-9739-eef99c5fb285_story.html">Washington Post</a> to the <a href="http://www.huffingtonpost.com/2012/08/14/atheism-rise-religiosity-decline-in-america_n_1777031.html">Huffington Post</a> ran a story about the rise of atheism in America. The source for the story was a poll that asked people “Irrespective of whether you attend a place of worship or not, would you say you are a religious person, not a religious person or a convinced atheist?” This type of question, which asks people to classify themselves in one way or another, is common in polling and generates categorical data. In this lab we take a look at the atheism survey and explore what’s at play when making inference about population proportions using categorical data.</p>
 <div id="the-survey" class="section level2">
 <h2>The survey</h2>
-<p>To access the press release for the poll, conducted by WIN-Gallup International, click on the following link:</p>
-<p><em><a href="http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf" class="uri">http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf</a></em></p>
-<p>Take a moment to review the report then address the following questions.</p>
+<p>Take a moment to review the <a href="http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf">press release for the poll</a> conducted by WIN-Gallup International then address the following questions.</p>
 <ol style="list-style-type: decimal">
 <li><p>In the first paragraph, several key findings are reported. Do these percentages appear to be <em>sample statistics</em> (derived from the data sample) or <em>population parameters</em>?</p></li>
-<li><p>The title of the report is “Global Index of Religiosity and Atheism”. To generalize the report’s findings to the global human population, what must we assume about the sampling method? Does that seem like a reasonable assumption?</p></li>
+<li><p>The title of the report is “Global Index of Religiosity and Atheism.” To generalize the report’s findings to the global human population, what must we assume about the sampling method? Does that seem like a reasonable assumption?</p></li>
 </ol>
 </div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
-<p>Turn your attention to Table 6 (pages 15 and 16), which reports the sample size and response percentages for all 57 countries. While this is a useful format to summarize the data, we will base our analysis on the original data set of individual responses to the survey. Load this data set into R with the following command.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
-<span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/atheism.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;atheism.RData&quot;</span>)
-<span class="kw">load</span>(<span class="st">&quot;atheism.RData&quot;</span>)</code></pre>
+<p>Turn your attention to Table 6 (pages 15 and 16), which reports the sample size and response percentages for all 57 countries. While this is a useful format to summarize the data, we will base our analysis on the original data set of individual responses to the survey. Load the necessary packages and the data set into R with the following command.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(oilabs)
+<span class="kw">library</span>(dplyr)  
+<span class="kw">data</span>(atheism)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>What does each row of Table 6 correspond to? What does each row of <code>atheism</code> correspond to?</li>
 </ol>
 <p>To investigate the link between these two ways of organizing this data, take a look at the estimated proportion of atheists in the United States. Towards the bottom of Table 6, we see that this is 5%. We should be able to come to the same number using the <code>atheism</code> data.</p>
 <ol start="4" style="list-style-type: decimal">
-<li>Using the command below, create a new dataframe called <code>us12</code> that contains only the rows in <code>atheism</code> associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table 6? If not, why?</li>
+<li>Using the command below, create a new data frame called <code>us12</code> that contains only the rows in <code>atheism</code> associated with respondents to the 2012 survey from the United States. Next, calculate the proportion of atheist responses. Does it agree with the percentage in Table 6? If not, why?</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">us12 &lt;-<span class="st"> </span><span class="kw">subset</span>(atheism, nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>year ==<span class="st"> &quot;2012&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">us12 &lt;-<span class="st"> </span>
+<span class="st">  </span>atheism %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(nationality ==<span class="st"> &quot;United States&quot;</span> &amp;<span class="st"> </span>year ==<span class="st"> &quot;2012&quot;</span>)</code></pre>
 </div>
 <div id="inference-on-proportions" class="section level2">
 <h2>Inference on proportions</h2>
@@ -115,7 +115,7 @@ n &lt;-<span class="st"> </span><span class="kw">nrow</span>(us12)
 se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(p *<span class="st"> </span>(<span class="dv">1</span>-p) /<span class="st"> </span>n)
 p +<span class="st"> </span><span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) *<span class="st"> </span>se</code></pre>
 <p>Note that since the goal is to construct an interval estimate for a proportion, it’s necessary to specify what constitutes a “success”, which here is a response of <code>&quot;atheist&quot;</code>. Secondly, the <code>qnorm</code> function helps us find the width (in terms of the number of standard deviations from the mean) that our confidence interval needs to be in order to achieve a 95% confidence level. Note that since the normal distribution is symmetric, by cutting off the smallest 2.5% and the largest 2.5%, we’re left with the middle 95%. By changing the argument to <code>qnorm</code> we can find intervals that correspond to different confidence levels.</p>
-<p>Although formal confidence intervals and hypothesis tests don’t show up in the report, suggestions of inference appear at the bottom of page 7: “In general, the error margin for surveys of this kind is <span class="math">\(\pm\)</span> 3-5% at 95% confidence”.</p>
+<p>Although formal confidence intervals and hypothesis tests don’t show up in the report, suggestions of inference appear at the bottom of page 7: “In general, the error margin for surveys of this kind is <span class="math">\(\pm\)</span> 3-5% at 95% confidence.”</p>
 <ol start="6" style="list-style-type: decimal">
 <li><p>Based on the R output, what is the margin of error for the estimate of the proportion of the proportion of atheists in US in 2012?</p></li>
 <li><p>Calculate confidence intervals for the proportion of atheists in 2012 in two other countries of your choice, and report the associated margins of error. Be sure to note whether the conditions for inference are met. It may be helpful to create new data sets for each of the two countries first, and then use these data sets to construct the confidence intervals.</p></li>
@@ -124,14 +124,14 @@ p +<span class="st"> </span><span class="kw">qnorm</span>(<span class="kw">c</sp
 <div id="how-does-the-proportion-affect-the-margin-of-error" class="section level2">
 <h2>How does the proportion affect the margin of error?</h2>
 <p>Imagine you’ve set out to survey 1000 people on two questions: are you female? and are you left-handed? Since both of these sample proportions were calculated from the same sample size, they should have the same margin of error, right? Wrong! While the margin of error does change with sample size, it is also affected by the proportion.</p>
-<p>Think back to the formula for the standard error: <span class="math">\(SE = \sqrt{p(1-p)/n}\)</span>. This is then used in the formula for the margin of error for a 95% confidence interval: <span class="math">\(ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n}\)</span>. Since the population proportion <span class="math">\(p\)</span> is in this <span class="math">\(ME\)</span> formula, it should make sense that the margin of error is in some way dependent on the population proportion. We can visualize this relationship by creating a plot of <span class="math">\(ME\)</span> vs. <span class="math">\(p\)</span>.</p>
-<p>The first step is to make a vector <code>p</code> that is a sequence from 0 to 1 with each number separated by 0.01. We can then create a vector of the margin of error (<code>me</code>) associated with each of these values of <code>p</code> using the familiar approximate formula (<span class="math">\(ME = 2 \times SE\)</span>). Lastly, we plot the two vectors against each other to reveal their relationship.</p>
+<p>Think back to the formula for the standard error: <span class="math">\(SE = \sqrt{p(1-p)/n}\)</span>. This is then used in the formula for the margin of error for a 95% confidence interval: <span class="math">\(ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n}\)</span>. Since the population proportion <span class="math">\(p\)</span> is in this <span class="math">\(ME\)</span> formula, it should make sense that the margin of error is in some way dependent on the population proportion. We can visualize this relationship by creating a plot of <span class="math">\(ME\)</span> vs. <span class="math">\(p\)</span> for all values of <span class="math">\(p\)</span> between 0 and 1.</p>
+<p>The first step is to make a vector <code>p</code> that is a sequence from 0 to 1 with each number separated by 0.01. We can then create a vector of the margin of error (<code>ME</code>) associated with each of these values of <code>p</code> using the familiar approximate formula (<span class="math">\(ME = 1.96 \times SE\)</span>). Lastly, we plot the two vectors against each other to reveal their relationship.</p>
 <pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
 p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
-me &lt;-<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span><span class="kw">sqrt</span>(p *<span class="st"> </span>(<span class="dv">1</span> -<span class="st"> </span>p)/n)
-<span class="kw">xyplot</span>(me ~<span class="st"> </span>p, <span class="dt">ylab =</span> <span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
+ME &lt;-<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span><span class="kw">sqrt</span>(p *<span class="st"> </span>(<span class="dv">1</span> -<span class="st"> </span>p)/n)
+<span class="kw">plot</span>(ME ~<span class="st"> </span>p, <span class="dt">ylab =</span> <span class="st">&quot;Margin of Error&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Population Proportion&quot;</span>)</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li>Describe the relationship between <code>p</code> and <code>me</code>.</li>
+<li>Describe the relationship between <code>p</code> and <code>ME</code>.</li>
 </ol>
 </div>
 <div id="success-failure-condition" class="section level2">
