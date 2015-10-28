@@ -21,7 +21,7 @@ population looks like.
 
 ## The data
 
-In the previous lab, ``Sampling Distributions'', we looked at the population data
+In the previous lab, "Sampling Distributions", we looked at the population data
 of houses from Ames, Iowa. Let's start by loading that data set.
 
 ```{r load-data, eval=FALSE}

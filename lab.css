@@ -69,3 +69,10 @@ ul {
 hr {
     border: 1px solid #357FAA;
 }
+
+div#boxedtext {
+    background-color: rgba(86, 155, 189, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 10pt;
+}
