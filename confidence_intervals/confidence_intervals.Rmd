@@ -24,19 +24,28 @@ population looks like.
 In the previous lab, "Sampling Distributions", we looked at the population data
 of houses from Ames, Iowa. Let's start by loading that data set.
 
-```{r load-data, eval=FALSE}
-download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
-load("ames.RData")
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval = FALSE)
+```
+
+```{r load-data, message=FALSE}
+require(mosaic)
+require(oilabs)
+require(dplyr)
+data(ames)
+head(ames)
 ```
 
 In this lab we'll start with a simple random sample of size 60 from the 
-population. Specifically, this is a simple random sample of size 60. Note that 
+population. Note that 
 the data set has information on many housing variables, but for the first 
 portion of the lab we'll focus on the size of the house, represented by the 
 variable `Gr.Liv.Area`.
 
-```{r sample, eval=FALSE}
-population <- ames$Gr.Liv.Area
+```{r sample}
+population <- ames %>% 
+  select(Gr.Liv.Area)
 samp <- sample(population, 60)
 ```
 
@@ -53,7 +62,7 @@ One of the most common ways to describe the typical or central value of a
 distribution is to use the mean. In this case we can calculate the mean of the 
 sample using,
 
-```{r sample-mean, eval=FALSE}
+```{r sample-mean}
 sample_mean <- mean(samp)
 ```
 
@@ -93,7 +102,7 @@ In this case we have the luxury of knowing the true population mean since we
 have data on the entire population. This value can be calculated using the 
 following command:
 
-```{r pop-mean, eval=FALSE}
+```{r pop-mean}
 mean(population)
 ```
 
@@ -110,7 +119,7 @@ population mean.
 
 Using R, we're going to recreate many samples to learn more about how sample 
 means and confidence intervals vary from one sample to another. *Loops* come 
-in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs/blob/master/sampling_distributions/sampling_distributions.html)).
+in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-dplyr-ggplot/blob/master/sampling_distributions/sampling_distributions.html)).
 
 Here is the rough outline:
 
@@ -163,7 +172,7 @@ c(lower_vector[1], upper_vector[1])
     the true population mean? Is this proportion exactly equal to the 
     confidence level? If not, explain why.
 
-    ```{r plot-ci, eval=FALSE}
+    ```{r plot-ci}
     plot_ci(lower_vector, upper_vector, mean(population))
     ```
 

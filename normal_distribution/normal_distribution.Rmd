@@ -71,9 +71,9 @@ and then calculate some statistics that will be referenced later.
 ```{r female-hgt-mean-sd}
 fhgtmean <- mean(fdims$hgt)
 fhgtsd   <- sd(fdims$hgt)
-```
+``` 
 
-Next we make a density histogram to use as the backdrop and use the `lines` 
+Next we make a density histogram to use as the backdrop and use the `stat_function` 
 function to overlay a normal probability curve. The difference between a 
 frequency histogram and a density histogram is that while in a frequency 
 histogram the *heights* of the bars add up to the total number of observations, 
@@ -86,7 +86,9 @@ same exact shape; they only differ in their y-axis. You can verify this by
 comparing the frequency histogram you constructed earlier and the density
 histogram created by the commands below.
 
-```{r hist-height}
+
+
+```{r qplot}
 qplot(x = hgt, data = fdims, geom = "blank") +
   geom_histogram(aes(y = ..density..)) +
   stat_function(fun = dnorm, args = c(mean = fhgtmean, sd = fhgtsd), col = "tomato")
@@ -99,6 +101,7 @@ We specify that we want the curve to have the same mean and standard deviation
 as the column of female heights. The argument `col` simply sets the color for 
 the line to be drawn. If we left it out, the line would be drawn in black. Which
 is no fun.
+
 
 2.  Based on the this plot, does it appear that the data follow a nearly normal 
     distribution?
@@ -198,7 +201,9 @@ need to determine how many observations fall above 182 then divide this number
 by the total sample size.
 
 ```{r probability}
-sum(fdims$hgt > 182) / length(fdims$hgt)
+fdims %>% 
+  filter(hgt>182) %>%
+  summarise(percent=n()/nrow(fdims))
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. 

@@ -83,10 +83,14 @@ img {
 <div id="the-data" class="section level2">
 <h2>The data</h2>
 <p>In the previous lab, ``Sampling Distributions’’, we looked at the population data of houses from Ames, Iowa. Let’s start by loading that data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://www.openintro.org/stat/data/ames.RData&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ames.RData&quot;</span>)
-<span class="kw">load</span>(<span class="st">&quot;ames.RData&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
+<span class="kw">require</span>(oilabs)
+<span class="kw">require</span>(dplyr)
+<span class="kw">data</span>(ames)
+<span class="kw">head</span>(ames)</code></pre>
 <p>In this lab we’ll start with a simple random sample of size 60 from the population. Specifically, this is a simple random sample of size 60. Note that the data set has information on many housing variables, but for the first portion of the lab we’ll focus on the size of the house, represented by the variable <code>Gr.Liv.Area</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">population &lt;-<span class="st"> </span>ames$Gr.Liv.Area
+<pre class="sourceCode r"><code class="sourceCode r">population &lt;-<span class="st"> </span>ames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Gr.Liv.Area)
 samp &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <span class="dv">60</span>)</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>Describe the distribution of your sample. What would you say is the “typical” size within your sample? Also state precisely what you interpreted “typical” to mean.</p></li>
@@ -119,7 +123,7 @@ upper &lt;-<span class="st"> </span>sample_mean +<span class="st"> </span><span 
 <li><p>Does your confidence interval capture the true average size of houses in Ames? If you are working on this lab in a classroom, does your neighbor’s interval capture this value?</p></li>
 <li><p>Each student in your class should have gotten a slightly different confidence interval. What proportion of those intervals would you expect to capture the true population mean? Why? If you are working in this lab in a classroom, collect data on the intervals created by other students in the class and calculate the proportion of intervals that capture the true population mean.</p></li>
 </ol>
-<p>Using R, we’re going to recreate many samples to learn more about how sample means and confidence intervals vary from one sample to another. <em>Loops</em> come in handy here (If you are unfamiliar with loops, review the <a href="http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs/blob/master/sampling_distributions/sampling_distributions.html">Sampling Distribution Lab</a>).</p>
+<p>Using R, we’re going to recreate many samples to learn more about how sample means and confidence intervals vary from one sample to another. <em>Loops</em> come in handy here (If you are unfamiliar with loops, review the <a href="http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-dplyr-ggplot/blob/master/sampling_distributions/sampling_distributions.html">Sampling Distribution Lab</a>).</p>
 <p>Here is the rough outline:</p>
 <ul>
 <li>Obtain a random sample.</li>

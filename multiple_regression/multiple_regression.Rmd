@@ -171,7 +171,9 @@ relationships between all beauty variables (columns 13 through 19) using the
 following command:
 
 ```{r bty-rels}
-plot(evals[,13:19])
+evals %>%
+  select(contains("bty")) %>%
+  pairs()
 ```
 
 These variables are collinear (correlated), and adding more than one of these 

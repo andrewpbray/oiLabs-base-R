@@ -97,7 +97,7 @@ samp1 <- ames %>%
   sample_n(50)
 ```
 
-This command collects a simple random sample of size 50 from the `ames` dataset 
+The `sample_n` function collects a simple random sample of size 50 from the `ames` dataset 
 `area`, which is assigned to `samp1`. This is like going into the City 
 Assessor's database and pulling up the files on 50 random home sales. Working 
 with these 50 files would be considerably simpler than working with all 2930 
@@ -138,9 +138,8 @@ of sample means, called the *sampling distribution*, can help us understand
 this variability. In this lab, because we have access to the population, we 
 can build up the sampling distribution for the sample mean by repeating the 
 above steps many times. Here we will generate 2000 samples and compute the 
-sample mean of each. Note that we are sampling with replacement, 
-`replace = TRUE` since sampling distributions are constructed with sampling
-with replacement.
+sample mean of each. Note that we are sampling with replacement. Thus, we set 
+`replace = TRUE`.
 
 ```{r loop}
 sample_means50 <- do(2000) * ames %>% 
@@ -162,14 +161,14 @@ the mean of each sample, and store each result in a vector called
 ## Interlude: The `do` function
 
 Let's take a break from the statistics for a moment to let that last block 
-of code sink in. The idea behind the do function is *repetition*: it allows 
+of code sink in. The idea behind the `do` function is *repetition*: it allows 
 you to execute a line of code as many times as you want and put the results 
 in a data frame.  In the case above, we wanted to repeatedly take a random 
 sample of size 50 from `area` and then save the mean of that sample into 
 the `sample_means50` vector.
 
 Without the `do` function, this would be painful. First, we'd have to create 
-an empty vector filled with 0s to hold the 2000 sample means. Then, we'd have 
+an empty vector filled with `NA`s to hold the 2000 sample means. Then, we'd have 
 to compute each of the 2000 sample means one line at a time, putting them 
 individually into the slots of the `sample_means50` vector:
 
@@ -247,11 +246,11 @@ same scale so that we can easily compare their shapes, centers, and spreads to
 each other.
 
 -- **Step 2a:** Combine these three sampling distributions (three $2000 \times 1$ data 
-frames) into one $12000 \times 1$ data frame. Note that we're just doing this 
-for ease in plotting later. To combine data frames by row, we use the `rbind` function, which stands for **r**ow bind.
+frames) into one $6000 \times 1$ data frame. Note that we're just doing this 
+for ease in plotting later. To combine data frames by row, we use the `bind_rows` function.
 
 ```{r samp-dist}
-sampling_dist <- rbind(sample_means10, sample_means50, sample_means100)
+sampling_dist <- bind_rows(sample_means10, sample_means50, sample_means100)
 ```
 
 -- **Step 2b:** Add a new column called `sample_size` to the data frame you just
