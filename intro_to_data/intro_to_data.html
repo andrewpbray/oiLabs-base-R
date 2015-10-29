@@ -123,7 +123,7 @@ img {
 </ol>
 <p>The <code>tally</code> command can be used to tabulate any number of variables that you provide. For example, to examine which participants have smoked across each gender, we could use the following.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data =</span> cdc, <span class="dt">format =</span> <span class="st">&quot;count&quot;</span>)</code></pre>
-<p>Here, we see column labels of 0 and 1. Recall that 1 indicates a respondent has smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic plot (no relation to the package name) of this table, we would enter the following command.</p>
+<p>Here, we see column labels of TRUE and FALSE. Recall that TRUE indicates a respondent has smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic plot (no relation to the package name) of this table, we would enter the following command.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">tally</span>(gender ~<span class="st"> </span>smoke100, <span class="dt">data =</span> cdc))</code></pre>
 <p>We could have accomplished this in two steps by saving the table in one line and applying <code>mosaicplot</code> in the next (see the <code>tally</code>/<code>barchart</code> example above).</p>
 <ol start="3" style="list-style-type: decimal">

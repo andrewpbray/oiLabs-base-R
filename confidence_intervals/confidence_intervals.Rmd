@@ -21,23 +21,37 @@ population looks like.
 
 ## The data
 
-In the previous lab, ``Sampling Distributions'', we looked at the population data
+In the previous lab, "Sampling Distributions", we looked at the population data
 of houses from Ames, Iowa. Let's start by loading that data set.
 
-```{r load-data, eval=FALSE}
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval = FALSE)
+```
+
+```{r load-data, message=FALSE}
 require(mosaic)
-download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
-load("ames.RData")
+require(oilabs)
+data(ames)
+head(ames)
+```
+
+We can rename the `Gr.Liv.Area` variable in the same way we did in the last lab, for consistency.
+
+```{r rename}
+ames <- ames %>%
+  rename(area = Gr.Liv.Area)
 ```
 
 In this lab we'll start with a simple random sample of size 60 from the 
-population. Specifically, this is a simple random sample of size 60. Note that 
+population. Note that 
 the data set has information on many housing variables, but for the first 
 portion of the lab we'll focus on the size of the house, represented by the 
-variable `Gr.Liv.Area`.
+variable `area`.
 
-```{r sample, eval=FALSE}
-population <- ames$Gr.Liv.Area
+```{r sample}
+population <- ames %>% 
+  select(area) 
 samp <- sample(population, 60)
 ```
 
@@ -54,8 +68,8 @@ One of the most common ways to describe the typical or central value of a
 distribution is to use the mean. In this case we can calculate the mean of the 
 sample using,
 
-```{r sample-mean, eval=FALSE}
-sample_mean <- mean(samp)
+```{r sample-mean}
+sample_mean <- mean(~area, data = samp)
 ```
 
 Return for a moment to the question that first motivated this lab: based on 
@@ -67,14 +81,22 @@ to also communicate how uncertain we are of that estimate. This can be
 captured by using a *confidence interval*.
 
 We can calculate a 95% confidence interval for a sample mean by adding and 
-subtracting 1.96 standard errors to the point estimate (See Section 4.2.3 if 
-you are unfamiliar with this formula).
+subtracting a particular number of standard errors. You might have that number memorized 
+for the 95% confidence interval, but lets use `qnorm()` to confirm.
 
-```{r ci, eval=FALSE}
-se <- sd(samp) / sqrt(60)
-lower <- sample_mean - 1.96 * se
+```{r zstar}
+zstar <- qnorm(0.975) # why 0.975?
+zstar
+```
 
-upper <- sample_mean + 1.96 * se
+Now we can build the confidence interval. 
+
+```{r ci}
+se <- sd(~area, data = samp) / sqrt(60)
+
+lower <- sample_mean - zstar * se
+
+upper <- sample_mean + zstar * se
 
 c(lower, upper)
 ```
@@ -90,21 +112,20 @@ met for this to be true?
 
 ## Confidence levels
 
-4.  What does "95% confidence" mean? If you're not sure, see Section 4.2.2.
+4.  What does "95% confidence" mean? If you're not sure, see Section 2.8.4.
 
 In this case we have the luxury of knowing the true population mean since we 
 have data on the entire population. This value can be calculated using the 
 following command:
 
-```{r pop-mean, eval=FALSE}
-mean(population)
+```{r pop-mean}
+mean(~area, data = population)
 ```
 
 5.  Does your confidence interval capture the true average size of houses in 
 Ames? If you are working on this lab in a classroom, does your neighbor's 
 interval capture this value? 
 
-1. Each student in your class should have gotten a slightly different confidence interval. What proportion of those intervals would you expect to capture the true population mean? Why? If you are working in this lab in a classroom, collect data on the intervals created by other students in the class and calculate the proportion of intervals that capture the true population mean.
 6.  Each student in your class should have gotten a slightly different 
 confidence interval. What proportion of those intervals would you expect to 
 capture the true population mean? Why? If you are working in this lab in a 
@@ -113,8 +134,8 @@ class and calculate the proportion of intervals that capture the true
 population mean.
 
 Using R, we're going to recreate many samples to learn more about how sample 
-means and confidence intervals vary from one sample to another. *Loops* come 
-in handy here (If you are unfamiliar with loops, review the [Sampling Distribution Lab](http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs/blob/master/sampling_distributions/sampling_distributions.html)).
+means and confidence intervals vary from one sample to another. The *do()* function comes 
+in handy here (If you are unfamiliar with `do()`, review the [Sampling Distribution Lab](http://htmlpreview.github.io/?https://github.com/beanumber/oiLabs-mosaic/blob/master/sampling_distributions/sampling_distributions.html)).
 
 Here is the rough outline:
 
@@ -123,64 +144,55 @@ Here is the rough outline:
 -   Repeat steps (1) and (2) 50 times.
 -   Use these stored statistics to calculate many confidence intervals.
 
-We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code takes a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
+We can accomplish this using the `do` and `favstats` functions in `mosaic`. The following lines of code take a uniform random `sample` of size 60 from `population`, computes several summary statistics (including `mean` and `sd`), and then does this 50 times and saves the result as a data frame. 
 
-```{r loop, eval=FALSE, tidy = FALSE}
+```{r loop, tidy = FALSE}
 n <- 60
-samp <- do(50) * favstats(sample(population, size = n))
+samp_ci <- do(50) * favstats(~area, data = sample(population, size = n))
 ```
 
 Lastly, we construct the confidence intervals.
 
-```{r ci50, eval=FALSE}
-samp = transform(samp, lower = mean - 1.96 * (sd / sqrt(n)))
-samp = transform(samp, upper = mean + 1.96 * (sd / sqrt(n)))
+```{r ci50}
+samp_ci <- samp_ci %>%
+  mutate( se = sd / sqrt(n)) %>%
+  mutate( lower = mean - zstar * se) %>%
+  mutate( upper = mean + zstar * se)
 ```
 
 Lower bounds of these 50 confidence intervals are stored in `lower`, and the 
 upper bounds are in `upper`. Let's view the first interval.
 
-```{r first-interval, eval=FALSE}
-samp[1, c("lower", "upper")]
+```{r first-interval}
+samp_ci %>% 
+  select(upper, lower) %>% 
+  slice(1)
 ```
+
+Now, we can plot how many of our confidence intervals intersect the true population mean using the `plot_ci` function.
+
+```{r plot-ci}
+with(samp_ci, plot_ci(lower, upper, m = mean(~area, data = population)))
+```
+
+7. How many of your confidence intervals contained the true mean? Is this the number you expected to see?
 
 * * *
 
 ## On your own
 
+So far, we have only focused on estimating the mean living area in homes in Ames.  Now you'll try to estimate the mean home price. 
 
-```{r plot-ci, eval=FALSE}
-panel.ci = function (x, y, mu, data2, ...) {
-  panel.xyplot(x, y, ...)
-  good = subset(data2, upper > mu & lower < mu)
-  bad = subset(data2, upper < mu | lower > mu)
-  with(good, panel.arrows(lower, .index, upper, .index, angle=90, length = 0.05, ends="both"))
-  with(bad, panel.arrows(lower, .index, upper, .index, angle=90, length = 0.05, ends="both", col="red", lwd=3))
-  panel.abline(v=mu, lty=2)
-}
+- Create 50 random samples of size 60. Generate 95% confidence intervals for each of your samples, and plot the confidence intervals with the `plot_ci` function.  What proportion of your confidence intervals include the true population mean of `home price`? Is this proportion exactly equal to the confidence level? If not, explain why.
 
-plot_ci = function (df, mu, ...) {  
-  space = 0.1 * (max(df$lower) - min(df$upper))
-  xyplot(.index ~ mean, data=df, data2 = df, panel=panel.ci, mu = mu, xlim = c(min(df$lower) - space, max(df$upper) + space), ylab = NULL)
-}
-
-plot_ci(samp, mu = mean(population))
+```{r plot-ci2, eval=FALSE}
+with(samp_ci, plot_ci(lower, upper, m = mean(~area, data = population)))
 ```
 
+- Pick a confidence level of your choosing, provided it is not 95% or 99%. What is the appropriate critical value?
 
--   Use the `plot_ci` function above to 
-    plot all intervals. What proportion of your confidence intervals include 
-    the true population mean? Is this proportion exactly equal to the 
-    confidence level? If not, explain why.
--   Pick a confidence level of your choosing, provided it is not 95%. What is 
-    the appropriate critical value?
--   Calculate 50 confidence intervals at the confidence level you chose in the 
-    previous question. You do not need to obtain new samples, simply calculate 
-    new intervals based on the sample means and standard deviations you have 
-    already collected. Using the `plot_ci` function, plot all intervals and 
-    calculate the proportion of intervals that include the true population 
-    mean. How does this percentage compare to the confidence level selected for
-    the intervals?
+- Calculate 50 confidence intervals at the confidence level you chose in the previous question. You do not need to obtain new samples, simply calculate new intervals based on the sample means and standard deviations you have already collected. Using the *plot_ci* function, plot all intervals and calculate the proportion of intervals that include the true population mean of `home price`. How does this percentage compare to the confidence level selected for the intervals?
+
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 

@@ -165,9 +165,10 @@ xyplot(bty_avg ~ bty_f1lower, data=evals)
 cor(bty_avg ~ bty_f1lower, data=evals)
 ```
 
-As expected the relationship is quite strong – after all, the average
-score is calculated using the individual scores. We can actually take a
-look at the relationships between all beauty variables using the `pairs` command:
+As expected the relationship is quite strong - after all, the average score is 
+calculated using the individual scores. We can actually take a look at the 
+relationships between all beauty variables (columns 13 through 19) using the 
+following command:
 
 ```{r bty-rels}
 evals %>%
@@ -300,3 +301,5 @@ summary(m_full)
 This is a product of OpenIntro that is released under a [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). This lab was written by 
 Mine &Ccedil;etinkaya-Rundel and Andrew Bray.
 </div>
+
+## References

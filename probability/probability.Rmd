@@ -81,7 +81,7 @@ occurrence).
 1.  What does a streak length of 1 mean, i.e. how many hits and misses are in a 
     streak of 1? What about a streak length of 0?
 
-The custom function `calc_streak`, which was loaded in with the data, may be 
+The custom function `calc_streak`, which was loaded in with the `oilabs` package, may be 
 used to calculate the lengths of all shooting streaks and then look at the 
 distribution.
 
