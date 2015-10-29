@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rproj
+.DS_Store
+<<<<<<< HEAD
+*.html
+*.orig
+=======
+news.html
+README.html
+>>>>>>> mydplyr/master

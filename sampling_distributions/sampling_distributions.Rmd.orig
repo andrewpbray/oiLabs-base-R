@@ -31,6 +31,8 @@ smaller samples from the full population. Let's first load some packages that
 we will use in this lab
 
 ```{r load-packages}
+library(dplyr)
+library(ggplot2)
 library(mosaic)
 library(oilabs)
 ```
@@ -38,7 +40,18 @@ library(oilabs)
 and then load the data from the `oilabs` package.
 
 ```{r load-data}
+<<<<<<< HEAD
+library(mosaic)
+library(oilabs)
 data(ames)
+head(ames)
+# rename two variables to make life easier
+ames <- ames %>%
+  rename(area = Gr.Liv.Area) %>%
+  rename(price = SalePrice)
+=======
+data(ames.RData)
+>>>>>>> mydplyr/master
 ```
 
 We see that there are quite a few variables in the data set, enough to do a 
@@ -136,7 +149,7 @@ Here we use R to take 2000 samples of size 50 from the population, calculate
 the mean of each sample, and store each result in a vector called 
 `sample_means50`. On the next page, we'll review how this set of code works.
 
-1.  How many elements are there in `sample_means50`?  Describe the sampling 
+1.  How many rows are there in `sample_means50`?  Describe the sampling 
     distribution, and be sure to specifically note its center. Would you 
     expect the distribution to change if we instead collected 10,000 sample 
     means?

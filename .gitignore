@@ -1,7 +1,8 @@
+.html
 .Rproj.user
 .Rhistory
 .RData
 *.Rproj
 .DS_Store
-*.html
-*.orig
+news.html
+README.html

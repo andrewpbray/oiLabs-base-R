@@ -95,6 +95,7 @@ and graphics. As a simple example, the function `favstats` returns a numerical
 summary: minimum, first quartile, median, third quartile, maximum, mean, standard deviation, number of observations, and number of missing values.
 For `weight` this is
 
+<<<<<<< HEAD
 ```{r summary-weight}
 require(mosaic)
 favstats(~weight, data = cdc)
@@ -103,14 +104,29 @@ favstats(~weight, data = cdc)
 As we have seen, R can function like a very fancy calculator. If you wanted to compute the 
 interquartile range for the respondents' weight, you could look at the output 
 from the summary command above and then enter
+=======
+Let's start with some histograms. We can create a the histogram for the age of
+our respondents with the following command:
 
-```{r weight-range-arith}
-190 - 140
+```{r hist-age-geom}
+qplot(x = age, data = cdc, geom = "histogram")
 ```
 
-R also has built-in functions to compute summary statistics one by one.  For 
-instance, to calculate the mean, median, and variance of `weight`, type 
+This functions says to plot `age` on the x-axis. It also defines a `geom` (short for 
+geometric object), which describes the type of plot you will produce. 
+>>>>>>> mydplyr/master
 
+Actually, since the default `geom` for a single numerical variable is a histogram, 
+we could get away with not defining a `geom` and still get the same plot:
+
+```{r hist-age}
+qplot(x = age, data = cdc)
+```
+
+It's a good idea to be explicit in our code and always define all options (and not
+rely on default settings), especially when we're first learning a new language.
+
+<<<<<<< HEAD
 ```{r weight-mean-var-median, message=FALSE}
 mean(~weight, data = cdc)
 var(~weight, data = cdc)
@@ -118,6 +134,28 @@ median(~weight, data = cdc)
 ```
 
 While it makes sense to describe a quantitative variable like `weight` in terms of these statistics, what about categorical data?  We would instead consider the sample frequency or relative frequency distribution.  The function `tally` does this for you by counting the number of times each kind of response was given. For example, to see the number of people who have smoked 100 cigarettes in their lifetime, type
+=======
+Histograms are generally a very good way to see the shape of a single 
+distribution, but that shape can change depending on how the data is split 
+between the different bins. You can easily define the binwidth you want to use:
+
+```{r hist-bmi}
+qplot(x = age, data = cdc, geom = "histogram", binwidth = 1)
+qplot(x = age, data = cdc, geom = "histogram", binwidth = 20)
+```
+
+How do these histograms with the various binwidths compare?
+
+### Summary statistics
+
+As a simple example, the function `summary` returns a numerical 
+summary: minimum, first quartile, median, mean, third quartile, maximum.
+While it makes sense to describe a quantitative variable like `weight` in terms
+of these statistics, what about categorical data?  We would instead consider the
+sample frequencies.  The function `table` does this for you by counting the number 
+of times each kind of response was given. For example, to see the number of 
+people who have smoked 100 cigarettes in their lifetime, type
+>>>>>>> mydplyr/master
 
 ```{r table-smoke}
 tally(~smoke100, data = cdc)
@@ -161,12 +199,21 @@ This is another important idea that we'll return to later.
     `gender` and `exerany`. How many males are in the sample? What proportion of
     the sample reports being in excellent health?
 
+<<<<<<< HEAD
+The `tally` command can be used to tabulate any number of variables that you 
+provide.  For example, to examine which participants have smoked across each 
+gender, we could use the following.
+
+```{r table-smoke-gender, eval=FALSE}
+tally(gender ~ smoke100, data = cdc, format = "count")
+=======
 To calculate the summary statistics for `weight`, type
 
 ```{r summary-weight}
 cdc %>%
   select(weight) %>%
   summary()
+>>>>>>> mydplyr/master
 ```
 
 <div id="boxedtext">
@@ -175,16 +222,30 @@ Here, we see column labels of TRUE and FALSE. Recall that TRUE indicates a respo
 smoked at least 100 cigarettes. The rows refer to gender. To create a mosaic 
 plot (no relation to the package name) of this table, we would enter the following command.
 
+<<<<<<< HEAD
 ```{r mosaic-smoke-gender, eval=FALSE}
 mosaicplot(tally(gender ~ smoke100, data = cdc))
 ```
 
 We could have accomplished this in two steps by saving the table in one line and
 applying `mosaicplot` in the next (see the `tally`/`barchart` example above).
+=======
+*"Take the `cdc` dataset and **pipe** it into the `select` function. Using this 
+function select the variable called `weight`, and **pipe** this 
+variable into the `summary` function."*
 
-3.  What does the mosaic plot reveal about smoking habits and gender?
+The `%>%` operator is called the **piping** operator. Basically, it takes the output
+of the current line and pipes it into the following line of code.
+</div>
+>>>>>>> mydplyr/master
 
-## Interlude: How R thinks about data
+Since R also functions like a very fancy calculator, you can use these statistics
+to then calculate the interquartile range for the respondents' weight, as the value
+of Q3 - Q1.
+
+```{r weight-range-arith}
+190 - 140
+```
 
 You can also individually calculate summary statistics, and make your own customized list
 of them using the `summarise` function:
@@ -253,12 +314,8 @@ command above.
 
 To make a bat plot of these data, use the following:
 
-Recall that column 6 represents respondents' weight, so the command above 
-reported all of the weights in the data set. An alternative method to access the
-weight data is by using the `select` command. `select` is in the [`dplyr` package](https://cran.r-project.org/web/packages/dplyr/index.html), so we need to load it
-
-```{r dplyr-load}
-require(dplyr)
+```{r table-smoke-barplot}
+qplot(x = smoke100, data = cdc, geom = "bar")
 ```
 
 3.  Compute the relative frequency distribution for `gender` and also for `genhlth`. 
@@ -288,10 +345,8 @@ reasoning.
 In the last lab we visualized relationships between two numerical variables using
 scatterplots. As a quick reminder, let's make one more of those:
 
-```{r weight-567}
-cdc %>% 
-  select(weight) %>% 
-  slice(567)
+```{r height-weight}
+qplot(x = weight, y = height, data = cdc, geom = "point")
 ```
 
 How are these two variables related?
@@ -301,11 +356,11 @@ How are these two variables related?
 To create a segmented bar plots we can use the following two optoons.
 It's often useful to extract all individuals (cases) in a data set that have 
 specific characteristics. We accomplish this through *logical operators*. 
-Consider this expression:
+First, consider expressions like
 
-```{r true-male}
-cdc %>% 
-  filter(gender == "m")
+```{r mosaic-smoke-gender}
+qplot(x = gender, fill = smoke100, data = cdc, geom = "bar")
+qplot(x = gender, fill = smoke100, data = cdc, geom = "bar", position = "fill")
 ```
 
 5.  How are the two plots different from each other? Which one is more
@@ -317,15 +372,13 @@ The purpose of a boxplot is to provide a thumbnail sketch of a variable for the 
 of comparing across several categories. So we can, for example, compare the heights of 
 men and women with 
 
-```{r males}
-mdata <- 
-  cdc %>% 
-  filter(gender == "m")
+```{r boxplot-height-gender}
+qplot(y = height, x = gender, data = cdc, geom = "boxplot")
 ```
 
-will create a new data set called `mdata` that contains only the men from the 
-`cdc` data set. In addition to finding it in your workspace alongside its 
-dimensions, you can take a peek at the first several rows as usual
+The notation here is new. `geom`, short for geometric objects, describe the type of 
+plot you will produce. So we're asking R to give us a box plots of heights where 
+the groups are defined by gender. 
 
 Next let's consider a new variable that doesn't show up directly in this data 
 set: Body Mass Index (BMI) 
@@ -340,9 +393,16 @@ kilograms) to imperial (inches and pounds).
 We can use the `mutate` function to create this new variable and add it to the
 `cdc` dataset:
 
+<<<<<<< HEAD
+```{r males-or-over30}
+m_or_over30 <- 
+  cdc %>% 
+  filter(gender == "m" | age > 30)
+=======
 ```{r bmi}
 cdc <- cdc %>%
   mutate(bmi = (weight / height^2) * 703)
+>>>>>>> mydplyr/master
 ```
 
 Notice that `(weight / height^2) * 703` is just some arithmetic, but it's applied to 
@@ -355,32 +415,40 @@ very simple expressions.
 Now we can use this new variable in our analysis. For example, let's create side-by-side 
 box plots of `bmi` over the levels of `genhlth`:
 
-## Quantitative data
-
-With our filtering tools in hand, we'll now return to the task of the day: 
-making basic summaries of the BRFSS questionnaire.  We've already looked at 
-categorical data such as `smoke` and `gender` so now let's turn our attention to
-quantitative data.  Two common ways to visualize quantitative data are with box
-plots and histograms.  We can construct a box plot for a single variable with 
-the following command.
-
+<<<<<<< HEAD
 ```{r boxplot-height}
-boxplot(cdc$height)
+bwplot(~height, data = cdc)
+=======
+```{r boxplot-bmi-genhlth}
+qplot(y = bmi, x = genhlth, data = cdc, geom = "boxplot")
+>>>>>>> mydplyr/master
 ```
 
 Discuss what this box plot shows in your team.
 
+<<<<<<< HEAD
+```{r summary-height, eval=FALSE}
+favstats(~height, data = cdc)
+```
+=======
 6.  Pick another categorical variable from the data set and see how it relates to BMI.
     List the variable you chose, why you might think it would have a relationship to 
     BMI, create side-by-side box plots of the distribution of BMI over this variable,
     and provide an interpretation for this plot.
+>>>>>>> mydplyr/master
 
 ## Subsetting
 
+<<<<<<< HEAD
+```{r boxplot-height-gender, eval=FALSE}
+bwplot(height ~ gender, data = cdc)
+```
+=======
 It's often useful to extract all individuals (cases) in a data set that have 
 specific characteristics. We can do this easily using the `filter` function and
 a series of **logical operators**. The most commonly used logical operators for
 data analysis are
+>>>>>>> mydplyr/master
 
 - `==` means "equal to"
 - `!=` means "not equal to"
@@ -399,29 +467,73 @@ Here, we've created a new object, called `males`. The special symbol `<-`
 performs an *assignment*, taking the output of one line of code and saving it 
 into this new object that you defined.
 
+<<<<<<< HEAD
 The following two lines first make a new object called `bmi` and then creates 
-box plots of these values, defining groups by the variable `cdc$genhlth`.
+box plots of these values, defining groups by the categorical variable `genhlth`.
 
 ```{r boxplot-bmi}
-bmi <- (cdc$weight / cdc$height^2) * 703
-boxplot(bmi ~ cdc$genhlth)
+cdc <- 
+  cdc %>%
+  mutate(bmi = (weight / height^2) * 703)
+bwplot(bmi ~ genhlth, data = cdc)
 ```
 
-Notice that the first line above is just some arithmetic, but it's applied to 
+Notice that the third line above is just some arithmetic, but it's applied to 
 all 20,000 numbers in the `cdc` data set. That is, for each of the 20,000 
 participants, we take their weight, divide by their height-squared and then 
 multiply by 703. The result is 20,000 BMI values, one for each respondent. This 
 is one reason why we like R: it lets us perform computations like this using 
 very simple expressions.
 
+When creating a similarly split boxplot for a categorical variable that has `TRUE/FALSE`
+values, we need to add `as.factor()` around the variable name. So for example, to compare `bmi` for smokers and
+non-smokers, we run:
+
+```{r boxplot-bmi2}
+bwplot(bmi ~ as.factor(smoke100), data = cdc)
+```
+
+4.  What does this box plot show? Pick another categorical variable from the 
+    data set and see how it relates to BMI. List the variable you chose, why you
+    might think it would have a relationship to BMI,  and indicate what the 
+    figure seems to suggest. 
+=======
+We can take look at the contents of this object by clicking on it in the 
+*Environment* tab, or by typing the following command we can view the first few 
+lines of it
+
+```{r head-males}
+head(males)
+```
+
+We don't want to print the entire dataset since it's pretty large, taking
+a look at just the first few lines should give you a good idea of what it
+looks like.
+
 This new data set contains all the same variables but just under half the rows.
 It is also possible to tell R to keep only specific variables using the `select`
 function we learned earlier, but this is not relevant here since we are focusing
 on subsetting a dataset based on values of one or more variables.
+>>>>>>> mydplyr/master
 
 As an aside, you can use several of these conditions together with `&` and `|`.
 The `&` is read "and" so that
 
+<<<<<<< HEAD
+```{r hist-age}
+histogram(~age, data = cdc)
+```
+
+Histograms are generally a very good way to see the shape of a single 
+distribution, but that shape can change depending on how the data is split 
+between the different bins.  You can control the number of bins by adding an 
+argument to the command. In the next two lines, we first make a default 
+histogram of `bmi` and then one with 50 intervals.
+
+```{r hist-bmi, eval=FALSE}
+histogram(~bmi, data = cdc)
+histogram(~bmi, data = cdc, nint = 50)
+=======
 ```{r males-and-over30}
 males_and_over30 <- cdc %>%
   filter(gender == "m" & age > 30)
@@ -433,6 +545,7 @@ will give you the data for men over the age of 30. The `|` character is read
 ```{r males-or-over30}
 males_or_over30 <- cdc %>%
   filter(gender == "m" | age > 30)
+>>>>>>> mydplyr/master
 ```
 
 will take people who are men or over the age of 30 (why that's an interesting 
