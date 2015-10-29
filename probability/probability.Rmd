@@ -23,21 +23,6 @@ to (1) think about the effects of independent and dependent events, (2) learn
 how to simulate shooting streaks in R, and (3) to compare a simulation to actual
 data in order to determine if the hot hand phenomenon appears to be real.
 
-## Saving your code
-
-Click on File -> New -> R Script. This will open a blank document above the 
-console. As you go along you can copy and paste your code here and save it. This
-is a good way to keep track of your code and be able to reuse it later. To run 
-your code from this document you can either copy and paste it into the console, 
-highlight the code and hit the Run button, or highlight the code and hit 
-command+enter or a mac or control+enter on a PC.
-
-You'll also want to save this script (code document). To do so click on the disk 
-icon. The first time you hit save, RStudio will ask for a file name; you can 
-name it anything you like. Once you hit save you'll see the file appear under 
-the Files tab in the lower right panel. You can reopen this file anytime by 
-simply clicking on it.
-
 ## Getting Started
 
 Our investigation will focus on the performance of one player: Kobe Bryant of 
@@ -46,10 +31,15 @@ NBA finals earned him the title *Most Valuable Player* and many spectators
 commented on how he appeared to show a hot hand. Let's load some data from those
 games and look at the first several rows.
 
-```{r load-data, eval=FALSE}
-require(mosaic)
-download.file("http://www.openintro.org/stat/data/kobe.RData", destfile = "kobe.RData")
-load("kobe.RData")
+```{r opts, eval=TRUE, echo=FALSE}
+library(knitr)
+opts_chunk$set(eval=FALSE)
+```
+
+```{r load-data, message=FALSE}
+library(mosaic)
+library(oilabs)
+data(kobe)
 head(kobe)
 ```
 
@@ -68,11 +58,6 @@ his nine shot attempts in the first quarter:
 
 \[ \textrm{H M | M | H H M | M | M | M} \]
 
-To verify this use the following command:
-
-```{r first9, eval=FALSE}
-head(kobe$basket, 9)
-```
 
 Within the nine shot attempts, there are six streaks, which are separated by a 
 "|" above. Their lengths are one, zero, two, zero, zero, zero (in order of 
@@ -85,7 +70,7 @@ The custom function `calc_streak`, which was loaded in with the `oilabs` package
 used to calculate the lengths of all shooting streaks and then look at the 
 distribution.
 
-```{r calc-streak-kobe, eval=FALSE}
+```{r calc-streak-kobe}
 kobe_streak <- calc_streak(kobe$basket)
 barchart(tally(~kobe_streak), horizontal=FALSE)
 ```
@@ -147,7 +132,7 @@ ground rules of a random process and then the computer uses random numbers to
 generate an outcome that adheres to those rules. As a simple example, you can
 simulate flipping a fair coin with the following.
 
-```{r head-tail, eval=FALSE}
+```{r head-tail}
 outcomes <- c("heads", "tails")
 resample(outcomes, size = 1)
 ```
@@ -166,14 +151,14 @@ governs how many samples to draw (since we are `resample`-ing, we put
 the slip of paper back in the hat before drawing again). Save the resulting 
 vector of heads and tails in a new object called `sim_fair_coin`.
 
-```{r sim-fair-coin, eval=FALSE}
+```{r sim-fair-coin}
 sim_fair_coin <- resample(outcomes, size = 100)
 ```
 
 To view the results of this simulation, type the name of the object and then use
 `tally` to count up the number of heads and tails.
 
-```{r table-sim-fair-coin, eval=FALSE}
+```{r table-sim-fair-coin}
 sim_fair_coin
 
 tally(~sim_fair_coin)
@@ -190,13 +175,7 @@ sim_unfair_coin <- resample(outcomes, size = 100, prob = c(0.2, 0.8))
 
 `prob=c(0.2, 0.8)` indicates that for the two elements in the `outcomes` vector,
 we want to select the first one, `heads`, with probability 0.2 and the second 
-one, `tails` with probability 0.8. Another way of thinking about this is to 
-think of the outcome space as a bag of 10 chips, where 2 chips are labeled 
-"head" and 8 chips "tail". Therefore at each draw, the probability of drawing a 
-chip that says "head"" is 20%, and "tail" is 80%.
-
-3.  In your simulation of flipping the unfair coin 100 times, how many flips 
-    came up heads?
+one, `tails` with probability 0.8. 
 
 In a sense, we've shrunken the size of the slip of paper that says "heads", 
 making it less likely to be drawn and we've increased the size of the slip of 
@@ -205,12 +184,21 @@ fair coin, both slips of paper were the same size. This happens by default if
 you don't provide a `prob` argument; all elements in the `outcomes` vector have 
 an equal probability of being drawn.
 
+Another way of thinking about this is to think of the outcome space as a bag of 
+10 chips, where 2 chips are labeled "head" and 8 chips "tail". Therefore at each
+draw, the probability of drawing a chip that says "head"" is 20%, and "tail" is 80%.
+
 If you want to learn more about `resample` or any other function, recall that you 
 can always check out its help file.
 
-```{r help-sample, eval=FALSE,tidy = FALSE}
+```{r help-resample,tidy = FALSE}
 ?resample
 ```
+
+3.  In your simulation of flipping the unfair coin 100 times, how many flips 
+    came up heads?
+
+
 
 ## Simulating the Independent Shooter
 
@@ -218,7 +206,7 @@ Simulating a basketball player who has independent shots uses the same mechanism
 that we use to simulate a coin flip. To simulate a single shot from an 
 independent shooter with a shooting percentage of 50% we type,
 
-```{r sim-basket, eval=FALSE}
+```{r sim-basket}
 outcomes <- c("H", "M")
 sim_basket <- resample(outcomes, size = 1)
 ```
@@ -240,8 +228,8 @@ With the results of the simulation saved as `sim_basket`, we have the data
 necessary to compare Kobe to our independent shooter. We can look at Kobe's data 
 alongside our simulated data.
 
-```{r compare-basket, eval=FALSE}
-kobe$basket
+```{r compare-basket}
+kobe %>% select(basket)
 sim_basket
 ```
 
