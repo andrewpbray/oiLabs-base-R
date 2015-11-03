@@ -34,8 +34,10 @@ Let's load up the data for the 2011 season.
 
 ```{r load-data}
 library(oilabs)
-library(dplyr)	
+library(dplyr)
+library(ggplot2)
 data(mlb11)
+str(mlb11)
 ```
 
 In addition to runs scored, there are seven traditionally used variables in the 
@@ -157,6 +159,8 @@ Let's create a scatterplot with the least squares line laid on top.
 ```{r reg-with-line}
 plot(mlb11$runs ~ mlb11$at_bats)
 abline(m1)
+qplot(x = at_bats, y = runs, data = mlb11, geom = "point") +
+  stat_smooth(method = lm, se = FALSE)
 ```
 
 The function `abline` plots a line based on its slope and intercept. Here, we 
