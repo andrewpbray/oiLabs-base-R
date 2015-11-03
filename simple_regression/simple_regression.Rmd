@@ -157,8 +157,6 @@ explained by at-bats.
 Let's create a scatterplot with the least squares line laid on top.
 
 ```{r reg-with-line}
-plot(mlb11$runs ~ mlb11$at_bats)
-abline(m1)
 qplot(x = at_bats, y = runs, data = mlb11, geom = "point") +
   stat_smooth(method = lm, se = FALSE)
 ```
@@ -187,8 +185,8 @@ of the residuals vs. at-bats. Recall that any code following a *#* is intended
 to be a comment that helps understand the code but is ignored by R.
 
 ```{r residuals}
-plot(m1$residuals ~ mlb11$at_bats)
-abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
+fortify(m1) # enable the model to act as a data frame
+qplot(x = .fitted, y = .stdresid, data = m1)
 ```
 
 6.  Is there any apparent pattern in the residuals plot? What does this indicate
@@ -197,14 +195,13 @@ abline(h = 0, lty = 3)  # adds a horizontal dashed line at y = 0
 *Nearly normal residuals*: To check this condition, we can look at a histogram
 
 ```{r hist-res}
-hist(m1$residuals)
+qplot(x = .stdresid, data = m1, geom = "histogram")
 ```
 
 or a normal probability plot of the residuals.
 
 ```{r qq-res}
-qqnorm(m1$residuals)
-qqline(m1$residuals)  # adds diagonal line to the normal prob plot
+qplot(sample = .stdresid, data = m1, stat = "qq") + geom_abline()
 ```
 
 7.  Based on the histogram and the normal probability plot, does the nearly 
