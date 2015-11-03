@@ -78,7 +78,7 @@ function to select the line that you think does the best job of going through
 the cloud of points.
 
 ```{r plotss-atbats-runs}
-plot_ss(x = mlb11$at_bats, y = mlb11$runs)
+plot_ss(x = at_bats, y = runs, data = mlb11)
 ```
 
 After running this command, you'll be prompted to click two points on the plot 
@@ -96,7 +96,7 @@ the sum of squared residuals. To visualize the squared residuals, you can rerun
 the plot command and add the argument `showSquares = TRUE`.
 
 ```{r plotss-atbats-runs-squares}
-plot_ss(x = mlb11$at_bats, y = mlb11$runs, showSquares = TRUE)
+plot_ss(x = at_bats, y = runs, data = mlb11, showSquares = TRUE)
 ```
 
 Note that the output from the `plot_ss` function provides you with the slope and
@@ -154,16 +154,18 @@ explained by at-bats.
 
 ## Prediction and prediction errors
 
-Let's create a scatterplot with the least squares line laid on top.
+Let's create a scatterplot with the least squares line for `m1` laid on top.
 
 ```{r reg-with-line}
 qplot(x = at_bats, y = runs, data = mlb11, geom = "point") +
-  stat_smooth(method = lm, se = FALSE)
+  stat_smooth(method = "lm", se = FALSE)
 ```
 
-The function `abline` plots a line based on its slope and intercept. Here, we 
-used a shortcut by providing the model `m1`, which contains both parameter 
-estimates. This line can be used to predict $y$ at any value of $x$. When 
+Here we are literally adding a layer on top of our plot. `stat_smooth` creates
+the line by fitting a linear model. It can also show us the standard error `se`
+associated with our line, but we'll suppress that for now.
+
+This line can be used to predict $y$ at any value of $x$. When 
 predictions are made for values of $x$ that are beyond the range of the observed
 data, it is referred to as *extrapolation* and is not usually recommended. 
 However, predictions made within the range of the data are more reliable. 
@@ -179,20 +181,22 @@ They're also used to compute the residuals.
 To assess whether the linear model is reliable, we need to check for (1) 
 linearity, (2) nearly normal residuals, and (3) constant variability.
 
-*Linearity*: You already checked if the relationship between runs and at-bats
+**Linearity**: You already checked if the relationship between runs and at-bats
 is linear using a scatterplot. We should also verify this condition with a plot 
-of the residuals vs. at-bats. Recall that any code following a *#* is intended
-to be a comment that helps understand the code but is ignored by R.
+of the residuals vs. at-bats.
 
 ```{r residuals}
-fortify(m1) # enable the model to act as a data frame
 qplot(x = .fitted, y = .stdresid, data = m1)
 ```
 
-6.  Is there any apparent pattern in the residuals plot? What does this indicate
-    about the linearity of the relationship between runs and at-bats?
+Notice here that our model object `m1` can also serve as a data set because stored within it are the fitted values ($\hat{y}$) and the residuals.
 
-*Nearly normal residuals*: To check this condition, we can look at a histogram
+6.  Is there any apparent pattern in the residuals plot? What does this indicate
+    about the linearity of the relationship between runs and at-bats?  
+
+</br>
+
+**Nearly normal residuals**: To check this condition, we can look at a histogram
 
 ```{r hist-res}
 qplot(x = .stdresid, data = m1, geom = "histogram")
@@ -201,13 +205,16 @@ qplot(x = .stdresid, data = m1, geom = "histogram")
 or a normal probability plot of the residuals.
 
 ```{r qq-res}
-qplot(sample = .stdresid, data = m1, stat = "qq") + geom_abline()
+qplot(sample = .stdresid, data = m1, stat = "qq") +
+  geom_abline()
 ```
 
 7.  Based on the histogram and the normal probability plot, does the nearly 
     normal residuals condition appear to be met?
 
-*Constant variability*:
+</br>
+
+**Constant variability**:
 
 8.  Based on the plot in (1), does the constant variability condition appear to 
     be met?
