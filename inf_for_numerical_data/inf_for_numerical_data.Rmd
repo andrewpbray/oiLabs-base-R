@@ -28,6 +28,7 @@ Load the `nc` data set into our workspace.
 library(dplyr)
 library(ggplot2)
 library(oilabs)
+data(nc)
 head(nc)
 ```
 
@@ -61,7 +62,7 @@ highlight about the relationship between these two variables?
 
 The box plots show how the medians of the two distributions compare, but we can
 also compare the means of the distributions using the following chain to take
-the `nc` data, group it by `habit`, then summarize each groups' `weight` by taking
+the `nc` data, group it by `habit`, then summarize each group's `weight` by taking
 the mean.
 
 ```{r by-means}
@@ -109,14 +110,13 @@ of inference can be `"theoretical"` or `"simulation"` based.
 
 5.  Change the `type` argument to `"ci"` to construct and record a confidence 
 interval for the difference between the weights of babies born to smoking and 
-non-smoking mothers.
+non-smoking mothers. Which arguments are no longer necessary?
 
 By default the function reports an interval for ($\mu_{nonsmoker} - \mu_{smoker}$)
 . We can easily change this order by using the `order` argument:
 
 ```{r inf-weight-habit-ci, tidy=FALSE}
-inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, 
-          alternative = "twosided", method = "theoretical", 
+inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", method = "theoretical", 
           order = c("smoker","nonsmoker"))
 ```
 
