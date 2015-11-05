@@ -25,8 +25,7 @@ observations from this data set.
 Load the `nc` data set into our workspace.
 
 ```{r load-data, message = FALSE}
-library(dplyr)
-library(ggplot2)
+library(mosaic)
 library(oilabs)
 head(nc)
 ```
