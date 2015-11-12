@@ -160,7 +160,6 @@ To view the results of this simulation, type the name of the object and then use
 
 ```{r table-sim-fair-coin}
 sim_fair_coin
-
 tally(~sim_fair_coin)
 ```
 
