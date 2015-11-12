@@ -78,7 +78,7 @@ function to select the line that you think does the best job of going through
 the cloud of points.
 
 ```{r plotss-atbats-runs}
-plot_ss(x = mlb11$at_bats, y = mlb11$runs)
+plot_ss(x = at_bats, y = runs, data = mlb11)
 ```
 
 After running this command, you'll be prompted to click two points on the plot 
@@ -96,7 +96,7 @@ the sum of squared residuals. To visualize the squared residuals, you can rerun
 the plot command and add the argument `showSquares = TRUE`.
 
 ```{r plotss-atbats-runs-squares}
-plot_ss(x = mlb11$at_bats, y = mlb11$runs, showSquares = TRUE)
+plot_ss(x = at_bats, y = runs, data = mlb11, showSquares = TRUE)
 ```
 
 Note that the output from the `plot_ss` function provides you with the slope and
@@ -154,7 +154,7 @@ explained by at-bats.
 
 ## Prediction and prediction errors
 
-Let's create a scatterplot with the least squares line laid on top.
+Let's create a scatterplot with the least squares line for `m1` laid on top.
 
 ```{r reg-with-line}
 plotModel(m1)
@@ -208,7 +208,9 @@ qqline(m1$residuals)  # adds diagonal line to the normal prob plot
 7.  Based on the histogram and the normal probability plot, does the nearly 
     normal residuals condition appear to be met?
 
-*Constant variability*:
+</br>
+
+**Constant variability**:
 
 8.  Based on the plot in (1), does the constant variability condition appear to 
     be met?
