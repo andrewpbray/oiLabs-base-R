@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r opts, include=FALSE}
-knitr::opts_chunk$set(eval = TRUE)
+knitr::opts_chunk$set(eval = FALSE)
 ```
 
 In August of 2012, news outlets ranging from the [Washington
