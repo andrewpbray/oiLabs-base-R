@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r opts, include=FALSE}
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(eval = TRUE)
 ```
 
 In August of 2012, news outlets ranging from the [Washington
@@ -47,7 +47,7 @@ packages and the data set into R with the following command.
 
 ```{r load-data, message=FALSE}
 library(oilabs)
-library(dplyr)	
+library(mosaic)
 data(atheism)
 ```
 
@@ -90,7 +90,7 @@ hypothesis test.
 If the conditions for inference are reasonable (check this!), we can calculate
 the standard error and construct the confidence interval.
 
-```{r us-atheism-ci, eval=FALSE, tidy = FALSE}
+```{r us-atheism-ci, tidy = FALSE}
 p <- tally(~response, data=us12, format='proportion')["atheist"]
 n <- nrow(us12)
 se <- sqrt(p * (1-p) / n)
@@ -145,7 +145,7 @@ against each other to reveal their relationship.
 n <- 1000
 p <- seq(from = 0, to = 1, by = 0.01)
 ME <- 2 * sqrt(p * (1 - p)/n)
-plot(ME ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
+xyplot(ME ~ p, ylab = "Margin of Error", xlab = "Population Proportion")
 ```
 
 8.  Describe the relationship between `p` and `ME`.
@@ -178,11 +178,11 @@ proportion of those responses that are `"atheist"`. We `do` this 500 times.
 ```{r sim-np, tidy=FALSE}
 p <- 0.1
 n <- 1040
-responses = c("atheist", "non_atheist")
+responses <- c("atheist", "non_atheist")
 
-p_hats = do(5000) * tally(~resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion')["atheist"]
+p_hats <- do(5000) * tally(~resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion')
 
-histogram(~p_hats, main = "p = 0.1, n = 1040")
+histogram(~atheist, data=p_hats, main = "p = 0.1, n = 1040")
 ```
 
 These commands build up the sampling distribution of $\hat{p}$ using the 
