@@ -180,7 +180,9 @@ p <- 0.1
 n <- 1040
 responses <- c("atheist", "non_atheist")
 
-p_hats <- do(5000) * tally(~resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion')
+p_hats <- 
+  do(5000) * 
+  tally(~resample(responses, size = n, prob = c(p, 1-p)), format = 'proportion')
 
 histogram(~atheist, data=p_hats, main = "p = 0.1, n = 1040")
 ```
