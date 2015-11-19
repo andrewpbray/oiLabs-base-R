@@ -60,7 +60,13 @@ questions.
 highlight about the relationship between these two variables?
 
 The box plots show how the medians of the two distributions compare, but we can
-also compare the means of the distributions using the following chain to take
+also compare the means of the distributions. There are several ways we could do this. 
+One it to use the standard `mean` function, 
+```{r mosaicmean}
+mean(~weight|habit, data=nc)
+```
+
+We could also build a `dplyr` chain, to take
 the `nc` data, group it by `habit`, then summarize each group's `weight` by taking
 the mean.
 
@@ -70,9 +76,12 @@ nc %>%
   summarize(mean(weight))
 ```
 
-There is an observed difference, but is this difference statistically 
-significant? In order to answer this question we will conduct a hypothesis test
-.
+The results from these two pieces of code should be the same. However, notice what
+happens with NA values in the first version. 
+
+Either way, we can say that there is an observed difference between the means, but 
+we want to know if this difference is statistically. In order to answer this 
+question we will conduct a hypothesis test.
 
 ## Inference
 
@@ -81,43 +90,56 @@ smoking and non-smoking mothers are different.
 
 4.  What is our test statistic? What distribution would you expect it to follow?
 
-4.  Check if the conditions necessary for inference are satisfied. Note that 
+5.  Check if the conditions necessary for inference are satisfied. Note that 
 you will need to obtain sample sizes to check the conditions. You can compute 
-the group size using the same chain above but replacing summarizing each group
+the group size using the same dplyr chain above but replacing summarizing each group
 with `n()` instead of `mean(weight)`.
 
-Next, we introduce a new function, `inference`, that we will use for conducting
-hypothesis tests and constructing confidence intervals. 
+Now we can compute a T score to complete our hypothesis test. To do this, we need a few pieces of information. First, we need point estimates for our means. We're also going to need the sample standard deviation and the number of observations in each group, so we might as well calculate those statistics at the same time. 
 
-```{r inf-weight-habit-ht, eval=FALSE, tidy=FALSE}
-inference(y = nc$weight, x = nc$habit, est = "mean", type = "ht", null = 0, 
-          alternative = "twosided", method = "theoretical")
+```{r inf-weight-habit-ht, tidy=FALSE}
+smoke_stats <- nc %>%
+  group_by(habit) %>%
+  filter(habit != "NA") %>%
+  summarize(mean = mean(weight), sd = sd(weight), n = n())
+
+smoke_stats
 ```
 
-Let's pause for a moment to go through the arguments of this custom function. 
-The first argument is `y`, which is the response variable that we are 
-interested in: `nc$weight`. The second argument is the explanatory variable, 
-`x`, which is the variable that splits the data into two groups, smokers and 
-non-smokers: `nc$habit`. The third argument, `est`, is the parameter we're 
-interested in: `"mean"` (other options are `"median"`, or `"proportion"`.) Next
-we decide on the `type` of inference we want: a hypothesis test (`"ht"`) or a 
-confidence interval (`"ci"`). When performing a hypothesis test, we also need 
-to supply the `null` value, which in this case is `0`, since the null 
-hypothesis sets the two population means equal to each other. The `alternative`
-hypothesis can be `"less"`, `"greater"`, or `"twosided"`. Lastly, the `method` 
-of inference can be `"theoretical"` or `"simulation"` based.
+Once we have that information from our data, we can start working on our standard error. Recall that the standard error for a difference of two (unpooled) means is 
 
-5.  Change the `type` argument to `"ci"` to construct and record a confidence 
+$$SE = \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_1}} \approx \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_1}}$$
+
+So, we want to find the $s^2/n$ for each of our groups, as well as the point estimate of the difference of means. 
+```{r}
+smoke_stats <- smoke_stats %>%
+  mutate(sd2s = sd^2/n, diff = mean - lag(mean))
+
+inference <- smoke_stats %>%
+  select(diff)%>%
+  slice(2)
+```
+From there, we can complete our SE calculation. 
+```{r computing-se}
+inference <- inference %>%
+  mutate(se = sqrt(sum(~sd2s, data=smoke_stats)))
+```
+Of course, once we have our point estimate and standard error, it is simple to compute our T statistic. 
+```{r t-stat}
+inference <- inference %>%
+  mutate(t = (diff-0)/se)
+
+inference
+```
+
+6. Once you have a T statistic, how do you use it to find a p-value? Name at least one method. What information do you need to find the value?
+
+One method is to use the `pt()` function. 
+
+7.  Instead of finding a p-value, construct and record a confidence 
 interval for the difference between the weights of babies born to smoking and 
-non-smoking mothers. Which arguments are no longer necessary?
+non-smoking mothers. 
 
-By default the function reports an interval for ($\mu_{nonsmoker} - \mu_{smoker}$)
-. We can easily change this order by using the `order` argument:
-
-```{r inf-weight-habit-ci, tidy=FALSE}
-inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", method = "theoretical", 
-          order = c("smoker","nonsmoker"))
-```
 
 * * *
 
@@ -127,26 +149,19 @@ For the following inferential exercises, be sure to assess the conditions for
 inference.
 
 -   Calculate a 95% confidence interval for the average length of pregnancies 
-(`weeks`) and interpret it in context. Note that since you're doing inference 
-on a single population parameter, there is no explanatory variable, so you can 
-omit the `x` variable from the function.
-
--   Calculate a new confidence interval for the same parameter at the 90% 
-confidence level. You can change the confidence level by adding a new argument 
-to the function: `conflevel = 0.90`.
+(`weeks`) and interpret it in context. 
 
 -   Conduct a hypothesis test evaluating whether the average weight gained by 
 younger mothers is different from the average weight gained by mature mothers.
 Be sure to state hypotheses.
 
--   Now, a non-inference task: Determine the age cutoff for younger and mature 
-mothers. Use a method of your choice, and explain how your method works.
+-   Now, a non-inference task: Determine the age cutoff that was used to separate
+younger and mature mothers. Use a method of your choice, and explain how your method works.
 
 -   Pick a pair of numerical and categorical variables and come up with a 
 research question evaluating the relationship between these variables. 
 Formulate the question in a way that it can be answered using a hypothesis test
-and/or a confidence interval. Please outline the hypotheses, utilize the `inference()` 
-function, report the statistical results, and also provide an explanation in 
+and/or a confidence interval. Please outline the hypotheses, find a p-value or confidence interval, report the statistical results, and also provide an explanation in 
 plain language.
 
 <div id="license">
