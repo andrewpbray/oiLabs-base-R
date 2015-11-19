@@ -100,51 +100,57 @@ img {
 <li>Make a side-by-side boxplot of <code>habit</code> and <code>weight</code>. What does the plot highlight about the relationship between these two variables?</li>
 </ol>
 <p>The box plots show how the medians of the two distributions compare, but we can also compare the means of the distributions. There are several ways we could do this. One it to use the standard <code>mean</code> function,</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(~weight|habit, <span class="dt">data=</span>nc)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(weight ~<span class="st"> </span>habit, <span class="dt">data =</span> nc)</code></pre>
 <p>We could also build a <code>dplyr</code> chain, to take the <code>nc</code> data, group it by <code>habit</code>, then summarize each group’s <code>weight</code> by taking the mean.</p>
 <pre class="sourceCode r"><code class="sourceCode r">nc %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(habit) %&gt;%
 <span class="st">  </span><span class="kw">summarize</span>(<span class="kw">mean</span>(weight))</code></pre>
 <p>The results from these two pieces of code should be the same. However, notice what happens with NA values in the first version.</p>
-<p>Either way, we can say that there is an observed difference between the means, but we want to know if this difference is statistically. In order to answer this question we will conduct a hypothesis test.</p>
+<p>Either way, we can say that there is an observed difference between the means, but we want to know if this difference is statistically significant. In order to answer this question we will conduct a hypothesis test.</p>
 </div>
-<div id="inference" class="section level2">
-<h2>Inference</h2>
+<div id="inference-hypothesis-test" class="section level2">
+<h2>Inference (hypothesis test)</h2>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.</p></li>
 <li><p>What is our test statistic? What distribution would you expect it to follow?</p></li>
 <li><p>Check if the conditions necessary for inference are satisfied. Note that you will need to obtain sample sizes to check the conditions. You can compute the group size using the same dplyr chain above but replacing summarizing each group with <code>n()</code> instead of <code>mean(weight)</code>.</p></li>
 </ol>
 <p>Now we can compute a T score to complete our hypothesis test. To do this, we need a few pieces of information. First, we need point estimates for our means. We’re also going to need the sample standard deviation and the number of observations in each group, so we might as well calculate those statistics at the same time.</p>
-<pre class="sourceCode r"><code class="sourceCode r">smoke_stats &lt;-<span class="st"> </span>nc %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(habit) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(habit !=<span class="st"> &quot;NA&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(weight), <span class="dt">sd =</span> <span class="kw">sd</span>(weight), <span class="dt">n =</span> <span class="kw">n</span>())
-
+<pre class="sourceCode r"><code class="sourceCode r">smoke_stats &lt;-<span class="st"> </span><span class="kw">favstats</span>(weight ~<span class="st"> </span>habit, <span class="dt">data =</span> nc)
 smoke_stats</code></pre>
 <p>Once we have that information from our data, we can start working on our standard error. Recall that the standard error for a difference of two (unpooled) means is</p>
-<p><span class="math">\[SE = \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_1}} \approx \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_1}}\]</span></p>
-<p>So, we want to find the <span class="math">\(s^2/n\)</span> for each of our groups, as well as the point estimate of the difference of means.</p>
-<pre class="sourceCode r"><code class="sourceCode r">smoke_stats &lt;-<span class="st"> </span>smoke_stats %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sd2s =</span> sd^<span class="dv">2</span>/n, <span class="dt">diff =</span> mean -<span class="st"> </span><span class="kw">lag</span>(mean))
-
-inference &lt;-<span class="st"> </span>smoke_stats %&gt;%
-<span class="st">  </span><span class="kw">select</span>(diff)%&gt;%
-<span class="st">  </span><span class="kw">slice</span>(<span class="dv">2</span>)</code></pre>
-<p>From there, we can complete our SE calculation.</p>
-<pre class="sourceCode r"><code class="sourceCode r">inference &lt;-<span class="st"> </span>inference %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">se =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(~sd2s, <span class="dt">data=</span>smoke_stats)))</code></pre>
-<p>Of course, once we have our point estimate and standard error, it is simple to compute our T statistic.</p>
-<pre class="sourceCode r"><code class="sourceCode r">inference &lt;-<span class="st"> </span>inference %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t =</span> (diff<span class="dv">-0</span>)/se)
-
-inference</code></pre>
+<p><span class="math">\[
+  SE = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_1}}
+\]</span></p>
+<p>We can use the <code>summarize</code> function to aggregate over the rows in <code>smoke_stats</code>. This will allow us to calculate the difference in the means, the unpooled standard error, and the estimated number of degrees of freedom <em>across the two separate groups</em>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">smoke_compare &lt;-<span class="st"> </span>smoke_stats %&gt;%
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">diff =</span> <span class="kw">diff</span>(mean), <span class="dt">se =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(sd^<span class="dv">2</span>/n)), <span class="dt">df =</span> <span class="kw">min</span>(n -<span class="st"> </span><span class="dv">1</span>))</code></pre>
+<p>Now that we have our point estimate for the difference in means (<code>diff</code>) and standard error (<code>se</code>) of that difference, it is simple to compute our <span class="math">\(T\)</span> statistic.</p>
+<pre class="sourceCode r"><code class="sourceCode r">smoke_compare &lt;-<span class="st"> </span>smoke_compare %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t =</span> (diff -<span class="st"> </span><span class="dv">0</span>) /<span class="st"> </span>se)
+smoke_compare</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>Once you have a T statistic, how do you use it to find a p-value? Name at least one method. What information do you need to find the value?</li>
+<li>Once you have a <span class="math">\(T\)</span> statistic, how do you use it to find a p-value? Name at least one method. What information do you need to find the value?</li>
 </ol>
-<p>One method is to use the <code>pt()</code> function.</p>
+<p>One method is to use the <code>pt()</code> function. Recall that the t-distribution has one parameter: the degrees of freedom. You will need to know this value to use the <code>pt()</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">smoke_compare &lt;-<span class="st"> </span>smoke_compare %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">p_value =</span> <span class="dv">2</span> *<span class="st"> </span><span class="kw">pt</span>(t, <span class="dt">df =</span> df))
+smoke_compare</code></pre>
+<p>For a graphical look at where this <span class="math">\(T\)</span> statistic lies in this t-distribution, you can use the <code>xpt()</code> function.</p>
 <ol start="7" style="list-style-type: decimal">
-<li>Instead of finding a p-value, construct and record a confidence interval for the difference between the weights of babies born to smoking and non-smoking mothers.</li>
+<li>Why do we have to multiply the value from <code>pt()</code> by 2 in order to obtain the p-value? What can you conclude about the association between smoking and birth weight?</li>
+</ol>
+</div>
+<div id="inference-confidence-interval" class="section level2">
+<h2>Inference (confidence interval)</h2>
+<p>Confidence Intervals are another type of inferential technique. Next, we will construct a 95% confidence interval for the true mean difference in birth weight among smoking and non-smoking mothers.</p>
+<p>Since we have already computed the standard error of the difference in means, we just need to find the critical value <span class="math">\(t^*_{d.f., \alpha/2}\)</span>. We can do this using the <code>qt()</code> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">smoke_compare %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_star =</span> <span class="kw">qt</span>(.<span class="dv">975</span>, <span class="dt">df=</span>df)) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">CI_left =</span> diff -<span class="st"> </span>t_star *<span class="st"> </span>se) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">CI_right =</span> diff +<span class="st"> </span>t_star *<span class="st"> </span>se)</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Interpret the confidence interval for the difference between the weights of babies born to smoking and non-smoking mothers. What can we conclude about the true value of the difference in mean weights between the two groups? How does this conclusion compare to the conclusion from your hypothesis test?</li>
 </ol>
 <hr />
 </div>

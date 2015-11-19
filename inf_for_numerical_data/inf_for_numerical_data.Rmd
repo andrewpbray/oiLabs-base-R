@@ -63,7 +63,7 @@ The box plots show how the medians of the two distributions compare, but we can
 also compare the means of the distributions. There are several ways we could do this. 
 One it to use the standard `mean` function, 
 ```{r mosaicmean}
-mean(~weight|habit, data=nc)
+mean(weight ~ habit, data = nc)
 ```
 
 We could also build a `dplyr` chain, to take
@@ -80,10 +80,10 @@ The results from these two pieces of code should be the same. However, notice wh
 happens with NA values in the first version. 
 
 Either way, we can say that there is an observed difference between the means, but 
-we want to know if this difference is statistically. In order to answer this 
+we want to know if this difference is statistically significant. In order to answer this 
 question we will conduct a hypothesis test.
 
-## Inference
+## Inference (hypothesis test)
 
 3.  Write the hypotheses for testing if the average weights of babies born to 
 smoking and non-smoking mothers are different.
@@ -98,47 +98,61 @@ with `n()` instead of `mean(weight)`.
 Now we can compute a T score to complete our hypothesis test. To do this, we need a few pieces of information. First, we need point estimates for our means. We're also going to need the sample standard deviation and the number of observations in each group, so we might as well calculate those statistics at the same time. 
 
 ```{r inf-weight-habit-ht, tidy=FALSE}
-smoke_stats <- nc %>%
-  group_by(habit) %>%
-  filter(habit != "NA") %>%
-  summarize(mean = mean(weight), sd = sd(weight), n = n())
-
+smoke_stats <- favstats(weight ~ habit, data = nc)
 smoke_stats
 ```
 
 Once we have that information from our data, we can start working on our standard error. Recall that the standard error for a difference of two (unpooled) means is 
 
-$$SE = \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_1}} \approx \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_1}}$$
+$$
+  SE = \sqrt{SE_1^2 + SE_2^2} = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_1}}
+$$
 
-So, we want to find the $s^2/n$ for each of our groups, as well as the point estimate of the difference of means. 
-```{r}
-smoke_stats <- smoke_stats %>%
-  mutate(sd2s = sd^2/n, diff = mean - lag(mean))
+We can use the `summarize` function to aggregate over the rows in `smoke_stats`. This will allow us to calculate the difference in the means, the unpooled standard error, and the estimated number of degrees of freedom *across the two separate groups*. 
 
-inference <- smoke_stats %>%
-  select(diff)%>%
-  slice(2)
+```{r aggregate}
+smoke_compare <- smoke_stats %>%
+  summarize(diff = diff(mean), se = sqrt(sum(sd^2/n)), df = min(n - 1))
 ```
-From there, we can complete our SE calculation. 
-```{r computing-se}
-inference <- inference %>%
-  mutate(se = sqrt(sum(~sd2s, data=smoke_stats)))
-```
-Of course, once we have our point estimate and standard error, it is simple to compute our T statistic. 
+
+Now that we have our point estimate for the difference in means (`diff`) and standard error (`se`) of that difference, it is simple to compute our $T$ statistic. 
+
 ```{r t-stat}
-inference <- inference %>%
-  mutate(t = (diff-0)/se)
-
-inference
+smoke_compare <- smoke_compare %>%
+  mutate(t = (diff - 0) / se)
+smoke_compare
 ```
 
-6. Once you have a T statistic, how do you use it to find a p-value? Name at least one method. What information do you need to find the value?
+6. Once you have a $T$ statistic, how do you use it to find a p-value? Name at least one method. What information do you need to find the value?
 
-One method is to use the `pt()` function. 
+One method is to use the `pt()` function. Recall that the t-distribution has one parameter: the degrees of freedom. You will need to know this value to use the `pt()` function. 
 
-7.  Instead of finding a p-value, construct and record a confidence 
-interval for the difference between the weights of babies born to smoking and 
-non-smoking mothers. 
+```{r p-value}
+smoke_compare <- smoke_compare %>%
+  mutate(p_value = 2 * pt(t, df = df))
+smoke_compare
+```
+
+For a graphical look at where this $T$ statistic lies in this t-distribution, you can use the `xpt()` function. 
+
+7. Why do we have to multiply the value from `pt()` by 2 in order to obtain the p-value?
+What can you conclude about the association between smoking and birth weight? 
+
+## Inference (confidence interval)
+
+Confidence Intervals are another type of inferential technique. Next, we will construct a 95% confidence interval for the true mean difference in birth weight among smoking and non-smoking mothers. 
+
+Since we have already computed the standard error of the difference in means, we just need to find the critical value $t^*_{d.f., \alpha/2}$. We can do this using the `qt()` function. 
+
+```{r qt}
+smoke_compare %>%
+  mutate(t_star = qt(.975, df=df)) %>%
+  mutate(CI_left = diff - t_star * se) %>%
+  mutate(CI_right = diff + t_star * se)
+```
+
+8.  Interpret the confidence interval for the difference between the weights of babies born to smoking and 
+non-smoking mothers. What can we conclude about the true value of the difference in mean weights between the two groups? How does this conclusion compare to the conclusion from your hypothesis test?
 
 
 * * *
