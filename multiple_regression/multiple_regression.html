@@ -194,19 +194,19 @@ img {
 <h2>Simple linear regression</h2>
 <p>The fundamental phenomenon suggested by the study is that better looking teachers are evaluated more favorably. Let’s create a scatterplot to see if this appears to be the case:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
-<span class="kw">xyplot</span>(score ~<span class="st"> </span>bty_avg, <span class="dt">data=</span>evals)</code></pre>
+<span class="kw">xyplot</span>(score ~<span class="st"> </span>bty_avg, <span class="dt">data =</span> evals)</code></pre>
 <p>Before we draw conclusions about the trend, compare the number of observations in the data frame with the approximate number of points on the scatterplot. Is anything awry?</p>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Replot the scatterplot, but this time use the function <code>jitter()</code> on the <span class="math">\(y\)</span> or the <span class="math">\(x\)</span>-coordinate. (Use <code>?jitter</code> to learn more.) What was misleading about the initial scatterplot?</p></li>
-<li><p>Let’s see if the apparent trend in the plot is something more than natural variation. Fit a linear model called <code>m_bty</code> to predict average professor score by average beauty rating and add the line to your plot using the <code>type=c(&quot;p&quot;, &quot;r&quot;)</code> argument. Write out the equation for the linear model and interpret the slope. Is average beauty score a statistically significant predictor? Does it appear to be a practically significant predictor?</p></li>
+<li><p>Let’s see if the apparent trend in the plot is something more than natural variation. Fit a linear model called <code>m_bty</code> to predict average professor score by average beauty rating and add the line to your plot using the <code>type=c(&quot;p&quot;, &quot;r&quot;)</code> argument or the <code>plotModel()</code> function. Write out the equation for the linear model and interpret the slope. Is average beauty score a statistically significant predictor? Does it appear to be a practically significant predictor?</p></li>
 <li><p>Use residual plots to evaluate whether the conditions of least squares regression are reasonable. Provide plots and comments for each one (see the Simple Regression Lab for a reminder of how to make these).</p></li>
 </ol>
 </div>
 <div id="multiple-linear-regression" class="section level2">
 <h2>Multiple linear regression</h2>
 <p>The data set contains several variables on the beauty score of the professor: individual ratings from each of the six students who were asked to score the physical appearance of the professors and the average of these six scores. Let’s take a look at the relationship between one of these scores and the average beauty score.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data=</span>evals)
-<span class="kw">cor</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data=</span>evals)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data =</span> evals)
+<span class="kw">cor</span>(bty_avg ~<span class="st"> </span>bty_f1lower, <span class="dt">data =</span> evals)</code></pre>
 <p>As expected the relationship is quite strong - after all, the average score is calculated using the individual scores. We can actually take a look at the relationships between all beauty variables (columns 13 through 19) using the following command:</p>
 <pre class="sourceCode r"><code class="sourceCode r">evals %&gt;%
 <span class="st">  </span><span class="kw">select</span>(<span class="kw">contains</span>(<span class="st">&quot;bty&quot;</span>)) %&gt;%
@@ -226,7 +226,7 @@ img {
 \widehat{score} &amp;= \hat{\beta}_0 + \hat{\beta}_1 \times bty\_avg + \hat{\beta}_2 \times (0) \\
 &amp;= \hat{\beta}_0 + \hat{\beta}_1 \times bty\_avg\end{aligned}
 \]</span></p>
-<p>We can plot this line and the line corresponding to males with the following code.</p>
+<p>We can plot this data and the line corresponding to males with the following code.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotModel</span>(m_bty_gen)</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>What is the equation of the line corresponding to males? (<em>Hint:</em> For males, the parameter estimate is multiplied by 1.) For two professors who received the same beauty rating, which gender tends to have the higher course evaluation score?</li>

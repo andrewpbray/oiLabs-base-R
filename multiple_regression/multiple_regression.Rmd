@@ -129,7 +129,7 @@ to be the case:
 
 ```{r scatter-score-bty_avg}
 require(mosaic)
-xyplot(score ~ bty_avg, data=evals)
+xyplot(score ~ bty_avg, data = evals)
 ```
 
 
@@ -144,7 +144,8 @@ Is anything awry?
 5.  Let's see if the apparent trend in the plot is something more than
     natural variation. Fit a linear model called `m_bty` to predict average
     professor score by average beauty rating and add the line to your plot
-    using the `type=c("p", "r")` argument. Write out the equation for the linear model and
+    using the `type=c("p", "r")` argument or the `plotModel()` function. 
+    Write out the equation for the linear model and
     interpret the slope. Is average beauty score a statistically significant
     predictor? Does it appear to be a practically significant predictor?
 
@@ -161,8 +162,8 @@ take a look at the relationship between one of these scores and the average
 beauty score.
 
 ```{r bty-rel}
-xyplot(bty_avg ~ bty_f1lower, data=evals)
-cor(bty_avg ~ bty_f1lower, data=evals)
+xyplot(bty_avg ~ bty_f1lower, data = evals)
+cor(bty_avg ~ bty_f1lower, data = evals)
 ```
 
 As expected the relationship is quite strong - after all, the average score is 
@@ -213,7 +214,7 @@ the intercept and slope form familiar from simple regression.
 &= \hat{\beta}_0 + \hat{\beta}_1 \times bty\_avg\end{aligned}
 \]
 
-We can plot this line and the line corresponding to males with the
+We can plot this data and the line corresponding to males with the
 following code.
 
 ```{r twoLines}
