@@ -146,7 +146,9 @@ responses &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="s
 
 p_hats &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">do</span>(<span class="dv">5000</span>) *<span class="st"> </span>
-<span class="st">  </span><span class="kw">tally</span>(~<span class="kw">resample</span>(responses, <span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p)), <span class="dt">format =</span> <span class="st">'proportion'</span>)
+<span class="st">  </span>responses %&gt;%
+<span class="st">  </span><span class="kw">resample</span>(<span class="dt">size =</span> n, <span class="dt">prob =</span> <span class="kw">c</span>(p, <span class="dv">1</span>-p)) %&gt;%
+<span class="st">  </span><span class="kw">tally</span>(<span class="dt">format =</span> <span class="st">&quot;proportion&quot;</span>)
 
 <span class="kw">histogram</span>(~atheist, <span class="dt">data=</span>p_hats, <span class="dt">main =</span> <span class="st">&quot;p = 0.1, n = 1040&quot;</span>)</code></pre>
 <p>These commands build up the sampling distribution of <span class="math">\(\hat{p}\)</span> using the familiar <code>do</code> loop. You can read the sampling procedure for the inner bit of code as, “take a sample of size <span class="math">\(n\)</span> with replacement from the choices of atheist and non-atheist with probabilities <span class="math">\(p\)</span> and <span class="math">\(1 - p\)</span>, respectively.” The <code>tally</code> command says, “calculate the proportion of atheists in this sample and record this value.” The loop allows us to repeat this process 5,000 times to build a good representation of the sampling distribution.</p>
