@@ -21,26 +21,11 @@ learn how to generate random numbers from a normal distribution.
 
 This week we'll be working with measurements of body dimensions.  This data set 
 contains measurements from 247 men and 260 women, most of whom were considered 
-<<<<<<< Temporary merge branch 1
 healthy young adults. Let's take a quick peek at the first few rows of the data.
 
-```{r load-data}
+```{r load-data, message=FALSE, warning=FALSE, results='hide', eval=TRUE}
 library(mosaic)
 library(oilabs)
-=======
-healthy young adults.
-
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(eval=FALSE)
-```
-
-```{r load-data}
-require(mosaic)
-require(oilabs)
-require(dplyr)
->>>>>>> Temporary merge branch 2
-data(bdims)
 head(bdims)
 ```
 
@@ -52,22 +37,14 @@ bringing up the help page.
 ?bdims
 ```
 
-<<<<<<< Temporary merge branch 1
 We'll be focusing on just three columns to get started: weight in kg (`wgt`), 
-=======
-You'll see that for every observation we have 25 measurements, many of which are
-either diameters or girths.  A key to the variable names can be found by typing `?bdims`,
-but we'll be focusing on just three columns to get started: weight in kg (`wgt`), 
-=======
-We'll be focusing on just three columns to get started: weight in kg (`wgt`), 
->>>>>>> beanumber/master
 height in cm (`hgt`), and `sex` (`m` indicates male, `f` indicates female).
 
 Since males and females tend to have different body dimensions, it will be 
 useful to create two additional data sets: one with only men and another with 
 only women.
 
-```{r male-female}
+```{r male-female, eval=TRUE}
 mdims <- bdims %>%
   filter(sex == "m")
 fdims <- bdims %>%
@@ -98,19 +75,19 @@ sdFheight <- sd(~hgt, data = fdims)
 Next we want to make a density histogram to use as the backdrop and use the `fit` argument to overlay a normal probability curve. The `histogram()` command has a parameter called `type` that allows us to specify if we want to see `count`, `percent` or `density` in our histogram. Setting `type="count"` produces a frequency histogram, which shows the number of data points that fall into a particular bin. In a frequency histogram, the *heights* of the bars add up to the total number of observations. 
 
 ```{r mosaic-hist1}
-histogram(~hgt, data = mdims, type="count")
+histogram(~hgt, data = fdims, type="count")
 ```
 
 Setting `type="percent"` changes the labels to percentages of the data that fall into each bin. Now, the *heights* of the bars all add up to 1. 
 
 ```{r mosaic-hist2}
-histogram(~hgt, data=mdims, type="percent")
+histogram(~hgt, data = fdims, type="percent")
 ```
 
 Finally, `type="density"` creates a density histogram. In a density histogram the *areas* of the bars add up to 1. The area of each bar can be calculated as simply the height *times* the width of the bar.
 
 ```{r mosaic-hist3}
-histogram(~hgt, data = mdims, type = "density")
+histogram(~hgt, data = fdims, type = "density")
 ```
 
 Frequency, percent, and density histograms all display the same shape; they only differ in their $y$-axis. You can verify this by comparing the three histograms we just constructed.
@@ -147,9 +124,9 @@ deviations of these points from the line.  The plot for female heights shows
 points that tend to follow the line but with some errant points towards the 
 tails.  We're left with the same problem that we encountered with the histogram 
 above: how close is close enough?
-=======
+
 The x-axis values correspond to the quantiles of a theoretically normal curve 
-with mean 0 and standard deviation 1 AKA the standard normal distribution.  The 
+with mean 0 and standard deviation 1 (a.k.a. the standard normal distribution).  The 
 y-axis values correspond to the quantiles of the original unstandardized sample 
 data. However, even if we were to standardize the sample data values, the Q-Q
 plot would look identical. A data set that is nearly normal will result in a
