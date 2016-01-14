@@ -195,7 +195,9 @@ this is done in one step with the function `pnorm()`.
 Note that the function `pnorm` gives the area under the normal curve below a 
 given value, `q`, with a given mean and standard deviation.  
 
-![norm-plot](more/norm-plot.jpeg)
+```{r, echo=FALSE, fig.width=10, eval=TRUE, message=FALSE, results='hide'}
+1 - xpnorm(q = 182, mean = meanFheight, sd = sdFheight)
+```
 
 Since we're interested in the probability that someone is taller than 182 cm, we have to 
 take one minus that probability.
