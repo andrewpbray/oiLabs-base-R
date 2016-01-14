@@ -57,7 +57,7 @@ relationship with the correlation coefficient.
 
 ```{r cor, eval=FALSE, message=FALSE}
 require(mosaic)
-cor(runs ~ at_bats, data=mlb11)
+cor(runs ~ at_bats, data = mlb11)
 ```
 
 ## Sum of squared residuals
@@ -186,7 +186,7 @@ of the residuals vs. at-bats. Recall that any code following a *#* is intended
 to be a comment that helps understand the code but is ignored by R.
 
 ```{r residuals}
-xyplot(residuals(m1) ~ at_bats, data=mlb11, type=c("p", "r"), lty=3)
+xyplot(residuals(m1) ~ at_bats, data = mlb11, type=c("p", "r"), lty = 3)
 ```
 
 6.  Is there any apparent pattern in the residuals plot? What does this indicate
@@ -201,8 +201,7 @@ histogram(~residuals(m1), fit="normal")
 or a normal probability plot of the residuals.
 
 ```{r qq-res}
-qqnorm(m1$residuals)
-qqline(m1$residuals)  # adds diagonal line to the normal prob plot
+plot(m1, which = 2)
 ```
 
 7.  Based on the histogram and the normal probability plot, does the nearly 

@@ -93,7 +93,7 @@ img {
 </ol>
 <p>If the relationship looks linear, we can quantify the strength of the relationship with the correlation coefficient.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(mosaic)
-<span class="kw">cor</span>(runs ~<span class="st"> </span>at_bats, <span class="dt">data=</span>mlb11)</code></pre>
+<span class="kw">cor</span>(runs ~<span class="st"> </span>at_bats, <span class="dt">data =</span> mlb11)</code></pre>
 </div>
 <div id="sum-of-squared-residuals" class="section level2">
 <h2>Sum of squared residuals</h2>
@@ -144,15 +144,14 @@ img {
 <h2>Model diagnostics</h2>
 <p>To assess whether the linear model is reliable, we need to check for (1) linearity, (2) nearly normal residuals, and (3) constant variability.</p>
 <p><em>Linearity</em>: You already checked if the relationship between runs and at-bats is linear using a scatterplot. We should also verify this condition with a plot of the residuals vs. at-bats. Recall that any code following a <em>#</em> is intended to be a comment that helps understand the code but is ignored by R.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">residuals</span>(m1) ~<span class="st"> </span>at_bats, <span class="dt">data=</span>mlb11, <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;r&quot;</span>), <span class="dt">lty=</span><span class="dv">3</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(<span class="kw">residuals</span>(m1) ~<span class="st"> </span>at_bats, <span class="dt">data =</span> mlb11, <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;r&quot;</span>), <span class="dt">lty =</span> <span class="dv">3</span>)</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>Is there any apparent pattern in the residuals plot? What does this indicate about the linearity of the relationship between runs and at-bats?</li>
 </ol>
 <p><em>Nearly normal residuals</em>: To check this condition, we can look at a histogram</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">histogram</span>(~<span class="kw">residuals</span>(m1), <span class="dt">fit=</span><span class="st">&quot;normal&quot;</span>)</code></pre>
 <p>or a normal probability plot of the residuals.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqnorm</span>(m1$residuals)
-<span class="kw">qqline</span>(m1$residuals)  <span class="co"># adds diagonal line to the normal prob plot</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(m1, <span class="dt">which =</span> <span class="dv">2</span>)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Based on the histogram and the normal probability plot, does the nearly normal residuals condition appear to be met?</li>
 </ol>
