@@ -51,18 +51,7 @@ li ol,
 li ul {margin-top:6px;}
 ol ol li:last-child {margin-bottom:0;}
 
-div#license { 
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: rgba(76, 114, 29, 0.8);
-    border:1px solid rgba(76, 114, 29, 0.2);
-    padding: 10px 10px;
-    background: rgba(76, 114, 29, 0.1);
-    border-radius: 5px;
-}
-
-
-ul {
+.oyo ul {
     list-style-type:decimal;
 }
 
@@ -75,4 +64,24 @@ div#boxedtext {
     padding: 20px;
     margin-bottom: 20px;
     font-size: 10pt;
+}
+
+div#template {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #808080;
+    border:1px solid #808080;
+    padding: 10px 10px;
+    background-color: rgba(128, 128, 128, 0.2);
+    border-radius: 5px;
+}
+
+div#license { 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #4C721D;
+    border:1px solid #4C721D;
+    padding: 10px 10px;
+    background-color: rgba(76, 114, 29, 0.2);
+    border-radius: 5px;
 }
