@@ -28,12 +28,11 @@ get to that stage, however, you need to build some basic fluency in R. Today we
 begin with the fundamental building blocks of R and RStudio: the interface, 
 reading in data, and basic commands.
 
-Go ahead and sign on to RStudio at https://vm-manage.oit.duke.edu/containers. You
-should see a window that looks like the image shown below.
+When you first open RStudio, you should see a window that looks like the image shown below.
 
 ![rinterface](more/rInterface2014.png)
 
-The panel in the upper right contains your *workspace* as well as a history of 
+The panel in the upper right contains your *environment* as well as a history of 
 the commands that you've previously entered. Any plots that you generate will 
 show up in the panel in the lower right corner.
 
@@ -46,47 +45,20 @@ and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
 to access data and organize, describe, and invoke statistical computations.
 
-## Creating a reproducible lab report
-
-We will be using a markdown language, R Markdown, to type up the lab report. This 
-allows you to complete your lab entirely in RStudio as well as ensuring 
-reproducibility of your analysis and results. To help get you started we are 
-providing a template for you. Use the following code to download this template:
-
-```{r load-template}
-# will need to be updated once we figure out the best way to include
-# Rmd templates in package
-download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab1.Rmd", destfile = "lab1.Rmd")
-```
-
-You will see a new file called `lab1.Rmd` in the Files tab on the pane in the 
-bottom right corner of your RStudio window. We will refer to this as your "R 
-markdown file" or "your report". Click on the file name to open the file. All you 
-need to do to complete the lab is to type up your **brief** answers and the R 
-code (when necessary) in the spaces provided in the document. Earlier in the lab 
-spaces are provided for you to enter R code chunks. Later in the lab you'll need 
-to figure out whether code is needed to answer a particular question, and if so a 
-new chunk can be inserted by clicking on the *Insert Chunk* button (dropdown menu 
-under *Chunks* on the upper right corner of your markdown document).
-
-Before you keep going type your team name, the name of the team member who is the 
-"author" for the day, and the "discussants", who are the other team members 
-present in lab today. Then click on *Knit HTML* and you'll see your document in a 
-new pop-up window.
-
 ## R Packages
 
 R is an open-source programming language, meaning that users can contribute
-packages that make our lives easier, and we can use them for free. For this lab,
+packages that make our lives easier and we can use them for free. For this lab,
 and many others in the future, we will use the following R packages:
 
 - `oilabs`: short for "OpenIntro Labs"
 - `dplyr`: for data wrangling
 - `ggplot2`: for data visualization
 
-These packages have already been installed for you, however you will still
-need to load them in your working environment. To do so, type the following 
-in the console:
+Please watch [this very short video](to learn how to download and install packages.
+Once you have a package, you'll need to load it into your R session to take advantage
+of its power. Load these three packages into your session by running the following
+lines at the console.
 
 ```{r}
 library(dplyr)
@@ -94,15 +66,29 @@ library(ggplot2)
 library(oilabs)
 ```
 
-Note that these two lines of code also appear on top of your R Markdown
-document. We need to load the packages both in the console and
-in your R Markdown environment since these two environments work independently
-of each other.
+## Creating a reproducible lab report
 
-Going forward you will be asked to load any relevant packages at the beginning
-of each lab, and the code for loading these packages will also be included
-on top of your R Markdown document as well.
+You will be typing up your lab report in what's called an R Markdown file. This 
+allows you to complete your lab entirely in RStudio while ensuring the
+reproducibility of your analysis and results. To help get you started we are 
+providing a template for you through the `oilabs` package that you just loaded.
+To open that file, click on the small green plus icon in the upper left corner
+of your screen and select **R Markdown...**. This will bring up this menu:
 
+Fig Here.
+
+Click on **From Template** and select **Lab 1 Template**.
+
+This will open up a lab report in a new pane called the *editor*. To get a sense
+of how this document is structured, you can [watch this video]().
+
+Two things to note before we move on to the actual lab. 1) You'll recognize that
+the R Markdown file has the same three lines used to load the packages. We need 
+to load the packages both in the console and in your R Markdown environment since 
+these two environments work independently of each other. 2) At the very top of the
+report there is a field for "author". Fill in your name then click the **Knit HTML**
+button. Voila - a lab report! As you proceed with the lab and add to this document,
+we encourage you to knit often to be sure it's coming along as you intend.
 
 ## The Data: Dr. Arbuthnot's Baptism Records
 
