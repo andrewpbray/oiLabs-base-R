@@ -95,14 +95,14 @@ we encourage you to knit often to be sure it's coming along as you intend.
 To get you started, run the following command from your markdown file.
 
 ```{r load-abrbuthnot-data}
-data(arbuthnot)
+head(arbuthnot)
 ```
 
 To do so, you can simply put your cursor on that line, and hit the **Run** button
 on the upper right corner of the pane.
 
-This command instructs R to load some data: 
-the Arbuthnot baptism counts for boys and girls. You should see that the 
+This command instructs R to print out the first several lines of a data set 
+containing baptism counts for boys and girls. You should see that the 
 workspace area in the upper righthand corner of the RStudio window now lists a 
 data set called `arbuthnot` that has 82 observations on 3 variables. As you 
 interact with R, you will create a series of objects. Sometimes you load them as
@@ -112,15 +112,14 @@ computation or some analysis you have performed.
 The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century 
 physician, writer, and mathematician. He was interested in the ratio of newborn
 boys to newborn girls, so he gathered the baptism records for children born in
-London for every year from 1629 to 1710. We can take a look at the data by 
-typing its name into the console.
+London for every year from 1629 to 1710. We can take a look at the entire data set
+by typing its name into the console.
 
 ```{r view-data}
 arbuthnot
 ```
 
-However printing the whole dataset in the console is not that useful. 
-One advantage of RStudio is that it comes with a built-in data viewer. Click on
+We can also view the data in a cleaner format using the data viewer. Click on
 the name `arbuthnot` in the *Environment* pane (upper right window) that lists 
 the objects in your workspace. This will bring up an alternative display of the 
 data set in the *Data Viewer* (upper left window). You can close the data viewer
@@ -177,13 +176,13 @@ variable that comes after me".
     it! (Enter your answer in your R markdown document and run the entire report
     by hitting **Knit HTML**. Voila! The R output you need is already in your 
     report. Let's make this the first and last time we print out an entire dataset
-    in our lab reports!)
+    in a lab report!)
     
 Notice that the way R has printed these data is different. When we looked at the
 complete data frame, we saw 82 rows, one on each line of the display. These data
 are no longer structured in a table with other variables, so they are displayed 
-one right after another. Objects that print out in this way are called vectors; 
-they represent a set of numbers. R has added numbers in [brackets] along the left
+one right after another. Objects that print out in this way are called vectors. 
+R has added numbers in [brackets] along the left
 side of the printout to indicate locations within the vector. For example, 5218 
 follows [1], indicating that 5218 is the first entry in the vector. And if [43] 
 starts a line, then that would mean the first number on that line would represent
@@ -197,7 +196,7 @@ qplot(x = year, y = girls, data = arbuthnot)
 ```
 
 The `qplot()` function (meaning "quick plot") looks at the type of data you have
-provided it and makes the decision to visualize it with a scatterplot. The plot
+provided and makes the decision to visualize it with a scatterplot. The plot
 should appear under the *Plots* tab of the lower right panel of RStudio. Notice 
 that the command above again looks like a function, this time with three arguments
 separated by commas. The first two arguments in the `qplot()` function specify 
@@ -249,27 +248,19 @@ We'll be using this new vector to generate some plots, so we'll want to save it
 as a permanent column in our data frame.
 
 ```{r calc-total-bapt-vars-save}
-arbuthnot <- arbuthnot %>%
-  mutate(total = boys + girls)
+arbuthnot <- mutate(arbuthnot, total = boys + girls)
 ```
 
-What in the world is going on here? The `%>%` operator is called the **piping** 
-operator. Basically, it takes the output of the current line and pipes it into 
-the following line of code.
+We can read this line of code as the following: 
 
-<div id="boxedtext">
-**A note on piping: ** Note that we can read these three lines of code as the following: 
-
-*"Take the `arbuthnot` dataset and **pipe** it into the `mutate` function. 
-Using this mutate a new variable called `total` that is the sum of the variables
-called `boys` and `girls`. Then assign this new resulting dataset to the object
-called `arbuthnot`, i.e. overwrite the old `arbuthnot` dataset with the new one
-containing the new variable."*
+*Mutate the `arbuthnot` data set to create a new variable called `total` that is
+the sum of the variables called `boys` and `girls`. Then assign this new 
+resulting dataset to the object called `arbuthnot`, i.e. overwrite the old 
+`arbuthnot` dataset with the new one containing the new variable.*
 
 This is essentially equivalent to going through each row and adding up the boys 
 and girls counts for that year and recording that value in a new column called
 total.
-</div>
 
 <div id="boxedtext">
 **Where is the new variable? ** When you make changes to variables in your dataset, 
@@ -298,8 +289,7 @@ of the number of boys to the number of girls baptized in 1629 with
 or we can act on the complete columns with the expression
 
 ```{r calc-prop-boys-to-girls-vars}
-arbuthnot <- arbuthnot %>%
-  mutate(boy_to_girl_ratio = boys / girls)
+arbuthnot <- mutate(arbuthnot, boy_to_girl_ratio = boys / girls)
 ```
 
 We can also compute the proportion of newborns that are boys in 1629
@@ -311,8 +301,7 @@ We can also compute the proportion of newborns that are boys in 1629
 or this may also be computed for all years simultaneously and append it to the dataset:
 
 ```{r calc-prop-boys-vars}
-arbuthnot <- arbuthnot %>%
-  mutate(boy_ratio = boys / total)
+arbuthnot <- mutate(arbuthnot, boy_ratio = boys / total)
 ```
 
 Note that we are using the new `total` variable we created earlier in our calculations.
@@ -332,8 +321,7 @@ division, you can ask R to make comparisons like greater than, `>`, less than,
 year with the expression
 
 ```{r boys-more-than-girls}
-arbuthnot <- arbuthnot %>%
-  mutate(more_boys = boys > girls)
+arbuthnot <- mutate(more_boys = boys > girls)
 ```
 
 This command add a new variable to the `arbuthnot` dataframe containing the values
@@ -346,12 +334,8 @@ or `FALSE`. In general, data analysis will involve many different kinds of data
 types, and one reason for using R is that it is able to represent and compute 
 with many of them.
 
-This seems like a fair bit for your first lab, so let's stop here. To exit 
-RStudio just close your browser window. And then sign back in to RStudio at
-
-https://vm-manage.oit.duke.edu/containers
-
-You'll find your R session is just as you left it.
+This seems like a fair bit for your first lab, so let's stop here. Be sure to
+save your Rmd so that you can continue your work at a later date.
 
 * * *
 
@@ -359,13 +343,13 @@ You'll find your R session is just as you left it.
 
 <div class="oyo">
 
-In the previous few pages, you recreated some of the displays and preliminary 
+In the lab above, you recreated some displays and preliminary 
 analysis of Arbuthnot's baptism data. Your assignment involves repeating these 
-steps, but for present day birth records in the United States. Load up the 
-present day data with the following command.
+steps, but for present day birth records in the United States. Glimpse the first
+several lines of this data set by typing.
 
 ```{r load-present-data}
-data(present)
+head(present)
 ```
 
 The data are stored in a data frame called `present`.
@@ -392,12 +376,11 @@ The data are stored in a data frame called `present`.
 <!-- eval=FALSE hard-coded, 
 won't run since present$total not defined in document -->
 ```{r eval=FALSE}
-present %>%
-  arrange(desc(total))
+arrange(present, desc(total))
 ```
 
 These data come from reports by the Centers for Disease Control listed in the
-references section. If you would like to read more abour an analysis of sex ratios
+references section. If you would like to read more about an analysis of sex ratios
 at birth in the United states, check out [this report](http://www.cdc.gov/nchs/data/nvsr/nvsr52/nvsr52_10.pdf).
 
 </div>
@@ -405,8 +388,7 @@ at birth in the United states, check out [this report](http://www.cdc.gov/nchs/d
 <div id="license">
 This is a product of OpenIntro that is released under a 
 [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). 
-This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel
-from a lab written by Mark Hansen of UCLA Statistics.
+This lab was developed by a team of contributors at [OpenIntro Labs](https://www.openintro.org/about.php).
 </div>
 
 * * *
@@ -414,14 +396,14 @@ from a lab written by Mark Hansen of UCLA Statistics.
 ## Resources for learning R and working in RStudio
 
 That was a short introduction to R and RStudio, but we will provide you with more
-functions and a more complete sense of the language as the course progresses. 
+functions and a more complete sense of the language as the labs progress. 
 
-In this course we will be using R packages called `dplyr` for data wrangling 
+In these labs we will be using R packages called `dplyr` for data wrangling 
 and `ggplot2` for data visualization. If you are googling for R code, make sure
 to also include these package names in your search query. For example, instead
 of googling "scatterplot in R", google "scatterplot in R with ggplot2".
 
-These cheathseets may come in handy throughout the semester:
+These cheatsheets may come in handy throughout the semester:
 
 - [RMarkdown cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 - [Data wrangling cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)

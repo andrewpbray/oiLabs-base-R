@@ -124,12 +124,12 @@ img {
 <div id="the-data-dr.arbuthnots-baptism-records" class="section level2">
 <h2>The Data: Dr. Arbuthnot’s Baptism Records</h2>
 <p>To get you started, run the following command from your markdown file.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(arbuthnot)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(arbuthnot)</code></pre></div>
 <p>To do so, you can simply put your cursor on that line, and hit the <strong>Run</strong> button on the upper right corner of the pane.</p>
-<p>This command instructs R to load some data: the Arbuthnot baptism counts for boys and girls. You should see that the workspace area in the upper righthand corner of the RStudio window now lists a data set called <code>arbuthnot</code> that has 82 observations on 3 variables. As you interact with R, you will create a series of objects. Sometimes you load them as we have done here, and sometimes you create them yourself as the byproduct of a computation or some analysis you have performed.</p>
-<p>The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century physician, writer, and mathematician. He was interested in the ratio of newborn boys to newborn girls, so he gathered the baptism records for children born in London for every year from 1629 to 1710. We can take a look at the data by typing its name into the console.</p>
+<p>This command instructs R to print out the first several lines of a data set containing baptism counts for boys and girls. You should see that the workspace area in the upper righthand corner of the RStudio window now lists a data set called <code>arbuthnot</code> that has 82 observations on 3 variables. As you interact with R, you will create a series of objects. Sometimes you load them as we have done here, and sometimes you create them yourself as the byproduct of a computation or some analysis you have performed.</p>
+<p>The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century physician, writer, and mathematician. He was interested in the ratio of newborn boys to newborn girls, so he gathered the baptism records for children born in London for every year from 1629 to 1710. We can take a look at the entire data set by typing its name into the console.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot</code></pre></div>
-<p>However printing the whole dataset in the console is not that useful. One advantage of RStudio is that it comes with a built-in data viewer. Click on the name <code>arbuthnot</code> in the <em>Environment</em> pane (upper right window) that lists the objects in your workspace. This will bring up an alternative display of the data set in the <em>Data Viewer</em> (upper left window). You can close the data viewer by clicking on the <em>x</em> in the upper lefthand corner.</p>
+<p>We can also view the data in a cleaner format using the data viewer. Click on the name <code>arbuthnot</code> in the <em>Environment</em> pane (upper right window) that lists the objects in your workspace. This will bring up an alternative display of the data set in the <em>Data Viewer</em> (upper left window). You can close the data viewer by clicking on the <em>x</em> in the upper lefthand corner.</p>
 <p>What you should see are four columns of numbers, each row representing a different year: the first entry in each row is simply the row number (an index we can use to access the data from individual years if we want), the second is the year, and the third and fourth are the numbers of boys and girls baptized that year, respectively. Use the scrollbar on the right side of the console window to examine the complete data set.</p>
 <p>Note that the row numbers in the first column are not part of Arbuthnot’s data. R adds them as part of its printout to help you make visual comparisons. You can think of them as the index that you see on the left side of a spreadsheet. In fact, the comparison to a spreadsheet will generally be helpful. R has stored Arbuthnot’s data in a kind of spreadsheet or table called a <em>data frame</em>.</p>
 <p>You can see the dimensions of this data frame by typing:</p>
@@ -144,12 +144,12 @@ img {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys</code></pre></div>
 <p>This command will only show the number of boys baptized each year. The dollar sign basically says “go to the data frame that comes before me, and find the variable that comes after me”.</p>
 <ol style="list-style-type: decimal">
-<li>What command would you use to extract just the counts of girls baptized? Try it! (Enter your answer in your R markdown document and run the entire report by hitting <strong>Knit HTML</strong>. Voila! The R output you need is already in your report. Let’s make this the first and last time we print out an entire dataset in our lab reports!)</li>
+<li>What command would you use to extract just the counts of girls baptized? Try it! (Enter your answer in your R markdown document and run the entire report by hitting <strong>Knit HTML</strong>. Voila! The R output you need is already in your report. Let’s make this the first and last time we print out an entire dataset in a lab report!)</li>
 </ol>
-<p>Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called vectors; they represent a set of numbers. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, 5218 follows [1], indicating that 5218 is the first entry in the vector. And if [43] starts a line, then that would mean the first number on that line would represent the 43rd entry in the vector.</p>
+<p>Notice that the way R has printed these data is different. When we looked at the complete data frame, we saw 82 rows, one on each line of the display. These data are no longer structured in a table with other variables, so they are displayed one right after another. Objects that print out in this way are called vectors. R has added numbers in [brackets] along the left side of the printout to indicate locations within the vector. For example, 5218 follows [1], indicating that 5218 is the first entry in the vector. And if [43] starts a line, then that would mean the first number on that line would represent the 43rd entry in the vector.</p>
 <p>R has some powerful functions for making graphics. We can create a simple plot of the number of girls baptized per year with the command</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> girls, <span class="dt">data =</span> arbuthnot)</code></pre></div>
-<p>The <code>qplot()</code> function (meaning “quick plot”) looks at the type of data you have provided it and makes the decision to visualize it with a scatterplot. The plot should appear under the <em>Plots</em> tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with three arguments separated by commas. The first two arguments in the <code>qplot()</code> function specify the variables for the x-axis and the y-axis and the third provides the name of the data set where they can be found. If we wanted to connect the data points with lines, we could add a fourth argument to specify the geometry that we’d like.</p>
+<p>The <code>qplot()</code> function (meaning “quick plot”) looks at the type of data you have provided and makes the decision to visualize it with a scatterplot. The plot should appear under the <em>Plots</em> tab of the lower right panel of RStudio. Notice that the command above again looks like a function, this time with three arguments separated by commas. The first two arguments in the <code>qplot()</code> function specify the variables for the x-axis and the y-axis and the third provides the name of the data set where they can be found. If we wanted to connect the data points with lines, we could add a fourth argument to specify the geometry that we’d like.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> girls, <span class="dt">data =</span> arbuthnot, <span class="dt">geom =</span> <span class="st">&quot;line&quot;</span>)</code></pre></div>
 <p>You might wonder how you are supposed to know that it was possible to add that fourth argument. Thankfully, R documents all of its functions extensively. To read what a function does and learn the arguments that are available to you, just type in a question mark followed by the name of the function that you’re interested in. Try the following.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?qplot</code></pre></div>
@@ -163,14 +163,10 @@ img {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot$boys +<span class="st"> </span>arbuthnot$girls</code></pre></div>
 <p>What you will see are 82 numbers (in that packed display, because we aren’t looking at a data frame here), each one representing the sum we’re after. Take a look at a few of them and verify that they are right.</p>
 <p>We’ll be using this new vector to generate some plots, so we’ll want to save it as a permanent column in our data frame.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>arbuthnot %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre></div>
-<p>What in the world is going on here? The <code>%&gt;%</code> operator is called the <strong>piping</strong> operator. Basically, it takes the output of the current line and pipes it into the following line of code.</p>
-<div id="boxedtext">
-<p><strong>A note on piping: </strong> Note that we can read these three lines of code as the following:</p>
-<p><em>“Take the <code>arbuthnot</code> dataset and <strong>pipe</strong> it into the <code>mutate</code> function. Using this mutate a new variable called <code>total</code> that is the sum of the variables called <code>boys</code> and <code>girls</code>. Then assign this new resulting dataset to the object called <code>arbuthnot</code>, i.e. overwrite the old <code>arbuthnot</code> dataset with the new one containing the new variable.”</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">total =</span> boys +<span class="st"> </span>girls)</code></pre></div>
+<p>We can read this line of code as the following:</p>
+<p><em>Mutate the <code>arbuthnot</code> data set to create a new variable called <code>total</code> that is the sum of the variables called <code>boys</code> and <code>girls</code>. Then assign this new resulting dataset to the object called <code>arbuthnot</code>, i.e. overwrite the old <code>arbuthnot</code> dataset with the new one containing the new variable.</em></p>
 <p>This is essentially equivalent to going through each row and adding up the boys and girls counts for that year and recording that value in a new column called total.</p>
-</div>
 <div id="boxedtext">
 <p><strong>Where is the new variable? </strong> When you make changes to variables in your dataset, click on the name of the dataset again to update it in the data viewer.</p>
 </div>
@@ -180,13 +176,11 @@ img {
 <p>Similarly to how we computed the total number of births, we can compute the ratio of the number of boys to the number of girls baptized in 1629 with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span><span class="dv">4683</span></code></pre></div>
 <p>or we can act on the complete columns with the expression</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>arbuthnot %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">boy_to_girl_ratio =</span> boys /<span class="st"> </span>girls)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">boy_to_girl_ratio =</span> boys /<span class="st"> </span>girls)</code></pre></div>
 <p>We can also compute the proportion of newborns that are boys in 1629</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5218</span> /<span class="st"> </span>(<span class="dv">5218</span> +<span class="st"> </span><span class="dv">4683</span>)</code></pre></div>
 <p>or this may also be computed for all years simultaneously and append it to the dataset:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>arbuthnot %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">boy_ratio =</span> boys /<span class="st"> </span>total)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(arbuthnot, <span class="dt">boy_ratio =</span> boys /<span class="st"> </span>total)</code></pre></div>
 <p>Note that we are using the new <code>total</code> variable we created earlier in our calculations.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Now, generate a plot of the proportion of boys born over time. What do you see?</li>
@@ -195,19 +189,16 @@ img {
 <p><strong>Tip: </strong> If you use the up and down arrow keys, you can scroll through your previous commands, your so-called command history. You can also access it by clicking on the history tab in the upper right panel. This will save you a lot of typing in the future.</p>
 </div>
 <p>Finally, in addition to simple mathematical operators like subtraction and division, you can ask R to make comparisons like greater than, <code>&gt;</code>, less than, <code>&lt;</code>, and equality, <code>==</code>. For example, we can ask if boys outnumber girls in each year with the expression</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span>arbuthnot %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">more_boys =</span> boys &gt;<span class="st"> </span>girls)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arbuthnot &lt;-<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">more_boys =</span> boys &gt;<span class="st"> </span>girls)</code></pre></div>
 <p>This command add a new variable to the <code>arbuthnot</code> dataframe containing the values of either <code>TRUE</code> if that year had more boys than girls, or <code>FALSE</code> if that year did not (the answer may surprise you). This variable contains different kind of data than we have considered so far. All other columns in the <code>arbuthnot</code> data frame have values are numerical (the year, the number of boys and girls). Here, we’ve asked R to create <em>logical</em> data, data where the values are either <code>TRUE</code> or <code>FALSE</code>. In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.</p>
-<p>This seems like a fair bit for your first lab, so let’s stop here. To exit RStudio just close your browser window. And then sign back in to RStudio at</p>
-<p><a href="https://vm-manage.oit.duke.edu/containers" class="uri">https://vm-manage.oit.duke.edu/containers</a></p>
-<p>You’ll find your R session is just as you left it.</p>
+<p>This seems like a fair bit for your first lab, so let’s stop here. Be sure to save your Rmd so that you can continue your work at a later date.</p>
 <hr />
 </div>
 <div id="on-your-own" class="section level2">
 <h2>On Your Own</h2>
 <div class="oyo">
-<p>In the previous few pages, you recreated some of the displays and preliminary analysis of Arbuthnot’s baptism data. Your assignment involves repeating these steps, but for present day birth records in the United States. Load up the present day data with the following command.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(present)</code></pre></div>
+<p>In the lab above, you recreated some displays and preliminary analysis of Arbuthnot’s baptism data. Your assignment involves repeating these steps, but for present day birth records in the United States. Glimpse the first several lines of this data set by typing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(present)</code></pre></div>
 <p>The data are stored in a data frame called <code>present</code>.</p>
 <ul>
 <li><p>What years are included in this data set? What are the dimensions of the data frame? What are the variable (column) names?</p></li>
@@ -217,20 +208,19 @@ img {
 </ul>
 <!-- eval=FALSE hard-coded, 
 won't run since present$total not defined in document -->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">present %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(total))</code></pre></div>
-<p>These data come from reports by the Centers for Disease Control listed in the references section. If you would like to read more abour an analysis of sex ratios at birth in the United states, check out <a href="http://www.cdc.gov/nchs/data/nvsr/nvsr52/nvsr52_10.pdf">this report</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(present, <span class="kw">desc</span>(total))</code></pre></div>
+<p>These data come from reports by the Centers for Disease Control listed in the references section. If you would like to read more about an analysis of sex ratios at birth in the United states, check out <a href="http://www.cdc.gov/nchs/data/nvsr/nvsr52/nvsr52_10.pdf">this report</a>.</p>
 </div>
 <div id="license">
-<p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was adapted for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel from a lab written by Mark Hansen of UCLA Statistics.</p>
+<p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was developed by a team of contributors at <a href="https://www.openintro.org/about.php">OpenIntro Labs</a>.</p>
 </div>
 <hr />
 </div>
 <div id="resources-for-learning-r-and-working-in-rstudio" class="section level2">
 <h2>Resources for learning R and working in RStudio</h2>
-<p>That was a short introduction to R and RStudio, but we will provide you with more functions and a more complete sense of the language as the course progresses.</p>
-<p>In this course we will be using R packages called <code>dplyr</code> for data wrangling and <code>ggplot2</code> for data visualization. If you are googling for R code, make sure to also include these package names in your search query. For example, instead of googling “scatterplot in R”, google “scatterplot in R with ggplot2”.</p>
-<p>These cheathseets may come in handy throughout the semester:</p>
+<p>That was a short introduction to R and RStudio, but we will provide you with more functions and a more complete sense of the language as the labs progress.</p>
+<p>In these labs we will be using R packages called <code>dplyr</code> for data wrangling and <code>ggplot2</code> for data visualization. If you are googling for R code, make sure to also include these package names in your search query. For example, instead of googling “scatterplot in R”, google “scatterplot in R with ggplot2”.</p>
+<p>These cheatsheets may come in handy throughout the semester:</p>
 <ul>
 <li><a href="http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown cheatsheet</a></li>
 <li><a href="http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling cheatsheet</a></li>
