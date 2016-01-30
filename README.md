@@ -1,4 +1,4 @@
-OpenIntro Labs - dplyr
+OpenIntro Labs - dplyr and ggplot2
 ==============
 
 OpenIntro Labs promote the understanding and application of statistics through 
@@ -19,3 +19,10 @@ using the [knitr](http://yihui.name/knitr/) package in R.
 It is our hope that these materials are useful for instructors and students of 
 statistics.  If you end up developing some interesting variants of these labs or 
 creating new ones, please let us know!
+
+## Feedback / collaboration
+
+Your feedback is most welcomed! If you have suggestions for minor updates (fixing
+typos, etc.) please do not hesitate to issue a pull request. If you have ideas for
+major revamp of a lab (replacing outdated code with modern version, overhaul in 
+pedagogy, etc.) please create an issue so to start the conversation.
