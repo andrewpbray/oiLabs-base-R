@@ -34,7 +34,23 @@ in this lab, which means you should set a seed on top of your lab. If this conce
 is new to you, review the previous lab and ask your TA.
 </div>
 
-## The data
+## Getting Started
+
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+### The data
 
 We consider real estate data from the city of Ames, Iowa. The details of 
 every real estate transaction in Ames is recorded by the City Assessor's 
