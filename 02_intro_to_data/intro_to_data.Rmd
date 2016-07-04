@@ -25,7 +25,7 @@ download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab2.Rmd", d
 Some define statistics as the field that focuses on turning information into
 knowledge. The first step in that process is to summarize and describe the raw
 information - the data. In this lab we explore flights, specifically a random
-sample of `r nrow(nycflights)` domestic flights that departed from the three major 
+sample of domestic flights that departed from the three major 
 New York City airport in 2013. We will generate simple graphical and numerical 
 summaries of data on these flights and explore delay times. As this is a large 
 data set, along the way you'll also learn the indispensable skills of data 
@@ -40,6 +40,20 @@ and hit Knit HTML.
 
 ## Getting started
 
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
 ### Data
 
 The [Bureau of Transportation Statistics](http://www.rita.dot.gov/bts/about/) 
@@ -48,8 +62,8 @@ Technology Administration (RITA). As its name implies, BTS collects and makes
 available transportation data, such as the flights data we will be working with 
 in this lab.
 
-We begin by loading the data set of `r nrow(nycflights)` observations into the R 
-workspace. After launching RStudio, enter the following command.
+We begin by loading the `nycflights` data frame. Type the following in your console
+to load the data:
 
 ```{r load-data}
 data(nycflights)
