@@ -5,12 +5,19 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
 ---
 
-```{r, include=FALSE}
+```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
+
+<div id="template">
+**Your reproducible lab report:** Before you get started, download the R Markdown 
+template for this lab. Remember all of your code and answers go in this document:
+```{r load-template, eval = FALSE}
+download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab9.Rmd", destfile = "lab9.Rmd")
+```
+</div>
 
 ## Batter up 
 
@@ -28,16 +35,28 @@ of other player statistics. Our aim will be to summarize these relationships
 both graphically and numerically in order to find which variable, if any, helps 
 us best predict a team's runs scored in a season.
 
-## The data
+## Getting Started
+
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+### The data
 
 Let's load up the data for the 2011 season.
 
 ```{r load-data}
-library(oilabs)
-library(dplyr)
-library(ggplot2)
 data(mlb11)
-str(mlb11)
 ```
 
 In addition to runs scored, there are seven traditionally used variables in the 
@@ -62,6 +81,13 @@ mlb11 %>%
 ```
 
 ## Sum of squared residuals
+
+<div id="boxedtext">
+In this section you will use an interactive function to investigate what we mean by "sum 
+of squared residuals". You will need to run this function in your console, not in your 
+markdown document. Running the function also requires that the `mlb11` dataset is loaded 
+in your environment.
+</div>
 
 Think back to the way that we described the distribution of a single variable. 
 Recall that we discussed characteristics such as center, spread, and shape. It's
@@ -173,7 +199,7 @@ However, predictions made within the range of the data are more reliable.
 They're also used to compute the residuals.
 
 5.  If a team manager saw the least squares regression line and not the actual 
-    data, how many runs would he or she predict for a team with 5,578 at-bats? 
+    data, how many runs would he or she predict for a team with 5,579 at-bats? 
     Is this an overestimate or an underestimate, and by how much? In other 
     words, what is the residual for this prediction?
 
@@ -184,7 +210,7 @@ linearity, (2) nearly normal residuals, and (3) constant variability.
 
 **Linearity**: You already checked if the relationship between runs and at-bats
 is linear using a scatterplot. We should also verify this condition with a plot 
-of the residuals vs. at-bats.
+of the residuals vs. fitted (predicted) values.
 
 ```{r residuals}
 qplot(x = .fitted, y = .resid, data = m1) +
@@ -193,12 +219,7 @@ qplot(x = .fitted, y = .resid, data = m1) +
   ylab("Residuals")
 ```
 
-Notice here that our model object `m1` can also serve as a data set because stored within 
-it are the fitted values ($\hat{y}$) and the residuals. Also note that we're getting 
-fancy with the code here. After creating the scatterplot on the first layer (first line 
-of code), we overlay a horizontal dashed line at $y = 0$ (to help us check whether 
-residuals are distributed around 0), and we also adjust the axis labels to be more 
-informative.
+Notice here that our model object `m1` can also serve as a data set because stored within it are the fitted values ($\hat{y}$) and the residuals. Also note that we're getting fancy with the code here. After creating the scatterplot on the first layer (first line of code), we overlay a horizontal dashed line at $y = 0$ (to help us check whether residuals are distributed around 0), and we also adjust the axis labels to be more informative.
 
 6.  Is there any apparent pattern in the residuals plot? What does this indicate
     about the linearity of the relationship between runs and at-bats?  
@@ -218,6 +239,8 @@ or a normal probability plot of the residuals.
 qplot(sample = .resid, data = m1, stat = "qq")
 ```
 
+Note that the syntax for making a normal probability plot is a bit different than what you're used to seeing: we set `sample` equal to the residuals instead of `x`, and we set a statistical method `qq`, which stands for "quantile-quantile", another name commonly used for normal probability plots.
+
 7.  Based on the histogram and the normal probability plot, does the nearly 
     normal residuals condition appear to be met?
 
@@ -225,12 +248,13 @@ qplot(sample = .resid, data = m1, stat = "qq")
 
 **Constant variability**:
 
-8.  Based on the plot in (1), does the constant variability condition appear to 
-    be met?
-    
+8.  Based on the residuals vs. fitted plot, does the constant variability condition 
+    appear to be met?
+
 * * *
 
-## On Your Own
+## On your own
+<div class="oyo">
 
 -   Choose another one of the seven traditional variables from `mlb11` besides 
     `at_bats` that you think might be a good predictor of `runs`. Produce a 
@@ -259,6 +283,8 @@ qplot(sample = .resid, data = m1, stat = "qq")
 
 -   Check the model diagnostics for the regression model with the variable you 
     decided was the best predictor for runs.
+    
+</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
