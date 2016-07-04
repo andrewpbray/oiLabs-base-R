@@ -8,11 +8,38 @@ output:
   pdf_document: default
 ---
 
-```{r opts, include=FALSE}
+```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
 ```
 
-## North Carolina births
+<div id="template">
+**Your reproducible lab report:** Before you get started, download the R Markdown 
+template for this lab. Remember all of your code and answers go in this document:
+```{r load-template, eval = FALSE}
+download("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab6.Rmd", destfile = "lab6.Rmd")
+```
+</div>
+
+## Getting Started
+
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+### The data
 
 In 2004, the state of North Carolina released a large data set containing 
 information on births recorded in this state. This data set is useful to 
@@ -20,38 +47,55 @@ researchers studying the relation between habits and practices of expectant
 mothers and the birth of their children. We will work with a random sample of 
 observations from this data set.
 
-## Exploratory analysis
-
 Load the `nc` data set into our workspace.
 
-```{r load-data, message = FALSE}
-library(dplyr)
-library(ggplot2)
-library(oilabs)
-head(nc)
+```{r load-data}
+data(nc)
 ```
 
 We have observations on 13 different variables, some categorical and some 
-numerical. You can read more about each one in the help file.
+numerical. The meaning of each variable is as follows.
 
-```{r nc_help}
-?nc
-```
+variable         | description
+---------------- | ---------------------------------------------
+`fage`           | father's age in years.
+`mage`           | mother's age in years.
+`mature`         | maturity status of mother.
+`weeks`          | length of pregnancy in weeks.
+`premie`         | whether the birth was classified as premature (premie) or full-term.
+`visits`         | number of hospital visits during pregnancy.
+`marital`        | whether mother is `married` or `not married` at birth.
+`gained`         | weight gained by mother during pregnancy in pounds.
+`weight`         | weight of the baby at birth in pounds.
+`lowbirthweight` | whether baby was classified as low birthweight (`low`) or not (`not low`).
+`gender`         | gender of the baby, `female` or `male`.
+`habit`          | status of the mother as a `nonsmoker` or a `smoker`.
+`whitemom`       | whether mom is `white` or `not white`.
 
 1.  What are the cases in this data set? How many cases are there in our sample?
 
-As a first step in the analysis, we should consider numerical summaries of the 
-data. This can be done using the `summary` command:
+Remember that you can answer this question by viewing the data in the data viewer or
+by using the following command:
 
-```{r summary}
-summary(nc)
+```{r str}
+str(nc)
 ```
 
-As you review the variable summaries, consider which variables are categorical 
-and which are numerical. For numerical variables, are there outliers? If you 
-aren't sure or want to take a closer look at the data, make a plot.
+## Exploratory data analysis
 
-Consider the possible relationship between a mother's smoking habit and the 
+We will first start with analyzing the weight gained by mothers throughout the 
+pregnancy: `gained`.
+
+Using visualization and summary statistics, describe the distribution of weight 
+gained by mothers during pregnancy. The `summary` function can also be useful.
+
+```{r summary}
+summary(nc$gained)
+```
+
+1.  How many mothers are we missing weight gain data from?
+
+Next, consider the possible relationship between a mother's smoking habit and the 
 weight of her baby. Plotting the data is a useful first step because it helps 
 us quickly visualize trends, identify strong associations, and develop research
 questions.
@@ -60,14 +104,14 @@ questions.
 highlight about the relationship between these two variables?
 
 The box plots show how the medians of the two distributions compare, but we can
-also compare the means of the distributions using the following chain to take
-the `nc` data, group it by `habit`, then summarize each groups' `weight` by taking
-the mean.
+also compare the means of the distributions using the following to 
+first group the data by the `habit` variable, and then calculate the mean
+`weight` in these groups using the `mean` function.
 
 ```{r by-means}
 nc %>%
   group_by(habit) %>%
-  summarize(mean(weight))
+  summarise(mean_weight = mean(weight))
 ```
 
 There is an observed difference, but is this difference statistically 
@@ -76,56 +120,57 @@ significant? In order to answer this question we will conduct a hypothesis test
 
 ## Inference
 
-3.  Write the hypotheses for testing if the average weights of babies born to 
+3.  Are all conditions necessary for inference satisfied? Comment on each. You can 
+compute the group sizes using the same `by` command above but replacing `mean(weight)` 
+with `n()`.
+
+4.  Write the hypotheses for testing if the average weights of babies born to 
 smoking and non-smoking mothers are different.
-
-4.  What is our test statistic? What distribution would you expect it to follow?
-
-4.  Check if the conditions necessary for inference are satisfied. Note that 
-you will need to obtain sample sizes to check the conditions. You can compute 
-the group size using the same chain above but replacing summarizing each group
-with `n()` instead of `mean(weight)`.
 
 Next, we introduce a new function, `inference`, that we will use for conducting
 hypothesis tests and constructing confidence intervals. 
 
-```{r inf-weight-habit-ht, eval=FALSE, tidy=FALSE}
-inference(y = nc$weight, x = nc$habit, est = "mean", type = "ht", null = 0, 
+```{r inf-weight-habit-ht, tidy=FALSE}
+inference(y = weight, x = habit, data = nc, statistic = "mean", type = "ht", null = 0, 
           alternative = "twosided", method = "theoretical")
 ```
 
 Let's pause for a moment to go through the arguments of this custom function. 
 The first argument is `y`, which is the response variable that we are 
-interested in: `nc$weight`. The second argument is the explanatory variable, 
+interested in: `weight`. The second argument is the explanatory variable, 
 `x`, which is the variable that splits the data into two groups, smokers and 
-non-smokers: `nc$habit`. The third argument, `est`, is the parameter we're 
-interested in: `"mean"` (other options are `"median"`, or `"proportion"`.) Next
-we decide on the `type` of inference we want: a hypothesis test (`"ht"`) or a 
-confidence interval (`"ci"`). When performing a hypothesis test, we also need 
-to supply the `null` value, which in this case is `0`, since the null 
-hypothesis sets the two population means equal to each other. The `alternative`
-hypothesis can be `"less"`, `"greater"`, or `"twosided"`. Lastly, the `method` 
-of inference can be `"theoretical"` or `"simulation"` based.
+non-smokers: `habit`. The third argument, `data`, is the data frame these
+variables are stored in. Next is `statistic`, which is the sample statistic
+we're using, or similarly, the population parameter we're estimating. In future labs
+we'll also work with "median" and "proportion". Next we decide on the `type` of inference 
+we want: a hypothesis test (`"ht"`) or a confidence interval (`"ci"`). When performing a 
+hypothesis test, we also need to supply the `null` value, which in this case is `0`, 
+since the null hypothesis sets the two population means equal to each other. 
+The `alternative` hypothesis can be `"less"`, `"greater"`, or `"twosided"`. 
+Lastly, the `method` of inference can be `"theoretical"` or `"simulation"` based.
+
+For more information on the inference function see the help file with `?inference`.
 
 5.  Change the `type` argument to `"ci"` to construct and record a confidence 
-interval for the difference between the weights of babies born to smoking and 
-non-smoking mothers.
+interval for the difference between the weights of babies born to nonsmoking and 
+smoking mothers, and interpret this interval in context of the data. Note that by 
+default you'll get a 95% confidence interval. If you want to change the
+confidence level, add a new argument (`conf_level`) which takes on a value
+between 0 and 1. Also note that when doing a confidence interval arguments like
+`null` and `alternative` are not useful, so make sure to remove them.
 
 By default the function reports an interval for ($\mu_{nonsmoker} - \mu_{smoker}$)
 . We can easily change this order by using the `order` argument:
 
 ```{r inf-weight-habit-ci, tidy=FALSE}
-inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, 
-          alternative = "twosided", method = "theoretical", 
-          order = c("smoker","nonsmoker"))
+inference(y = weight, x = habit, data = nc, statistic = "mean", type = "ci", 
+          method = "theoretical", order = c("smoker","nonsmoker"))
 ```
 
 * * *
 
+<div class="oyo">
 ## On your own
-
-For the following inferential exercises, be sure to assess the conditions for
-inference.
 
 -   Calculate a 95% confidence interval for the average length of pregnancies 
 (`weeks`) and interpret it in context. Note that since you're doing inference 
@@ -134,21 +179,26 @@ omit the `x` variable from the function.
 
 -   Calculate a new confidence interval for the same parameter at the 90% 
 confidence level. You can change the confidence level by adding a new argument 
-to the function: `conflevel = 0.90`.
+to the function: `conf_level = 0.90`. Comment on the width of this interval versus 
+the one obtained in the the previous exercise.
 
 -   Conduct a hypothesis test evaluating whether the average weight gained by 
-younger mothers is different from the average weight gained by mature mothers.
-Be sure to state hypotheses.
+younger mothers is different than the average weight gained by mature mothers.
 
 -   Now, a non-inference task: Determine the age cutoff for younger and mature 
 mothers. Use a method of your choice, and explain how your method works.
 
--   Pick a pair of numerical and categorical variables and come up with a 
-research question evaluating the relationship between these variables. 
+-   Pick a pair of variables: one numerical (response) and one categorical (explanatory). 
+Come up with a research question evaluating the relationship between these variables. 
 Formulate the question in a way that it can be answered using a hypothesis test
-and/or a confidence interval. Please outline the hypotheses, utilize the `inference()` 
+and/or a confidence interval. Answer your question using the `inference` 
 function, report the statistical results, and also provide an explanation in 
-plain language.
+plain language. Be sure to check all assumptions,state your $\alpha$ level, and conclude 
+in context. (Note: Picking your own variables, coming up with a research question,
+and analyzing the data to answer this question is basically what you'll need to do for
+your project as well.)
+
+</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
