@@ -168,6 +168,16 @@ $(document).ready(function () {
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting Started</h2>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<p>In this lab we will explore the data using the <code>dplyr</code> package and visualize it using the <code>ggplot2</code> package for data visualization. The data can be found in the companion package for OpenIntro labs, <code>oilabs</code>.</p>
+<p>Let’s load the packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(oilabs)</code></pre></div>
+</div>
+<div id="data" class="section level3">
+<h3>Data</h3>
 <p>Our investigation will focus on the performance of one player: Kobe Bryant of the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 NBA finals earned him the title <em>Most Valuable Player</em> and many spectators commented on how he appeared to show a hot hand. Let’s load some necessary files that we will need for this lab.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(kobe_basket)</code></pre></div>
 <p>This data frame contains 133 observations and 6 variables, where every row records a shot taken by Kobe Bryant. The <code>shot</code> variable in this dataset indicates whether the shot was a hit (<code>H</code>) or a miss (<code>M</code>).</p>
@@ -186,6 +196,7 @@ $(document).ready(function () {
 <ol start="2" style="list-style-type: decimal">
 <li>Describe the distribution of Kobe’s streak lengths from the 2009 NBA finals. What was his typical streak length? How long was his longest streak of baskets? Make sure to include the accompanying plot in your answer.</li>
 </ol>
+</div>
 </div>
 <div id="compared-to-what" class="section level2">
 <h2>Compared to What?</h2>

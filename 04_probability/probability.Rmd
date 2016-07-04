@@ -61,6 +61,22 @@ data in order to determine if the hot hand phenomenon appears to be real.
 
 ## Getting Started
 
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+### Data
+
 Our investigation will focus on the performance of one player: Kobe Bryant of 
 the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 
 NBA finals earned him the title *Most Valuable Player* and many spectators 
