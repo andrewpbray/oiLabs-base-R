@@ -40,20 +40,6 @@ and hit Knit HTML.
 
 ## Getting started
 
-### R Packages
-
-In this lab we will explore these questions using the `dplyr` package for data
-wrangling and the `ggplot2` package for data visualization. So let's load these 
-packages:
-
-```{r packages}
-library(ggplot2)
-library(dplyr)
-library(openintro)
-```
-
-Note that these two lines are also included in your R Markdown template.
-
 ### Data
 
 The [Bureau of Transportation Statistics](http://www.rita.dot.gov/bts/about/) 
@@ -126,6 +112,19 @@ destination tend to be.
 - We might want to evaluate how departure delays vary over months. 
 - Or we might want to determine which of the three major NYC airports has a better 
 on time percentage for departing flights.
+
+### R Packages
+
+In this lab we will explore these questions using the `dplyr` package for data
+wrangling and the `ggplot2` package for data visualization. So let's load these 
+packages:
+
+```{r packages}
+library(ggplot2)
+library(dplyr)
+```
+
+Note that these two lines are also included in your R Markdown template.
 
 ### Seven verbs
 
@@ -235,12 +234,12 @@ flights headed to San Francisco (SFO) in February:
 
 ```{r}
 sfo_feb_flights <- nycflights %>%
-  filter(dest == "SFO" & month == 2)
+  filter(dest == "SFO", month == 2)
 ```
 
-Note that we can separate the conditions using `&` if we want flights that
+Note that we can separate the conditions using commas if we want flights that
 are both headed to SFO **and** in February. If we are interested in either
-flights headed to SFO **or** in February we can use the `|` instead of the `&`
+flights headed to SFO **or** in February we can use the `|` instead of the comma.
 
 1.  Create a new data frame that includes flights headed to SFO in February, 
     and save this data frame as `sfo_feb_flights`. How many flights 
