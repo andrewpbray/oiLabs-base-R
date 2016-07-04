@@ -14,6 +14,9 @@ nocite: |
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
 ```
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
@@ -28,8 +31,7 @@ get to that stage, however, you need to build some basic fluency in R. Today we
 begin with the fundamental building blocks of R and RStudio: the interface, 
 reading in data, and basic commands.
 
-Go ahead and sign on to RStudio at https://vm-manage.oit.duke.edu/containers. You
-should see a window that looks like the image shown below.
+Go ahead and launch RStudio. You should see a window that looks like the image shown below.
 
 ![rinterface](more/rInterface2014.png)
 
@@ -53,9 +55,7 @@ allows you to complete your lab entirely in RStudio as well as ensuring
 reproducibility of your analysis and results. To help get you started we are 
 providing a template for you. Use the following code to download this template:
 
-```{r load-template}
-# will need to be updated once we figure out the best way to include
-# Rmd templates in package
+```{r load-template, eval=FALSE}
 download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab1.Rmd", destfile = "lab1.Rmd")
 ```
 
@@ -80,9 +80,9 @@ R is an open-source programming language, meaning that users can contribute
 packages that make our lives easier, and we can use them for free. For this lab,
 and many others in the future, we will use the following R packages:
 
-- `oilabs`: short for "OpenIntro Labs"
 - `dplyr`: for data wrangling
 - `ggplot2`: for data visualization
+- `oilabs`: for datasets and custom functions for OpenIntro labs
 
 These packages have already been installed for you, however you will still
 need to load them in your working environment. To do so, type the following 
@@ -108,7 +108,7 @@ on top of your R Markdown document as well.
 
 To get you started, run the following command from your markdown file.
 
-```{r load-abrbuthnot-data}
+```{r load-abrbuthnot-data, eval=TRUE, message = FALSE}
 data(arbuthnot)
 ```
 
@@ -403,8 +403,6 @@ The data are stored in a data frame called `present`.
     in a descenting order with another function: `descr` (for descending order).
     Sample code provided below.
     
-<!-- eval=FALSE hard-coded, 
-won't run since present$total not defined in document -->
 ```{r eval=FALSE}
 present %>%
   arrange(desc(total))
