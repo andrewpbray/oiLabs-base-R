@@ -81,7 +81,7 @@ you need to **load** them each time you relaunch RStudio.
 ```{r load-packages, message = FALSE}
 library(dplyr)
 library(ggplot2)
-library(statsr)
+library(oilabs)
 ```
 
 To do so, you can 
