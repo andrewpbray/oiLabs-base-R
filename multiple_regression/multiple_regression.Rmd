@@ -83,7 +83,7 @@ data(evals)
 ```
 
 variable         | description
----------------- | -----------
+---------------- | ------------------------------------------------------------------------------
 `score`          | average professor evaluation score: (1) very unsatisfactory - (5) excellent.
 `rank`           | rank of professor: teaching, tenure track, tenured.
 `ethnicity`      | ethnicity of professor: not minority, minority.
@@ -188,7 +188,7 @@ term into the model.
 
 ```{r scatter-score-bty_avg_gender}
 m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
-summary(m_bty_gen)
+msummary(m_bty_gen)
 ```
 
 7.  P-values and parameter estimates should only be trusted if the
@@ -262,7 +262,7 @@ Let's run the model...
 m_full <- lm(score ~ rank + ethnicity + gender + language + age + cls_perc_eval 
              + cls_students + cls_level + cls_profs + cls_credits + bty_avg 
              + pic_outfit + pic_color, data = evals)
-summary(m_full)
+msummary(m_full)
 ```
 
 12. Check your suspicions from the previous exercise. Include the model output
