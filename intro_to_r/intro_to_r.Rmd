@@ -30,7 +30,7 @@ reading in data, and basic commands.
 
 When you first open RStudio, you should see a window that looks like the image shown below.
 
-![rinterface](more/rInterface2014.png)
+![](more/r-interface-2016.png)
 
 The panel in the upper right contains your *environment* as well as a history of 
 the commands that you've previously entered. Any plots that you generate will 
