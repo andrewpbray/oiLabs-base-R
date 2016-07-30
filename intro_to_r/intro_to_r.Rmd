@@ -5,11 +5,12 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
+    toc: true
+    toc_float: true
   pdf_document: default
 bibliography: intro_to_r.bib
 nocite: | 
-  @Births2002, @Births2003, @Births2004, @Births2005, @Births2006, @Births2007,
-  @Births2008, @Births2009, @Births2010, @Births2011, @Births2012, @Births2013
+  @Births2002
 ---
 
 ```{r global_options, include=FALSE}
@@ -415,3 +416,5 @@ however majority of it will become useful throughout the semester.
 * * *
 
 ## References
+
+The data come from a sequence of reports issued anually between 2002 and 2013. The citation is below is for 2002; remaining years follow a similar format.
