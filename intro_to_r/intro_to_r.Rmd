@@ -63,7 +63,7 @@ Once you have a package, you'll need to load it into your R session to take adva
 of its power. Load these three packages into your session by running the following
 lines at the console.
 
-```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
