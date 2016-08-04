@@ -17,6 +17,8 @@ nocite: |
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## The RStudio Interface
+
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
 throughout the course both to learn the statistical concepts discussed in the 
 texbook and also to analyze real data and come to informed conclusions. To 
@@ -46,7 +48,7 @@ and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
 to access data and organize, describe, and invoke statistical computations.
 
-## R Packages
+#### R Packages
 
 R is an open-source programming language, meaning that users can contribute
 packages that make our lives easier and we can use them for free. For this lab,
@@ -61,13 +63,13 @@ Once you have a package, you'll need to load it into your R session to take adva
 of its power. Load these three packages into your session by running the following
 lines at the console.
 
-```{r}
+```{r, eval=TRUE, echo=FALSE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
 ```
 
-## Creating a reproducible lab report
+## Creating a Reproducible Lab Report
 
 You will be typing up your lab report in what's called an R Markdown file. This 
 allows you to complete your lab entirely in RStudio while ensuring the
@@ -76,7 +78,7 @@ providing a template for you through the `oilabs` package that you just loaded.
 To open that file, click on the small green plus icon in the upper left corner
 of your screen and select **R Markdown...**. This will bring up this menu:
 
-Fig Here.
+<img src="more/Rmd-from-template.png" width = 400 align="middle">
 
 Click on **From Template** and select **Lab 1 Template**.
 
@@ -184,10 +186,10 @@ complete data frame, we saw 82 rows, one on each line of the display. These data
 are no longer structured in a table with other variables, so they are displayed 
 one right after another. Objects that print out in this way are called vectors. 
 R has added numbers in [brackets] along the left
-side of the printout to indicate locations within the vector. For example, 5218 
-follows [1], indicating that 5218 is the first entry in the vector. And if [43] 
-starts a line, then that would mean the first number on that line would represent
-the 43rd entry in the vector.
+side of the printout to indicate locations within the vector. For example, 
+`5218` follows `[1]`, indicating that `5218` is the first entry in 
+the vector. And if `[43]` starts a line, then that would mean the first number 
+on that line would represent the 43<sup>rd</sup> entry in the vector.
 
 R has some powerful functions for making graphics. We can create a simple plot 
 of the number of girls baptized per year with the command
@@ -340,7 +342,7 @@ save your Rmd so that you can continue your work at a later date.
 
 * * *
 
-## On Your Own
+## More Practice
 
 <div class="oyo">
 
@@ -394,7 +396,7 @@ This lab was developed by a team of contributors at [OpenIntro Labs](https://www
 
 * * *
 
-## Resources for learning R and working in RStudio
+#### Resources for learning R and working in RStudio
 
 That was a short introduction to R and RStudio, but we will provide you with more
 functions and a more complete sense of the language as the labs progress. 
@@ -415,6 +417,6 @@ however majority of it will become useful throughout the semester.
 
 * * *
 
-## References
+#### References
 
 The data come from a sequence of reports issued anually between 2002 and 2013. The citation is below is for 2002; remaining years follow a similar format.
