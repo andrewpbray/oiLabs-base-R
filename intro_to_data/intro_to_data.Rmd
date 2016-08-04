@@ -5,6 +5,8 @@ output:
     theme: cerulean
     highlight: pygments
     css: ../lab.css
+    toc: true
+    toc_float: true
 ---
 
 ```{r global-options, include=FALSE}
