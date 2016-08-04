@@ -78,7 +78,9 @@ providing a template for you through the `oilabs` package that you just loaded.
 To open that file, click on the small green plus icon in the upper left corner
 of your screen and select **R Markdown...**. This will bring up this menu:
 
-<img src="more/Rmd-from-template.png" width = 400 align="middle">
+<br>
+<center><img src="more/Rmd-from-template.png" width=400></center>
+<br>
 
 Click on **From Template** and select **Lab 1 Template**.
 
