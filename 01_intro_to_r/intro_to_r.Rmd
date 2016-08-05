@@ -5,11 +5,8 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
-bibliography: intro_to_r.bib
-nocite: | 
-  @Births2002, @Births2003, @Births2004, @Births2005, @Births2006, @Births2007,
-  @Births2008, @Births2009, @Births2010, @Births2011, @Births2012, @Births2013
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
@@ -33,11 +30,11 @@ reading in data, and basic commands.
 
 Go ahead and launch RStudio. You should see a window that looks like the image shown below.
 
-## RStudio
+## The RStudio Interface
 
 Your RStudio window has four panels.
 
-![rinterface](more/rInterface2014.png)
+![rinterface](more/r-interface-2016.png)
 
 Your R Markdown file (this document) is in the upper left panel.
 
