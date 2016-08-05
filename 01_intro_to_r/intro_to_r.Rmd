@@ -392,9 +392,7 @@ You'll find your R session is just as you left it.
 
 * * *
 
-## On Your Own
-
-<div class="oyo">
+## More Practice
 
 In the previous few pages, you recreated some of the displays and preliminary 
 analysis of Arbuthnot's baptism data. Your assignment involves repeating these 
@@ -407,17 +405,17 @@ data(present)
 
 The data are stored in a data frame called `present`.
 
--   What years are included in this data set? What are the dimensions of the 
+4.  What years are included in this data set? What are the dimensions of the 
     data frame? What are the variable (column) names?
 
--   How do these counts compare to Arbuthnot's? Are they on a similar scale?
+5.  How do these counts compare to Arbuthnot's? Are they on a similar scale?
 
--   Make a plot that displays the proportion of boys born over time. What do you see? 
+6.  Make a plot that displays the proportion of boys born over time. What do you see? 
     Does Arbuthnot's observation about boys being born in greater proportion than girls 
     hold up in the U.S.? Include the plot in your response. *Hint:* You should be
     able to reuse your code from Ex 3 above, just replace the dataframe name.
 
--   In what year did we see the most total number of births in the U.S.? *Hint:*
+7.  In what year did we see the most total number of births in the U.S.? *Hint:*
     First calculate the totals and save it as a new variable. Then, sort your
     dataset in descending order based on the total column. You can do this
     interactively in the data viewer by clicking on the arrows next to the 
