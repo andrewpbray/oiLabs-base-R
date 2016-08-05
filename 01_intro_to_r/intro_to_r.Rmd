@@ -5,25 +5,25 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-    toc: true
-    toc_float: true
   pdf_document: default
 bibliography: intro_to_r.bib
 nocite: | 
-  @Births2002
+  @Births2002, @Births2003, @Births2004, @Births2005, @Births2006, @Births2007,
+  @Births2008, @Births2009, @Births2010, @Births2011, @Births2012, @Births2013
 ---
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
 ```
-
-## The RStudio Interface
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
 throughout the course both to learn the statistical concepts discussed in the 
-texbook and also to analyze real data and come to informed conclusions. To 
-straighten out which is which: R is the name of the programming language itself 
-and RStudio is a convenient interface.
+course and to analyze real data and come to informed conclusions. To straighten 
+out which is which: R is the name of the programming language itself and RStudio 
+is a convenient interface.
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate;
 a willingness to experiment will make you a much better programmer. Before we 
@@ -31,15 +31,17 @@ get to that stage, however, you need to build some basic fluency in R. Today we
 begin with the fundamental building blocks of R and RStudio: the interface, 
 reading in data, and basic commands.
 
-When you first open RStudio, you should see a window that looks like the image shown below.
+Go ahead and launch RStudio. You should see a window that looks like the image shown below.
 
-![](more/r-interface-2016.png)
+## RStudio
 
-The panel in the upper right contains your *environment* as well as a history of 
-the commands that you've previously entered. Any plots that you generate will 
-show up in the panel in the lower right corner.
+Your RStudio window has four panels.
 
-The panel on the left is where the action happens. It's called the *console*. 
+![rinterface](more/rInterface2014.png)
+
+Your R Markdown file (this document) is in the upper left panel.
+
+The panel on the lower left is where the action happens. It's called the *console*. 
 Everytime you launch RStudio, it will have the same text at the top of the 
 console telling you the version of R that you're running. Below that information
 is the *prompt*. As its name suggests, this prompt is really a request, a 
@@ -48,66 +50,95 @@ and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
 to access data and organize, describe, and invoke statistical computations.
 
-#### R Packages
+The panel in the upper right contains your *workspace* as well as a history of 
+the commands that you've previously entered. 
+
+Any plots that you generate will show up in the panel in the lower right corner. 
+This is also where you can browse your files, access help, manage packages, etc.
+
+## R Packages
 
 R is an open-source programming language, meaning that users can contribute
-packages that make our lives easier and we can use them for free. For this lab,
+packages that make our lives easier, and we can use them for free. For this lab,
 and many others in the future, we will use the following R packages:
 
-- `oilabs`: short for "OpenIntro Labs"
 - `dplyr`: for data wrangling
 - `ggplot2`: for data visualization
+- `oilabs`: for data and custom functions with the OpenIntro labs
 
-Please watch [this very short video](to learn how to download and install packages.
-Once you have a package, you'll need to load it into your R session to take advantage
-of its power. Load these three packages into your session by running the following
-lines at the console.
+First, install these packages with the `install.packages` function:
 
-```{r, eval=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+```{r install-packages, message = FALSE}
+install.packages(dplyr)
+install.packages(ggplot2)
+install.packages(oilabs)
+```
+
+Next, you need to load the packages in your working environment. We do this with
+the `library` function. Note that you only need to **install** packages once, but
+you need to **load** them each time you relaunch RStudio.
+
+```{r load-packages, message = FALSE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
 ```
 
-## Creating a Reproducible Lab Report
+To do so, you can 
 
-You will be typing up your lab report in what's called an R Markdown file. This 
-allows you to complete your lab entirely in RStudio while ensuring the
+- click on the green arrow at the top of the code chunk in the R Markdown (Rmd) 
+file, or
+- highlight these lines, and hit the **Run** button on the upper right corner of the 
+pane, or
+- type the code in the console.
+
+Going forward you will be asked to load any relevant packages at the beginning
+of each lab.
+
+## Creating a reproducible lab report
+
+We will be using a markdown language, R Markdown, to type up the lab report. This 
+allows you to complete your lab entirely in RStudio as well as ensuring 
 reproducibility of your analysis and results. To help get you started we are 
-providing a template for you through the `oilabs` package that you just loaded.
-To open that file, click on the small green plus icon in the upper left corner
-of your screen and select **R Markdown...**. This will bring up this menu:
+providing a template for you. Use the following code to download this template:
 
-<br>
-<center><img src="more/Rmd-from-template.png" width=400></center>
-<br>
-
-Click on **From Template** and select **Lab 1 Template**.
-
-This will open up a lab report in a new pane called the *editor*. To get a sense
-of how this document is structured, you can [watch this video]().
-
-Two things to note before we move on to the actual lab. 1) You'll recognize that
-the R Markdown file has the same three lines used to load the packages. We need 
-to load the packages both in the console and in your R Markdown environment since 
-these two environments work independently of each other. 2) At the very top of the
-report there is a field for "author". Fill in your name then click the **Knit HTML**
-button. Voila - a lab report! As you proceed with the lab and add to this document,
-we encourage you to knit often to be sure it's coming along as you intend.
-
-## The Data: Dr. Arbuthnot's Baptism Records
-
-To get you started, run the following command from your markdown file.
-
-```{r load-abrbuthnot-data}
-head(arbuthnot)
+```{r load-template, eval=FALSE}
+download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab1.Rmd", destfile = "lab1.Rmd")
 ```
 
-To do so, you can simply put your cursor on that line, and hit the **Run** button
-on the upper right corner of the pane.
+You will see a new file called `lab1.Rmd` in the Files tab on the pane in the 
+bottom right corner of your RStudio window. We will refer to this as your "R 
+markdown file" or "your report". Click on the file name to open the file. All you 
+need to do to complete the lab is to type up your **brief** answers and the R 
+code (when necessary) in the spaces provided in the document. Earlier in the lab 
+spaces are provided for you to enter R code chunks. Later in the lab you'll need 
+to figure out whether code is needed to answer a particular question, and if so a 
+new chunk can be inserted by clicking on the *Insert Chunk* button (dropdown menu 
+under *Chunks* on the upper right corner of your markdown document).
 
-This command instructs R to print out the first several lines of a data set 
-containing baptism counts for boys and girls. You should see that the 
+Before you keep going type your team name, the name of the team member who is the 
+"author" for the day, and the "discussants", who are the other team members 
+present in lab today. Then click on *Knit HTML* and you'll see your document in a 
+new pop-up window.
+
+## Dr. Arbuthnot's Baptism Records
+
+To get you started, run the following command to load the data.
+
+```{r load-abrbuthnot-data}
+data(arbuthnot)
+```
+
+To do so, you can 
+
+- click on the green arrow at the top of the code chunk in the R Markdown (Rmd) 
+file, or
+- put your cursor on this line, and hit the **Run** button on the upper right 
+corner of the pane, or
+- type the code in the console.
+
+This command instructs R to load some data: 
+the Arbuthnot baptism counts for boys and girls. You should see that the 
 workspace area in the upper righthand corner of the RStudio window now lists a 
 data set called `arbuthnot` that has 82 observations on 3 variables. As you 
 interact with R, you will create a series of objects. Sometimes you load them as
@@ -117,14 +148,15 @@ computation or some analysis you have performed.
 The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century 
 physician, writer, and mathematician. He was interested in the ratio of newborn
 boys to newborn girls, so he gathered the baptism records for children born in
-London for every year from 1629 to 1710. We can take a look at the entire data set
-by typing its name into the console.
+London for every year from 1629 to 1710. We can take a look at the data by 
+typing its name into the console.
 
 ```{r view-data}
 arbuthnot
 ```
 
-We can also view the data in a cleaner format using the data viewer. Click on
+However printing the whole dataset in the console is not that useful. 
+One advantage of RStudio is that it comes with a built-in data viewer. Click on
 the name `arbuthnot` in the *Environment* pane (upper right window) that lists 
 the objects in your workspace. This will bring up an alternative display of the 
 data set in the *Data Viewer* (upper left window). You can close the data viewer
@@ -181,17 +213,17 @@ variable that comes after me".
     it! (Enter your answer in your R markdown document and run the entire report
     by hitting **Knit HTML**. Voila! The R output you need is already in your 
     report. Let's make this the first and last time we print out an entire dataset
-    in a lab report!)
+    in our lab reports!)
     
 Notice that the way R has printed these data is different. When we looked at the
 complete data frame, we saw 82 rows, one on each line of the display. These data
 are no longer structured in a table with other variables, so they are displayed 
-one right after another. Objects that print out in this way are called vectors. 
-R has added numbers in [brackets] along the left
-side of the printout to indicate locations within the vector. For example, 
-`5218` follows `[1]`, indicating that `5218` is the first entry in 
-the vector. And if `[43]` starts a line, then that would mean the first number 
-on that line would represent the 43<sup>rd</sup> entry in the vector.
+one right after another. Objects that print out in this way are called vectors; 
+they represent a set of numbers. R has added numbers in [brackets] along the left
+side of the printout to indicate locations within the vector. For example, 5218 
+follows [1], indicating that 5218 is the first entry in the vector. And if [43] 
+starts a line, then that would mean the first number on that line would represent
+the 43rd entry in the vector.
 
 R has some powerful functions for making graphics. We can create a simple plot 
 of the number of girls baptized per year with the command
@@ -201,7 +233,7 @@ qplot(x = year, y = girls, data = arbuthnot)
 ```
 
 The `qplot()` function (meaning "quick plot") looks at the type of data you have
-provided and makes the decision to visualize it with a scatterplot. The plot
+provided it and makes the decision to visualize it with a scatterplot. The plot
 should appear under the *Plots* tab of the lower right panel of RStudio. Notice 
 that the command above again looks like a function, this time with three arguments
 separated by commas. The first two arguments in the `qplot()` function specify 
@@ -229,6 +261,8 @@ toggle between plots and help files using the tabs at the top of that panel.
 2. Is there an apparent trend in the number of girls baptized over the years? 
 How would you describe it?
 
+### R as a big calculator
+
 Now, suppose we want to plot the total number of baptisms. To compute this, we 
 could use the fact that R is really just a big calculator. We can type in 
 mathematical expressions like
@@ -249,23 +283,33 @@ What you will see are 82 numbers (in that packed display, because we aren’t
 looking at a data frame here), each one representing the sum we’re after. Take a
 look at a few of them and verify that they are right.
 
+### Adding a new variable to the data frame
+
 We'll be using this new vector to generate some plots, so we'll want to save it 
 as a permanent column in our data frame.
 
 ```{r calc-total-bapt-vars-save}
-arbuthnot <- mutate(arbuthnot, total = boys + girls)
+arbuthnot <- arbuthnot %>%
+  mutate(total = boys + girls)
 ```
 
-We can read this line of code as the following: 
+What in the world is going on here? The `%>%` operator is called the **piping** 
+operator. Basically, it takes the output of the current line and pipes it into 
+the following line of code.
 
-*Mutate the `arbuthnot` data set to create a new variable called `total` that is
-the sum of the variables called `boys` and `girls`. Then assign this new 
-resulting dataset to the object called `arbuthnot`, i.e. overwrite the old 
-`arbuthnot` dataset with the new one containing the new variable.*
+<div id="boxedtext">
+**A note on piping: ** Note that we can read these three lines of code as the following: 
+
+*"Take the `arbuthnot` dataset and **pipe** it into the `mutate` function. 
+Using this mutate a new variable called `total` that is the sum of the variables
+called `boys` and `girls`. Then assign this new resulting dataset to the object
+called `arbuthnot`, i.e. overwrite the old `arbuthnot` dataset with the new one
+containing the new variable."*
 
 This is essentially equivalent to going through each row and adding up the boys 
 and girls counts for that year and recording that value in a new column called
 total.
+</div>
 
 <div id="boxedtext">
 **Where is the new variable? ** When you make changes to variables in your dataset, 
@@ -294,7 +338,8 @@ of the number of boys to the number of girls baptized in 1629 with
 or we can act on the complete columns with the expression
 
 ```{r calc-prop-boys-to-girls-vars}
-arbuthnot <- mutate(arbuthnot, boy_to_girl_ratio = boys / girls)
+arbuthnot <- arbuthnot %>%
+  mutate(boy_to_girl_ratio = boys / girls)
 ```
 
 We can also compute the proportion of newborns that are boys in 1629
@@ -306,7 +351,8 @@ We can also compute the proportion of newborns that are boys in 1629
 or this may also be computed for all years simultaneously and append it to the dataset:
 
 ```{r calc-prop-boys-vars}
-arbuthnot <- mutate(arbuthnot, boy_ratio = boys / total)
+arbuthnot <- arbuthnot %>%
+  mutate(boy_ratio = boys / total)
 ```
 
 Note that we are using the new `total` variable we created earlier in our calculations.
@@ -326,7 +372,8 @@ division, you can ask R to make comparisons like greater than, `>`, less than,
 year with the expression
 
 ```{r boys-more-than-girls}
-arbuthnot <- mutate(more_boys = boys > girls)
+arbuthnot <- arbuthnot %>%
+  mutate(more_boys = boys > girls)
 ```
 
 This command add a new variable to the `arbuthnot` dataframe containing the values
@@ -339,22 +386,26 @@ or `FALSE`. In general, data analysis will involve many different kinds of data
 types, and one reason for using R is that it is able to represent and compute 
 with many of them.
 
-This seems like a fair bit for your first lab, so let's stop here. Be sure to
-save your Rmd so that you can continue your work at a later date.
+This seems like a fair bit for your first lab, so let's stop here. To exit 
+RStudio just close your browser window. And then sign back in to RStudio at
+
+https://vm-manage.oit.duke.edu/containers
+
+You'll find your R session is just as you left it.
 
 * * *
 
-## More Practice
+## On Your Own
 
 <div class="oyo">
 
-In the lab above, you recreated some displays and preliminary 
+In the previous few pages, you recreated some of the displays and preliminary 
 analysis of Arbuthnot's baptism data. Your assignment involves repeating these 
-steps, but for present day birth records in the United States. Glimpse the first
-several lines of this data set by typing.
+steps, but for present day birth records in the United States. Load up the 
+present day data with the following command.
 
 ```{r load-present-data}
-head(present)
+data(present)
 ```
 
 The data are stored in a data frame called `present`.
@@ -378,14 +429,13 @@ The data are stored in a data frame called `present`.
     in a descenting order with another function: `descr` (for descending order).
     Sample code provided below.
     
-<!-- eval=FALSE hard-coded, 
-won't run since present$total not defined in document -->
 ```{r eval=FALSE}
-arrange(present, desc(total))
+present %>%
+  arrange(desc(total))
 ```
 
 These data come from reports by the Centers for Disease Control listed in the
-references section. If you would like to read more about an analysis of sex ratios
+references section. If you would like to read more abour an analysis of sex ratios
 at birth in the United states, check out [this report](http://www.cdc.gov/nchs/data/nvsr/nvsr52/nvsr52_10.pdf).
 
 </div>
@@ -393,22 +443,23 @@ at birth in the United states, check out [this report](http://www.cdc.gov/nchs/d
 <div id="license">
 This is a product of OpenIntro that is released under a 
 [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0). 
-This lab was developed by a team of contributors at [OpenIntro Labs](https://www.openintro.org/about.php).
+This lab was adapted for OpenIntro by Andrew Bray and Mine &Ccedil;etinkaya-Rundel
+from a lab written by Mark Hansen of UCLA Statistics.
 </div>
 
 * * *
 
-#### Resources for learning R and working in RStudio
+## Resources for learning R and working in RStudio
 
 That was a short introduction to R and RStudio, but we will provide you with more
-functions and a more complete sense of the language as the labs progress. 
+functions and a more complete sense of the language as the course progresses. 
 
-In these labs we will be using R packages called `dplyr` for data wrangling 
+In this course we will be using R packages called `dplyr` for data wrangling 
 and `ggplot2` for data visualization. If you are googling for R code, make sure
 to also include these package names in your search query. For example, instead
 of googling "scatterplot in R", google "scatterplot in R with ggplot2".
 
-These cheatsheets may come in handy throughout the semester:
+These cheathseets may come in handy throughout the semester:
 
 - [RMarkdown cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 - [Data wrangling cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
@@ -419,6 +470,4 @@ however majority of it will become useful throughout the semester.
 
 * * *
 
-#### References
-
-The data come from a sequence of reports issued anually between 2002 and 2013. The citation is below is for 2002; remaining years follow a similar format.
+## References

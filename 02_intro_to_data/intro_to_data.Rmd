@@ -5,8 +5,6 @@ output:
     theme: cerulean
     highlight: pygments
     css: ../lab.css
-    toc: true
-    toc_float: true
 ---
 
 ```{r global-options, include=FALSE}
@@ -27,7 +25,7 @@ download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab2.Rmd", d
 Some define statistics as the field that focuses on turning information into
 knowledge. The first step in that process is to summarize and describe the raw
 information - the data. In this lab we explore flights, specifically a random
-sample of `r nrow(nycflights)` domestic flights that departed from the three major 
+sample of domestic flights that departed from the three major 
 New York City airport in 2013. We will generate simple graphical and numerical 
 summaries of data on these flights and explore delay times. As this is a large 
 data set, along the way you'll also learn the indispensable skills of data 
@@ -42,19 +40,19 @@ and hit Knit HTML.
 
 ## Getting started
 
-### R Packages
+### Load packages
 
-In this lab we will explore these questions using the `dplyr` package for data
-wrangling and the `ggplot2` package for data visualization. So let's load these 
-packages:
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
 
-```{r packages}
-library(ggplot2)
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
 library(dplyr)
-library(openintro)
+library(ggplot2)
+library(oilabs)
 ```
-
-Note that these two lines are also included in your R Markdown template.
 
 ### Data
 
@@ -64,8 +62,8 @@ Technology Administration (RITA). As its name implies, BTS collects and makes
 available transportation data, such as the flights data we will be working with 
 in this lab.
 
-We begin by loading the data set of `r nrow(nycflights)` observations into the R 
-workspace. After launching RStudio, enter the following command.
+We begin by loading the `nycflights` data frame. Type the following in your console
+to load the data:
 
 ```{r load-data}
 data(nycflights)
@@ -128,6 +126,19 @@ destination tend to be.
 - We might want to evaluate how departure delays vary over months. 
 - Or we might want to determine which of the three major NYC airports has a better 
 on time percentage for departing flights.
+
+### R Packages
+
+In this lab we will explore these questions using the `dplyr` package for data
+wrangling and the `ggplot2` package for data visualization. So let's load these 
+packages:
+
+```{r packages}
+library(ggplot2)
+library(dplyr)
+```
+
+Note that these two lines are also included in your R Markdown template.
 
 ### Seven verbs
 
@@ -237,12 +248,12 @@ flights headed to San Francisco (SFO) in February:
 
 ```{r}
 sfo_feb_flights <- nycflights %>%
-  filter(dest == "SFO" & month == 2)
+  filter(dest == "SFO", month == 2)
 ```
 
-Note that we can separate the conditions using `&` if we want flights that
+Note that we can separate the conditions using commas if we want flights that
 are both headed to SFO **and** in February. If we are interested in either
-flights headed to SFO **or** in February we can use the `|` instead of the `&`
+flights headed to SFO **or** in February we can use the `|` instead of the comma.
 
 1.  Create a new data frame that includes flights headed to SFO in February, 
     and save this data frame as `sfo_feb_flights`. How many flights 
