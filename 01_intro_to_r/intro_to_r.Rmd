@@ -429,8 +429,8 @@ present %>%
   arrange(desc(total))
 ```
 
-These data come from reports by the Centers for Disease Control. You can learn more about data
-by bringing up it's helpful using the command `?present`.
+These data come from reports by the Centers for Disease Control. You can learn more about them
+by bringing up the help file using the command `?present`.
 
 </div>
 
