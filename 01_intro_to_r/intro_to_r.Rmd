@@ -16,6 +16,9 @@ library(ggplot2)
 library(oilabs)
 ```
 
+
+## The RStudio Interface
+
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
 throughout the course both to learn the statistical concepts discussed in the 
 course and to analyze real data and come to informed conclusions. To straighten 
@@ -28,16 +31,12 @@ get to that stage, however, you need to build some basic fluency in R. Today we
 begin with the fundamental building blocks of R and RStudio: the interface, 
 reading in data, and basic commands.
 
-Go ahead and launch RStudio. You should see a window that looks like the image shown below.
-
-## The RStudio Interface
-
-Your RStudio window has four panels.
+Go ahead and launch RStudio. You should see a window that looks like the image 
+shown below.
 
 ![](more/r-interface-2016.png)
 <br>
 
-Your R Markdown file (this document) is in the upper left panel.
 
 The panel on the lower left is where the action happens. It's called the *console*. 
 Everytime you launch RStudio, it will have the same text at the top of the 
@@ -54,7 +53,7 @@ the commands that you've previously entered.
 Any plots that you generate will show up in the panel in the lower right corner. 
 This is also where you can browse your files, access help, manage packages, etc.
 
-## R Packages
+### R Packages
 
 R is an open-source programming language, meaning that users can contribute
 packages that make our lives easier, and we can use them for free. For this lab,
@@ -64,7 +63,8 @@ and many others in the future, we will use the following R packages:
 - `ggplot2`: for data visualization
 - `oilabs`: for data and custom functions with the OpenIntro labs
 
-First, install these packages with the `install.packages` function:
+First, install these packages by typing the following three lines of code into
+the console of your RStudio session, pressing the enter/return key after each one.
 
 ```{r install-packages, message = FALSE}
 install.packages(dplyr)
@@ -73,9 +73,8 @@ install.packages(oilabs)
 ```
 
 You may need to select a server from which to download; any of them will work.
-Next, you need to load the packages in your working environment. We do this with
-the `library` function. Note that you only need to **install** packages once, but
-you need to **load** them each time you relaunch RStudio.
+Next, you need to load these packages in your working environment. We do this with
+the `library` function. Run the following three lines in your console.
 
 ```{r load-packages, message = FALSE}
 library(dplyr)
@@ -83,10 +82,13 @@ library(ggplot2)
 library(oilabs)
 ```
 
+Note that you only need to *install* packages once, but you need to *load* 
+them each time you relaunch RStudio. 
 
-## Creating a reproducible lab report
 
-We will be typing up your lab report using R Markdown. This 
+### Creating a reproducible lab report
+
+We will be typing up the lab report using R Markdown. This 
 allows you to complete your lab entirely in RStudio while ensuring the 
 transparency and reproducibility of your analysis. To help get you started we are 
 providing a template for you through the `oilabs` package that you just loaded.
@@ -97,7 +99,7 @@ of your screen and select **R Markdown...**. This will bring up this menu:
 <center><img src="more/Rmd-from-template.png" width=400></center>
 <br>
 
-Click on **From Template** and select **Lab 1 Template**.
+Click on **From Template** and select **Lab Report for OpenIntro Lab 1**.
 
 This will open up a lab report in a new pane called the *editor*. All you 
 need to do to complete the lab is to type up your *brief* answers and the R 
@@ -107,8 +109,10 @@ to figure out whether code is needed to answer a particular question, and if so 
 new chunk can be inserted by clicking on the **Insert Chunk** button (dropdown menu 
 under **Chunks** on the upper right corner of your markdown document).
 
-Before continuing, please replace the word *author* with your name. Then click 
+Before continuing, please replace the word *Name* with your name. Then click 
 on **Knit HTML** and you'll see your document in a new pop-up window.
+
+Now that we have the lab report ready to go, on to the data!
 
 
 ## Dr. Arbuthnot's Baptism Records
@@ -119,13 +123,13 @@ To get you started, run the following command to load the data.
 data(arbuthnot)
 ```
 
-To do so, you can 
+You can do this by
 
-- click on the green arrow at the top right of the code chunk in the R Markdown (Rmd) 
+- clicking on the green arrow at the top right of the code chunk in the R Markdown (Rmd) 
 file, or
-- put your cursor on this line, and hit the **Run** button on the upper right 
+- putting your cursor on this line, and hit the **Run** button on the upper right 
 corner of the pane, or
-- type the code in the console.
+- typing the code in the console.
 
 This command instructs R to load some data: 
 the Arbuthnot baptism counts for boys and girls. You should see that the 
