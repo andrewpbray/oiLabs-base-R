@@ -34,7 +34,8 @@ Go ahead and launch RStudio. You should see a window that looks like the image s
 
 Your RStudio window has four panels.
 
-![rinterface](more/r-interface-2016.png)
+![](more/r-interface-2016.png)
+<br>
 
 Your R Markdown file (this document) is in the upper left panel.
 
@@ -71,6 +72,7 @@ install.packages(ggplot2)
 install.packages(oilabs)
 ```
 
+You may need to select a server from which to download; any of them will work.
 Next, you need to load the packages in your working environment. We do this with
 the `library` function. Note that you only need to **install** packages once, but
 you need to **load** them each time you relaunch RStudio.
@@ -81,42 +83,33 @@ library(ggplot2)
 library(oilabs)
 ```
 
-To do so, you can 
-
-- click on the green arrow at the top of the code chunk in the R Markdown (Rmd) 
-file, or
-- highlight these lines, and hit the **Run** button on the upper right corner of the 
-pane, or
-- type the code in the console.
-
-Going forward you will be asked to load any relevant packages at the beginning
-of each lab.
 
 ## Creating a reproducible lab report
 
-We will be using a markdown language, R Markdown, to type up the lab report. This 
-allows you to complete your lab entirely in RStudio as well as ensuring 
-reproducibility of your analysis and results. To help get you started we are 
-providing a template for you. Use the following code to download this template:
+We will be typing up your lab report using R Markdown. This 
+allows you to complete your lab entirely in RStudio while ensuring the 
+transparency and reproducibility of your analysis. To help get you started we are 
+providing a template for you through the `oilabs` package that you just loaded.
+To open that file, click on the small green plus icon in the upper left corner
+of your screen and select **R Markdown...**. This will bring up this menu:
 
-```{r load-template, eval=FALSE}
-download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab1.Rmd", destfile = "lab1.Rmd")
-```
+<br>
+<center><img src="more/Rmd-from-template.png" width=400></center>
+<br>
 
-You will see a new file called `lab1.Rmd` in the Files tab on the pane in the 
-bottom right corner of your RStudio window. We will refer to this as your "R 
-markdown file" or "your report". Click on the file name to open the file. All you 
-need to do to complete the lab is to type up your **brief** answers and the R 
+Click on **From Template** and select **Lab 1 Template**.
+
+This will open up a lab report in a new pane called the *editor*. All you 
+need to do to complete the lab is to type up your *brief* answers and the R 
 code (when necessary) in the spaces provided in the document. Earlier in the lab 
 spaces are provided for you to enter R code chunks. Later in the lab you'll need 
 to figure out whether code is needed to answer a particular question, and if so a 
-new chunk can be inserted by clicking on the *Insert Chunk* button (dropdown menu 
-under *Chunks* on the upper right corner of your markdown document).
+new chunk can be inserted by clicking on the **Insert Chunk** button (dropdown menu 
+under **Chunks** on the upper right corner of your markdown document).
 
-Before you keep going type your team name, the name of the team member who is the 
-"author" for the day, and the "discussants", who are the other team members 
-present in lab today. Then click on *Knit HTML* and you'll see your document in a 
-new pop-up window.
+Before continuing, please replace the word *author* with your name. Then click 
+on **Knit HTML** and you'll see your document in a new pop-up window.
+
 
 ## Dr. Arbuthnot's Baptism Records
 
@@ -128,7 +121,7 @@ data(arbuthnot)
 
 To do so, you can 
 
-- click on the green arrow at the top of the code chunk in the R Markdown (Rmd) 
+- click on the green arrow at the top right of the code chunk in the R Markdown (Rmd) 
 file, or
 - put your cursor on this line, and hit the **Run** button on the upper right 
 corner of the pane, or
@@ -432,7 +425,6 @@ present %>%
 These data come from reports by the Centers for Disease Control. You can learn more about them
 by bringing up the help file using the command `?present`.
 
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
