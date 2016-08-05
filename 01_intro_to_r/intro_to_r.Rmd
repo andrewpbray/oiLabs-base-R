@@ -431,9 +431,8 @@ present %>%
   arrange(desc(total))
 ```
 
-These data come from reports by the Centers for Disease Control listed in the
-references section. If you would like to read more abour an analysis of sex ratios
-at birth in the United states, check out [this report](http://www.cdc.gov/nchs/data/nvsr/nvsr52/nvsr52_10.pdf).
+These data come from reports by the Centers for Disease Control. You can learn more about data
+by bringing up it's helpful using the command `?present`.
 
 </div>
 
@@ -464,7 +463,3 @@ These cheathseets may come in handy throughout the semester:
 
 Note that some of the code on these cheatsheets may be too advanced for this course,
 however majority of it will become useful throughout the semester.
-
-* * *
-
-## References
