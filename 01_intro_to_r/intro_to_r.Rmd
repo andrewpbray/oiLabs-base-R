@@ -204,10 +204,10 @@ sign basically says "go to the data frame that comes before me, and find the
 variable that comes after me".
 
 1. What command would you use to extract just the counts of girls baptized? Try
-    it! (Enter your answer in your R markdown document and run the entire report
-    by hitting **Knit HTML**. Voila! The R output you need is already in your 
-    report. Let's make this the first and last time we print out an entire dataset
-    in our lab reports!)
+    it! (OK, so you may have noticed that we've already provided the answer to
+    this one in your lab report. Go ahead and click the **Knit HTML** button to
+    generate your lab report and notice that it provides both the code and the
+    corresponding output.)
     
 Notice that the way R has printed these data is different. When we looked at the
 complete data frame, we saw 82 rows, one on each line of the display. These data
