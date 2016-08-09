@@ -219,6 +219,9 @@ follows [1], indicating that 5218 is the first entry in the vector. And if [43]
 starts a line, then that would mean the first number on that line would represent
 the 43rd entry in the vector.
 
+
+### Data visualization
+
 R has some powerful functions for making graphics. We can create a simple plot 
 of the number of girls baptized per year with the command
 
@@ -295,7 +298,7 @@ the following line of code.
 **A note on piping: ** Note that we can read these three lines of code as the following: 
 
 *"Take the `arbuthnot` dataset and **pipe** it into the `mutate` function. 
-Using this mutate a new variable called `total` that is the sum of the variables
+Mutate a new variable called `total` that is the sum of the variables
 called `boys` and `girls`. Then assign this new resulting dataset to the object
 called `arbuthnot`, i.e. overwrite the old `arbuthnot` dataset with the new one
 containing the new variable."*
