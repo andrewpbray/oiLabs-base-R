@@ -88,31 +88,7 @@ them each time you relaunch RStudio.
 
 ### Creating a reproducible lab report
 
-We will be typing up the lab report using R Markdown. This 
-allows you to complete your lab entirely in RStudio while ensuring the 
-transparency and reproducibility of your analysis. To help get you started we are 
-providing a template for you through the `oilabs` package that you just loaded.
-To open that file, click on the small green plus icon in the upper left corner
-of your screen and select **R Markdown...**. This will bring up this menu:
 
-<br>
-<center><img src="more/Rmd-from-template.png" width=400></center>
-<br>
-
-Click on **From Template** and select **Lab Report for OpenIntro Lab 1**.
-
-This will open up a lab report in a new pane called the *editor*. All you 
-need to do to complete the lab is to type up your *brief* answers and the R 
-code (when necessary) in the spaces provided in the document. Earlier in the lab 
-spaces are provided for you to enter R code chunks. Later in the lab you'll need 
-to figure out whether code is needed to answer a particular question, and if so a 
-new chunk can be inserted by clicking on the **Insert Chunk** button (dropdown menu 
-under **Chunks** on the upper right corner of your markdown document).
-
-Before continuing, please replace the word *Name* with your name. Then click 
-on **Knit HTML** and you'll see your document in a new pop-up window.
-
-Now that we have the lab report ready to go, on to the data!
 
 
 ## Dr. Arbuthnot's Baptism Records
