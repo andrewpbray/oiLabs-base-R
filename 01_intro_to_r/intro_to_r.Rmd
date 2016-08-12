@@ -67,9 +67,9 @@ First, install these packages by typing the following three lines of code into
 the console of your RStudio session, pressing the enter/return key after each one.
 
 ```{r install-packages, message = FALSE}
-install.packages(dplyr)
-install.packages(ggplot2)
-install.packages(oilabs)
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("oilabs")
 ```
 
 You may need to select a server from which to download; any of them will work.
@@ -180,15 +180,12 @@ sign basically says "go to the data frame that comes before me, and find the
 variable that comes after me".
 
 1. What command would you use to extract just the counts of girls baptized? Try
-    it! (OK, so you may have noticed that we've already provided the answer to
-    this one in your lab report. Go ahead and click the **Knit HTML** button to
-    generate your lab report and notice that it provides both the code and the
-    corresponding output.)
+    it!
     
 Notice that the way R has printed these data is different. When we looked at the
 complete data frame, we saw 82 rows, one on each line of the display. These data
 are no longer structured in a table with other variables, so they are displayed 
-one right after another. Objects that print out in this way are called vectors; 
+one right after another. Objects that print out in this way are called *vectors*; 
 they represent a set of numbers. R has added numbers in [brackets] along the left
 side of the printout to indicate locations within the vector. For example, 5218 
 follows [1], indicating that 5218 is the first entry in the vector. And if [43] 
@@ -232,7 +229,9 @@ Notice that the help file replaces the plot in the lower right panel. You can
 toggle between plots and help files using the tabs at the top of that panel.
 
 2. Is there an apparent trend in the number of girls baptized over the years? 
-How would you describe it?
+How would you describe it? (To ensure that your lab report is comprehensive,
+be sure to include the code needed to make the plot as well as your written
+interpretation.)
 
 ### R as a big calculator
 
