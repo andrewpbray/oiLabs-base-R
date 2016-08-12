@@ -358,13 +358,6 @@ or `FALSE`. In general, data analysis will involve many different kinds of data
 types, and one reason for using R is that it is able to represent and compute 
 with many of them.
 
-This seems like a fair bit for your first lab, so let's stop here. To exit 
-RStudio just close your browser window. And then sign back in to RStudio at
-
-https://vm-manage.oit.duke.edu/containers
-
-You'll find your R session is just as you left it.
-
 * * *
 
 ## More Practice
@@ -383,7 +376,7 @@ The data are stored in a data frame called `present`.
 4.  What years are included in this data set? What are the dimensions of the 
     data frame? What are the variable (column) names?
 
-5.  How do these counts compare to Arbuthnot's? Are they on a similar scale?
+5.  How do these counts compare to Arbuthnot's? Are they of a similar magnitude?
 
 6.  Make a plot that displays the proportion of boys born over time. What do you see? 
     Does Arbuthnot's observation about boys being born in greater proportion than girls 
@@ -396,7 +389,7 @@ The data are stored in a data frame called `present`.
     interactively in the data viewer by clicking on the arrows next to the 
     variable names. To include the sorted result in your report you will need 
     to use two new functions: `arrange` (for sorting). We can arrange the data 
-    in a descenting order with another function: `descr` (for descending order).
+    in a descending order with another function: `desc` (for descending order).
     Sample code provided below.
     
 ```{r eval=FALSE}
@@ -427,7 +420,7 @@ and `ggplot2` for data visualization. If you are googling for R code, make sure
 to also include these package names in your search query. For example, instead
 of googling "scatterplot in R", google "scatterplot in R with ggplot2".
 
-These cheathseets may come in handy throughout the semester:
+These cheatsheets may come in handy throughout the semester:
 
 - [RMarkdown cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 - [Data wrangling cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
