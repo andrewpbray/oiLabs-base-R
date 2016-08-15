@@ -5,6 +5,8 @@ output:
     theme: cerulean
     highlight: pygments
     css: ../lab.css
+    toc: true
+    toc_float: true
 ---
 
 ```{r global-options, include=FALSE}
@@ -13,14 +15,6 @@ library(dplyr)
 library(ggplot2)
 library(oilabs)
 ```
-
-<div id="template">
-**Your reproducible lab report: ** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab2.Rmd", destfile = "lab2.Rmd")
-```
-</div>
 
 Some define statistics as the field that focuses on turning information into
 knowledge. The first step in that process is to summarize and describe the raw
