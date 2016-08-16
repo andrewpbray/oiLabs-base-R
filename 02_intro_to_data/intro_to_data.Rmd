@@ -44,13 +44,8 @@ library(oilabs)
 
 
 ### Lab report
-To create a reproducible lab report, 
-
-1. Update title and author
-2. Load in relevant data
-3. Add a new exercise by typing in the new exercise number after ###
-4. Add a new R chunk by clicking the green plus C button in the top right of the editor.
-
+To create a reproducible lab report, you'll be adapting the general Lab Report
+template from the oilabs package. Watch this video to learn how.
 
 ### Data
 
@@ -79,11 +74,15 @@ names(nycflights)
 ```
 
 This returns the names of the variables in this data frame. The **codebook**
-(description of the variables) is included below.
+(description of the variables) can be accessed by pulling up the help file:
 
-- `year`, `month`, `day`: Date of departure
-- `dep_time`, `arr_time`: Departure and arrival times, local timezone.
-- `dep_delay`, `arr_delay`: Departure and arrival delays, in minutes. Negative times represent early departures/arrivals.
+```{r}
+?nycflights
+```
+
+One of the variables refers to the carrier (i.e. airline) of the flight, which 
+is coded according to the following system.
+
 - `carrier`: Two letter carrier abbreviation.
     + `9E`:           Endeavor Air Inc.
     + `AA`:      American Airlines Inc.
@@ -101,15 +100,9 @@ This returns the names of the variables in this data frame. The **codebook**
     + `VX`:              Virgin America
     + `WN`:      Southwest Airlines Co.
     + `YV`:          Mesa Airlines Inc.
-- `tailnum`: Plane tail number
-- `flight`: Flight number
-- `origin`, `dest`: Airport codes for origin and destination. (Google can help
-you with what code stands for which airport.)
-- `air_time`: Amount of time spent in the air, in minutes.
-- `distance`: Distance flown, in miles.
-- `hour`, `minute`: Time of departure broken in to hour and minutes.
 
-A very useful function for taking a quick peek at your data frame, and viewing
+
+A very useful function for taking a quick peek at your data frame and viewing
 its dimensions and data types is `str`, which stands for **str**ucture.
 
 ```{r str}
@@ -119,28 +112,11 @@ str(nycflights)
 The `nycflights` data frame is a massive trove of information. Let's think about 
 some questions we might want to answer with these data:
 
-- We might want to find out how delayed flights headed to a particular 
-destination tend to be. 
-- We might want to evaluate how departure delays vary over months. 
-- Or we might want to determine which of the three major NYC airports has a better 
-on time percentage for departing flights.
+- How delayed were flights that were headed to Los Angeles?
+- How do departure delays vary over months?
+- Which of the three major NYC airports has a better on time percentage for 
+departing flights?
 
-
-### Seven verbs
-
-The `dplyr` package offers seven verbs (functions) for basic data 
-manipulation:
-
-- `filter()`
-- `arrange()`
-- `select()` 
-- `distinct()`
-- `mutate()`
-- `summarise()`
-- `sample_n()`
-
-We will use some of these functions in this lab, and learn about others in a 
-future lab.
 
 ## Analysis
 
@@ -158,8 +134,9 @@ frame on the x-axis. It also defines a `geom` (short for geometric object),
 which describes the type of plot you will produce. 
 
 Histograms are generally a very good way to see the shape of a single 
-distribution, but that shape can change depending on how the data is split 
-between the different bins. You can easily define the binwidth you want to use:
+distribution of numerical data, but that shape can change depending on how the 
+data is split between the different bins. You can easily define the binwidth you 
+want to use:
 
 ```{r hist-dep-delay-bins}
 qplot(x = dep_delay, data = nycflights, geom = "histogram", binwidth = 15)
@@ -360,9 +337,7 @@ qplot(x = origin, fill = dep_type, data = nycflights, geom = "bar")
 
 * * *
 
-## On Your Own
-
-<div class="oyo">
+## More Practice
 
 -   Mutate the data frame so that it includes a new variable that contains the 
     average speed, `avg_speed` traveled by the plane for each flight (in mph).
@@ -398,5 +373,3 @@ dl_aa_ua <- nycflights %>%
   filter(carrier == "AA" | carrier == "DL" | carrier == "UA")
 qplot(x = dep_delay, y = arr_delay, data = dl_aa_ua, color = carrier)
 ```
-
-</div>
