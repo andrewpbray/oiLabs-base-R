@@ -42,11 +42,6 @@ library(ggplot2)
 library(oilabs)
 ```
 
-
-### Lab report
-To create a reproducible lab report, you'll be adapting the general Lab Report
-template from the oilabs package. Watch this video to learn how.
-
 ### Data
 
 The [Bureau of Transportation Statistics](http://www.rita.dot.gov/bts/about/) 
@@ -119,6 +114,10 @@ departing flights?
 
 
 ## Analysis
+
+### Lab report
+To record your analysis in a reproducible format, you can adapt the general Lab 
+Report template from the oilabs package. Watch this video to learn how.
 
 ### Departure delays in flights to Raleigh-Durham (RDU)
 
