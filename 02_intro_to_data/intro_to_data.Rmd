@@ -25,12 +25,6 @@ summaries of data on these flights and explore delay times. As this is a large
 data set, along the way you'll also learn the indispensable skills of data 
 processing and subsetting.
 
-<div id="boxedtext">
-**A note on expectations: ** For each exercise and on your own question you 
-answer include any relevant output (tables, summary statistics, plots) in your 
-answer. Doing this is easy! Just place any relevant R code in a code chunk, 
-and hit Knit HTML.
-</div>
 
 ## Getting started
 
@@ -48,6 +42,16 @@ library(ggplot2)
 library(oilabs)
 ```
 
+
+### Lab report
+To create a reproducible lab report, 
+
+1. Update title and author
+2. Load in relevant data
+3. Add a new exercise by typing in the new exercise number after ###
+4. Add a new R chunk by clicking the green plus C button in the top right of the editor.
+
+
 ### Data
 
 The [Bureau of Transportation Statistics](http://www.rita.dot.gov/bts/about/) 
@@ -59,14 +63,14 @@ in this lab.
 We begin by loading the `nycflights` data frame. Type the following in your console
 to load the data:
 
-```{r load-data}
+```{r load-data, eval = TRUE}
 data(nycflights)
 ```
 
 The data set `nycflights` that shows up in your workspace is a *data matrix*, 
 with each row representing an *observation* and each column representing a 
 *variable*. R calls this data format a **data frame**, which is a term that will 
-be used throughout the labs.
+be used throughout the labs. For this data set, each *observation* is a single flight.
 
 To view the names of the variables, type the command
 
@@ -121,18 +125,6 @@ destination tend to be.
 - Or we might want to determine which of the three major NYC airports has a better 
 on time percentage for departing flights.
 
-### R Packages
-
-In this lab we will explore these questions using the `dplyr` package for data
-wrangling and the `ggplot2` package for data visualization. So let's load these 
-packages:
-
-```{r packages}
-library(ggplot2)
-library(dplyr)
-```
-
-Note that these two lines are also included in your R Markdown template.
 
 ### Seven verbs
 
