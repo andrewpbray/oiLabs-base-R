@@ -155,13 +155,15 @@ lax_flights <- nycflights %>%
 qplot(x = dep_delay, data = lax_flights, geom = "histogram")
 ```
 
-Let's decipher these three lines of code:
+Let's decipher these two commands (OK, so it might look like three lines, but
+the first two physical lines of code are actually part of the same command. It's 
+common to add a break to a new line after `%>%` to help readability).
 
-- Line 1: Take the `nycflights` data frame, `filter` for flights headed to LAX, and 
+- Command 1: Take the `nycflights` data frame, `filter` for flights headed to LAX, and 
 save the result as a new data frame called `lax_flights`.
     + `==` means "if it's equal to".
     + `LAX` is in quotation marks since it is a character string.
-- Line 2: Basically the same `qplot` call from earlier for making a histogram, 
+- Command 2: Basically the same `qplot` call from earlier for making a histogram, 
 except that it uses the smaller data frame for flights headed to LAX instead of all
 flights.
 
@@ -183,12 +185,12 @@ We can also obtain numerical summaries for these flights:
 
 ```{r lax-flights-summ}
 lax_flights %>%
-  summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+  summarise(mean_dd = mean(dep_delay), median_dd = median(dep_delay), n = n())
 ```
 
 Note that in the `summarise` function we created a list of three different
 numerical summaries that we were interested in. The names of these elements are 
-user defined, like `mean_dd`, `sd_dd`, `n`, and you could customize these names 
+user defined, like `mean_dd`, `median_dd`, `n`, and you could customize these names 
 as you like (just don't use spaces in your names). Calculating these summary 
 statistics also require that you know the function calls. Note that `n()` reports
 the sample size.
@@ -235,7 +237,11 @@ each origin airport:
 ```{r summary-custom-list-origin}
 lax_flights %>%
   group_by(origin) %>%
-  summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+  summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n = n())
+
+lax_flights %>% 
+  filter(origin == "JFK", dep_delay < 0) %>%
+  qplot(x = dep_delay, data = ., geom = "histogram")
 ```
 
 Here, we first grouped the data by `origin`, and then calculated the summary 
