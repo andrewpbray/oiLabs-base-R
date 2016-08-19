@@ -426,5 +426,9 @@ These cheatsheets may come in handy throughout the semester:
 - [Data wrangling cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 - [Data visualization cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf)
 
+Chester Ismay has put together a resource for new users of R, RStudio, and R Markdown
+[here](https://ismayc.github.io/rbasics-book).  It includes examples showing working with R Markdown files
+in RStudio recorded as GIFs.
+
 Note that some of the code on these cheatsheets may be too advanced for this course,
 however majority of it will become useful throughout the semester.
