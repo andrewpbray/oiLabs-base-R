@@ -271,19 +271,6 @@ nycflights %>%
     about the highest median departure delay? Which of these measures is more 
     reliable for deciding which month(s) to avoid flying if you really dislike 
     delayed flights.
-    
-We can also visualize the distributions of departure delays across months using 
-side-by-side box plots:
-
-```{r delay-month-box}
-qplot(y = dep_delay, x = factor(month), data = nycflights, geom = "boxplot")
-```
-
-There is some new syntax here: We want departure delays on the y-axis and the
-months on the x-axis to produce side-by-side box plots. Side-by-side box plots
-require a categorical variable on the x-axis, however `month` is 
-stored as a numerical variable (numbers 1 - 12). Therefore we can force R to treat
-this variable as categorical, what R calls a **factor**, with `factor(month)`.
 
 ### On time departure rate for NYC airports
 
