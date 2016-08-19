@@ -235,29 +235,22 @@ above command using the `group_by` function to get the same summary stats for
 each origin airport:
 
 ```{r summary-custom-list-origin}
-lax_flights %>%
+sfo_feb_flights %>%
   group_by(origin) %>%
   summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n = n())
-
-lax_flights %>% 
-  filter(origin == "JFK", dep_delay < 0) %>%
-  qplot(x = dep_delay, data = ., geom = "histogram")
 ```
 
 Here, we first grouped the data by `origin`, and then calculated the summary 
 statistics.
 
-1. Which New York area airport would you choose to fly out of if you were heading
-to Los Angeles and wanted to minimize departure delay?
-
 1.  Calculate the median and interquartile range for `arr_delay`s of flights in
     in the `sfo_feb_flights` data frame, grouped by carrier. Which carrier
-    is the has the most variable arrival delays?
+    has the most variable arrival delays?
 
 ### Departure delays over months
 
-Which month would you expect to have the highest average delay departing 
-from an NYC airport?
+Which month would you expect to have the highest average delay departing from an
+NYC airport?
 
 Let's think about how we would answer this question:
 
@@ -288,10 +281,9 @@ qplot(y = dep_delay, x = factor(month), data = nycflights, geom = "boxplot")
 
 There is some new syntax here: We want departure delays on the y-axis and the
 months on the x-axis to produce side-by-side box plots. Side-by-side box plots
-require a categorical variable on the x-axis, however in the data frame `month` is 
+require a categorical variable on the x-axis, however `month` is 
 stored as a numerical variable (numbers 1 - 12). Therefore we can force R to treat
-this variable as categorical, what R calls a **factor**, variable with 
-`factor(month)`.
+this variable as categorical, what R calls a **factor**, with `factor(month)`.
 
 ### On time departure rate for NYC airports
 
