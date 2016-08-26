@@ -274,10 +274,7 @@ a hot hand.
 ### Comparing Kobe Bryant to the Independent Shooter
 
 5.  Using `calc_streak`, compute the streak lengths of `sim_basket`, and
-    save the results in a data frame called `sim_streak`. Note that since the
-    `sim_streak` object is just a vector and not a variable in a data frame,
-    we don't need to first select it from a data frame like we did earlier
-    when we calculated the streak lengths for Kobe's shots.
+    save the results in a data frame called `sim_streak`.
 
 6.  Describe the distribution of streak lengths. What is the typical streak 
     length for this simulated independent shooter with a 45% shooting percentage?
