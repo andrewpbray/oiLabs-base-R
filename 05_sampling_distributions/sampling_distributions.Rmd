@@ -1,11 +1,12 @@
 ---
 title: "Foundations for statistical inference - Sampling distributions"
-runtime: shiny
 output:
   html_document:
-    css: www/lab.css
+    css: ../lab.css
     highlight: pygments
     theme: cerulean
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
@@ -15,14 +16,6 @@ library(ggplot2)
 library(oilabs)
 ```
 
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab4.Rmd", destfile = "lab4.Rmd")
-```
-</div>
-
 In this lab, we investigate the ways in which the statistics from a random 
 sample of data can serve as point estimates for population parameters. We're 
 interested in formulating a *sampling distribution* of our estimate in order 
@@ -31,7 +24,7 @@ to learn about the properties of the estimate, such as its distribution.
 <div id="boxedtext">
 **Setting a seed:** We will take some random samples and build sampling distributions
 in this lab, which means you should set a seed on top of your lab. If this concept
-is new to you, review the previous lab and ask your TA.
+is new to you, review the lab concerning probability.
 </div>
 
 ## Getting Started
@@ -238,7 +231,7 @@ sample size has on our sampling distribution.
     increases? How (if at all) do these values change if you increase the number 
     of simulations? (You do not need to include plots in your answer.)
     
-```{r shiny, echo=FALSE, eval=TRUE}
+```{r shiny, echo=FALSE, eval=FALSE}
 shinyApp(
   ui <- fluidPage(
     
@@ -322,9 +315,7 @@ shinyApp(
 
 * * *
 
-<div class="oyo">
-
-## On your own
+## More Practice
 
 So far, we have only focused on estimating the mean living area in homes in 
 Ames. Now you'll try to estimate the mean home price.
@@ -333,11 +324,11 @@ Note that while you might be able to answer some of these questions using the ap
 you are expected to write the required code and produce the necessary plots and
 summary statistics. You are welcomed to use the app for exploration.
 
--   Take a sample of size 15 from the population and calculate the mean `price`
+1.  Take a sample of size 15 from the population and calculate the mean `price`
     of the homes in this sample. Using this sample, what is your best point estimate
     of the population mean of prices of homes?
 
--   Since you have access to the population, simulate the sampling 
+1.  Since you have access to the population, simulate the sampling 
     distribution for $\bar{x}_{price}$ by taking 2000 samples from the 
     population of size 15 and computing 2000 sample means. Store these means 
     in a vector called `sample_means15`. Plot the data, then describe the 
@@ -345,18 +336,17 @@ summary statistics. You are welcomed to use the app for exploration.
     what would you guess the mean home price of the population to be? Finally, 
     calculate and report the population mean.
 
--   Change your sample size from 15 to 150, then compute the sampling 
+1.  Change your sample size from 15 to 150, then compute the sampling 
     distribution using the same method as above, and store these means in a 
     new vector called `sample_means150`. Describe the shape of this sampling 
     distribution, and compare it to the sampling distribution for a sample 
     size of 15. Based on this sampling distribution, what would you guess to 
     be the mean sale price of homes in Ames?
 
--   Of the sampling distributions from 2 and 3, which has a smaller spread?  If
+1.  Of the sampling distributions from 2 and 3, which has a smaller spread?  If
     we're concerned with making estimates that are more often close to the 
     true value, would we prefer a sampling distribution with a large or small spread?
 
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
