@@ -14,35 +14,6 @@ library(ggplot2)
 library(oilabs)
 ```
 
-<div id="boxedtext">
-**A note on workspaces:** Before we get started with the lab, let's take a moment
-to review our R Markdown workflow and remind ourselves about workspaces in R.
-The workspaces of the console and the workspaces of your R Markdown document are
-not the same. Therefore, if you define a variable only in the Console and then try to
-use that variable in your R Markdown document, you'll get an error. This might
-seem frustrating at first, but it is actually a feature that helps you in the long
-run. In order to ensure that your report is fully reproducible, everything that
-is used in the report must be defined in the report, and not somewhere else.
-
-It is your responsibility, and an important learning goal of this course, that you 
-master the skills for creating fully reproducible data analysis reports. Below are 
-some tips for achieving this goal:
-
-- Always work in your R Markdown document, and not in the Console.
-- Knit early, and often, always checking that the resulting document contains 
-everything you expected it to contain.
-</div> 
-
-* * *
-
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab3.Rmd", destfile = "lab3.Rmd")
-```
-</div>
-
 ## Hot Hands
 
 Basketball players who make several baskets in succession are described as 
