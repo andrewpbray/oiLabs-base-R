@@ -95,7 +95,7 @@ kobe_streak <- calc_streak(kobe_basket$shot)
 We can then take a look at the distribution of these streak lengths.
 
 ```{r plot-streak-kobe}
-qplot(data = kobe_streak, x = length, geom = "histogram", binwidth = 1)
+qplot(data = kobe_streak, x = length, geom = "bar")
 ```
 
 2.  Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. 
