@@ -142,7 +142,7 @@ params <- ames %>%
     Ames? If you are working on this lab in a classroom, does your neighbor's 
     interval capture this value? 
 
-1.  Each team in should have gotten a slightly different confidence interval. What 
+1.  Each student should have gotten a slightly different confidence interval. What 
     proportion of those intervals would you expect to capture the true population 
     mean? Why?
 
