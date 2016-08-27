@@ -239,19 +239,16 @@ qplot(data = ci_data, x = ci_bounds, y = ci_id,
 
 * * *
 
-<div class="oyo">
+## More Practice
 
-## On your own
-
--   Pick a confidence level of your choosing, provided it is not 95%. What is 
+1.  Pick a confidence level of your choosing, provided it is not 95%. What is 
     the appropriate critical value?
 
--   Calculate 50 confidence intervals at the confidence level you chose in the 
+1.  Calculate 50 confidence intervals at the confidence level you chose in the 
     previous question, and plot all intervals on one plot, and calculate the proportion 
     of intervals that include the true population mean. How does this percentage compare 
     to the confidence level selected for the intervals? Make 
     sure to include your plot in your answer.
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
