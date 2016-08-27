@@ -5,7 +5,8 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
@@ -14,14 +15,6 @@ library(dplyr)
 library(ggplot2)
 library(oilabs)
 ```
-
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab6.Rmd", destfile = "lab6.Rmd")
-```
-</div>
 
 ## Getting Started
 
@@ -169,8 +162,7 @@ inference(y = weight, x = habit, data = nc, statistic = "mean", type = "ci",
 
 * * *
 
-<div class="oyo">
-## On your own
+## More Practice
 
 -   Calculate a 95% confidence interval for the average length of pregnancies 
 (`weeks`) and interpret it in context. Note that since you're doing inference 
@@ -197,8 +189,6 @@ plain language. Be sure to check all assumptions,state your $\alpha$ level, and 
 in context. (Note: Picking your own variables, coming up with a research question,
 and analyzing the data to answer this question is basically what you'll need to do for
 your project as well.)
-
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
