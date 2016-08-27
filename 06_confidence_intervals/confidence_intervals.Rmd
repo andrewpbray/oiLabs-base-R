@@ -15,15 +15,6 @@ library(ggplot2)
 library(oilabs)
 ```
 
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab5.Rmd", 
-         destfile = "lab5.Rmd")
-```
-</div>
-
 If you have access to data on an entire population, say the size of every 
 house in Ames, Iowa, it's straight forward to answer questions like, "How big 
 is the typical house in Ames?" and "How much variation is there in sizes of 
@@ -34,21 +25,9 @@ situation requires that you use your sample to make inference on what your
 population looks like.
 
 <div id="boxedtext">
-**Setting a seed:** We will take some random samples and calculate confidence based
-on these samples in this lab, which means you should set a seed on top of your lab. If 
-this concept is new to you, review the previous lab and ask your TA.
-
-Setting a seed will cause R to sample the same sample each time you knit your document.
-This will make sure your results don't change each time you knit, and it will also 
-ensure reproducibility of your work (by setting the same seed it will be possible to 
-reproduce your results). You can set a seed like this:
-```{r set-seed}
-set.seed(9102015)                 # make sure to change the seed
-```
-The number above is completely arbitraty. If you need inspiration, you can use your
-ID, birthday, or just a random string of numbers. The important thing is that you
-use each seed only once. You only need to do this once in your R Markdown document,
-but make sure it comes before sampling.
+**Setting a seed:** We will take some random samples and build sampling distributions
+in this lab, which means you should set a seed on top of your lab. If this concept
+is new to you, review the lab concerning probability.
 </div>
 
 ## Getting Started
