@@ -103,7 +103,7 @@ significant? In order to answer this question we will conduct a hypothesis test
 ## Inference
 
 3.  Are all conditions necessary for inference satisfied? Comment on each. You can 
-compute the group sizes using the same `by` command above but replacing `mean(weight)` 
+compute the group sizes with the `summarize` command above but replacing `mean(weight)` 
 with `n()`.
 
 4.  Write the hypotheses for testing if the average weights of babies born to 
