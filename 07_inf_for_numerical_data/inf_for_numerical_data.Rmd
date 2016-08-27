@@ -153,23 +153,23 @@ inference(y = weight, x = habit, data = nc, statistic = "mean", type = "ci",
 
 ## More Practice
 
--   Calculate a 95% confidence interval for the average length of pregnancies 
+6.  Calculate a 95% confidence interval for the average length of pregnancies 
 (`weeks`) and interpret it in context. Note that since you're doing inference 
 on a single population parameter, there is no explanatory variable, so you can 
 omit the `x` variable from the function.
 
--   Calculate a new confidence interval for the same parameter at the 90% 
+7.  Calculate a new confidence interval for the same parameter at the 90% 
 confidence level. You can change the confidence level by adding a new argument 
 to the function: `conf_level = 0.90`. Comment on the width of this interval versus 
 the one obtained in the the previous exercise.
 
--   Conduct a hypothesis test evaluating whether the average weight gained by 
+8.  Conduct a hypothesis test evaluating whether the average weight gained by 
 younger mothers is different than the average weight gained by mature mothers.
 
--   Now, a non-inference task: Determine the age cutoff for younger and mature 
+9.  Now, a non-inference task: Determine the age cutoff for younger and mature 
 mothers. Use a method of your choice, and explain how your method works.
 
--   Pick a pair of variables: one numerical (response) and one categorical (explanatory). 
+10. Pick a pair of variables: one numerical (response) and one categorical (explanatory). 
 Come up with a research question evaluating the relationship between these variables. 
 Formulate the question in a way that it can be answered using a hypothesis test
 and/or a confidence interval. Answer your question using the `inference` 
