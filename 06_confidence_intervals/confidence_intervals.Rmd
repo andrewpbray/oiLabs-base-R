@@ -220,7 +220,7 @@ We can accomplish this using the following:
 ```{r create-ci-data-for-plot}
 ci_data <- data.frame(ci_id = c(1:50, 1:50),
                       ci_bounds = c(ci$lower, ci$upper),
-                      capture_mu = c(ci$capture, ci$capture))
+                      capture_mu = c(ci$capture_mu, ci$capture_mu))
 ```
 
 And finally we can create the plot using the following:
