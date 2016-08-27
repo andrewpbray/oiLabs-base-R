@@ -72,11 +72,11 @@ n <- 60
 samp <- sample_n(ames, n)
 ```
 
-1.  Describe the distribution of homes in your sample. What would you say is the
+1.  Describe the distribution of house area in your sample. What would you say is the
     "typical" size within your sample? Also state precisely what you interpreted 
     "typical" to mean.
 
-1.  Would you expect another team's distribution to be identical to yours? 
+1.  Would you expect another student's distribution to be identical to yours? 
     Would you expect it to be similar? Why or why not?
 
 ## Confidence intervals
