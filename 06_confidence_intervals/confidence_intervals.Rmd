@@ -5,7 +5,8 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
