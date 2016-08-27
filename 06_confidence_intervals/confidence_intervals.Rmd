@@ -243,35 +243,12 @@ qplot(data = ci_data, x = ci_bounds, y = ci_id,
 
 1.  Pick a confidence level of your choosing, provided it is not 95%. What is 
     the appropriate critical value?
-    
-```{r}
-z_star_90 <- qnorm(0.95)
-```
-
 
 1.  Calculate 50 confidence intervals at the confidence level you chose in the 
     previous question, and plot all intervals on one plot, and calculate the proportion 
     of intervals that include the true population mean. How does this percentage compare 
     to the confidence level selected for the intervals? Make 
     sure to include your plot in your answer.
-    
-    
-```{r}
-ci2 <- ames %>%
-        rep_sample_n(size = n, reps = 50, replace = TRUE) %>%
-        summarise(lower = mean(area) - z_star_95 * (sd(area) / sqrt(n)),
-                  upper = mean(area) + z_star_95 * (sd(area) / sqrt(n)))
-ci2 <- ci2 %>%
-  mutate(capture_mu = ifelse(lower < params$mu & upper > params$mu, "yes", "no"))
-ci_data2 <- data.frame(ci_id = c(1:50, 1:50),
-                      ci_bounds = c(ci2$lower, ci2$upper),
-                      capture_mu = c(ci2$capture_mu, ci2$capture_mu))
-qplot(data = ci_data2, x = ci_bounds, y = ci_id, 
-      group = ci_id, color = capture_mu) +
-  geom_point(size = 2) +  # add points at the ends, size = 2
-  geom_line() +           # connect with lines
-  geom_vline(xintercept = params$mu, color = "darkgray") # draw vertical line
-```
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
