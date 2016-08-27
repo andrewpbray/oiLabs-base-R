@@ -47,23 +47,12 @@ data(nc)
 ```
 
 We have observations on 13 different variables, some categorical and some 
-numerical. The meaning of each variable is as follows.
+numerical. The meaning of each variable can be found by bringing up the help file:
 
-variable         | description
----------------- | ---------------------------------------------
-`fage`           | father's age in years.
-`mage`           | mother's age in years.
-`mature`         | maturity status of mother.
-`weeks`          | length of pregnancy in weeks.
-`premie`         | whether the birth was classified as premature (premie) or full-term.
-`visits`         | number of hospital visits during pregnancy.
-`marital`        | whether mother is `married` or `not married` at birth.
-`gained`         | weight gained by mother during pregnancy in pounds.
-`weight`         | weight of the baby at birth in pounds.
-`lowbirthweight` | whether baby was classified as low birthweight (`low`) or not (`not low`).
-`gender`         | gender of the baby, `female` or `male`.
-`habit`          | status of the mother as a `nonsmoker` or a `smoker`.
-`whitemom`       | whether mom is `white` or `not white`.
+```{r help-nc}
+?nc
+```
+
 
 1.  What are the cases in this data set? How many cases are there in our sample?
 
