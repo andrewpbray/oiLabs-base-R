@@ -51,7 +51,7 @@ Take a moment to review the report then address the following questions.
     we assume about the sampling method? Does that seem like a reasonable 
     assumption?
 
-## The data
+### The data
 
 Turn your attention to Table 6 (pages 15 and 16), which reports the
 sample size and response percentages for all 57 countries. While this is
