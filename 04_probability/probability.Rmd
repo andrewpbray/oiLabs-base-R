@@ -2,9 +2,11 @@
 title: "Probability"
 output:
   html_document:
-    theme: cerulean
-    highlight: pygments
     css: ../lab.css
+    highlight: pygments
+    theme: cerulean
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
@@ -13,35 +15,6 @@ library(dplyr)
 library(ggplot2)
 library(oilabs)
 ```
-
-<div id="boxedtext">
-**A note on workspaces:** Before we get started with the lab, let's take a moment
-to review our R Markdown workflow and remind ourselves about workspaces in R.
-The workspaces of the console and the workspaces of your R Markdown document are
-not the same. Therefore, if you define a variable only in the Console and then try to
-use that variable in your R Markdown document, you'll get an error. This might
-seem frustrating at first, but it is actually a feature that helps you in the long
-run. In order to ensure that your report is fully reproducible, everything that
-is used in the report must be defined in the report, and not somewhere else.
-
-It is your responsibility, and an important learning goal of this course, that you 
-master the skills for creating fully reproducible data analysis reports. Below are 
-some tips for achieving this goal:
-
-- Always work in your R Markdown document, and not in the Console.
-- Knit early, and often, always checking that the resulting document contains 
-everything you expected it to contain.
-</div> 
-
-* * *
-
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download.file("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab3.Rmd", destfile = "lab3.Rmd")
-```
-</div>
 
 ## Hot Hands
 
@@ -122,7 +95,7 @@ kobe_streak <- calc_streak(kobe_basket$shot)
 We can then take a look at the distribution of these streak lengths.
 
 ```{r plot-streak-kobe}
-qplot(data = kobe_streak, x = length, geom = "histogram", binwidth = 1)
+qplot(data = kobe_streak, x = length, geom = "bar")
 ```
 
 2.  Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. 
@@ -234,13 +207,13 @@ chip that says "head"" is 20%, and "tail" is 80%.
     about setting a seed below.
     
 <div id="boxedtext">
-**A note on setting a seed:** Setting a seed will cause R to sample the same 
+**A note on setting a seed:** Setting a seed will cause R to select the same 
 sample each time you knit your document. This will make sure your results don't
 change each time you knit, and it will also ensure reproducibility of your work 
 (by setting the same seed it will be possible to reproduce your results). You can
 set a seed like this:
 ```{r set-seed}
-set.seed(9102015)                 # make sure to change the seed
+set.seed(35797)                 # make sure to change the seed
 ```
 The number above is completely arbitraty. If you need inspiration, you can use your
 ID, birthday, or just a random string of numbers. The important thing is that you
@@ -296,29 +269,24 @@ a hot hand.
 
 * * *
 
-<div class="oyo">
-
-## On your own
+## More Practice
 
 ### Comparing Kobe Bryant to the Independent Shooter
 
--   Using `calc_streak`, compute the streak lengths of `sim_basket`, and
-    save the results in a data frame called `sim_streak`. Note that since the
-    `sim_streak` object is just a vector and not a variable in a data frame,
-    we don't need to first select it from a data frame like we did earlier
-    when we calculated the streak lengths for Kobe's shots.
+5.  Using `calc_streak`, compute the streak lengths of `sim_basket`, and
+    save the results in a data frame called `sim_streak`.
 
--   Describe the distribution of streak lengths. What is the typical streak 
+6.  Describe the distribution of streak lengths. What is the typical streak 
     length for this simulated independent shooter with a 45% shooting percentage?
     How long is the player's longest streak of baskets in 133 shots? Make sure
     to include a plot in your answer.
 
--   If you were to run the simulation of the independent shooter a second time, 
+7.  If you were to run the simulation of the independent shooter a second time, 
     how would you expect its streak distribution to compare to the distribution 
     from the question above? Exactly the same? Somewhat similar? Totally 
     different? Explain your reasoning.
 
--   How does Kobe Bryant's distribution of streak lengths compare to the 
+8.  How does Kobe Bryant's distribution of streak lengths compare to the 
     distribution of streak lengths for the simulated shooter? Using this 
     comparison, do you have evidence that the hot hand model fits Kobe's 
     shooting patterns? Explain.
