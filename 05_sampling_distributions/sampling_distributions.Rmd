@@ -1,8 +1,9 @@
 ---
 title: "Foundations for statistical inference - Sampling distributions"
+runtime: shiny
 output:
   html_document:
-    css: ../lab.css
+    css: www/lab.css
     highlight: pygments
     theme: cerulean
     toc: true
@@ -14,6 +15,7 @@ knitr::opts_chunk$set(eval = FALSE)
 library(dplyr)
 library(ggplot2)
 library(oilabs)
+data(ames)
 ```
 
 In this lab, we investigate the ways in which the statistics from a random 
@@ -235,7 +237,7 @@ sample size has on our sampling distribution.
     increases? How (if at all) do these values change if you increase the number 
     of simulations? (You do not need to include plots in your answer.)
     
-```{r shiny, echo=FALSE, eval=FALSE}
+```{r shiny, echo=FALSE, eval=TRUE}
 shinyApp(
   ui <- fluidPage(
     
