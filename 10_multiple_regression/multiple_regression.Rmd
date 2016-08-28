@@ -6,40 +6,6 @@ output:
     highlight: pygments
     theme: cerulean
   pdf_document: default
-  
-references:
-- id: Hamermesh2005
-  title: Beauty in the Classroom - Instructors’ Pulchritude and Putative Pedagogical Productivity
-  author:
-  - family: Hamermesh
-    given: Daniel S.
-  - family: Parker
-    given: Amy
-  volume: 24
-  URL: 'http://www.sciencedirect.com/science/article/pii/S0272775704001165'
-  DOI: 10.1016/j.econedurev.2004.07.013
-  publisher: Economics of Education Review
-  ISSN: 0272-7757
-  issue: 4
-  page: 369-376
-  type: article-journal
-  issued:
-    year: 2005
-    month: 8
-- id: Gelman2007
-  title: Data Analysis Using Regression and Multilevel/Hierarchical Models
-  author:
-  - family: Gelman
-    given: Andrew
-  - family: Hill
-    given: Jennifer
-  publisher: Cambridge University Press
-  city:
-  type: book
-  issued:
-    year: 2007
-  edition: 1
-  ISBN: 9780521686891
 ---
 
 ```{r global_options, include=FALSE}
@@ -57,7 +23,7 @@ evaluations as an indicator of course quality and teaching effectiveness is
 often criticized because these measures may reflect the influence of 
 non-teaching related characteristics, such as the physical appearance of the 
 instructor. The article titled, "Beauty in the classroom: instructors' 
-pulchritude and putative pedagogical productivity" [@Hamermesh2005] 
+pulchritude and putative pedagogical productivity" by Hamermesh and Parker 
 found that instructors who are viewed to be better looking receive higher 
 instructional ratings. 
 
@@ -86,18 +52,16 @@ This is the first time we're using the `GGally` package. We will be using the
 
 ### Creating a reproducible lab report
 
-To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. Make sure that all 
+necessary packages loaded in your R Markdown document.
 
 ### The data
 
 The data were gathered from end of semester student evaluations for a large 
 sample of professors from the University of Texas at Austin. In addition, six 
-students rated the professors' physical appearance. (This is a slightly modified 
-version of the original data set that was released as part of the replication 
-data for *Data Analysis Using Regression and Multilevel/Hierarchical Models* 
-[@Gelman2007].) The result is a data frame where each row contains a 
-different course and columns represent variables about the courses and 
-professors.
+students rated the professors' physical appearance. The result is a data frame 
+where each row contains a different course and columns represent variables about 
+the courses and professors.
 
 Let's load the data:
 
@@ -105,29 +69,12 @@ Let's load the data:
 data(evals)
 ```
 
-variable         | description
----------------- | -----------
-`score`          | average professor evaluation score: (1) very unsatisfactory - (5) excellent.
-`rank`           | rank of professor: teaching, tenure track, tenured.
-`ethnicity`      | ethnicity of professor: not minority, minority.
-`gender`         | gender of professor: female, male.
-`language`       | language of school where professor received education: english or non-english.
-`age`            | age of professor.
-`cls_perc_eval`  | percent of students in class who completed evaluation.
-`cls_did_eval`   | number of students in class who completed evaluation.
-`cls_students`   | total number of students in class.
-`cls_level`      | class level: lower, upper.
-`cls_profs`      | number of professors teaching sections in course in sample: single, multiple.
-`cls_credits`    | number of credits of class: one credit (lab, PE, etc.), multi credit.
-`bty_f1lower`    | beauty rating of professor from lower level female: (1) lowest - (10) highest.
-`bty_f1upper`    | beauty rating of professor from upper level female: (1) lowest - (10) highest.
-`bty_f2upper`    | beauty rating of professor from second upper level female: (1) lowest - (10) highest.
-`bty_m1lower`    | beauty rating of professor from lower level male: (1) lowest - (10) highest.
-`bty_m1upper`    | beauty rating of professor from upper level male: (1) lowest - (10) highest.
-`bty_m2upper`    | beauty rating of professor from second upper level male: (1) lowest - (10) highest.
-`bty_avg`        | average beauty rating of professor.
-`pic_outfit`     | outfit of professor in picture: not formal, formal.
-`pic_color`      | color of professor's picture: color, black & white.
+We have observations on 21 different variables, some categorical and some 
+numerical. The meaning of each variable can be found by bringing up the help file:
+
+```{r help-nc}
+?evals
+```
 
 ## Exploring the data
 

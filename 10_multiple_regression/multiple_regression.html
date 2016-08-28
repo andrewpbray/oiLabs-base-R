@@ -151,7 +151,7 @@ $(document).ready(function () {
 
 <div id="grading-the-professor" class="section level2">
 <h2>Grading the professor</h2>
-<p>Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. The article titled, “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” <span class="citation">(Hamermesh and Parker 2005)</span> found that instructors who are viewed to be better looking receive higher instructional ratings.</p>
+<p>Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. The article titled, “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” by Hamermesh and Parker found that instructors who are viewed to be better looking receive higher instructional ratings.</p>
 <p>In this lab we will analyze the data from this study in order to learn what goes into a positive professor evaluation.</p>
 </div>
 <div id="getting-started" class="section level2">
@@ -168,111 +168,15 @@ $(document).ready(function () {
 </div>
 <div id="creating-a-reproducible-lab-report" class="section level3">
 <h3>Creating a reproducible lab report</h3>
-<p>To create your new lab report, start by opening a new R Markdown document… From Template… then select Lab Report from the <code>oilabs</code> package.</p>
+<p>To create your new lab report, start by opening a new R Markdown document… From Template… then select Lab Report from the <code>oilabs</code> package. Make sure that all necessary packages loaded in your R Markdown document.</p>
 </div>
 <div id="the-data" class="section level3">
 <h3>The data</h3>
-<p>The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin. In addition, six students rated the professors’ physical appearance. (This is a slightly modified version of the original data set that was released as part of the replication data for <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em> <span class="citation">(Gelman and Hill 2007)</span>.) The result is a data frame where each row contains a different course and columns represent variables about the courses and professors.</p>
+<p>The data were gathered from end of semester student evaluations for a large sample of professors from the University of Texas at Austin. In addition, six students rated the professors’ physical appearance. The result is a data frame where each row contains a different course and columns represent variables about the courses and professors.</p>
 <p>Let’s load the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(evals)</code></pre></div>
-<table style="width:40%;">
-<colgroup>
-<col width="23%"></col>
-<col width="16%"></col>
-</colgroup>
-<thead>
-<tr class="header">
-<th>variable</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>score</code></td>
-<td>average professor evaluation score: (1) very unsatisfactory - (5) excellent.</td>
-</tr>
-<tr class="even">
-<td><code>rank</code></td>
-<td>rank of professor: teaching, tenure track, tenured.</td>
-</tr>
-<tr class="odd">
-<td><code>ethnicity</code></td>
-<td>ethnicity of professor: not minority, minority.</td>
-</tr>
-<tr class="even">
-<td><code>gender</code></td>
-<td>gender of professor: female, male.</td>
-</tr>
-<tr class="odd">
-<td><code>language</code></td>
-<td>language of school where professor received education: english or non-english.</td>
-</tr>
-<tr class="even">
-<td><code>age</code></td>
-<td>age of professor.</td>
-</tr>
-<tr class="odd">
-<td><code>cls_perc_eval</code></td>
-<td>percent of students in class who completed evaluation.</td>
-</tr>
-<tr class="even">
-<td><code>cls_did_eval</code></td>
-<td>number of students in class who completed evaluation.</td>
-</tr>
-<tr class="odd">
-<td><code>cls_students</code></td>
-<td>total number of students in class.</td>
-</tr>
-<tr class="even">
-<td><code>cls_level</code></td>
-<td>class level: lower, upper.</td>
-</tr>
-<tr class="odd">
-<td><code>cls_profs</code></td>
-<td>number of professors teaching sections in course in sample: single, multiple.</td>
-</tr>
-<tr class="even">
-<td><code>cls_credits</code></td>
-<td>number of credits of class: one credit (lab, PE, etc.), multi credit.</td>
-</tr>
-<tr class="odd">
-<td><code>bty_f1lower</code></td>
-<td>beauty rating of professor from lower level female: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="even">
-<td><code>bty_f1upper</code></td>
-<td>beauty rating of professor from upper level female: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="odd">
-<td><code>bty_f2upper</code></td>
-<td>beauty rating of professor from second upper level female: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="even">
-<td><code>bty_m1lower</code></td>
-<td>beauty rating of professor from lower level male: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="odd">
-<td><code>bty_m1upper</code></td>
-<td>beauty rating of professor from upper level male: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="even">
-<td><code>bty_m2upper</code></td>
-<td>beauty rating of professor from second upper level male: (1) lowest - (10) highest.</td>
-</tr>
-<tr class="odd">
-<td><code>bty_avg</code></td>
-<td>average beauty rating of professor.</td>
-</tr>
-<tr class="even">
-<td><code>pic_outfit</code></td>
-<td>outfit of professor in picture: not formal, formal.</td>
-</tr>
-<tr class="odd">
-<td><code>pic_color</code></td>
-<td>color of professor’s picture: color, black &amp; white.</td>
-</tr>
-</tbody>
-</table>
+<p>We have observations on 21 different variables, some categorical and some numerical. The meaning of each variable can be found by bringing up the help file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?evals</code></pre></div>
 </div>
 </div>
 <div id="exploring-the-data" class="section level2">
@@ -368,16 +272,8 @@ evals %&gt;%<span class="st"> </span>
 <p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written by Mine Çetinkaya-Rundel and Andrew Bray.</p>
 </div>
 </div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2">
 <h2>References</h2>
-<div id="refs" class="references">
-<div id="ref-Gelman2007">
-<p>Gelman, Andrew, and Jennifer Hill. 2007. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. 1st ed. Cambridge University Press.</p>
-</div>
-<div id="ref-Hamermesh2005">
-<p>Hamermesh, Daniel S., and Amy Parker. 2005. “Beauty in the Classroom - Instructors’ Pulchritude and Putative Pedagogical Productivity” 24 (4). Economics of Education Review: 369–76. doi:<a href="https://doi.org/10.1016/j.econedurev.2004.07.013">10.1016/j.econedurev.2004.07.013</a>.</p>
-</div>
-</div>
 </div>
 
 
