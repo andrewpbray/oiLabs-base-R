@@ -6,19 +6,13 @@ output:
     css: www/lab.css
     highlight: pygments
     theme: cerulean
+    toc: true
+    toc_float: true
 ---
 
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
-
-<div id="template">
-**Your reproducible lab report:** Before you get started, download the R Markdown 
-template for this lab. Remember all of your code and answers go in this document:
-```{r load-template, eval = FALSE}
-download("http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab8.Rmd", destfile = "lab8.Rmd")
-```
-</div>
 
 In August of 2012, news outlets ranging from the [Washington Post](http://www.washingtonpost.com/national/on-faith/poll-shows-atheism-on-the-rise-in-the-us/2012/08/13/90020fd6-e57d-11e1-9739-eef99c5fb285_story.html) to the [Huffington Post](http://www.huffingtonpost.com/2012/08/14/atheism-rise-religiosity-decline-in-america_n_1777031.html) ran a story about the rise of atheism in America. The source for the story was a poll that asked people, "Irrespective of whether you attend a place of worship or not, would you say you are a religious person, not a religious person or a convinced atheist?" This type of question, which asks people to classify themselves in one way or another, is common in polling and generates categorical data. In this lab we take a look at the atheism survey and explore what's at play when making inference about population proportions using categorical data.
 
@@ -32,7 +26,7 @@ companion package for OpenIntro labs, `oilabs`.
 
 Let's load the packages.
 
-```{r load-packages, message=FALSE}
+```{r load-packages, message=FALSE, eval=TRUE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
@@ -62,7 +56,7 @@ original data set of individual responses to the survey. Load this data
 set into R with the following command.
 
 ```{r head-data}
-load(url("https://stat.duke.edu/~mc301/data/atheism.RData"))
+data(atheism)
 ```
 
 1.   What does each row of Table 6 correspond to? What does each row of 
@@ -244,32 +238,30 @@ renderPlot({
 
 * * *
 
-<div class="oyo">
-
-## On your own
+## More Practice
 
 The question of atheism was asked by WIN-Gallup International in a similar 
 survey that was conducted in 2005. (We assume here that sample sizes have 
 remained the same.) Table 4 on page 13 of the report summarizes survey results 
 from 2005 and 2012 for 39 countries.
 
--   Is there convincing evidence that Spain has seen a change in its atheism index 
+1.   Is there convincing evidence that Spain has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
     significant difference, also quantify this difference with a condfidence interval. \
     *Hint:* First create a new data set for respondents from Spain.
 
--   Is there convincing evidence that the US has seen a change in its atheism index 
+1.   Is there convincing evidence that the US has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
     significant difference, also quantify this difference with a condfidence interval.
 
--   If in fact there has been no change in the atheism index in the countries 
+1.   If in fact there has been no change in the atheism index in the countries 
     listed in Table 4, in how many of those countries would you expect to 
     detect a change (at a significance level of 0.05) simply by chance?\
     *Hint:* Review the definition of the Type 1 error.
 
--   Suppose you're hired by the local government to estimate the proportion of 
+1.   Suppose you're hired by the local government to estimate the proportion of 
     residents that attend a religious service on a weekly basis. According to 
     the guidelines, the estimate must have a margin of error no greater than 
     1% with 95% confidence. You have no idea what to expect for $p$. How many 
@@ -277,8 +269,6 @@ from 2005 and 2012 for 39 countries.
     guidelines?\
     *Hint:* Refer to your plot of the relationship between $p$ and margin of 
     error. This question does not require using the dataset.
-
-</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 
