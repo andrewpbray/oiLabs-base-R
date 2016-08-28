@@ -48,6 +48,10 @@ library(ggplot2)
 library(oilabs)
 ```
 
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
 ### Data
 
 Our investigation will focus on the performance of one player: Kobe Bryant of 

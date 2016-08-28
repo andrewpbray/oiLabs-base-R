@@ -32,6 +32,10 @@ library(ggplot2)
 library(oilabs)
 ```
 
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
 ### The survey
 
 The press release for the poll, conducted by WIN-Gallup International, can be accessed [here](http://www.wingia.com/web/files/richeditor/filemanager/Global_INDEX_of_Religiosity_and_Atheism_PR__6.pdf).

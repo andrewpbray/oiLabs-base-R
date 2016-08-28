@@ -122,6 +122,7 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
@@ -148,10 +149,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="template">
-<p><strong>Your reproducible lab report:</strong> Before you get started, download the R Markdown template for this lab. Remember all of your code and answers go in this document:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab10.Rmd&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;lab10.Rmd&quot;</span>)</code></pre></div>
-</div>
 <div id="grading-the-professor" class="section level2">
 <h2>Grading the professor</h2>
 <p>Many college courses conclude by giving students the opportunity to evaluate the course and the instructor anonymously. However, the use of these student evaluations as an indicator of course quality and teaching effectiveness is often criticized because these measures may reflect the influence of non-teaching related characteristics, such as the physical appearance of the instructor. The article titled, “Beauty in the classroom: instructors’ pulchritude and putative pedagogical productivity” <span class="citation">(Hamermesh and Parker 2005)</span> found that instructors who are viewed to be better looking receive higher instructional ratings.</p>
@@ -168,6 +165,10 @@ $(document).ready(function () {
 <span class="kw">library</span>(oilabs)
 <span class="kw">library</span>(GGally)</code></pre></div>
 <p>This is the first time we’re using the <code>GGally</code> package. We will be using the <code>ggpairs</code> function from this package later in the lab.</p>
+</div>
+<div id="creating-a-reproducible-lab-report" class="section level3">
+<h3>Creating a reproducible lab report</h3>
+<p>To create your new lab report, start by opening a new R Markdown document… From Template… then select Lab Report from the <code>oilabs</code> package.</p>
 </div>
 <div id="the-data" class="section level3">
 <h3>The data</h3>
@@ -390,6 +391,7 @@ evals %&gt;%<span class="st"> </span>
 $(document).ready(function () {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
+
 
 </script>
 

@@ -122,6 +122,7 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
@@ -148,10 +149,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="template">
-<p><strong>Your reproducible lab report:</strong> Before you get started, download the R Markdown template for this lab. Remember all of your code and answers go in this document:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://stat.duke.edu/courses/Spring16/sta101.001/rmd/lab9.Rmd&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;lab9.Rmd&quot;</span>)</code></pre></div>
-</div>
 <div id="batter-up" class="section level2">
 <h2>Batter up</h2>
 <p>The movie <a href="http://en.wikipedia.org/wiki/Moneyball_(film)">Moneyball</a> focuses on the “quest for the secret of success in baseball”. It follows a low-budget team, the Oakland Athletics, who believed that underused statistics, such as a player’s ability to get on base, better predict the ability to score runs than typical statistics like home runs, RBIs (runs batted in), and batting average. Obtaining players who excelled in these underused statistics turned out to be much more affordable for the team.</p>
@@ -166,6 +163,10 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(oilabs)</code></pre></div>
+</div>
+<div id="creating-a-reproducible-lab-report" class="section level3">
+<h3>Creating a reproducible lab report</h3>
+<p>To create your new lab report, start by opening a new R Markdown document… From Template… then select Lab Report from the <code>oilabs</code> package.</p>
 </div>
 <div id="the-data" class="section level3">
 <h3>The data</h3>
@@ -285,6 +286,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
+
 
 </script>
 
