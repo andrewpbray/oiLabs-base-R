@@ -328,22 +328,22 @@ qplot(x = origin, fill = dep_type, data = nycflights, geom = "bar")
 
 ## More Practice
 
--   Mutate the data frame so that it includes a new variable that contains the 
+1.  Mutate the data frame so that it includes a new variable that contains the 
     average speed, `avg_speed` traveled by the plane for each flight (in mph).
     **Hint:** Average speed can be calculated as distance divided by
     number of hours of travel, and note that `air_time` is given in minutes.
 
--   What is the tail number of the plane with the fastest `avg_speed`? 
+1.  What is the tail number of the plane with the fastest `avg_speed`? 
     **Hint:** If you just want to show the `avg_speed` and `tailnum` and
     none of the other variables, use the select function at the end of your
     pipe to select just these two variables with `select(avg_speed, tailnum)`.
     You can google this tail number to find out more about the aircraft.
     
--   Make a scatterplot of `avg_speed` vs. `distance`. Describe the relationship
+1.  Make a scatterplot of `avg_speed` vs. `distance`. Describe the relationship
     between average speed and distance.
     **Hint:** Use `geom = "point"`.
 
--   Suppose you define a flight to be "on time" if it gets to the destination
+1.  Suppose you define a flight to be "on time" if it gets to the destination
     on time or earlier than expected, regardless of any departure delays.
     Mutate the data frame to create a new variable called `arr_type` with
     levels `"on time"` and `"delayed"` based on this definition. Then,
@@ -351,7 +351,7 @@ qplot(x = origin, fill = dep_type, data = nycflights, geom = "bar")
     departed on time or not. What percent of flights  that were `"delayed"`
     departing arrive `"on time"`?
 
--   Replicate the following plot. **Hint:** The data frame plotted only
+1.  Replicate the following plot. **Hint:** The data frame plotted only
     contains flights from American Airlines, Delta Airlines, and United
     Airlines, and the points are `color`ed by `carrier`. Once you replicate
     the plot, determine (roughly) what the cutoff point is for departure
