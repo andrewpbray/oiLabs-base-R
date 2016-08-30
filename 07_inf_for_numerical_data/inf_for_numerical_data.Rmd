@@ -32,6 +32,10 @@ library(ggplot2)
 library(oilabs)
 ```
 
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
 ### The data
 
 In 2004, the state of North Carolina released a large data set containing 

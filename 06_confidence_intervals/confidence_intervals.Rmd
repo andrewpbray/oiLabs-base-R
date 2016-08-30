@@ -47,6 +47,10 @@ library(ggplot2)
 library(oilabs)
 ```
 
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
 ### The data
 
 We consider real estate data from the city of Ames, Iowa. This is the same 

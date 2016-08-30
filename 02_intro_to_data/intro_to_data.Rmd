@@ -42,7 +42,16 @@ library(ggplot2)
 library(oilabs)
 ```
 
-### Data
+### Creating a reproducible lab report
+
+Remember that we will be using R Markdown to create reproducible lab reports. 
+See the following video describing how to get started with creating these 
+reports for this lab, and all future labs:
+
+[**Basic R Markdown with an OpenIntro Lab**](https://www.youtube.com/watch?v=Pdc368lS2hk)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Pdc368lS2hk" frameborder="0" allowfullscreen></iframe>
+
+### The data
 
 The [Bureau of Transportation Statistics](http://www.rita.dot.gov/bts/about/) 
 (BTS) is a statistical agency that is a part of the Research and Innovative 

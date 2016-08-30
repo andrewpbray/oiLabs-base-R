@@ -88,8 +88,14 @@ them each time you relaunch RStudio.
 
 ### Creating a reproducible lab report
 
+We will be using R Markdown to create reproducible lab reports. See the
+following videos describing why and how:
 
+[**Why use R Markdown for Lab Reports?**](https://youtu.be/lNWVQ2oxNho)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lNWVQ2oxNho" frameborder="0" allowfullscreen></iframe>
 
+[**Using R Markdown for Lab Reports in RStudio**](https://youtu.be/o0h-eVABe9M)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/o0h-eVABe9M" frameborder="0" allowfullscreen></iframe>
 
 ## Dr. Arbuthnot's Baptism Records
 
