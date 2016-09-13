@@ -230,8 +230,13 @@ fhgtsd   &lt;-<span class="st"> </span><span class="kw">sd</span>(fdims$hgt)</co
 <p>The x-axis values correspond to the quantiles of a theoretically normal curve with mean 0 and standard deviation 1 AKA the standard normal distribution. The y-axis values correspond to the quantiles of the original unstandardized sample data. However, even if we were to standardize the sample data values, the Q-Q plot would look identical. A data set that is nearly normal will result in a probability plot where the points closely follow the line. Any deviations from normality leads to deviations of these points from the line.</p>
 <p>The plot for female heights shows points that tend to follow the line but with some errant points towards the tails. We’re left with the same problem that we encountered with the histogram above: how close is close enough?</p>
 <p>A useful way to address this question is to rephrase it as: what do probability plots look like for data that I <em>know</em> came from a normal distribution? We can answer this by simulating data from a normal distribution using <code>rnorm</code>.</p>
+<<<<<<< HEAD
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_norm &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">length</span>(fdims$hgt), <span class="dt">mean =</span> fhgtmean, <span class="dt">sd =</span> fhgtsd)</code></pre></div>
 <p>The first argument indicates how many numbers you’d like to generate, which we specify to be the same number of heights in the <code>fdims</code> data set using the <code>length()</code> function. The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated. We can take a look at the shape of our simulated data set, <code>sim_norm</code>, as well as its normal probability plot.</p>
+>>>>>>> upstream/master
+=======
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_norm &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(fdims), <span class="dt">mean =</span> fhgtmean, <span class="dt">sd =</span> fhgtsd)</code></pre></div>
+<p>The first argument indicates how many numbers you’d like to generate, which we specify to be the same number of heights in the <code>fdims</code> data set using the <code>nrow()</code> function. The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated. We can take a look at the shape of our simulated data set, <code>sim_norm</code>, as well as its normal probability plot.</p>
 >>>>>>> upstream/master
 <ol start="3" style="list-style-type: decimal">
 <li>Make a normal probability plot of <code>sim_norm</code>. Do all of the points fall on the line? How does this plot compare to the probability plot for the real data?</li>
@@ -265,7 +270,13 @@ fhgtsd   &lt;-<span class="st"> </span><span class="kw">sd</span>(fdims$hgt)</co
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">182</span>, <span class="dt">mean =</span> fhgtmean, <span class="dt">sd =</span> fhgtsd)</code></pre></div>
 <p>Note that the function <code>pnorm()</code> gives the area under the normal curve below a given value, <code>q</code>, with a given mean and standard deviation. Since we’re interested in the probability that someone is taller than 182 cm, we have to take one minus that probability.</p>
 <p>Assuming a normal distribution has allowed us to calculate a theoretical probability. If we want to calculate the probability empirically, we simply need to determine how many observations fall above 182 then divide this number by the total sample size.</p>
+<<<<<<< HEAD
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(fdims$hgt &gt;<span class="st"> </span><span class="dv">182</span>) /<span class="st"> </span><span class="kw">length</span>(fdims$hgt)</code></pre></div>
+>>>>>>> upstream/master
+=======
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fdims %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(hgt &gt;<span class="st"> </span><span class="dv">182</span>) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">percent =</span> <span class="kw">n</span>() /<span class="st"> </span><span class="kw">nrow</span>(fdims))</code></pre></div>
 >>>>>>> upstream/master
 <p>Although the probabilities are not exactly the same, they are reasonably close. The closer that your distribution is to being normal, the more accurate the theoretical probabilities will be.</p>
 <ol start="6" style="list-style-type: decimal">

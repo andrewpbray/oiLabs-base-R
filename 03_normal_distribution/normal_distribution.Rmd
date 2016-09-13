@@ -23,7 +23,7 @@ This week we'll be working with measurements of body dimensions.  This data set
 contains measurements from 247 men and 260 women, most of whom were considered 
 healthy young adults. Let's take a quick peek at the first few rows of the data.
 
-```{r load-data, message=FALSE, warning=FALSE, results='hide', eval=TRUE}
+```{r load-data, message=FALSE, warning=FALSE}
 library(mosaic)
 library(oilabs)
 data(bdims)
@@ -69,8 +69,8 @@ and then calculate some statistics that will be referenced later.
 
 
 ```{r female-hgt-mean-sd, eval=TRUE}
-meanFheight <- mean(~hgt, data = fdims)
-sdFheight <- sd(~hgt, data = fdims)
+fhgtmean <- mean(~hgt, data = fdims)
+fhgtsd <- sd(~hgt, data = fdims)
 ```
 
 Next we want to make a density histogram to use as the backdrop and use the `fit` argument to overlay a normal probability curve. The `histogram()` command has a parameter called `type` that allows us to specify if we want to see `count`, `percent` or `density` in our histogram. Setting `type="count"` produces a frequency histogram, which shows the number of data points that fall into a particular bin. In a frequency histogram, the *heights* of the bars add up to the total number of observations. 
@@ -133,11 +133,16 @@ A useful way to address this question is to rephrase it as: what do probability
 plots look like for data that I *know* came from a normal distribution?  We can 
 answer this by simulating data from a normal distribution using `rnorm`.
 
-````{r sim-norm}
-sim_norm <- rnorm(n = nrow(fdims), mean = meanFheight, sd = sdFheight)
+```{r sim-norm}
+sim_norm <- rnorm(n = nrow(fdims), mean = fhgtmean, sd = fhgtsd)
 ```
 
-The first argument indicates how many numbers you'd like to generate, which we specify to be the same number of heights in the `fdims` data set using the `nrow` function.  The last two arguments determine the mean and standard deviation of the normal distribution from which the simulated sample will be generated.  We can take a look at the shape of our simulated data set, `sim_norm`, as well as its normal probability plot.
+The first argument indicates how many numbers you'd like to generate, which we 
+specify to be the same number of heights in the `fdims` data set using the 
+`nrow()` function.  The last two arguments determine the mean and standard 
+deviation of the normal distribution from which the simulated sample will be 
+generated.  We can take a look at the shape of our simulated data set, `sim_norm`, 
+as well as its normal probability plot.
 
 3.  Make a normal probability plot of `sim_norm`.  Do all of the points fall on 
     the line?  How does this plot compare to the probability plot for the real 
@@ -180,7 +185,7 @@ score and consulting a Z table (also called a normal probability table).  In R,
 this is done in one step with the function `pnorm()`.
 
 ```{r pnorm}
-1 - pnorm(q = 182, mean = meanFheight, sd = sdFheight)
+1 - pnorm(q = 182, mean = fhgtmean, sd = fhgtsd)
 ```
 
 Note that the function `pnorm()` gives the area under the normal curve below a 
