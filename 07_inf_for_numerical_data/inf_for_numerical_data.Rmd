@@ -165,7 +165,7 @@ omit the `x` variable from the function.
 7.  Calculate a new confidence interval for the same parameter at the 90% 
 confidence level. You can change the confidence level by adding a new argument 
 to the function: `conf_level = 0.90`. Comment on the width of this interval versus 
-the one obtained in the the previous exercise.
+the one obtained in the previous exercise.
 
 8.  Conduct a hypothesis test evaluating whether the average weight gained by 
 younger mothers is different than the average weight gained by mature mothers.
