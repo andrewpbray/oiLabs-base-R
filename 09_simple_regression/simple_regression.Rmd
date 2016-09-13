@@ -5,10 +5,9 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-  pdf_document: default
 ---
 
-```{r, include=FALSE}
+```{r global_options, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -28,14 +27,33 @@ of other player statistics. Our aim will be to summarize these relationships
 both graphically and numerically in order to find which variable, if any, helps 
 us best predict a team's runs scored in a season.
 
-## The data
+## Getting Started
+
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(mosaic)
+library(oilabs)
+```
+
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
+### The data
 
 Let's load up the data for the 2011 season.
 
-
 ```{r load-data}
 library(oilabs)
-library(dplyr)	
+library(dplyr)
+library(ggplot2)
 data(mlb11)
 ```
 
@@ -55,12 +73,19 @@ work with the three newer variables on your own.
 If the relationship looks linear, we can quantify the strength of the
 relationship with the correlation coefficient.
 
-```{r cor, eval=FALSE, message=FALSE}
-require(mosaic)
-cor(runs ~ at_bats, data = mlb11)
+```{r cor}
+mlb11 %>%
+  summarise(cor(runs, at_bats))
 ```
 
 ## Sum of squared residuals
+
+<div id="boxedtext">
+In this section you will use an interactive function to investigate what we mean by "sum 
+of squared residuals". You will need to run this function in your console, not in your 
+markdown document. Running the function also requires that the `mlb11` dataset is loaded 
+in your environment.
+</div>
 
 Think back to the way that we described the distribution of a single variable. 
 Recall that we discussed characteristics such as center, spread, and shape. It's
@@ -77,7 +102,7 @@ line that best follows their association. Use the following interactive
 function to select the line that you think does the best job of going through 
 the cloud of points.
 
-```{r plotss-atbats-runs}
+```{r plotss-atbats-runs, eval=FALSE}
 plot_ss(x = at_bats, y = runs, data = mlb11)
 ```
 
@@ -95,7 +120,7 @@ The most common way to do linear regression is to select the line that minimizes
 the sum of squared residuals. To visualize the squared residuals, you can rerun 
 the plot command and add the argument `showSquares = TRUE`.
 
-```{r plotss-atbats-runs-squares}
+```{r plotss-atbats-runs-squares, eval=FALSE}
 plot_ss(x = at_bats, y = runs, data = mlb11, showSquares = TRUE)
 ```
 
@@ -138,7 +163,7 @@ With this table, we can write down the least squares regression line for the
 linear model:
 
 \[
-  \hat{y} = -2789.2429 + 0.6305 \cdot atbats
+  \hat{y} = -2789.2429 + 0.6305 \times at\_bats
 \]
 
 One last piece of information we will discuss from the summary output is the 
@@ -180,19 +205,22 @@ They're also used to compute the residuals.
 To assess whether the linear model is reliable, we need to check for (1) 
 linearity, (2) nearly normal residuals, and (3) constant variability.
 
-*Linearity*: You already checked if the relationship between runs and at-bats
+**Linearity**: You already checked if the relationship between runs and at-bats
 is linear using a scatterplot. We should also verify this condition with a plot 
-of the residuals vs. at-bats. Recall that any code following a *#* is intended
-to be a comment that helps understand the code but is ignored by R.
+of the residuals vs. fitted (predicted) values.
 
 ```{r residuals}
 xyplot(residuals(m1) ~ at_bats, data = mlb11, type=c("p", "r"), lty = 3)
 ```
 
-6.  Is there any apparent pattern in the residuals plot? What does this indicate
-    about the linearity of the relationship between runs and at-bats?
+Notice here that our model object `m1` can also serve as a data set because stored within it are the fitted values ($\hat{y}$) and the residuals. Also note that we're getting fancy with the code here. After creating the scatterplot on the first layer (first line of code), we overlay a horizontal dashed line at $y = 0$ (to help us check whether residuals are distributed around 0), and we also adjust the axis labels to be more informative.
 
-*Nearly normal residuals*: To check this condition, we can look at a histogram
+6.  Is there any apparent pattern in the residuals plot? What does this indicate
+    about the linearity of the relationship between runs and at-bats?  
+
+</br>
+
+**Nearly normal residuals**: To check this condition, we can look at a histogram
 
 ```{r hist-res}
 histogram(~residuals(m1), fit="normal")
@@ -211,12 +239,13 @@ plot(m1, which = 2)
 
 **Constant variability**:
 
-8.  Based on the plot in (1), does the constant variability condition appear to 
-    be met?
-    
+8.  Based on the residuals vs. fitted plot, does the constant variability condition 
+    appear to be met?
+
 * * *
 
-## On Your Own
+## On your own
+<div class="oyo">
 
 -   Choose another one of the seven traditional variables from `mlb11` besides 
     `at_bats` that you think might be a good predictor of `runs`. Produce a 
@@ -245,6 +274,8 @@ plot(m1, which = 2)
 
 -   Check the model diagnostics for the regression model with the variable you 
     decided was the best predictor for runs.
+    
+</div>
 
 <div id="license">
 This is a product of OpenIntro that is released under a [Creative Commons 

@@ -2,19 +2,28 @@
 title: "Probability"
 output:
   html_document:
-    theme: cerulean
-    highlight: pygments
     css: ../lab.css
+    highlight: pygments
+    theme: cerulean
+    toc: true
+    toc_float: true
 ---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
 
 ## Hot Hands
 
 Basketball players who make several baskets in succession are described as 
 having a *hot hand*. Fans and players have long believed in the hot hand 
 phenomenon, which refutes the assumption that each shot is independent of the 
-next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence
+next. However, [a 1985 paper](http://www.sciencedirect.com/science/article/pii/0010028585900106) by Gilovich, Vallone, and Tversky collected evidence
 that contradicted this belief and showed that successive shots are independent 
-events ([http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf](http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf)). This paper started a great controversy that continues to this day, as you can 
+events. This paper started a great controversy that continues to this day, as you can 
 see by Googling *hot hand basketball*.
 
 We do not expect to resolve this controversy today. However, in this lab we'll 
@@ -25,27 +34,38 @@ data in order to determine if the hot hand phenomenon appears to be real.
 
 ## Getting Started
 
+### Load packages
+
+In this lab we will explore the data using the `dplyr` package and visualize it 
+using the `ggplot2` package for data visualization. The data can be found in the
+companion package for OpenIntro labs, `oilabs`.
+
+Let's load the packages.
+
+```{r load-packages, message=FALSE}
+library(mosaic)
+library(oilabs)
+```
+
+### Creating a reproducible lab report
+
+To create your new lab report, start by opening a new R Markdown document... From Template... then select Lab Report from the `oilabs` package. 
+
+### Data
+
 Our investigation will focus on the performance of one player: Kobe Bryant of 
 the Los Angeles Lakers. His performance against the Orlando Magic in the 2009 
 NBA finals earned him the title *Most Valuable Player* and many spectators 
-commented on how he appeared to show a hot hand. Let's load some data from those
-games and look at the first several rows.
+commented on how he appeared to show a hot hand. Let's load some necessary files
+that we will need for this lab.
 
-```{r opts, eval=TRUE, echo=FALSE}
-library(knitr)
-opts_chunk$set(eval=FALSE)
+```{r load-data}
+data(kobe_basket)
 ```
 
-```{r load-data, message=FALSE}
-library(mosaic)
-library(oilabs)
-data(kobe)
-head(kobe)
-```
-
-In this data frame, every row records a shot taken by Kobe Bryant. If he hit the
-shot (made a basket), a hit, `H`, is recorded in the column named `basket`, 
-otherwise a miss, `M`, is recorded.
+This data frame contains 133 observations and 6 variables, where every
+row records a shot taken by Kobe Bryant. The `shot` variable in this dataset
+indicates whether the shot was a hit (`H`) or a miss (`M`).
 
 Just looking at the string of hits and misses, it can be difficult to gauge 
 whether or not it seems like Kobe was shooting with a hot hand. One way we can 
@@ -58,6 +78,7 @@ his nine shot attempts in the first quarter:
 
 \[ \textrm{H M | M | H H M | M | M | M} \]
 
+You can verify this by viewing the first 8 rows of the data in the data viewer.
 
 Within the nine shot attempts, there are six streaks, which are separated by a 
 "|" above. Their lengths are one, zero, two, zero, zero, zero (in order of 
@@ -66,21 +87,23 @@ occurrence).
 1.  What does a streak length of 1 mean, i.e. how many hits and misses are in a 
     streak of 1? What about a streak length of 0?
 
-The custom function `calc_streak`, which was loaded in with the `oilabs` package, may be 
-used to calculate the lengths of all shooting streaks and then look at the 
-distribution.
+Counting streak lengths manually for all 133 shots would get tedious, so we'll
+use the custom function `calc_streak` to calculate them, and store the results
+in a data frame called `kobe_streak` as the `length` variable.
 
 ```{r calc-streak-kobe}
-kobe_streak <- calc_streak(kobe$basket)
-barchart(tally(~kobe_streak), horizontal=FALSE)
+kobe_streak <- calc_streak(kobe_basket$shot)
 ```
 
-Note that instead of making a histogram, we chose to make a bar plot from a 
-table of the streak data. A bar plot is preferable here since our variable is 
-discrete -- counts -- instead of continuous.
+We can then take a look at the distribution of these streak lengths.
+
+```{r plot-streak-kobe}
+qplot(data = kobe_streak, x = length, geom = "bar")
+```
 
 2.  Describe the distribution of Kobe's streak lengths from the 2009 NBA finals. 
-    What was his typical streak length? How long was his longest streak of baskets?
+    What was his typical streak length? How long was his longest streak of 
+    baskets? Make sure to include the accompanying plot in your answer.
 
 ## Compared to What?
 
@@ -133,7 +156,7 @@ generate an outcome that adheres to those rules. As a simple example, you can
 simulate flipping a fair coin with the following.
 
 ```{r head-tail}
-outcomes <- c("heads", "tails")
+coin_outcomes <- c("heads", "tails")
 resample(outcomes, size = 1)
 ```
 
@@ -158,7 +181,7 @@ sim_fair_coin <- resample(outcomes, size = 100)
 To view the results of this simulation, type the name of the object and then use
 `tally` to count up the number of heads and tails.
 
-```{r table-sim-fair-coin}
+```{r table-sim-fair-coin, eval=FALSE}
 sim_fair_coin
 tally(~sim_fair_coin)
 ```
@@ -168,13 +191,37 @@ a coin and it lands heads is 0.5. Say we're trying to simulate an unfair coin
 that we know only lands heads 20% of the time. We can adjust for this by adding 
 an argument called `prob`, which provides a vector of two probability weights.
 
-```{r sim-unfair-coin, eval=FALSE}
-sim_unfair_coin <- resample(outcomes, size = 100, prob = c(0.2, 0.8))
+```{r sim-unfair-coin}
+sim_unfair_coin <- resample(coin_outcomes, size = 100, prob = c(0.2, 0.8))
 ```
 
 `prob=c(0.2, 0.8)` indicates that for the two elements in the `outcomes` vector,
 we want to select the first one, `heads`, with probability 0.2 and the second 
-one, `tails` with probability 0.8. 
+one, `tails` with probability 0.8. Another way of thinking about this is to 
+think of the outcome space as a bag of 10 chips, where 2 chips are labeled 
+"head" and 8 chips "tail". Therefore at each draw, the probability of drawing a 
+chip that says "head"" is 20%, and "tail" is 80%.
+
+3.  In your simulation of flipping the unfair coin 100 times, how many flips 
+    came up heads? Include the code for sampling the unfair coin in your response.
+    Since the markdown file will run the code, and generate a new sample each time
+    you *Knit* it, you should also "set a seed" **before** you sample. Read more 
+    about setting a seed below.
+    
+<div id="boxedtext">
+**A note on setting a seed:** Setting a seed will cause R to select the same 
+sample each time you knit your document. This will make sure your results don't
+change each time you knit, and it will also ensure reproducibility of your work 
+(by setting the same seed it will be possible to reproduce your results). You can
+set a seed like this:
+```{r set-seed}
+set.seed(35797)                 # make sure to change the seed
+```
+The number above is completely arbitraty. If you need inspiration, you can use your
+ID, birthday, or just a random string of numbers. The important thing is that you
+use each seed only once. Remember to do this **before** you sample in the exercise 
+above.
+</div>
 
 In a sense, we've shrunken the size of the slip of paper that says "heads", 
 making it less likely to be drawn and we've increased the size of the slip of 
@@ -183,21 +230,12 @@ fair coin, both slips of paper were the same size. This happens by default if
 you don't provide a `prob` argument; all elements in the `outcomes` vector have 
 an equal probability of being drawn.
 
-Another way of thinking about this is to think of the outcome space as a bag of 
-10 chips, where 2 chips are labeled "head" and 8 chips "tail". Therefore at each
-draw, the probability of drawing a chip that says "head"" is 20%, and "tail" is 80%.
-
 If you want to learn more about `resample` or any other function, recall that you 
 can always check out its help file.
 
 ```{r help-resample,tidy = FALSE}
 ?resample
 ```
-
-3.  In your simulation of flipping the unfair coin 100 times, how many flips 
-    came up heads?
-
-
 
 ## Simulating the Independent Shooter
 
@@ -206,8 +244,8 @@ that we use to simulate a coin flip. To simulate a single shot from an
 independent shooter with a shooting percentage of 50% we type,
 
 ```{r sim-basket}
-outcomes <- c("H", "M")
-sim_basket <- resample(outcomes, size = 1)
+shot_outcomes <- c("H", "M")
+sim_basket <- resample(shot_outcomes, size = 1)
 ```
 
 To make a valid comparison between Kobe and our simulated independent shooter, 
@@ -224,13 +262,7 @@ R overwrites the old object with the new one, so always make sure that you don't
 need the information in an old vector before reassigning its name.
 
 With the results of the simulation saved as `sim_basket`, we have the data 
-necessary to compare Kobe to our independent shooter. We can look at Kobe's data 
-alongside our simulated data.
-
-```{r compare-basket}
-kobe %>% select(basket)
-sim_basket
-```
+necessary to compare Kobe to our independent shooter.
 
 Both data sets represent the results of 133 shot attempts, each with the same 
 shooting percentage of 45%. We know that our simulated data is from a shooter 
@@ -239,22 +271,24 @@ a hot hand.
 
 * * *
 
-## On your own
+## More Practice
 
 ### Comparing Kobe Bryant to the Independent Shooter
 
-Using `calc_streak`, compute the streak lengths of `sim_basket`.
+5.  Using `calc_streak`, compute the streak lengths of `sim_basket`, and
+    save the results in a data frame called `sim_streak`.
 
--   Describe the distribution of streak lengths. What is the typical streak 
+6.  Describe the distribution of streak lengths. What is the typical streak 
     length for this simulated independent shooter with a 45% shooting percentage?
-    How long is the player's longest streak of baskets in 133 shots?
+    How long is the player's longest streak of baskets in 133 shots? Make sure
+    to include a plot in your answer.
 
--   If you were to run the simulation of the independent shooter a second time, 
+7.  If you were to run the simulation of the independent shooter a second time, 
     how would you expect its streak distribution to compare to the distribution 
     from the question above? Exactly the same? Somewhat similar? Totally 
     different? Explain your reasoning.
 
--   How does Kobe Bryant's distribution of streak lengths compare to the 
+8.  How does Kobe Bryant's distribution of streak lengths compare to the 
     distribution of streak lengths for the simulated shooter? Using this 
     comparison, do you have evidence that the hot hand model fits Kobe's 
     shooting patterns? Explain.

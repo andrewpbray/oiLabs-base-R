@@ -1,4 +1,4 @@
-OpenIntro Labs - dplyr
+OpenIntro Labs - dplyr and ggplot2
 ==============
 
 OpenIntro Labs promote the understanding and application of statistics through 
@@ -20,4 +20,11 @@ It is our hope that these materials are useful for instructors and students of
 statistics.  If you end up developing some interesting variants of these labs or 
 creating new ones, please let us know!
 
-This branch contains a fork of the OpenIntro Labs that have been infused with **mosaic**. Project MOSAIC is a community of educators working to develop a new way to introduce mathematics, statistics, computation and modeling to students in colleges and universities. [The **mosaic** package](https://github.com/rpruim/mosaic) brings the full power of R to  statistics students. 
+This branch contains a fork of the OpenIntro Labs that have been infused with **mosaic**. Project MOSAIC is a community of educators working to develop a new way to introduce mathematics, statistics, computation and modeling to students in colleges and universities. [The **mosaic** package](https://github.com/rpruim/mosaic) brings the full power of R to statistics students. 
+
+## Feedback / collaboration
+
+Your feedback is most welcomed! If you have suggestions for minor updates (fixing
+typos, etc.) please do not hesitate to issue a pull request. If you have ideas for
+major revamp of a lab (replacing outdated code with modern version, overhaul in 
+pedagogy, etc.) please create an issue so to start the conversation.
