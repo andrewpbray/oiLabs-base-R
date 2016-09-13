@@ -133,12 +133,12 @@ plots look like for data that I *know* came from a normal distribution?  We can
 answer this by simulating data from a normal distribution using `rnorm`.
 
 ```{r sim-norm}
-sim_norm <- rnorm(n = length(fdims$hgt), mean = fhgtmean, sd = fhgtsd)
+sim_norm <- rnorm(n = nrow(fdims), mean = fhgtmean, sd = fhgtsd)
 ```
 
 The first argument indicates how many numbers you'd like to generate, which we 
 specify to be the same number of heights in the `fdims` data set using the 
-`length()` function.  The last two arguments determine the mean and standard 
+`nrow()` function.  The last two arguments determine the mean and standard 
 deviation of the normal distribution from which the simulated sample will be 
 generated.  We can take a look at the shape of our simulated data set, `sim_norm`, 
 as well as its normal probability plot.
@@ -198,7 +198,9 @@ need to determine how many observations fall above 182 then divide this number
 by the total sample size.
 
 ```{r probability}
-sum(fdims$hgt > 182) / length(fdims$hgt)
+fdims %>% 
+  filter(hgt > 182) %>%
+  summarise(percent = n() / nrow(fdims))
 ```
 
 Although the probabilities are not exactly the same, they are reasonably close. 
