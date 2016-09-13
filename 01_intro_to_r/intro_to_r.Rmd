@@ -21,8 +21,8 @@ library(oilabs)
 
 The goal of this lab is to introduce you to R and RStudio, which you'll be using
 throughout the course both to learn the statistical concepts discussed in the 
-course and to analyze real data and come to informed conclusions. To straighten 
-out which is which: R is the name of the programming language itself and RStudio 
+course and to analyze real data and come to informed conclusions. To clarify
+which is which: R is the name of the programming language itself and RStudio 
 is a convenient interface.
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate;
@@ -41,7 +41,7 @@ shown below.
 The panel on the lower left is where the action happens. It's called the *console*. 
 Everytime you launch RStudio, it will have the same text at the top of the 
 console telling you the version of R that you're running. Below that information
-is the *prompt*. As its name suggests, this prompt is really a request, a 
+is the *prompt*. As its name suggests, this prompt is really a request: a 
 request for a command. Initially, interacting with R is all about typing commands
 and interpreting the output. These commands and their syntax have evolved over
 decades (literally) and now provide what many users feel is a fairly natural way
@@ -66,7 +66,7 @@ and many others in the future, we will use the following R packages:
 First, install these packages by typing the following three lines of code into
 the console of your RStudio session, pressing the enter/return key after each one.
 
-```{r install-packages, message = FALSE}
+```{r install-packages, message = FALSE, eval=FALSE}
 install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("oilabs")
@@ -76,7 +76,7 @@ You may need to select a server from which to download; any of them will work.
 Next, you need to load these packages in your working environment. We do this with
 the `library` function. Run the following three lines in your console.
 
-```{r load-packages, message = FALSE}
+```{r load-packages, message = FALSE, eval=TRUE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
@@ -101,7 +101,7 @@ following videos describing why and how:
 
 To get you started, run the following command to load the data.
 
-```{r load-abrbuthnot-data}
+```{r load-abrbuthnot-data, eval=TRUE}
 data(arbuthnot)
 ```
 
@@ -111,6 +111,7 @@ You can do this by
 file, or
 - putting your cursor on this line, and hit the **Run** button on the upper right 
 corner of the pane, or
+- hitting `Ctrl-Shift-Enter`, or
 - typing the code in the console.
 
 This command instructs R to load some data: 
@@ -124,7 +125,7 @@ computation or some analysis you have performed.
 The Arbuthnot data set refers to Dr. John Arbuthnot, an 18<sup>th</sup> century 
 physician, writer, and mathematician. He was interested in the ratio of newborn
 boys to newborn girls, so he gathered the baptism records for children born in
-London for every year from 1629 to 1710. We can take a look at the data by 
+London for every year from 1629 to 1710. We can view the data by 
 typing its name into the console.
 
 ```{r view-data}
@@ -136,7 +137,7 @@ One advantage of RStudio is that it comes with a built-in data viewer. Click on
 the name `arbuthnot` in the *Environment* pane (upper right window) that lists 
 the objects in your workspace. This will bring up an alternative display of the 
 data set in the *Data Viewer* (upper left window). You can close the data viewer
-by clicking on the *x* in the upper lefthand corner.
+by clicking on the `x` in the upper lefthand corner.
 
 What you should see are four columns of numbers, each row representing a 
 different year: the first entry in each row is simply the row number (an index 
@@ -151,26 +152,22 @@ think of them as the index that you see on the left side of a spreadsheet. In
 fact, the comparison to a spreadsheet will generally be helpful. R has stored 
 Arbuthnot's data in a kind of spreadsheet or table called a *data frame*.
 
-You can see the dimensions of this data frame by typing:
+You can see the dimensions of this data frame as well as the names of the variables and the first few observations by typing:
 
-```{r dim-data}
-dim(arbuthnot)
+```{r glimpse-data}
+glimpse(arbuthnot)
 ```
 
-This command should output `[1] 82 3`, indicating that there are 82 rows and 3 
-columns (we'll get to what the `[1]` means in a bit), just as it says next to 
-the object in your workspace. You can see the names of these columns (or 
-variables) by typing:
+This command should output the following
 
-```{r names-data}
-names(arbuthnot)
+```{r glimpse-data-result, echo=FALSE, eval=TRUE}
+glimpse(arbuthnot)
 ```
 
-You should see that the data frame contains the columns `year`,  `boys`, and 
-`girls`. At this point, you might notice that many of the commands in R look a 
-lot like functions from math class; that is, invoking R commands means supplying
-a function with some number of arguments. The `dim` and `names` commands, for 
-example, each took a single argument, the name of a data frame. 
+We can see that there are 82 observations and 3 variables in this dataset. The variable names are `year`, `boys`, and `girls`. At this point, you might notice 
+that many of the commands in R look a  lot like functions from math class; that 
+is, invoking R commands means supplying a function with some number of arguments. 
+The `glimpse` command, for example, took a single argument, the name of a data frame. 
 
 ## Some Exploration
 
@@ -208,7 +205,7 @@ of the number of girls baptized per year with the command
 qplot(x = year, y = girls, data = arbuthnot)
 ```
 
-The `qplot()` function (meaning "quick plot") looks at the type of data you have
+The `qplot()` function (meaning "quick plot") considers the type of data you have
 provided it and makes the decision to visualize it with a scatterplot. The plot
 should appear under the *Plots* tab of the lower right panel of RStudio. Notice 
 that the command above again looks like a function, this time with three arguments
@@ -271,22 +268,24 @@ arbuthnot <- arbuthnot %>%
   mutate(total = boys + girls)
 ```
 
-What in the world is going on here? The `%>%` operator is called the **piping** 
-operator. Basically, it takes the output of the current line and pipes it into 
-the following line of code.
+The `%>%` operator is called the **piping** 
+operator. It takes the output of the previous expression and pipes it into 
+the first argument of the function in the following one. 
+To continue our analogy with mathematical functions, `x %>% f(y)` is 
+equivalent to `f(x, y)`.
 
 <div id="boxedtext">
 **A note on piping: ** Note that we can read these three lines of code as the following: 
 
 *"Take the `arbuthnot` dataset and **pipe** it into the `mutate` function. 
-Mutate a new variable called `total` that is the sum of the variables
-called `boys` and `girls`. Then assign this new resulting dataset to the object
+Mutate the `arbuthnot` data set by creating a new variable called `total` that is the sum of the variables
+called `boys` and `girls`. Then assign the resulting dataset to the object
 called `arbuthnot`, i.e. overwrite the old `arbuthnot` dataset with the new one
 containing the new variable."*
 
-This is essentially equivalent to going through each row and adding up the boys 
-and girls counts for that year and recording that value in a new column called
-total.
+This is equivalent to going through each row and adding up the `boys` 
+and `girls` counts for that year and recording that value in a new column called
+`total`.
 </div>
 
 <div id="boxedtext">
@@ -356,9 +355,9 @@ arbuthnot <- arbuthnot %>%
 
 This command add a new variable to the `arbuthnot` dataframe containing the values
 of either `TRUE` if that year had more boys than girls, or `FALSE` if that year 
-did not (the answer may surprise you). This variable contains different kind of 
-data than we have considered so far. All other columns in the `arbuthnot` data 
-frame have values are numerical (the year, the number of boys and girls). Here, 
+did not (the answer may surprise you). This variable contains a different kind of 
+data than we have encountered so far. All other columns in the `arbuthnot` data 
+frame have values that are numerical (the year, the number of boys and girls). Here, 
 we've asked R to create *logical* data, data where the values are either `TRUE` 
 or `FALSE`. In general, data analysis will involve many different kinds of data 
 types, and one reason for using R is that it is able to represent and compute 
@@ -370,7 +369,7 @@ with many of them.
 
 In the previous few pages, you recreated some of the displays and preliminary 
 analysis of Arbuthnot's baptism data. Your assignment involves repeating these 
-steps, but for present day birth records in the United States. Load up the 
+steps, but for present day birth records in the United States. Load the 
 present day data with the following command.
 
 ```{r load-present-data}

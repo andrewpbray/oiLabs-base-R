@@ -26,6 +26,7 @@ healthy young adults. Let's take a quick peek at the first few rows of the data.
 ```{r load-data, message=FALSE, warning=FALSE, results='hide', eval=TRUE}
 library(mosaic)
 library(oilabs)
+data(bdims)
 head(bdims)
 ```
 
@@ -44,7 +45,7 @@ Since males and females tend to have different body dimensions, it will be
 useful to create two additional data sets: one with only men and another with 
 only women.
 
-```{r male-female, eval=TRUE}
+```{r male-female}
 mdims <- bdims %>%
   filter(sex == "m")
 fdims <- bdims %>%
@@ -112,21 +113,12 @@ close the histogram is to the curve. An alternative approach involves
 constructing a normal probability plot, also called a normal Q-Q plot for 
 "quantile-quantile".
 
-````{r qq}
-qqmath(~hgt, data = fdims, type = c("p", "r"))
+```{r qq}
+qplot(sample = hgt, data = fdims, stat = "qq")
 ```
 
-In this command, the `p` signifies points and the `r` says to add a regression line. 
-
-A data set that is nearly normal will result in a probability plot where the 
-points closely follow a line.  Any deviations from normality leads to 
-deviations of these points from the line.  The plot for female heights shows 
-points that tend to follow the line but with some errant points towards the 
-tails.  We're left with the same problem that we encountered with the histogram 
-above: how close is close enough?
-
 The x-axis values correspond to the quantiles of a theoretically normal curve 
-with mean 0 and standard deviation 1 (a.k.a. the standard normal distribution).  The 
+with mean 0 and standard deviation 1 AKA the standard normal distribution.  The 
 y-axis values correspond to the quantiles of the original unstandardized sample 
 data. However, even if we were to standardize the sample data values, the Q-Q
 plot would look identical. A data set that is nearly normal will result in a
@@ -157,11 +149,11 @@ function. It shows the Q-Q plot corresponding to the original data in the top
 left corner, and the Q-Q plots of 8 different simulated normal data.  It may be
 helpful to click the zoom button in the plot window.
 
-```{r qqnormsim, message=FALSE}
-qqnormsim(hgt, data = fdims)
+```{r qqnormsim}
+qqnormsim(sample = hgt, data = fdims)
 ```
 
-4.  Does the normal probability plot for `hgt` look similar to the plots 
+4.  Does the normal probability plot for female heights look similar to the plots 
     created for the simulated data?  That is, do plots provide evidence that the
     female heights are nearly normal?
 
@@ -191,15 +183,9 @@ this is done in one step with the function `pnorm()`.
 1 - pnorm(q = 182, mean = meanFheight, sd = sdFheight)
 ```
 
-
-Note that the function `pnorm` gives the area under the normal curve below a 
-given value, `q`, with a given mean and standard deviation.  
-
-```{r, echo=FALSE, fig.width=10, eval=TRUE, message=FALSE, results='hide'}
-1 - xpnorm(q = 182, mean = meanFheight, sd = sdFheight)
-```
-
-Since we're interested in the probability that someone is taller than 182 cm, we have to 
+Note that the function `pnorm()` gives the area under the normal curve below a 
+given value, `q`, with a given mean and standard deviation.  Since we're 
+interested in the probability that someone is taller than 182 cm, we have to 
 take one minus that probability.
 
 Assuming a normal distribution has allowed us to calculate a theoretical 
@@ -256,11 +242,84 @@ theoretical probabilities will be.
     your findings.
 
 
+```{r hists-and-qqs, echo=FALSE, eval=FALSE}
+sdata <- fdims %>%
+  mutate(sdata = (bii.di - mean(bii.di))/sd(bii.di)) %>%
+  select(sdata)
+p1 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for female bii.di")
+p4 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot B")
+sdata <- fdims %>%
+  mutate(sdata = (elb.di - mean(elb.di))/sd(elb.di)) %>%
+  select(sdata)
+p3 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for female elb.di")
+p6 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot C")
+sdata <- bdims %>%
+  mutate(sdata = (age - mean(age))/sd(age)) %>%
+  select(sdata)
+p5 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for general age")
+p8 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot D")
+sdata <- fdims %>%
+  mutate(sdata = (che.de - mean(che.de))/sd(che.de)) %>%
+  select(sdata)
+p7 <- ggplot(sdata, aes(x = sdata)) +
+  geom_histogram() + 
+  ggtitle("Histogram for general age")
+p2 <- qplot(sample = sdata, data = sdata, stat = "qq") +
+  ggtitle("Normal QQ plot A")
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+png("more/histQQmatch.png", height = 1600, width = 1200, res = 150)
+multiplot(p1, p2, p3, p4, p5, p6, p7, p8,
+          layout = matrix(1:8, ncol = 2, byrow = TRUE))
+dev.off()
+```
 
 
-![histQQmatch](more/histQQmatchgg.png)
-
-
+![histQQmatchgg](more/histQQmatchgg.png)
 
 <div id="license">
 This is a product of OpenIntro that is released under a 
