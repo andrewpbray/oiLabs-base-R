@@ -63,8 +63,11 @@ and many others in the future, we will use the following R packages:
 - `ggplot2`: for data visualization
 - `oilabs`: for data and custom functions with the OpenIntro labs
 
-First, install these packages by typing the following three lines of code into
-the console of your RStudio session, pressing the enter/return key after each one.
+If these packages are not already available in your R environment, 
+install them by typing the following three lines of code into
+the console of your RStudio session, pressing the enter/return key after each one. 
+Note that you can check to see which packages (and which versions) are installed by
+inspecting the *Packages* tab in the lower right panel of RStudio. 
 
 ```{r install-packages, message = FALSE, eval=FALSE}
 install.packages("dplyr")
