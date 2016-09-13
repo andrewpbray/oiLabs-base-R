@@ -66,7 +66,7 @@ and many others in the future, we will use the following R packages:
 First, install these packages by typing the following three lines of code into
 the console of your RStudio session, pressing the enter/return key after each one.
 
-```{r install-packages, message = FALSE}
+```{r install-packages, message = FALSE, eval=FALSE}
 install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("oilabs")
@@ -76,7 +76,7 @@ You may need to select a server from which to download; any of them will work.
 Next, you need to load these packages in your working environment. We do this with
 the `library` function. Run the following three lines in your console.
 
-```{r load-packages, message = FALSE}
+```{r load-packages, message = FALSE, eval=TRUE}
 library(dplyr)
 library(ggplot2)
 library(oilabs)
@@ -101,7 +101,7 @@ following videos describing why and how:
 
 To get you started, run the following command to load the data.
 
-```{r load-abrbuthnot-data}
+```{r load-abrbuthnot-data, eval=TRUE}
 data(arbuthnot)
 ```
 
@@ -151,26 +151,22 @@ think of them as the index that you see on the left side of a spreadsheet. In
 fact, the comparison to a spreadsheet will generally be helpful. R has stored 
 Arbuthnot's data in a kind of spreadsheet or table called a *data frame*.
 
-You can see the dimensions of this data frame by typing:
+You can see the dimensions of this data frame as well as the names of the variables and the first few observations by typing:
 
-```{r dim-data}
-dim(arbuthnot)
+```{r glimpse-data}
+glimpse(arbuthnot)
 ```
 
-This command should output `[1] 82 3`, indicating that there are 82 rows and 3 
-columns (we'll get to what the `[1]` means in a bit), just as it says next to 
-the object in your workspace. You can see the names of these columns (or 
-variables) by typing:
+This command should output the following
 
-```{r names-data}
-names(arbuthnot)
+```{r glimpse-data-result, echo=FALSE, eval=TRUE}
+glimpse(arbuthnot)
 ```
 
-You should see that the data frame contains the columns `year`,  `boys`, and 
-`girls`. At this point, you might notice that many of the commands in R look a 
-lot like functions from math class; that is, invoking R commands means supplying
-a function with some number of arguments. The `dim` and `names` commands, for 
-example, each took a single argument, the name of a data frame. 
+We can see that there are 82 observations and 3 variables in this dataset. The variable names are `year`, `boys`, and `girls`. At this point, you might notice 
+that many of the commands in R look a  lot like functions from math class; that 
+is, invoking R commands means supplying a function with some number of arguments. 
+The `glimpse` command, for example, took a single argument, the name of a data frame. 
 
 ## Some Exploration
 

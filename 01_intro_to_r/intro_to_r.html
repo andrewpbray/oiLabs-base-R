@@ -296,11 +296,15 @@ div.tocify {
 <p>However printing the whole dataset in the console is not that useful. One advantage of RStudio is that it comes with a built-in data viewer. Click on the name <code>arbuthnot</code> in the <em>Environment</em> pane (upper right window) that lists the objects in your workspace. This will bring up an alternative display of the data set in the <em>Data Viewer</em> (upper left window). You can close the data viewer by clicking on the <em>x</em> in the upper lefthand corner.</p>
 <p>What you should see are four columns of numbers, each row representing a different year: the first entry in each row is simply the row number (an index we can use to access the data from individual years if we want), the second is the year, and the third and fourth are the numbers of boys and girls baptized that year, respectively. Use the scrollbar on the right side of the console window to examine the complete data set.</p>
 <p>Note that the row numbers in the first column are not part of Arbuthnot’s data. R adds them as part of its printout to help you make visual comparisons. You can think of them as the index that you see on the left side of a spreadsheet. In fact, the comparison to a spreadsheet will generally be helpful. R has stored Arbuthnot’s data in a kind of spreadsheet or table called a <em>data frame</em>.</p>
-<p>You can see the dimensions of this data frame by typing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(arbuthnot)</code></pre></div>
-<p>This command should output <code>[1] 82 3</code>, indicating that there are 82 rows and 3 columns (we’ll get to what the <code>[1]</code> means in a bit), just as it says next to the object in your workspace. You can see the names of these columns (or variables) by typing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(arbuthnot)</code></pre></div>
-<p>You should see that the data frame contains the columns <code>year</code>, <code>boys</code>, and <code>girls</code>. At this point, you might notice that many of the commands in R look a lot like functions from math class; that is, invoking R commands means supplying a function with some number of arguments. The <code>dim</code> and <code>names</code> commands, for example, each took a single argument, the name of a data frame.</p>
+<p>You can see the dimensions of this data frame as well as the names of the variables and the first few observations by typing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(arbuthnot)</code></pre></div>
+<p>This command should output the following</p>
+<pre><code>## Observations: 82
+## Variables: 3
+## $ year  &lt;int&gt; 1629, 1630, 1631, 1632, 1633, 1634, 1635, 1636, 1637, 16...
+## $ boys  &lt;int&gt; 5218, 4858, 4422, 4994, 5158, 5035, 5106, 4917, 4703, 53...
+## $ girls &lt;int&gt; 4683, 4457, 4102, 4590, 4839, 4820, 4928, 4605, 4457, 49...</code></pre>
+<p>We can see that there are 82 observations and 3 variables in this dataset. The variable names are <code>year</code>, <code>boys</code>, and <code>girls</code>. At this point, you might notice that many of the commands in R look a lot like functions from math class; that is, invoking R commands means supplying a function with some number of arguments. The <code>glimpse</code> command, for example, took a single argument, the name of a data frame.</p>
 </div>
 <div id="some-exploration" class="section level2">
 <h2>Some Exploration</h2>
