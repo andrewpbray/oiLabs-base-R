@@ -14,7 +14,7 @@ having a *hot hand*. Fans and players have long believed in the hot hand
 phenomenon, which refutes the assumption that each shot is independent of the 
 next. However, a 1985 paper by Gilovich, Vallone, and Tversky collected evidence
 that contradicted this belief and showed that successive shots are independent 
-events ([http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf](http://psych.cornell.edu/sites/default/files/Gilo.Vallone.Tversky.pdf)). This paper started a great controversy that continues to this day, as you can 
+events ([http://www.cs.colorado.edu/~mozer/Teaching/syllabi/7782/readings/gilovich%20vallone%20tversky.pdf](http://www.cs.colorado.edu/~mozer/Teaching/syllabi/7782/readings/gilovich%20vallone%20tversky.pdf)). This paper started a great controversy that continues to this day, as you can 
 see by Googling *hot hand basketball*.
 
 We do not expect to resolve this controversy today. However, in this lab we'll 
