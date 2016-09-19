@@ -53,7 +53,7 @@ fdims <- bdims %>%
   filter(sex == "f")
 ```
 
-1.  Make a histogram of men's heights and a histogram of women's heights.  How 
+1.  Make a plot (or plots) to compare the distributions of men's and women's heights.  How 
     would you compare the various aspects of the two distributions?
 
 ## The normal distribution
