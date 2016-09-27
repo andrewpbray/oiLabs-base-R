@@ -269,8 +269,8 @@ Note that the syntax for making a normal probability plot is a bit different tha
     the sake of conciseness, only include output for the best variable, not all 
     five).
 
--   Now examine the three newer variables. These are the statistics used by the 
-    central character in *Moneyball* to predict a team's success. In general, are they more 
+-   Now examine the three newer variables. These are the statistics used by [the 
+    central character](https://en.wikipedia.org/wiki/Paul_DePodesta) in *Moneyball* to predict a team's success. In general, are they more 
     or less effective at predicting runs that the old variables? Explain using 
     appropriate graphical and numerical evidence. Of all ten variables we've 
     analyzed, which seems to be the best predictor of `runs`? Using the limited 
