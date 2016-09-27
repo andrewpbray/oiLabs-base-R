@@ -13,7 +13,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Batter up 
 
-The movie [Moneyball](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
+The movie [*Moneyball*](http://en.wikipedia.org/wiki/Moneyball_(film)) focuses on
 the "quest for the secret of success in baseball". It follows a low-budget team, 
 the Oakland Athletics, who believed that underused statistics, such as a player's 
 ability to get on base, better predict the ability to score runs than typical 
@@ -55,7 +55,7 @@ Let's load up the data for the 2011 season.
 data(mlb11)
 ```
 
-In addition to runs scored, there are seven traditionally used variables in the 
+In addition to runs scored, there are seven [traditionally-used variables](https://en.wikipedia.org/wiki/Baseball_statistics#Commonly_used_statistics) in the 
 data set: at-bats, hits, home runs, batting average, strikeouts, stolen bases, 
 and wins. There are also three newer variables: on-base percentage, slugging 
 percentage, and on-base plus slugging. For the first portion of the analysis 
@@ -181,7 +181,7 @@ Let's create a scatterplot with the least squares line for `m1` laid on top.
 
 ```{r reg-with-line}
 qplot(x = at_bats, y = runs, data = mlb11, geom = "point") +
-  stat_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE)
 ```
 
 Here we are literally adding a layer on top of our plot. `stat_smooth` creates
@@ -258,7 +258,7 @@ Note that the syntax for making a normal probability plot is a bit different tha
     there seem to be a linear relationship?
 
 -   How does this relationship compare to the relationship between `runs` and 
-    `at_bats`? Use the R$^2$ values from the two model summaries to compare. 
+    `at_bats`? Use the $R^2$ values from the two model summaries to compare. 
     Does your variable seem to predict `runs` better than `at_bats`? How can you
     tell?
 
@@ -270,7 +270,7 @@ Note that the syntax for making a normal probability plot is a bit different tha
     five).
 
 -   Now examine the three newer variables. These are the statistics used by the 
-    author of *Moneyball* to predict a teams success. In general, are they more 
+    central character in *Moneyball* to predict a team's success. In general, are they more 
     or less effective at predicting runs that the old variables? Explain using 
     appropriate graphical and numerical evidence. Of all ten variables we've 
     analyzed, which seems to be the best predictor of `runs`? Using the limited 
