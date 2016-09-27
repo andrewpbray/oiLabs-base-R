@@ -1,4 +1,5 @@
 require(rmarkdown)
+render("index.Rmd")
 render("01_intro_to_r/intro_to_r.Rmd")
 render("02_intro_to_data/intro_to_data.Rmd")
 #render("03_normal_distribution/normal_distribution.Rmd")

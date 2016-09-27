@@ -2,6 +2,7 @@
 
 all: make.R 
 
-make.R: 01_intro_to_r/intro_to_r.Rmd 02_intro_to_data/intro_to_data.Rmd
+make.R: index.Rmd 01_intro_to_r/intro_to_r.Rmd 02_intro_to_data/intro_to_data.Rmd
 	Rscript make.R
-	cp ~/Dropbox/lib/oiLabs-mosaic/*/*.html docs/
+	mv ~/Dropbox/lib/oiLabs-mosaic/*.html docs/
+	cp -fu ~/Dropbox/lib/oiLabs-mosaic/*/*.html docs/
