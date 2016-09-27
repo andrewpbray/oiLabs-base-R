@@ -184,7 +184,7 @@ qplot(x = at_bats, y = runs, data = mlb11, geom = "point") +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-Here we are literally adding a layer on top of our plot. `stat_smooth` creates
+Here we are literally adding a layer on top of our plot. `geom_smooth` creates
 the line by fitting a linear model. It can also show us the standard error `se`
 associated with our line, but we'll suppress that for now.
 
