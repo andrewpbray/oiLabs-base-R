@@ -18,7 +18,7 @@ library(oilabs)
 
 Some define statistics as the field that focuses on turning information into
 knowledge. The first step in that process is to summarize and describe the raw
-information - the data. In this lab we explore flights, specifically a random
+information -- the data. In this lab we explore flights, specifically a random
 sample of domestic flights that departed from the three major 
 New York City airport in 2013. We will generate simple graphical and numerical 
 summaries of data on these flights and explore delay times. As this is a large 
@@ -126,7 +126,7 @@ departing flights?
 
 ### Lab report
 To record your analysis in a reproducible format, you can adapt the general Lab 
-Report template from the oilabs package. Watch this video to learn how.
+Report template from the `oilabs` package. Watch the video above to learn how.
 
 ### Departure delays
 
@@ -213,9 +213,11 @@ single numerical variable are as follows:
 - `sd`
 - `var`
 - `IQR`
-- `range`
 - `min`
 - `max`
+
+Note that each of these functions take a single vector as an argument, and 
+returns a single value. 
 </div>
 
 We can also filter based on multiple criteria. Suppose we are interested in
@@ -238,7 +240,7 @@ flights headed to SFO **or** in February we can use the `|` instead of the comma
     histogram and appropriate summary statistics. **Hint:** The summary 
     statistics you use should depend on the shape of the distribution.
     
-Another useful functionality is being able to quickly calculate summary 
+Another useful technique is quickly calculating summary 
 statistics for various groups in your data frame. For example, we can modify the 
 above command using the `group_by` function to get the same summary stats for 
 each origin airport:
