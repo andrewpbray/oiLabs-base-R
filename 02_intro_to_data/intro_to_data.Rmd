@@ -246,7 +246,7 @@ each origin airport:
 ```{r summary-custom-list-origin}
 sfo_feb_flights %>%
   group_by(origin) %>%
-  summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n = n())
+  summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n_flights = n())
 ```
 
 Here, we first grouped the data by `origin`, and then calculated the summary 
@@ -276,10 +276,18 @@ nycflights %>%
   arrange(desc(mean_dd))
 ```
 
-1.  Which month has the highest average departure delay from an NYC airport? What
+1.  Suppose you really dislike departure delays, and you want to schedule 
+    your travel in a month that minimizes your potential departure delay leaving 
+    NYC. One option is to choose the month with the lowest mean departure delay.
+    Another option is to choose the month with the lowest median departure delay. 
+    What are the pros and cons of these two choices?
+
+<!--
+Which month has the highest average departure delay from an NYC airport? What
     about the highest median departure delay? Which of these measures is more 
     reliable for deciding which month(s) to avoid flying if you really dislike 
     delayed flights.
+-->
 
 ### On time departure rate for NYC airports
 
