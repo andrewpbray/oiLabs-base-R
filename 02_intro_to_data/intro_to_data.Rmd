@@ -362,13 +362,11 @@ qplot(x = origin, fill = dep_type, data = nycflights, geom = "bar")
     between average speed and distance.
     **Hint:** Use `geom = "point"`.
 
-1.  Suppose you define a flight to be "on time" if it gets to the destination
-    on time or earlier than expected, regardless of any departure delays.
-    Mutate the data frame to create a new variable called `arr_type` with
-    levels `"on time"` and `"delayed"` based on this definition. Then,
-    determine the on time arrival percentage based on whether the flight
-    departed on time or not. What percent of flights  that were `"delayed"`
-    departing arrive `"on time"`?
+1.  Suppose you define a flight to be "on time" if it gets to the destination on 
+time or earlier than expected, regardless of any departure delays. Mutate the data 
+frame to create a new variable called `arr_type` with levels `"on time"` and 
+`"delayed"` based on this definition. Also mutate to create a new variable called 
+`dep_type` with levels `"on time"` and `"delayed"` depending on the flight was delayed for fewer than 5 minutes or 5 minutes or more, respectively. In other words, if `arr_delay` is 0 minutes or fewer, `arr_type` is `"on time"`. If `dep_delay` is less than 5 minutes, `dep_type` is `"on time"`. Then, determine the on time arrival percentage based on whether the flight departed on time or not. What percent of flights that were `"delayed"` departing arrive `"on time"`?
 
 1.  Replicate the following plot. **Hint:** The data frame plotted only
     contains flights from American Airlines, Delta Airlines, and United
