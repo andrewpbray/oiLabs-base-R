@@ -174,7 +174,7 @@ qplot(x = p, y = me, data = dd,
 
 ## Success-failure condition
 
-We emphasized over and over that you must always check conditions before making 
+We have emphasized that you must always check conditions before making 
 inference. For inference on proportions, the sample proportion can be assumed 
 to be nearly normal if it is based upon a random sample of independent 
 observations and if both $np \geq 10$ and $n(1 - p) \geq 10$. This rule of 
