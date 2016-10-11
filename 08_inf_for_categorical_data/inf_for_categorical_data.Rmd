@@ -247,13 +247,13 @@ from 2005 and 2012 for 39 countries.
 1.   Is there convincing evidence that Spain has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
-    significant difference, also quantify this difference with a condfidence interval. \
+    significant difference, also quantify this difference with a confidence interval. \
     *Hint:* First create a new data set for respondents from Spain.
 
 1.   Is there convincing evidence that the US has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
-    significant difference, also quantify this difference with a condfidence interval.
+    significant difference, also quantify this difference with a confidence interval.
 
 1.   If in fact there has been no change in the atheism index in the countries 
     listed in Table 4, in how many of those countries would you expect to 
