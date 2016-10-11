@@ -98,11 +98,6 @@ hypothesis test.
     interval for the proportion of atheists in the United States in 2012.
     Are you confident all conditions are met?
 
-Before you proceed, make sure to load the `inference` function. You might have this 
-function already loaded in your console's enviromment from last time, but note that in 
-order to create a fully reproducible lab report you need to load it in your markdown 
-document as well.
-
 If the conditions for inference are reasonable, we can either calculate
 the standard error and construct the interval by hand, or allow the `inference`
 function to do it for us.
