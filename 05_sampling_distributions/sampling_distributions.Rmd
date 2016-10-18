@@ -123,7 +123,7 @@ with these 50 files would be considerably simpler than working with all 2930
 home sales.
 
 1.  Describe the distribution of area in this sample. How does it compare to the 
-    distribution of the population? **Hint:** `sample_n` function takes a random
+    distribution of the population? **Hint:** the `sample_n` function takes a random
     sample of observations (i.e. rows) from the dataset, you can still refer to 
     the variables in the dataset with the same names. Code you used in the 
     previous exercise will also be helpful for visualizing and summarizing the sample,
@@ -206,7 +206,7 @@ Note that for each of the 15,000 times we computed a mean, we did so from a
 **different** sample!
 
 1.  To make sure you understand how sampling distributions are built, and exactly
-    what the `sample_n` and `do` function do, try modifying the code to create a
+    what the `rep_sample_n` function does, try modifying the code to create a
     sampling distribution of **25 sample means** from **samples of size 10**, 
     and put them in a data frame named `sample_means_small`. Print the output. 
     How many observations are there in this object called `sample_means_small`? 
