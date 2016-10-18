@@ -248,7 +248,7 @@ each origin airport:
 ```{r summary-custom-list-origin}
 sfo_feb_flights %>%
   group_by(origin) %>%
-  summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n = n())
+  summarise(median_dd = median(dep_delay), iqr_dd = IQR(dep_delay), n_flights = n())
 ```
 
 Here, we first grouped the data by `origin`, and then calculated the summary 
@@ -278,10 +278,18 @@ nycflights %>%
   arrange(desc(mean_dd))
 ```
 
-1.  Which month has the highest average departure delay from an NYC airport? What
+1.  Suppose you really dislike departure delays, and you want to schedule 
+    your travel in a month that minimizes your potential departure delay leaving 
+    NYC. One option is to choose the month with the lowest mean departure delay.
+    Another option is to choose the month with the lowest median departure delay. 
+    What are the pros and cons of these two choices?
+
+<!--
+Which month has the highest average departure delay from an NYC airport? What
     about the highest median departure delay? Which of these measures is more 
     reliable for deciding which month(s) to avoid flying if you really dislike 
     delayed flights.
+-->
 
 ### On time departure rate for NYC airports
 
@@ -343,24 +351,10 @@ qplot(x = origin, fill = dep_type, data = nycflights, geom = "bar")
     average speed, `avg_speed` traveled by the plane for each flight (in mph).
     **Hint:** Average speed can be calculated as distance divided by
     number of hours of travel, and note that `air_time` is given in minutes.
-
-1.  What is the tail number of the plane with the fastest `avg_speed`? 
-    **Hint:** If you just want to show the `avg_speed` and `tailnum` and
-    none of the other variables, use the select function at the end of your
-    pipe to select just these two variables with `select(avg_speed, tailnum)`.
-    You can google this tail number to find out more about the aircraft.
     
 1.  Make a scatterplot of `avg_speed` vs. `distance`. Describe the relationship
     between average speed and distance.
     **Hint:** Use `geom = "point"`.
-
-1.  Suppose you define a flight to be "on time" if it gets to the destination
-    on time or earlier than expected, regardless of any departure delays.
-    Mutate the data frame to create a new variable called `arr_type` with
-    levels `"on time"` and `"delayed"` based on this definition. Then,
-    determine the on time arrival percentage based on whether the flight
-    departed on time or not. What percent of flights  that were `"delayed"`
-    departing arrive `"on time"`?
 
 1.  Replicate the following plot. **Hint:** The data frame plotted only
     contains flights from American Airlines, Delta Airlines, and United

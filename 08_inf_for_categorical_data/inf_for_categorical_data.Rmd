@@ -98,11 +98,6 @@ hypothesis test.
     interval for the proportion of atheists in the United States in 2012.
     Are you confident all conditions are met?
 
-Before you proceed, make sure to load the `inference` function. You might have this 
-function already loaded in your console's enviromment from last time, but note that in 
-order to create a fully reproducible lab report you need to load it in your markdown 
-document as well.
-
 If the conditions for inference are reasonable, we can either calculate
 the standard error and construct the interval by hand, or allow the `inference`
 function to do it for us.
@@ -179,7 +174,7 @@ qplot(x = p, y = me, data = dd,
 
 ## Success-failure condition
 
-We emphasized over and over that you must always check conditions before making 
+We have emphasized that you must always check conditions before making 
 inference. For inference on proportions, the sample proportion can be assumed 
 to be nearly normal if it is based upon a random sample of independent 
 observations and if both $np \geq 10$ and $n(1 - p) \geq 10$. This rule of 
@@ -249,16 +244,30 @@ survey that was conducted in 2005. (We assume here that sample sizes have
 remained the same.) Table 4 on page 13 of the report summarizes survey results 
 from 2005 and 2012 for 39 countries.
 
+For some of the exercises below we will conduct inference comparing two proportions. In
+such cases we have a response variable that is categorical, and an exaplanatory variable
+that is also categorical, and we are comparing the proportions of success of the response
+variable across the levels of the explanatory variable. This means, in the `inference` function
+we need to specify both variables, response as `y` and explanatory as `x`.
+
+```{r eval=FALSE}
+inference(y = name_of_response_variable, x = name_of_explanatory_variable, ...)
+```
+
+
 1.   Is there convincing evidence that Spain has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
-    significant difference, also quantify this difference with a condfidence interval. \
-    *Hint:* First create a new data set for respondents from Spain.
+    significant difference, also quantify this difference with a confidence interval. \
+    *Hint:* First create a new data set for respondents from Spain. Also, modify the
+    code for the inference function changing the type to run a hypothesis test and
+    adding arguments for the null value and the alternative hypothesis. See the help
+    for the `inference` function using `?inference` to determine the appropriate syntax.
 
 1.   Is there convincing evidence that the US has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
-    significant difference, also quantify this difference with a condfidence interval.
+    significant difference, also quantify this difference with a confidence interval.
 
 1.   If in fact there has been no change in the atheism index in the countries 
     listed in Table 4, in how many of those countries would you expect to 
