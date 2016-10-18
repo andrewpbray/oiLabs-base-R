@@ -3,5 +3,7 @@ title: "Index"
 output: html_document
 ---
 
-Add links to labs
+
+- [Intro to R](intro_to_r.html)
+- [Sampling Distributions](sampling_distributions.Rmd)
 
