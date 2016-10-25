@@ -5,5 +5,8 @@ output: html_document
 
 
 - [Intro to R](intro_to_r.html)
+- [Intro to Data](intro_to_data.html)
 - [Sampling Distributions](sampling_distributions.Rmd)
+- [Confidence Intervals](confidence_intervals.Rmd)
+- [Simple Linear Regression](simple_regression.Rmd)
 
