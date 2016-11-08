@@ -98,13 +98,17 @@ hypothesis test.
     interval for the proportion of atheists in the United States in 2012.
     Are you confident all conditions are met?
 
-If the conditions for inference are reasonable, we can either calculate
-the standard error and construct the interval by hand, or allow the `inference`
-function to do it for us.
+If the conditions for inference are reasonable, we can calculate
+the standard error and construct the interval in R. 
 
 ```{r us-atheism-ci, tidy = FALSE}
-inference(y = response, data = us12, statistic = "proportion",
-          type = "ci", method = "theoretical", success = "atheist")
+us12 %>%
+  summarize(N = n(), atheist = sum(response == "atheist")) %>%
+  mutate(p_hat = atheist / N,
+         se = sqrt(p_hat * (1 - p_hat) / N), 
+         me = qnorm(0.975) * se, 
+         lower = p_hat - me, 
+         upper = p_hat + me)
 ```
 
 Note that since the goal is to construct an interval estimate for a 
@@ -118,12 +122,12 @@ the error margin for surveys of this kind is $\pm$ 3--5% at 95% confidence".
 1.  Based on the R output, what is the margin of error for the estimate of the 
     proportion of the proportion of atheists in US in 2012?
 
-1.  Using the `inference` function, calculate confidence intervals for the 
+1.  Calculate confidence intervals for the 
     proportion of atheists in 2012 in two other countries of your choice, and 
     report the associated margins of error. Be sure to note whether the 
     conditions for inference are met, and interpet the interval in context of the data.
     It may be helpful to create new data sets for each of the two countries first, and 
-    then use these data sets in the `inference` function to construct the confidence 
+    then use these data sets to construct the confidence 
     intervals.
 
 ## How does the proportion affect the margin of error?
@@ -136,7 +140,11 @@ it is also affected by the proportion.
 
 Think back to the formula for the standard error: $SE = \sqrt{p(1-p)/n}$. This 
 is then used in the formula for the margin of error for a 95% confidence 
-interval: $ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n}$. Since the 
+interval: 
+$$
+ME = 1.96\times SE = 1.96\times\sqrt{p(1-p)/n} \,.
+$$
+Since the 
 population proportion $p$ is in this $ME$ formula, it should make sense that 
 the margin of error is in some way dependent on the population proportion. We 
 can visualize this relationship by creating a plot of $ME$ vs. $p$.
@@ -244,25 +252,12 @@ survey that was conducted in 2005. (We assume here that sample sizes have
 remained the same.) Table 4 on page 13 of the report summarizes survey results 
 from 2005 and 2012 for 39 countries.
 
-For some of the exercises below we will conduct inference comparing two proportions. In
-such cases we have a response variable that is categorical, and an exaplanatory variable
-that is also categorical, and we are comparing the proportions of success of the response
-variable across the levels of the explanatory variable. This means, in the `inference` function
-we need to specify both variables, response as `y` and explanatory as `x`.
-
-```{r eval=FALSE}
-inference(y = name_of_response_variable, x = name_of_explanatory_variable, ...)
-```
-
 
 1.   Is there convincing evidence that Spain has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
     conduct and outline the status of the conditions for inference. If you find a 
     significant difference, also quantify this difference with a confidence interval. \
-    *Hint:* First create a new data set for respondents from Spain. Also, modify the
-    code for the inference function changing the type to run a hypothesis test and
-    adding arguments for the null value and the alternative hypothesis. See the help
-    for the `inference` function using `?inference` to determine the appropriate syntax.
+    *Hint:* Use the difference of two proportions methodology. 
 
 1.   Is there convincing evidence that the US has seen a change in its atheism index 
     between 2005 and 2012? As always, write out the hypotheses for any tests you 
