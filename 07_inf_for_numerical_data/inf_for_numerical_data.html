@@ -271,13 +271,13 @@ div.tocify {
 <li>What are the cases in this data set? How many cases are there in our sample?</li>
 </ol>
 <p>Remember that you can answer this question by viewing the data in the data viewer or by using the following command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(nc)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(nc)</code></pre></div>
 </div>
 </div>
 <div id="exploratory-data-analysis" class="section level2">
 <h2>Exploratory data analysis</h2>
 <p>We will first start with analyzing the weight gained by mothers throughout the pregnancy: <code>gained</code>.</p>
-<p>Using visualization and summary statistics, describe the distribution of weight gained by mothers during pregnancy. The <code>summary</code> function can also be useful.</p>
+<p>Using visualization and summary statistics, describe the distribution of weight gained by mothers during pregnancy. The <code>summary</code> function can be useful.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(nc$gained)</code></pre></div>
 <ol style="list-style-type: decimal">
 <li>How many mothers are we missing weight gain data from?</li>
@@ -295,7 +295,7 @@ div.tocify {
 <div id="inference" class="section level2">
 <h2>Inference</h2>
 <ol start="3" style="list-style-type: decimal">
-<li><p>Are all conditions necessary for inference satisfied? Comment on each. You can compute the group sizes with the <code>summarize</code> command above but replacing <code>mean(weight)</code> with <code>n()</code>.</p></li>
+<li><p>Are all conditions necessary for inference satisfied? Comment on each. You can compute the group sizes with the <code>summarize</code> command above by defining a new variable with the definition <code>n()</code>.</p></li>
 <li><p>Write the hypotheses for testing if the average weights of babies born to smoking and non-smoking mothers are different.</p></li>
 </ol>
 <p>Next, we introduce a new function, <code>inference</code>, that we will use for conducting hypothesis tests and constructing confidence intervals.</p>
