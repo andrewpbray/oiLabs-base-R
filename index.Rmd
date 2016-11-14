@@ -11,4 +11,5 @@ output: html_document
 - [Simple Linear Regression](simple_regression.html)
 - [Probability](probability.html)
 - [Inference for Categorical Data](inf_for_categorical_data.Rmd)
+- [Inference for Numerical Data](inf_for_numerical_data.html)
 

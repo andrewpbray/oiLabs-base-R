@@ -73,10 +73,11 @@ We will first start with analyzing the weight gained by mothers throughout the
 pregnancy: `gained`.
 
 Using visualization and summary statistics, describe the distribution of weight 
-gained by mothers during pregnancy. The `summary` function can be useful.
+gained by mothers during pregnancy. The `favstats` function from `mosaic` can be useful.
 
 ```{r summary}
-summary(nc$gained)
+library(mosaic)
+favstats(~gained, data = nc)
 ```
 
 1.  How many mothers are we missing weight gain data from?

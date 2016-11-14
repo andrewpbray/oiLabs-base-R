@@ -277,8 +277,9 @@ div.tocify {
 <div id="exploratory-data-analysis" class="section level2">
 <h2>Exploratory data analysis</h2>
 <p>We will first start with analyzing the weight gained by mothers throughout the pregnancy: <code>gained</code>.</p>
-<p>Using visualization and summary statistics, describe the distribution of weight gained by mothers during pregnancy. The <code>summary</code> function can be useful.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(nc$gained)</code></pre></div>
+<p>Using visualization and summary statistics, describe the distribution of weight gained by mothers during pregnancy. The <code>favstats</code> function from <code>mosaic</code> can be useful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mosaic)
+<span class="kw">favstats</span>(~gained, <span class="dt">data =</span> nc)</code></pre></div>
 <ol style="list-style-type: decimal">
 <li>How many mothers are we missing weight gain data from?</li>
 </ol>
