@@ -41,7 +41,6 @@ companion package for the OpenIntro labs, `oilabs`.
 Let's load the packages.
 
 ```{r load-packages, message=FALSE}
-library(mosaic)
 library(oilabs)
 library(GGally)
 ```
@@ -96,7 +95,7 @@ are evaluated more favorably. Let's create a scatterplot to see if this appears
 to be the case:
 
 ```{r scatter-score-bty_avg}
-xyplot(score ~ bty_avg, data = evals)
+qplot(data = evals, x = bty_avg, y = score)
 ```
 
 
@@ -104,9 +103,12 @@ Before we draw conclusions about the trend, compare the number of observations
 in the data frame with the approximate number of points on the scatterplot. 
 Is anything awry?
 
-4.  Replot the scatterplot, but this time use the function `jitter()` on the
-    $y$ or the $x$-coordinate. (Use `?jitter` to learn more.) What was
+4.  Replot the scatterplot, but this time use `geom = "jitter"` What was
     misleading about the initial scatterplot?
+    
+```{r scatter-score-bty_avg-jitter}
+qplot(data = evals, x = bty_avg, y = score, geom = "jitter")
+```
 
 5.  Let's see if the apparent trend in the plot is something more than
     natural variation. Fit a linear model called `m_bty` to predict average
@@ -142,7 +144,7 @@ take a look at the relationship between one of these scores and the average
 beauty score.
 
 ```{r bty-rel}
-xyplot(bty_avg ~ bty_f1lower, data = evals)
+qplot(data = evals, x = bty_f1lower, y = bty_avg)
 evals %>% 
   summarise(cor(bty_avg, bty_f1lower))
 ```
@@ -155,11 +157,7 @@ following command:
 ```{r bty-rels}
 evals %>%
   select(contains("bty")) %>%
-<<<<<<< HEAD
-  pairs()
-=======
   ggpairs()
->>>>>>> upstream/master
 ```
 
 These variables are collinear (correlated), and adding more than one of these 
@@ -173,7 +171,7 @@ term into the model.
 
 ```{r scatter-score-bty_avg_gender}
 m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
-msummary(m_bty_gen)
+summary(m_bty_gen)
 ```
 
 7.  P-values and parameter estimates should only be trusted if the
@@ -248,7 +246,7 @@ Let's run the model...
 m_full <- lm(score ~ rank + ethnicity + gender + language + age + cls_perc_eval 
              + cls_students + cls_level + cls_profs + cls_credits + bty_avg 
              + pic_outfit + pic_color, data = evals)
-msummary(m_full)
+summary(m_full)
 ```
 
 12. Check your suspicions from the previous exercise. Include the model output
