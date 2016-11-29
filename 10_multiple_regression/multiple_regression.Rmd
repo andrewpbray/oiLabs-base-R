@@ -5,7 +5,6 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-
 ---
 
 ```{r global_options, include=FALSE}
@@ -41,6 +40,8 @@ companion package for the OpenIntro labs, `oilabs`.
 Let's load the packages.
 
 ```{r load-packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
 library(oilabs)
 library(GGally)
 ```
@@ -98,14 +99,13 @@ to be the case:
 qplot(data = evals, x = bty_avg, y = score)
 ```
 
-
 Before we draw conclusions about the trend, compare the number of observations 
 in the data frame with the approximate number of points on the scatterplot. 
 Is anything awry?
 
-4.  Replot the scatterplot, but this time use `geom = "jitter"` What was
+4.  Replot the scatterplot, but this time use `geom = "jitter"`. What was
     misleading about the initial scatterplot?
-    
+
 ```{r scatter-score-bty_avg-jitter}
 qplot(data = evals, x = bty_avg, y = score, geom = "jitter")
 ```
