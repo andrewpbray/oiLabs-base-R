@@ -104,7 +104,7 @@ Before we draw conclusions about the trend, compare the number of observations
 in the data frame with the approximate number of points on the scatterplot. 
 Is anything awry?
 
-4.  Replot the scatterplot, but this time use `geom = "jitter`. What was
+4.  Replot the scatterplot, but this time use `geom = "jitter"`. What was
     misleading about the initial scatterplot?
 
 ```{r scatter-score-bty_avg-jitter}
