@@ -298,7 +298,7 @@ those over 30. We can use the R function `subset` to do that for us. For example
 the command
 
 ```{r males, eval=FALSE}
-mdata <- subset(cdc, cdc$gender == "m")
+mdata <- subset(cdc, gender == "m")
 ```
 
 will create a new data set called `mdata` that contains only the men from the 
